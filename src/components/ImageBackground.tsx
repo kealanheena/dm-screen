@@ -12,6 +12,8 @@ function ImageBackground() {
 	const background = theme === 'dark' || (theme === 'system' && systemTheme === 'dark') 
 		? { alt: 'Black scales background', src: '/backgrounds/black-scaled.png' }
 		: { alt: 'White speckled background', src: '/backgrounds/white-speckled.png' }
+
+	console.log({ theme, systemTheme, background })
 	
 	return (
 		<div

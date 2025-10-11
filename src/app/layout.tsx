@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       
-      <html lang="en">
+      <html lang="en suppressHydrationWarning">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
@@ -40,8 +40,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <ImageBackground />
             <div className="m-h-screen">
+              {/* <ImageBackground /> */}
               <Navbar />
 
               <main className="py-8">
