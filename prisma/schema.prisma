@@ -32,8 +32,8 @@ model User {
   // Relations
 
   posts Post[]
-  comments Comments[]
-  likes Likes[]
+  comments Comment[]
+  likes Like[]
 
   followers Follows[] @relation("following") // user who follow this user
   following Follows[] @relation("follower") // users this user follows
@@ -68,7 +68,24 @@ model Comment {
   // Relations
   // "onDelete: cascade" means delete all posts if the author is deleted
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  post User @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
-  @@index([authorId, postId])
+  @@index([authorId, postId]) // composite index for faster queries
 }
+
+model Like {
+  id String @id @default(cuid())
+  postId String
+  userId String
+  createdAt DateTime @default(now())
+
+  // Relations
+  // "onDelete: cascade" means delete all posts if the author is deleted
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([userId, postId]) // composite index for faster queries
+  @@unique([userId, postId]) // this prevents a user liking something twice
+}
+
+
