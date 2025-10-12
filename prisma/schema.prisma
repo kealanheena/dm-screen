@@ -38,8 +38,8 @@ model User {
   followers Follows[] @relation("following") // user who follow this user
   following Follows[] @relation("follower") // users this user follows
 
-  notifications Notification @relation("userNotifications") // notifications recieved by a user
-  notificationCreated Notification @relation("notificationCreator") // notifications triggered by a user
+  notifications Notification[] @relation("userNotifications") // notifications recieved by a user
+  notificationCreated Notification[] @relation("notificationCreator") // notifications triggered by a user
 }
 
 model Post {
