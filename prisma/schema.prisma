@@ -57,3 +57,18 @@ model Post {
   likes Like[]
   notifications Notification[]
 }
+
+model Comment {
+  id String @id @default(cuid())
+  content String
+  authorId String
+  postId String
+  createdAt DateTime @default(now())
+
+  // Relations
+  // "onDelete: cascade" means delete all posts if the author is deleted
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post User @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([authorId, postId])
+}
