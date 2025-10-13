@@ -3,8 +3,9 @@
 import React, { useState } from "react"
 import { Button } from "./ui/button";
 import { Loader2Icon } from "lucide-react";
+import { toggleFollow } from "@/actions/user.action";
 
-function FollowButton({ userId }: { userId: number }) {
+function FollowButton({ userId }: { userId: string }) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const onClickFollow = async () => {
