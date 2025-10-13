@@ -12,6 +12,10 @@ Potential feature:
    - Stat block access with quick info access
    - Drop down for applying Conditions
        - Pop up for Concentration check
+- Campagin link which allows players to choose a character
+    - on player screen their should be:
+        - an option for adding quick reference sheet a place to keep notes
+        - some quick ref info AC, Passive Skills, Max HP, Current HP, Temp HP
 - Random number generator, no dice
 - images with clickable sections that popup with room details
 
