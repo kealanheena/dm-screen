@@ -65,11 +65,13 @@ export async function getDbUserId() {
 		throw new Error("Unauthorized");
 	}
 
-	const user = getUserByClerkId(clerkId)
+	const user = await getUserByClerkId(clerkId)
 
 	if (!user) {
 		throw new Error("User not found");
 	}
+
+	console.log(user)
 
 
 	return user?.id;

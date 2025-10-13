@@ -9,6 +9,8 @@ import { Card, CardContent } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 import { ImageIcon, Loader2Icon, SendIcon } from 'lucide-react';
+import { createPost } from '@/actions/post.action';
+import toast from 'react-hot-toast';
 
 function CreatePost() {
 	const { user } = useUser();
@@ -19,7 +21,30 @@ function CreatePost() {
 	const [showImageUpload, setShowImageUpload] = useState(false);
 
 	const handleSubmit = async () => {
+		if (!content.trim() && !imageUrl) {
+			return;
+		}
 
+		setIsPosting(true);
+
+		try {
+			const { success } = await createPost({ content, image: imageUrl })
+
+			console.log(success)
+
+			if (success) {
+				setContent("")
+				setImageUrl("")
+				setShowImageUpload(false)
+			}
+
+			toast.success('Post created successfully! 😊')
+		} catch (error) {
+			console.error('Failed to create post: ', error)
+			toast.success('Failed to create post 😢')
+		} finally {
+			setIsPosting(false);
+		}
 	};
 	const onChangeContent = (e) => setContent(e.target.value);
 
