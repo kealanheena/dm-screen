@@ -3,22 +3,27 @@
 import { useUser } from '@clerk/nextjs'
 import React, { useState } from 'react'
 
-import { Card, CardContent } from './ui/card';
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
+
+import { Card, CardContent } from './ui/card';
 import { Textarea } from './ui/textarea';
+import { Button } from './ui/button';
+import { ImageIcon, Loader2Icon, SendIcon } from 'lucide-react';
 
 function CreatePost() {
 	const { user } = useUser();
 
-	const [content, setContent] = useState("")
-	const [imageUrl, setImageUrl] = useState("")
-	const [isPosting, setIsPosting] = useState(false)
-	const [showImageUpload, setShowImageUpload] = useState("")
+	const [content, setContent] = useState("");
+	const [imageUrl, setImageUrl] = useState("");
+	const [isPosting, setIsPosting] = useState(false);
+	const [showImageUpload, setShowImageUpload] = useState(false);
 
 	const handleSubmit = async () => {
 
-	}
-	const onChangeContent = (e) => setContent(e.target.value)
+	};
+	const onChangeContent = (e) => setContent(e.target.value);
+
+	const onClickShowImageUpload = () => setShowImageUpload(!showImageUpload);
 
 	console.log(user); 
 	return (
@@ -37,6 +42,41 @@ function CreatePost() {
               disabled={isPosting}
             />
           </div>
+
+					{/* TODO: Handle image uploads */}
+
+          <div className="flex items-center justify-between border-t pt-4">
+            <div className="flex space-x-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-primary"
+                onClick={onClickShowImageUpload}
+                disabled={isPosting}
+              >
+                <ImageIcon className="size-4 mr-2" />
+                Photo
+              </Button>
+            </div>
+            <Button
+              className="flex items-center"
+              onClick={handleSubmit}
+              disabled={(!content.trim() && !imageUrl) || isPosting}
+            >
+              {isPosting ? (
+                <>
+                  <Loader2Icon className="size-4 mr-2 animate-spin" />
+                  Posting...
+                </>
+              ) : (
+                <>
+                  <SendIcon className="size-4 mr-2" />
+                  Post
+                </>
+              )}
+            </Button>
+					</div>
 				</div>
 			</CardContent>
 		</Card>
