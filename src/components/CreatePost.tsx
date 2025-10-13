@@ -50,7 +50,6 @@ function CreatePost() {
 
 	const onClickShowImageUpload = () => setShowImageUpload(!showImageUpload);
 
-	console.log(user); 
 	return (
 		<Card className='mb-6'>
 			<CardContent className='pt-6'>
