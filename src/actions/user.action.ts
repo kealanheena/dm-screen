@@ -42,3 +42,21 @@ export async function syncUser() {
 	}
 	
 }
+
+export async function getUserByClerkId(clerkId: string) {
+	const existingUser = await prisma.user.findUnique({
+			where: {
+				clerkId,
+			},
+			include: {
+				_count: {
+					select: {
+						followers: true,
+						following: true,
+						posts: true
+					}
+				}
+			}
+		});
+
+}
