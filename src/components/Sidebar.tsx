@@ -22,7 +22,6 @@ async function sidebar() {
 	}
 
 	const user = await getUserByClerkId(authUser.id)
-	console.log(user)
 
 	if (!user) {
 		return null;
