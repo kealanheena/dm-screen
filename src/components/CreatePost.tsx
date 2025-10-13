@@ -30,8 +30,6 @@ function CreatePost() {
 		try {
 			const { success } = await createPost({ content, image: imageUrl })
 
-			console.log(success)
-
 			if (success) {
 				setContent("")
 				setImageUrl("")

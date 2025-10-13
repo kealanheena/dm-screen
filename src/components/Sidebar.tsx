@@ -13,7 +13,6 @@ import { Separator } from "./ui/separator";
 
 async function sidebar() {
 	const authUser = await currentUser();
-	console.log(authUser)
 
 	if (!authUser) {
 		return (

@@ -15,8 +15,6 @@ export async function createPost(data: PostCreationData) {
 	try {
 		const userId = await getDbUserId();
 
-		console.log(userId)
-
 		const post = await prisma.post.create({
 			data: {
 				content,
