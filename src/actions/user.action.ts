@@ -126,7 +126,7 @@ export async function toggleFollow(targetUserId: string) {
 		const userId = await getDbUserId();
 
 		if (!userId) {
-			return null;
+			return;
 		}
 
 		if (userId === targetUserId) {

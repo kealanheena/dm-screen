@@ -15,6 +15,10 @@ export async function createPost(data: PostCreationData) {
 	try {
 		const userId = await getDbUserId();
 
+		if (!userId) {
+			return;
+		}
+
 		const post = await prisma.post.create({
 			data: {
 				content,
@@ -35,5 +39,5 @@ export async function createPost(data: PostCreationData) {
 }
 
 export async function getPosts() {
-	
+
 }
