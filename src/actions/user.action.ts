@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 
 
 export async function syncUser() {
@@ -162,6 +163,8 @@ export async function toggleFollow(targetUserId: string) {
 				})
 			]);
 		}
+		// Reset the cache to update the page
+		revalidatePath("/");
 
 		return { success: true };
 	} catch (error) {
