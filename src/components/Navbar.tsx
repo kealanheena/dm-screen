@@ -19,7 +19,7 @@ async function Navbar() {
     	<div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-primary font-mono tracking-wider">
+            <Link href="/home" className="text-xl font-bold text-primary font-mono tracking-wider">
               dm screen
             </Link>
           </div>

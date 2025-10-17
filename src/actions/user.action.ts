@@ -172,7 +172,7 @@ export async function toggleFollow(targetUserId: string) {
 			]);
 		}
 		// Reset the cache to update the page
-		revalidatePath("/");
+		revalidatePath("/home");
 
 		return { success: true };
 	} catch (error) {

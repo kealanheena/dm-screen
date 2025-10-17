@@ -13,7 +13,7 @@ async function DesktopNavbar() {
       <ModeToggle />
 
       <Button variant="ghost" className="flex items-center gap-2" asChild>
-        <Link href="/">
+        <Link href="/home">
           <HomeIcon className="w-4 h-4" />
           <span className="hidden lg:inline">Home</span>
         </Link>

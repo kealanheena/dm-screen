@@ -27,7 +27,7 @@ export async function createPost(data: PostCreationData) {
 			} 
 		});
 
-		revalidatePath('/');
+		revalidatePath('/home');
 
 		return { success: true, post };
 	} catch (error) {
@@ -150,7 +150,7 @@ export async function toggleLike(postId: string) {
       ]);
     }
 
-    revalidatePath("/");
+    revalidatePath("/home");
     return { success: true };
   } catch (error) {
     console.error("Failed to toggle like:", error);
@@ -233,7 +233,7 @@ export async function deletePost(postId: string) {
       where: { id: postId },
     });
 
-    revalidatePath("/"); // purge the cache
+    revalidatePath("/home"); // purge the cache
     return { success: true };
   } catch (error) {
     console.error("Failed to delete post:", error);
