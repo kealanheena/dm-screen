@@ -19,6 +19,12 @@ Potential feature:
 - Random number generator, no dice
 - images with clickable sections that popup with room details
 
+## Tools
+
+- database (neon): https://console.neon.tech/
+- image upload (uploadthing): https://uploadthing.com/
+- signin (clerk): https://dashboard.clerk.com/
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
