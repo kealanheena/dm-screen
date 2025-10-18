@@ -6,7 +6,7 @@ import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/mater
 import MenuIcon from '@mui/icons-material/Menu';
 
 
-export default function ButtonAppBar() {
+export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
