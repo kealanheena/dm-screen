@@ -46,7 +46,7 @@ export default function RootLayout({
               {/* <ImageBackground /> */}
               <Navbar />
 
-              <main className="py-8 px-4 grow">
+              <main className="pb-8 px-4 grow">
                 {children}
               </main>
             </div>

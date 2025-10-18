@@ -1,6 +1,6 @@
 import ScreenContainer from "@/components/ScreenContainer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { MountainSnowIcon, MapIcon, LucideProps } from "lucide-react";
+import { PlusIcon, MapIcon, LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 interface Section {
@@ -43,7 +43,7 @@ export default async function Home() {
   const { tabs, sectionsAmount } = screen;
 
   return (
-  <div className={`flex flex-row h-full w-full bg-primary`}>
+  <div className={`flex flex-row h-full w-full`}>
     <ScreenContainer />
   </div>
   );
