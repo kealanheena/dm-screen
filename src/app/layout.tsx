@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { ClerkProvider } from '@clerk/nextjs'
-import { ThemeProvider } from "@/components/ThemeProvider"
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { createTheme } from "@mui/material/styles";
 
-import "./globals.css";
+import { themeOptions } from './theme';
+
+import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
+
+
 import Navbar from "@/components/Navbar";
 
 export default function RootLayout({
@@ -12,25 +16,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = createTheme(themeOptions);
+
+
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body style={{ margin: 0 }}
         >
-          {/* <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          > */}
+          <ThemeProviderWrapper>
             <div>
               <Navbar />
               <main>
                 {children}
               </main>
             </div>
-            <Toaster />
-          {/* </ThemeProvider> */}
+          </ThemeProviderWrapper>
         </body>
       </html>
     </ClerkProvider>
