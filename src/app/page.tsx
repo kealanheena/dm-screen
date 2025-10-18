@@ -1,4 +1,3 @@
-import ScreenContainer from "@/components/ScreenContainer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { PlusIcon, MapIcon, LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
@@ -44,7 +43,7 @@ export default async function Home() {
 
   return (
   <div className={`flex flex-row h-full w-full`}>
-    <ScreenContainer />
+    test
   </div>
   );
 }
