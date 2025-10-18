@@ -4,7 +4,7 @@ export const themeOptions: ThemeOptions = {
   palette: {
     mode: 'light',
     primary: {
-      main: '#BC0F0F',
+      main: '#E40712',
     },
     secondary: {
       main: '#4285f4',
@@ -18,6 +18,16 @@ export const themeOptions: ThemeOptions = {
     borderRadius: 4,
   },
   components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          background: '#242527',
+          color: '#E40712',
+          borderBottom: '1.5px solid #E40712',
+          height: '64px',
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {

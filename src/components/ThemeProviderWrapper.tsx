@@ -10,9 +10,6 @@ import { createTheme } from "@mui/material/styles";
 import { themeOptions } from '../app/theme';
 
 
-import Navbar from "@/components/Navbar";
-
-
 function ThemeProviderWrapper({
   children,
 }: Readonly<{
