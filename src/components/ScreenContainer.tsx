@@ -3,16 +3,21 @@
 import React, { useState } from 'react';
 
 import { Card, CardContent } from "./ui/card";
-import { map, slice, filter, remove } from 'lodash';
+import { map, filter } from 'lodash';
 import { Button } from './ui/button';
-import { PlusIcon } from 'lucide-react';
+import { PlusIcon, Trash2Icon, Loader2Icon } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ScreenCard from './ScreenCard';
 
 function ScreenContainer() {
+	const [isDeleting, setIsDeleting] = useState(false);
 	const [columns, setColumns] = useState([
 		{
 			id: 1,
-			cards: []
+			cards: [{
+				title: 'New Title',
+				description: 'This is a description'
+			}]
 		},
 		{
 			id: 2,
@@ -39,15 +44,23 @@ function ScreenContainer() {
 		]);
 	}
 
-	const onClickRemoveColumn = (index: number) => () => {
+	const onClickRemoveColumn = (columnId: number) => () => {
+		setIsDeleting(true);
+
+		if (isDeleting) {
+			setIsDeleting(false);
+			return;
+		}
 		if (columns.length <= 1) {
 			toast.error("You must have at least one column")
+			setIsDeleting(false);
 			return;
 		}
 
-		const newArray = filter(columns, ({ id }) => id !== index)
+		const newArray = filter(columns, ({ id }) => id !== columnId)
 
 		setColumns(newArray);
+		setIsDeleting(false);
 	}
 
 	return (
@@ -62,12 +75,11 @@ function ScreenContainer() {
 			
 			<div className={`flex flex-row h-full w-full`}>
 				{map(columns, (column, index) => (
-					<div className={`flex-2 h-full mx-1 bg-${index % 2 === 0 ? 'amber' : 'emerald'}-700`}>
-						Testung
-						<Button onClick={onClickRemoveColumn(index)}>
-							Remove Column
-						</Button>
-					</div>
+					<ScreenCard
+						key={index}
+						onClickDelete={onClickRemoveColumn(column.id)}
+						isDeleting={isDeleting}	
+					/>
 				))}
 			</div>
     </div>
