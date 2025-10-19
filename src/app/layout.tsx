@@ -22,15 +22,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body style={{ margin: 0 }}
-        >
+        <body style={{ margin: 0, height: '100vh' }}>
           <ThemeProviderWrapper>
-            <div>
-              <Navbar />
-              <main>
-                {children}
-              </main>
-            </div>
+            <Navbar />
+            <main>
+              {children}
+            </main>
           </ThemeProviderWrapper>
         </body>
       </html>
