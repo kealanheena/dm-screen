@@ -17,16 +17,21 @@ const increaseSectionSizeRight = ({
 		return;
 	}
 
-	if (expandingLayout.start + expandingLayout?.width >= MAXCOLUMN) {
-		return;
-	}
-
-	let isRightOfExpandingSection = false;
+	let doesSectionHaveToBeDecreased = false;
 
 	const newLayout = map(layouts, (layout) => {
 		const { id, start, width } = layout;
 
-		if (isRightOfExpandingSection) {
+		if (doesSectionHaveToBeDecreased) {
+			if (width <= 1) {
+				return {
+					...layout,
+					start: start + 1,
+				};
+			}
+
+			doesSectionHaveToBeDecreased = false;
+			
 			return {
 				...layout,
 				width: width - 1,
@@ -35,7 +40,7 @@ const increaseSectionSizeRight = ({
 		}
 
 		if (id === layoutId) {
-			isRightOfExpandingSection = true;
+			doesSectionHaveToBeDecreased = true;
 
 			return {
 				...layout,
@@ -45,6 +50,10 @@ const increaseSectionSizeRight = ({
 
 		return layout;
 	});
+
+	if (doesSectionHaveToBeDecreased) {
+		return;
+	}
 
 	return newLayout;
 }
