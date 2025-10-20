@@ -19,6 +19,7 @@ export default function Screen() {
 	 	{ id: 3, start_point: 8, width: 2  },
 	 	{ id: 4, start_point: 10, width: 2  },
 	]);
+	const [hoverTarget, setHoverTarget] = useState<number | null>(null)
 	// const [currentLayoutId, setCurrentLayoutId] = useState<number>(1);
 
 	const onChangeLayout = (e) => {
@@ -28,6 +29,7 @@ export default function Screen() {
 		console.log(e.target.value);
 	}
 	const onMouseEnterSection = (id: number) => () => {
+		setHoverTarget(id);
 		const layout: Layout | undefined = find(layouts, ['id', id]);
 
 		if (!layout) {
@@ -38,12 +40,24 @@ export default function Screen() {
 		setRange([start_point, start_point + width]);
 	}
 
+	const onMouseLeaveSection = () => setHoverTarget(null);
 
 
-	// const maxColumns = (columns - layouts.length); // +1 because columns is 1
+
+	const getPadding = (id: number) => {
+
+		console.log();
+
+		return hoverTarget === id ? { 
+			padding: '0px'
+		} : {
+			padding: '5px'
+		}
+	}
 
   return (
-		<div style={{ height: '100%', padding: '10px' }}>
+		<div style={{ height: '100%'  }}>
+			<div style={{ padding: '10px' }}>
 			<Slider
 				value={range}
 				min={0}
@@ -53,16 +67,32 @@ export default function Screen() {
 				valueLabelDisplay="auto"
 				onChange={onChangeLayout}
 			/>
-			<Grid container spacing={1} style={{ height: '100%' }}>
-				{map(layouts, ({ id, width }: Layout) => (
-					<Grid key={id} size={width} onMouseEnter={onMouseEnterSection(id)}>
-						<Card >
-							<CardContent>
-								<Typography>size={width}</Typography>
-							</CardContent>
-						</Card>
-					</Grid>
-				))}
+			</div>
+			<Grid container spacing={1} style={{ height: '100%', padding: '10px' }}>
+				{map(layouts, ({ id, width }: Layout) => {
+					const padding = getPadding(id);
+					
+					return (
+						<Grid 
+							style={padding}
+							key={id}
+							size={width}
+							onMouseEnter={onMouseEnterSection(id)}
+							onMouseLeave={onMouseLeaveSection}
+						>
+							<Card
+								style={id === hoverTarget ? {
+									transition: "transform 0.15s ease-in-out",
+									// "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
+								} : {}}
+							>
+								<CardContent>
+									<Typography>size={width}</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+					)}
+				)}
 			</Grid>
 		</div>
   );
