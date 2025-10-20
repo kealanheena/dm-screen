@@ -1,9 +1,44 @@
 "use client"
 
 import React, { useState } from 'react';
-import { find, map }  from 'lodash';
+import { find, filter, map }  from 'lodash';
 
 import { Card, CardContent, Grid, Slider, Typography } from '@mui/material';
+
+const moveRight = (
+	layouts: Layout[],
+	{ id, start_point, width }: Layout,
+	newRange: number[],
+) => {
+	// if start point + width is greater than or equal to 12
+	// it is at the end of the sections
+	if ((start_point + width) >= 12) {
+		return;
+	}
+
+
+	// if item to right starting point is 11 do not change
+	let include = false
+	const sectionsToTheRight = filter(layouts, (layout: Layout) => {
+		if (include) {
+			return true;
+		}
+		
+		if (layout.id === id) {
+			include = true;
+		}
+
+		return false
+	})
+
+	const reduceWhichLayout: Layout | undefined = find(sectionsToTheRight, ({ width }) => width > 1);
+
+	if (!reduceWhichLayout) {
+		return;
+	}
+	
+	return []
+}
 
 interface Layout {
 	id: number;
@@ -20,16 +55,35 @@ export default function Screen() {
 	 	{ id: 4, start_point: 10, width: 2  },
 	]);
 	const [hoverTarget, setHoverTarget] = useState<number | null>(null)
-	// const [currentLayoutId, setCurrentLayoutId] = useState<number>(1);
+	const [currentLayoutId, setCurrentLayoutId] = useState<number>(1);
 
 	const onChangeLayout = (e) => {
-		// if (finds) {
+		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
+		if (!layout) {
+			return;
+		}
 
-		// }
-		console.log(e.target.value);
+		const newRange = e.target.value;
+		const { start_point, width } = layout;
+
+
+		moveRight(layouts, layout, newRange)
+
+			// Increase the last item in the array
+
+			// Get layout to the right
+			// Decrease its starting point by 1
+
+		
+
+		// console.log({
+		// 	newRange,
+		// 	layout: [start_point, start_point + width]
+		// })
+		
 	}
-	const onMouseEnterSection = (id: number) => () => {
-		setHoverTarget(id);
+	const onClickSection = (id: number) => () => {
+		setCurrentLayoutId(id);
 		const layout: Layout | undefined = find(layouts, ['id', id]);
 
 		if (!layout) {
@@ -44,16 +98,13 @@ export default function Screen() {
 
 
 
-	const getPadding = (id: number) => {
-
-		console.log();
-
-		return hoverTarget === id ? { 
+	const getPadding = (id: number) => (
+		hoverTarget === id ? { 
 			padding: '0px'
 		} : {
 			padding: '5px'
 		}
-	}
+	);
 
   return (
 		<div style={{ height: '100%'  }}>
@@ -71,14 +122,15 @@ export default function Screen() {
 			<Grid container spacing={1} style={{ height: '100%', padding: '10px' }}>
 				{map(layouts, ({ id, width }: Layout) => {
 					const padding = getPadding(id);
-					
+
 					return (
 						<Grid 
 							style={padding}
 							key={id}
 							size={width}
-							onMouseEnter={onMouseEnterSection(id)}
+							onMouseEnter={() => setHoverTarget(id)}
 							onMouseLeave={onMouseLeaveSection}
+							onClick= {onClickSection(id)}
 						>
 							<Card
 								style={id === hoverTarget ? {
