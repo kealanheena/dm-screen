@@ -1,7 +1,9 @@
+import increaseSectionSizeRight from "@/utils/increaseSectionSizeRight";
+
 describe("ShouldTest", () => {
 	it("Should equal true", () => {
 
-		expect(true).toEqual(true);
+		expect(increaseSectionSizeRight(1, 2)).toEqual(true);
 
 	})
 });
