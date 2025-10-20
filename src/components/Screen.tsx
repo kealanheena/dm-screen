@@ -4,55 +4,15 @@ import React, { useState } from 'react';
 import { find, filter, map }  from 'lodash';
 
 import { Card, CardContent, Grid, Slider, Typography } from '@mui/material';
-
-const moveRight = (
-	layouts: Layout[],
-	{ id, start_point, width }: Layout,
-	newRange: number[],
-) => {
-	// if start point + width is greater than or equal to 12
-	// it is at the end of the sections
-	if ((start_point + width) >= 12) {
-		return;
-	}
-
-
-	// if item to right starting point is 11 do not change
-	let include = false
-	const sectionsToTheRight = filter(layouts, (layout: Layout) => {
-		if (include) {
-			return true;
-		}
-		
-		if (layout.id === id) {
-			include = true;
-		}
-
-		return false
-	})
-
-	const reduceWhichLayout: Layout | undefined = find(sectionsToTheRight, ({ width }) => width > 1);
-
-	if (!reduceWhichLayout) {
-		return;
-	}
-	
-	return []
-}
-
-interface Layout {
-	id: number;
-	start_point: number; 
-	width: number;
-}
+import { Layout } from '@/types';
 
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([0, 5])
 	const [layouts, setLayouts] = useState<Layout[]>([
-		{ id: 1, start_point: 0, width: 5 },
-	 	{ id: 2, start_point: 5, width: 3  },
-	 	{ id: 3, start_point: 8, width: 2  },
-	 	{ id: 4, start_point: 10, width: 2  },
+		{ id: 1, start: 0, width: 5 },
+	 	{ id: 2, start: 5, width: 3  },
+	 	{ id: 3, start: 8, width: 2  },
+	 	{ id: 4, start: 10, width: 2  },
 	]);
 	const [hoverTarget, setHoverTarget] = useState<number | null>(null)
 	const [currentLayoutId, setCurrentLayoutId] = useState<number>(1);
@@ -64,10 +24,7 @@ export default function Screen() {
 		}
 
 		const newRange = e.target.value;
-		const { start_point, width } = layout;
-
-
-		moveRight(layouts, layout, newRange)
+		const { start, width } = layout;
 
 			// Increase the last item in the array
 
@@ -78,7 +35,7 @@ export default function Screen() {
 
 		// console.log({
 		// 	newRange,
-		// 	layout: [start_point, start_point + width]
+		// 	layout: [start, start + width]
 		// })
 		
 	}
@@ -90,8 +47,8 @@ export default function Screen() {
 			return;
 		}
 
-		const { start_point, width } = layout;
-		setRange([start_point, start_point + width]);
+		const { start, width } = layout;
+		setRange([start, start + width]);
 	}
 
 	const onMouseLeaveSection = () => setHoverTarget(null);
@@ -135,7 +92,6 @@ export default function Screen() {
 							<Card
 								style={id === hoverTarget ? {
 									transition: "transform 0.15s ease-in-out",
-									// "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
 								} : {}}
 							>
 								<CardContent>
