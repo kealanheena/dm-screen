@@ -32,6 +32,8 @@ export default function Screen() {
 		const newLayouts: Layout[] | undefined = increaseSectionSizeRight({
 			layoutId: currentLayoutId,
 			layouts,
+			newRange: newRange[1],
+			range: range[1],
 		});
 
 		if (!newLayouts) {
