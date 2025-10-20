@@ -29,12 +29,10 @@ export default function Screen() {
 		const newRange: number[] = e.target.value;
 		const { start, width } = layout;
 
-		const newLayouts: Layout[] | undefined = increaseSectionSizeRight(
-			layouts, 
-			layout, 
-			range,
-			newRange
-		);
+		const newLayouts: Layout[] | undefined = increaseSectionSizeRight({
+			layoutId: currentLayoutId,
+			layouts,
+		});
 
 		if (!newLayouts) {
 			return;
