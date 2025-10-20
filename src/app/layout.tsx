@@ -25,7 +25,7 @@ export default function RootLayout({
         <body style={{ margin: 0, height: '100vh' }}>
           <ThemeProviderWrapper>
             <Navbar />
-            <main>
+            <main style={{ height: '100%' }}>
               {children}
             </main>
           </ThemeProviderWrapper>
