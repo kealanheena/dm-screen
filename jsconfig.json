@@ -1,9 +1,12 @@
 {
 	"checkjs": true,
   "compilerOptions": {
-    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["components/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]
