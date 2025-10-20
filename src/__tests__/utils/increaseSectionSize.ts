@@ -9,7 +9,7 @@ describe("#increaseSectionSizeRight", () => {
 	beforeAll(() => {
 		layouts = [{
 			id: 1,
-			start: 1,
+			start: 0,
 			width: 9,
 		}, {
 			id: 2,
@@ -31,6 +31,23 @@ describe("#increaseSectionSizeRight", () => {
 		);
 
 		expect(result).toEqual(undefined);
+	});
 
-	})
+	it.only("Should do nothing if start plus width is greater than 12", () => {
+		const layout = {
+			id: 1,
+			start: 0,
+			width: 9,
+		}
+		const result = increaseSectionSizeRight(
+			layouts,
+			layout,
+			[0, 10],
+		);
+
+		expect(result).toStrictEqual([
+			{ id: 1, start: 0, width: 10 }, // correct
+			{ id: 2, start: 11, width: 1 }
+		]);
+	});
 });

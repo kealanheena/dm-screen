@@ -1,10 +1,12 @@
 "use client"
 
 import React, { useState } from 'react';
-import { find, filter, map }  from 'lodash';
+import { find, filter, last, map }  from 'lodash';
 
 import { Card, CardContent, Grid, Slider, Typography } from '@mui/material';
+import increaseSectionSizeRight from '@/utils/increaseSectionSizeRight'
 import { Layout } from '@/types';
+import toast from 'react-hot-toast';
 
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([0, 5])
@@ -20,16 +22,34 @@ export default function Screen() {
 	const onChangeLayout = (e) => {
 		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
 		if (!layout) {
+			// toast.error('Cannot increase size of section');
 			return;
 		}
 
-		const newRange = e.target.value;
+		const newRange: number[] = e.target.value;
 		const { start, width } = layout;
 
-			// Increase the last item in the array
+		const newLayouts: Layout[] | undefined = increaseSectionSizeRight(
+			layouts, 
+			layout, 
+			range,
+			newRange
+		);
 
-			// Get layout to the right
-			// Decrease its starting point by 1
+		if (!newLayouts) {
+			return;
+		}
+
+		console.log({newLayouts})
+
+		setLayouts(newLayouts)
+
+		setRange(newRange);
+
+	// Increase the last item in the array
+
+	// Get layout to the right
+	// Decrease its starting point by 1
 
 		
 
