@@ -1,4 +1,4 @@
-import { find, filter, last, reduce, map } from 'lodash';
+import { find, filter, last, reduce, some, map } from 'lodash';
 
 import { Layout } from '@/types';
 
@@ -16,39 +16,43 @@ const increaseSectionSizeRight = ({
 	range: number,
 }): Layout[] | undefined => {
 	const isExpanding = newRange > range;
+	const layoutById = find(layouts, ['id', layoutId])
+	const isShrinkingTooMuch = some(
+		layouts,
+		({ id, start }: Layout) => (
+			start === newRange && id === layoutId
+		)
+	)
 
-	const expandingLayout = find(layouts, ['id', layoutId])
-
-	if (!expandingLayout) {
+	if (!layoutById) {
 		return;
 	}
 
-	let doesSectionHaveToBeDecreased = false;
+	if (isShrinkingTooMuch) {
+		return;
+	}
+
+	let shouldShrinkNextSection = false;
 
 	const newLayouts = map(layouts, (layout) => {
 		const { id, start, width } = layout;
 
-		// if (!isExpanding) {
-		// 	if (id === layoutId) {
+		if (!isExpanding) {
+			if (id === layoutId) {				
+				// doesSectionHaveToBeDecreased = true;
 
-		// 		if (start === 0 && width <= 1) {
-		// 			return layout;
-		// 		}
-				
-		// 		doesSectionHaveToBeDecreased = true;
+				return {
+					...layout,
+					width: width - 1,
+				}
+			}
 
-		// 		return {
-		// 			...layout,
-		// 			width: width - 1,
-		// 		}
-		// 	}
-
-		// 	return layout;
-		// }
+			return layout;
+		}
 		// Has there been a decrease in a different section to
 		// account for the increase in the changed layout so that
 		// all sections width add up to a total of 12
-		if (doesSectionHaveToBeDecreased) {
+		if (shouldShrinkNextSection) {
 			if (width <= 1) {
 				return {
 					...layout,
@@ -56,7 +60,9 @@ const increaseSectionSizeRight = ({
 				};
 			}
 
-			doesSectionHaveToBeDecreased = false;
+			// Once one section shrinks no other sections have to
+			// shrink
+			shouldShrinkNextSection = false;
 			
 			return {
 				...layout,
@@ -66,7 +72,9 @@ const increaseSectionSizeRight = ({
 		}
 
 		if (id === layoutId) {
-			doesSectionHaveToBeDecreased = true;
+			// We want to shrink a section to the right of the
+			// expanded section to account for the expansion
+			shouldShrinkNextSection = true;
 
 			return {
 				...layout,
@@ -77,9 +85,11 @@ const increaseSectionSizeRight = ({
 		return layout;
 	});
 
-	return newLayouts;
-
-	if (doesSectionHaveToBeDecreased) {
+	// if shouldShrinkNextSection is still true we did not
+	// shrink any section.
+	// This means the sections where too small to shrink, so
+	// return undefines so we don't update sections
+	if (shouldShrinkNextSection) {
 		return;
 	}
 
