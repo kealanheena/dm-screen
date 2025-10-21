@@ -1,6 +1,14 @@
-import { find, filter, last, reduce, some, map } from 'lodash';
+import {
+	find,
+	filter,
+	last,
+	reduce,
+	some,
+	map,
+} from 'lodash';
 
 import { Layout } from '@/types';
+import shrinkSectionRight from './shrinkSectionRight';
 
 const MAXCOLUMN = 12;
 
@@ -33,22 +41,26 @@ const increaseSectionSizeRight = ({
 	}
 
 	let shouldShrinkNextSection = false;
+	let shouldExpandNextSection = false;
 
 	const newLayouts = map(layouts, (layout) => {
 		const { id, start, width } = layout;
 
+		// >>>>>>>>Shrink Left<<<<<<<<
 		if (!isExpanding) {
-			if (id === layoutId) {				
-				// doesSectionHaveToBeDecreased = true;
+			const { newLayout, newShouldExpandNextSection} = shrinkSectionRight({
+				layout,
+				layoutId,
+				shouldExpandNextSection,
+			});
 
-				return {
-					...layout,
-					width: width - 1,
-				}
-			}
+			shouldExpandNextSection = newShouldExpandNextSection;
 
-			return layout;
+			return newLayout;
 		}
+
+		// >>>>>>>>Expand Right<<<<<<<<
+
 		// Has there been a decrease in a different section to
 		// account for the increase in the changed layout so that
 		// all sections width add up to a total of 12

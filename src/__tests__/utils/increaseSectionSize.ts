@@ -45,7 +45,7 @@ describe("#increaseSectionSizeRight", () => {
 		]);
 	});
 
-	it.only("Should add 1 to both the width and start of a second layout", () => {
+	it("Should add 1 to both the width and start of a second layout", () => {
 		const layouts: Layout[] = [{
 			id: 1,
 			start: 0,
@@ -65,7 +65,7 @@ describe("#increaseSectionSizeRight", () => {
 
 		expect(result).toStrictEqual([
 			{ id: 1, start: 0, width: 8 }, // correct
-			{ id: 2, start: 9, width: 2 }
+			{ id: 2, start: 9, width: 3 }
 		]);
 	});
 });
