@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { find, filter, last, map }  from 'lodash';
 
 import { Card, CardContent, Grid, Slider, Typography } from '@mui/material';
-import onChangeSectionRight from '@/utils/onChangeSectionRight'
+import onChangeSection from '@/utils/onChangeSection'
 import { Layout } from '@/types';
 import toast from 'react-hot-toast';
 
@@ -29,7 +29,7 @@ export default function Screen() {
 		const newRange: number[] = e.target.value;
 		const { start, width } = layout;
 
-		const newLayouts: Layout[] | undefined = onChangeSectionRight({
+		const newLayouts: Layout[] | undefined = onChangeSection({
 			layoutId: currentLayoutId,
 			layouts,
 			newRange: newRange[1],

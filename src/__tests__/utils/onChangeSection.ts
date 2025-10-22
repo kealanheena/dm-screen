@@ -1,9 +1,9 @@
 import { head, last } from 'lodash';
 
-import onChangeSectionRight from "@/utils/onChangeSectionRight";
+import onChangeSection from "@/utils/onChangeSection";
 import { Layout } from '@/types';
 
-describe("#onChangeSectionRight", () => {
+describe("#onChangeSection", () => {
 	
 	it("Should do nothing if start plus width is greater than 12", () => {
 		let layouts: Layout[] = [{
@@ -11,7 +11,7 @@ describe("#onChangeSectionRight", () => {
 			start: 0,
 			width: 12,
 		}];
-		const result = onChangeSectionRight({
+		const result = onChangeSection({
 			layoutId: 2,
 			layouts,
 			newRange: 12,
@@ -32,7 +32,7 @@ describe("#onChangeSectionRight", () => {
 			width: 2,
 		}];
 
-		const result = onChangeSectionRight({
+		const result = onChangeSection({
 			layoutId: 1,
 			layouts,
 			newRange: 10,
@@ -56,7 +56,7 @@ describe("#onChangeSectionRight", () => {
 			width: 2,
 		}];
 
-		const result = onChangeSectionRight({
+		const result = onChangeSection({
 			layoutId: 1,
 			layouts,
 			newRange: 8,

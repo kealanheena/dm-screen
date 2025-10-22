@@ -13,7 +13,7 @@ import expandSectionRight from './expandSectionRight';
 
 const MAXCOLUMNAMOUNT = 12;
 
-const onChangeSectionRight = ({
+const onChangeSection = ({
 	layoutId,
 	layouts,
 	newRange,
@@ -96,4 +96,4 @@ const onChangeSectionRight = ({
 	
 }
 
-export default onChangeSectionRight;
+export default onChangeSection;
