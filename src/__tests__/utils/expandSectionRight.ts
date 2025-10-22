@@ -1,11 +1,9 @@
-import { head, last } from 'lodash';
-
 import expandSectionRight from '@/utils/expandSectionRight';
 import { Layout } from '@/types';
 
-describe("#increaseSectionSizeRight", () => {
+describe("#expandSectionRight", () => {
 	
-	it("Should return layout with increased widthb and a true newShouldShrinkNextSection", () => {
+	it("Should return layout with increased width and a true newShouldShrinkNextSection", () => {
 		let layout: Layout = {
 			id: 1,
 			start: 0,
