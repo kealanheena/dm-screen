@@ -27,37 +27,25 @@ export default function Screen() {
 		}
 
 		const newRange: number[] = e.target.value;
-		const { start, width } = layout;
 
 		const newLayouts: Layout[] | undefined = onChangeSection({
 			layoutId: currentLayoutId,
 			layouts,
-			newRange: newRange[1],
-			range: range[1],
+			newRange,
+			range,
 		});
 
 		if (!newLayouts) {
 			return;
 		}
 
-		console.log({newLayouts})
-
 		setLayouts(newLayouts)
-
 		setRange(newRange);
 
 	// Increase the last item in the array
 
 	// Get layout to the right
 	// Decrease its starting point by 1
-
-		
-
-		// console.log({
-		// 	newRange,
-		// 	layout: [start, start + width]
-		// })
-		
 	}
 	const onClickSection = (id: number) => () => {
 		setCurrentLayoutId(id);

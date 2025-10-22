@@ -14,8 +14,8 @@ describe("#onChangeSection", () => {
 		const result = onChangeSection({
 			layoutId: 2,
 			layouts,
-			newRange: 12,
-			range: 12,
+			newRange: [0, 12],
+			range: [0, 12],
 		});
 
 		expect(result).toEqual(undefined);
@@ -35,8 +35,8 @@ describe("#onChangeSection", () => {
 		const result = onChangeSection({
 			layoutId: 1,
 			layouts,
-			newRange: 10,
-			range: 9,
+			newRange: [0, 10],
+			range: [0, 9],
 		});
 
 		expect(result).toStrictEqual([
@@ -59,8 +59,8 @@ describe("#onChangeSection", () => {
 		const result = onChangeSection({
 			layoutId: 1,
 			layouts,
-			newRange: 8,
-			range: 9,
+			newRange: [0, 8],
+			range: [0, 9],
 		});
 
 		expect(result).toStrictEqual([

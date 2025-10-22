@@ -21,15 +21,18 @@ const onChangeSection = ({
 }: {
 	layoutId: number,
 	layouts: Layout[],
-	newRange: number,
-	range: number,
+	newRange: number[],
+	range: number[],
 }): Layout[] | undefined => {
-	const isExpanding = newRange > range;
+	const [rangeStart, rangeEnd] = range;
+	const [newRangeStart, newRangeEnd] = newRange;
+	const isExpanding = newRangeEnd > rangeEnd;
 	const layoutById = find(layouts, ['id', layoutId])
+
 	const isShrinkingTooMuch = some(
 		layouts,
 		({ id, start }: Layout) => (
-			start === newRange && id === layoutId
+			start === newRangeEnd && id === layoutId
 		)
 	)
 
