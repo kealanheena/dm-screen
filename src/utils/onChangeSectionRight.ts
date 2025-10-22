@@ -11,9 +11,9 @@ import { Layout } from '@/types';
 import shrinkSectionRight from './shrinkSectionRight';
 import expandSectionRight from './expandSectionRight';
 
-const MAXCOLUMN = 12;
+const MAXCOLUMNAMOUNT = 12;
 
-const increaseSectionSizeRight = ({
+const onChangeSectionRight = ({
 	layoutId,
 	layouts,
 	newRange,
@@ -34,6 +34,12 @@ const increaseSectionSizeRight = ({
 	)
 
 	if (!layoutById) {
+		return;
+	}
+
+	const { width, start } = layoutById;
+
+	if ((width + start) >= MAXCOLUMNAMOUNT) {
 		return;
 	}
 
@@ -90,4 +96,4 @@ const increaseSectionSizeRight = ({
 	
 }
 
-export default increaseSectionSizeRight;
+export default onChangeSectionRight;
