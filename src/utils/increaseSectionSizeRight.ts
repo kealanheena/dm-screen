@@ -9,6 +9,7 @@ import {
 
 import { Layout } from '@/types';
 import shrinkSectionRight from './shrinkSectionRight';
+import expandSectionRight from './expandSectionRight';
 
 const MAXCOLUMN = 12;
 
@@ -40,72 +41,53 @@ const increaseSectionSizeRight = ({
 		return;
 	}
 
-	let shouldShrinkNextSection = false;
-	let shouldExpandNextSection = false;
+	if (range !== newRange) {
+		let shouldShrinkNextSection = false;
+		let shouldExpandNextSection = false;
 
-	const newLayouts = map(layouts, (layout) => {
-		const { id, start, width } = layout;
+		const newLayouts = map(layouts, (layout) => {
+			// >>>>>>>>Expand Right<<<<<<<<
+			if (isExpanding) {
+				const { newLayout, newShouldShrinkNextSection } = expandSectionRight({
+					layout,
+					layoutId,
+					shouldShrinkNextSection,
+				});
 
-		// >>>>>>>>Shrink Left<<<<<<<<
-		if (!isExpanding) {
-			const { newLayout, newShouldExpandNextSection} = shrinkSectionRight({
-				layout,
-				layoutId,
-				shouldExpandNextSection,
-			});
+				shouldShrinkNextSection = newShouldShrinkNextSection;
 
-			shouldExpandNextSection = newShouldExpandNextSection;
+				return newLayout;
+			}
 
-			return newLayout;
-		}
+			// >>>>>>>>Shrink Left<<<<<<<<
+			if (!isExpanding) {
+				const { newLayout, newShouldExpandNextSection} = shrinkSectionRight({
+					layout,
+					layoutId,
+					shouldExpandNextSection,
+				});
 
-		// >>>>>>>>Expand Right<<<<<<<<
+				shouldExpandNextSection = newShouldExpandNextSection;
 
-		// Has there been a decrease in a different section to
-		// account for the increase in the changed layout so that
-		// all sections width add up to a total of 12
+				return newLayout;
+			}
+
+			return layout;
+		});
+
+		// if shouldShrinkNextSection is still true we did not
+		// shrink any section.
+		// This means the sections where too small to shrink, so
+		// return undefines so we don't update sections
 		if (shouldShrinkNextSection) {
-			if (width <= 1) {
-				return {
-					...layout,
-					start: start + 1,
-				};
-			}
-
-			// Once one section shrinks no other sections have to
-			// shrink
-			shouldShrinkNextSection = false;
-			
-			return {
-				...layout,
-				width: width - 1,
-				start: start + 1,
-			}
+			return;
 		}
 
-		if (id === layoutId) {
-			// We want to shrink a section to the right of the
-			// expanded section to account for the expansion
-			shouldShrinkNextSection = true;
+		return newLayouts;
 
-			return {
-				...layout,
-				width: width + 1,
-			}
-		}
-
-		return layout;
-	});
-
-	// if shouldShrinkNextSection is still true we did not
-	// shrink any section.
-	// This means the sections where too small to shrink, so
-	// return undefines so we don't update sections
-	if (shouldShrinkNextSection) {
-		return;
 	}
 
-	return newLayouts;
+	
 }
 
 export default increaseSectionSizeRight;
