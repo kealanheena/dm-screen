@@ -3,6 +3,7 @@ import {
 	filter,
 	last,
 	reduce,
+	reverse,
 	some,
 	map,
 } from 'lodash';
@@ -10,8 +11,10 @@ import {
 import { Layout } from '@/types';
 import shrinkSectionRight from './shrinkSectionRight';
 import expandSectionRight from './expandSectionRight';
+import expandSectionLeft from './expandSectionLeft';
 
 const MAXCOLUMNAMOUNT = 12;
+const COLUMNSTART = 0;
 
 const onChangeSection = ({
 	layoutId,
@@ -26,8 +29,13 @@ const onChangeSection = ({
 }): Layout[] | undefined => {
 	const [rangeStart, rangeEnd] = range;
 	const [newRangeStart, newRangeEnd] = newRange;
-	const isExpanding = newRangeEnd > rangeEnd;
+
+	const isExpandingStart = newRangeStart < rangeStart;
+	const isExpandingEnd = newRangeEnd > rangeEnd;
+
 	const layoutById = find(layouts, ['id', layoutId])
+
+	// console.log('hereh', range, newRange)
 
 	const isShrinkingTooMuch = some(
 		layouts,
@@ -42,28 +50,73 @@ const onChangeSection = ({
 
 	const { width, start } = layoutById;
 
-	if ((width + start) >= MAXCOLUMNAMOUNT) {
+	if (isExpandingStart && start === COLUMNSTART) {
+		return
+	}
+
+	if (isExpandingEnd && ((width + start) >= MAXCOLUMNAMOUNT)) {
 		return;
 	}
 
 	if (isShrinkingTooMuch) {
 		return;
 	}
+	let shouldShrinkNextSection = false;
+	let shouldExpandNextSection = false;
 
 	// This means the the left side is expanding or shrinking
 	if (rangeStart !== newRangeStart) {
-		// Expand left
 
+		
+		// Expand left
+		const newLayouts = map(reverse(layouts), (layout, index) => {
+			// >>>>>>>>Expand Right<<<<<<<<
+			if (isExpandingStart) {
+				const { newLayout, newShouldShrinkNextSection } = expandSectionLeft({
+					layout,
+					layoutId,
+					shouldShrinkNextSection,
+				});
+
+				shouldShrinkNextSection = newShouldShrinkNextSection;
+
+				return newLayout;
+			}
+
+		// 	// >>>>>>>>Shrink Left<<<<<<<<
+		// 	if (!isExpandingStart) {
+		// 		const { newLayout, newShouldExpandNextSection} = shrinkSectionRight({
+		// 			layout,
+		// 			layoutId,
+		// 			shouldExpandNextSection,
+		// 		});
+
+		// 		shouldExpandNextSection = newShouldExpandNextSection;
+
+		// 		return newLayout;
+		// 	}
+
+		// 	return layout;
+		});
+
+		console.log({ layouts, newLayouts })
+
+		// // if shouldShrinkNextSection is still true we did not
+		// // shrink any section.
+		// // This means the sections where too small to shrink, so
+		// // return undefines so we don't update sections
+		// if (shouldShrinkNextSection) {
+		// 	return;
+		// }
+
+		return reverse(newLayouts);		
 	}
 
 	// This means the the right side is expanding or shrinking
 	if (rangeEnd !== newRangeEnd) {
-		let shouldShrinkNextSection = false;
-		let shouldExpandNextSection = false;
-
 		const newLayouts = map(layouts, (layout) => {
 			// >>>>>>>>Expand Right<<<<<<<<
-			if (isExpanding) {
+			if (isExpandingEnd) {
 				const { newLayout, newShouldShrinkNextSection } = expandSectionRight({
 					layout,
 					layoutId,
@@ -76,7 +129,7 @@ const onChangeSection = ({
 			}
 
 			// >>>>>>>>Shrink Left<<<<<<<<
-			if (!isExpanding) {
+			if (!isExpandingEnd) {
 				const { newLayout, newShouldExpandNextSection} = shrinkSectionRight({
 					layout,
 					layoutId,
@@ -100,7 +153,6 @@ const onChangeSection = ({
 		}
 
 		return newLayouts;
-
 	}
 
 	

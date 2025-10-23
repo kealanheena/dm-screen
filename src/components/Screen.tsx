@@ -9,7 +9,7 @@ import { Layout } from '@/types';
 import toast from 'react-hot-toast';
 
 export default function Screen() {
-	const [range, setRange] = useState<number[]>([0, 5])
+	const [range, setRange] = useState<number[]>([10, 12])
 	const [layouts, setLayouts] = useState<Layout[]>([
 		{ id: 1, start: 0, width: 5 },
 	 	{ id: 2, start: 5, width: 3  },
@@ -17,12 +17,11 @@ export default function Screen() {
 	 	{ id: 4, start: 10, width: 2  },
 	]);
 	const [hoverTarget, setHoverTarget] = useState<number | null>(null)
-	const [currentLayoutId, setCurrentLayoutId] = useState<number>(1);
+	const [currentLayoutId, setCurrentLayoutId] = useState<number>(4);
 
 	const onChangeLayout = (e) => {
 		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
 		if (!layout) {
-			// toast.error('Cannot increase size of section');
 			return;
 		}
 
@@ -41,12 +40,8 @@ export default function Screen() {
 
 		setLayouts(newLayouts)
 		setRange(newRange);
+	};
 
-	// Increase the last item in the array
-
-	// Get layout to the right
-	// Decrease its starting point by 1
-	}
 	const onClickSection = (id: number) => () => {
 		setCurrentLayoutId(id);
 		const layout: Layout | undefined = find(layouts, ['id', id]);
@@ -60,8 +55,6 @@ export default function Screen() {
 	}
 
 	const onMouseLeaveSection = () => setHoverTarget(null);
-
-
 
 	const getPadding = (id: number) => (
 		hoverTarget === id ? { 
