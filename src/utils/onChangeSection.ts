@@ -50,7 +50,14 @@ const onChangeSection = ({
 		return;
 	}
 
-	if (range !== newRange) {
+	// This means the the left side is expanding or shrinking
+	if (rangeStart !== newRangeStart) {
+		// Expand left
+
+	}
+
+	// This means the the right side is expanding or shrinking
+	if (rangeEnd !== newRangeEnd) {
 		let shouldShrinkNextSection = false;
 		let shouldExpandNextSection = false;
 
