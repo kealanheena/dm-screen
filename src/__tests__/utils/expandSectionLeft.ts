@@ -19,7 +19,7 @@ describe("#expandSectionLeft", () => {
 			newLayout: {
 				id: 1,
 				start: 4,
-				width: 9,
+				width: 10,
 			}, 
 			newShouldShrinkNextSection: true,
 		});
