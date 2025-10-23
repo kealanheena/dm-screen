@@ -35,14 +35,36 @@ const onChangeSection = ({
 
 	const layoutById = find(layouts, ['id', layoutId])
 
-	// console.log('hereh', range, newRange)
-
 	const isShrinkingTooMuch = some(
 		layouts,
 		({ id, start }: Layout) => (
 			start === newRangeEnd && id === layoutId
 		)
 	)
+
+	// 1. Get all sections to the left
+	// 2. check the combined width
+	// 3. if length is equal to or less than combined width
+			// this means all the sections have width of 1
+	// 4. do not expand
+	// sections to the lest of LayoutId
+	let isLeft = true;
+	const leftSections = filter(layouts, ({ id }) => {
+		if (id === layoutId) {
+			isLeft = false;
+			return false;
+		}
+
+		return isLeft ? true : false
+	});
+
+	const leftSectionsTotalWidth = reduce(leftSections, (sum, { width }) => (
+		sum + width
+	), 0);
+
+	const isExpandingTooMuch = leftSectionsTotalWidth <= leftSections.length;
+
+	console.log({ isExpandingTooMuch });
 
 	if (!layoutById) {
 		return;
@@ -58,7 +80,7 @@ const onChangeSection = ({
 		return;
 	}
 
-	if (isShrinkingTooMuch) {
+	if (isShrinkingTooMuch || isExpandingTooMuch) {
 		return;
 	}
 	let shouldShrinkNextSection = false;
