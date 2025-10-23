@@ -21,6 +21,7 @@ export default function Screen() {
 
 	const onChangeLayout = (e) => {
 		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
+
 		if (!layout) {
 			return;
 		}
@@ -38,8 +39,16 @@ export default function Screen() {
 			return;
 		}
 
+		const newLayout = find(newLayouts, ['id', currentLayoutId]);
+
+		if (!newLayout) {
+			return;
+		}
+
+		const { start, width } = newLayout;
+
 		setLayouts(newLayouts)
-		setRange(newRange);
+		setRange([start, start + width]);
 	};
 
 	const onClickSection = (id: number) => () => {

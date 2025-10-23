@@ -72,7 +72,7 @@ const onChangeSection = ({
 
 	const { width, start } = layoutById;
 
-	if (isExpandingStart && start === COLUMNSTART) {
+	if (isExpandingStart && (start === COLUMNSTART || isExpandingTooMuch)) {
 		return
 	}
 
@@ -80,7 +80,7 @@ const onChangeSection = ({
 		return;
 	}
 
-	if (isShrinkingTooMuch || isExpandingTooMuch) {
+	if (isShrinkingTooMuch) {
 		return;
 	}
 	let shouldShrinkNextSection = false;
@@ -120,8 +120,6 @@ const onChangeSection = ({
 
 		// 	return layout;
 		});
-
-		console.log({ layouts, newLayouts })
 
 		// // if shouldShrinkNextSection is still true we did not
 		// // shrink any section.
