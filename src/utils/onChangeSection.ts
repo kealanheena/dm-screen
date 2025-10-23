@@ -12,6 +12,7 @@ import { Layout } from '@/types';
 import shrinkSectionRight from './shrinkSectionRight';
 import expandSectionRight from './expandSectionRight';
 import expandSectionLeft from './expandSectionLeft';
+import shrinkSectionLeft from './shrinkSectionLeft'
 
 const MAXCOLUMNAMOUNT = 12;
 const COLUMNSTART = 0;
@@ -64,8 +65,6 @@ const onChangeSection = ({
 
 	const isExpandingTooMuch = leftSectionsTotalWidth <= leftSections.length;
 
-	console.log({ isExpandingTooMuch });
-
 	if (!layoutById) {
 		return;
 	}
@@ -91,8 +90,8 @@ const onChangeSection = ({
 
 		
 		// Expand left
-		const newLayouts = map(reverse(layouts), (layout, index) => {
-			// >>>>>>>>Expand Right<<<<<<<<
+		const newLayouts = map(reverse(layouts), (layout) => {
+			// >>>>>>>>Expand Left<<<<<<<<
 			if (isExpandingStart) {
 				const { newLayout, newShouldShrinkNextSection } = expandSectionLeft({
 					layout,
@@ -105,20 +104,20 @@ const onChangeSection = ({
 				return newLayout;
 			}
 
-		// 	// >>>>>>>>Shrink Left<<<<<<<<
-		// 	if (!isExpandingStart) {
-		// 		const { newLayout, newShouldExpandNextSection} = shrinkSectionRight({
-		// 			layout,
-		// 			layoutId,
-		// 			shouldExpandNextSection,
-		// 		});
+			// >>>>>>>>Shrink Right<<<<<<<<
+			if (!isExpandingStart) {
+				const { newLayout, newShouldExpandNextSection} = shrinkSectionLeft({
+					layout,
+					layoutId,
+					shouldExpandNextSection,
+				});
 
-		// 		shouldExpandNextSection = newShouldExpandNextSection;
+				shouldExpandNextSection = newShouldExpandNextSection;
 
-		// 		return newLayout;
-		// 	}
+				return newLayout;
+			}
 
-		// 	return layout;
+			return layout;
 		});
 
 		// // if shouldShrinkNextSection is still true we did not
