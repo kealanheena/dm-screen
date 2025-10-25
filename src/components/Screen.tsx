@@ -19,14 +19,14 @@ export default function Screen() {
 	const [hoverTarget, setHoverTarget] = useState<number | null>(null)
 	const [currentLayoutId, setCurrentLayoutId] = useState<number>(4);
 
-	const onChangeLayout = (e) => {
+	const onChangeLayout = (e: any): void => {
 		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
 
 		if (!layout) {
 			return;
 		}
 
-		const newRange: number[] = e.target.value;
+		const newRange: number[] = map(e.target.value, (value: string) => Number(value));
 
 		const newLayouts: Layout[] | undefined = onChangeSection({
 			layoutId: currentLayoutId,

@@ -2,7 +2,12 @@
 
 // import React, { useState } from "react";
 
-// import { getProfileByUsername, getUserPosts, isFollowing, updateProfile } from "@/actions/profile.action";
+import {
+  getProfileByUsername, 
+  getUserPosts,
+  isFollowing,
+  // updateProfile
+} from "@/actions/profile.action";
 // import { SignInButton, useUser } from "@clerk/nextjs";
 // import { Card, CardContent } from "@/components/ui/card";
 // import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
@@ -20,16 +25,16 @@
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import PostCard from "@/components/PostCard";
 
-// type User = Awaited<ReturnType<typeof getProfileByUsername>>;
-// type Posts = Awaited<ReturnType<typeof getUserPosts>>;
-// type IsFollowing = Awaited<ReturnType<typeof isFollowing>>; // incase I change the function in future
+type User = Awaited<ReturnType<typeof getProfileByUsername>>;
+type Posts = Awaited<ReturnType<typeof getUserPosts>>;
+type IsFollowing = Awaited<ReturnType<typeof isFollowing>>; // incase I change the function in future
 
-// interface ProfilePageClientProps {
-//   user: NonNullable<User>;
-//   posts: Posts;
-//   likedPosts: Posts;
-//   isFollowing: IsFollowing;
-// }
+interface ProfilePageClientProps {
+  user: NonNullable<User>;
+  posts: Posts;
+  likedPosts: Posts;
+  isFollowing: IsFollowing;
+}
 
 
 // function ProfilePageClient({
@@ -275,4 +280,11 @@
 // 	)
 // }
 
-// export default ProfilePageClient;
+export default function ProfilePageClient({
+  user,
+  posts,
+  likedPosts,
+  isFollowing: initialIsFollowing,
+}: ProfilePageClientProps) {
+  return <h1>ProfilePageClient</h1>
+}
