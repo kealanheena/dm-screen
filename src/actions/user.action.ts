@@ -11,33 +11,36 @@ export async function syncUser() {
 		const { userId } = await auth();
 		const user = await currentUser();
 
-		if (!userId && !user) {
-			return;
+		if (user && userId) {
+			const email = user.emailAddresses[0].emailAddress;
+
+			const dbUser = await prisma.user.create({
+				data: {
+					clerkId: userId,
+					name: `${user.firstName || ""} ${user.lastName || ""}`,
+					username: user.username ?? email.split('@')[0],
+					email,
+					image: user.imageUrl,
+				}
+			});
+
+			return dbUser;
 		}
 
-		const existingUser = await prisma.user.findUnique({
-			where: {
-				clerkId: userId,
-			}
-		});
+		if (userId) {
+			const existingUser = await prisma.user.findUnique({
+				where: {
+					clerkId: userId,
+				}
+			});
 
-		if (existingUser) {
-			return existingUser;
+			if (existingUser) {
+				return existingUser;
+			}
 		}
 
-		const email = user.emailAddresses[0].emailAddress;
+		return;
 
-		const dbUser = await prisma.user.create({
-			data: {
-				clerkId: userId,
-				name: `${user.firstName || ""} ${user.lastName || ""}`,
-				username: user.username ?? email.split('@')[0],
-				email,
-				image: user.imageUrl,
-			}
-		})
-
-		return dbUser;
 	} catch (error) {
 		console.log('Error in syncUser', error)
 	}
