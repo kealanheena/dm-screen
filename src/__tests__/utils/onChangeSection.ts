@@ -1,12 +1,10 @@
-import { head, last } from 'lodash';
-
 import onChangeSection from "@/utils/onChangeSection";
 import { Layout } from '@/types';
 
 describe("#onChangeSection", () => {
 	
 	it("Should do nothing if start plus width is greater than 12", () => {
-		let layouts: Layout[] = [{
+		const layouts: Layout[] = [{
 			id: 1,
 			start: 0,
 			width: 12,

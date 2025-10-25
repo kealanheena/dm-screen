@@ -1,12 +1,11 @@
 "use client"
 
 import React, { useState } from 'react';
-import { find, filter, last, map }  from 'lodash';
+import { find, map }  from 'lodash';
 
 import { Card, CardContent, Grid, Slider, Typography } from '@mui/material';
 import onChangeSection from '@/utils/onChangeSection'
 import { Layout } from '@/types';
-import toast from 'react-hot-toast';
 
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([10, 12])
@@ -19,6 +18,7 @@ export default function Screen() {
 	const [hoverTarget, setHoverTarget] = useState<number | null>(null)
 	const [currentLayoutId, setCurrentLayoutId] = useState<number>(4);
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onChangeLayout = (e: any): void => {
 		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
 

@@ -4,7 +4,7 @@ import { Layout } from '@/types';
 describe("#expandSectionLeft", () => {
 	
 	it("Should return layout with increased width and a true newShouldShrinkNextSection", () => {
-		let layout: Layout = {
+		const layout: Layout = {
 			id: 1,
 			start: 5,
 			width: 9,

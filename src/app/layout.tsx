@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { Toaster } from "react-hot-toast";
+// import type { Metadata } from "next";
+// import { Toaster } from "react-hot-toast";
 import { ClerkProvider } from '@clerk/nextjs'
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { createTheme } from "@mui/material/styles";
+// import { CssBaseline, ThemeProvider } from '@mui/material';
+// import { createTheme } from "@mui/material/styles";
 
-import { themeOptions } from './theme';
+// import { themeOptions } from './theme';
 
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 
@@ -16,7 +16,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = createTheme(themeOptions);
+  // const theme = createTheme(themeOptions);
 
 
   return (

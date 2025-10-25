@@ -8,6 +8,7 @@ import {
   isFollowing,
   // updateProfile
 } from "@/actions/profile.action";
+import { map } from 'lodash';
 // import { SignInButton, useUser } from "@clerk/nextjs";
 // import { Card, CardContent } from "@/components/ui/card";
 // import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
@@ -286,5 +287,16 @@ export default function ProfilePageClient({
   likedPosts,
   isFollowing: initialIsFollowing,
 }: ProfilePageClientProps) {
-  return <h1>ProfilePageClient</h1>
+  return (
+    <div>
+      <h1>ProfilePageClient</h1>
+      <h3>{user.username} {initialIsFollowing ? 'Following' : 'Not Following'}</h3>
+      {map(posts, ({ content }) => (
+        <p>{content}</p>
+      ))}
+      {map(likedPosts, ({ content }) => (
+        <p>{content}</p>
+      ))}
+    </div>
+  )
 }

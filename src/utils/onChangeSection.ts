@@ -1,7 +1,6 @@
 import {
 	find,
 	filter,
-	last,
 	reduce,
 	reverse,
 	some,
