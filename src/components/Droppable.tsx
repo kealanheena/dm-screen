@@ -5,22 +5,33 @@ export function Droppable({
   children,
   id,
 }: Readonly<{
-  children: React.ReactNode;
+  children?: React.ReactNode;
   id: string,
 }>) {
-  const {isOver, setNodeRef} = useDroppable({
+  const { isOver, setNodeRef } = useDroppable({
     id,
   });
   const style = {
-    color: isOver ? 'green' : undefined,
     height: '100%',
-    backgroundColor: 'red'
+    width: '100%',
   };
-  
+
+  const droppableStyle = {
+    height: '200px',
+    width: '200px',
+    display: 'flex',
+    border: '3px dotted #90D5FF',
+    marginLeft: '10px'
+  }
   
   return (
-    <div ref={setNodeRef} style={style}>
-      {children}
+     <div ref={setNodeRef} style={style}>
+      <span style={{
+        ...droppableStyle,
+        backgroundColor: isOver ? '#90D5FF' : undefined,
+      }}>
+        {children || (<span>Drop Here</span>)}
+      </span>
     </div>
   );
 }

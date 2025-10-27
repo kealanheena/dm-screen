@@ -1,10 +1,5 @@
 // import type { Metadata } from "next";
-// import { Toaster } from "react-hot-toast";
 import { ClerkProvider } from '@clerk/nextjs'
-// import { CssBaseline, ThemeProvider } from '@mui/material';
-// import { createTheme } from "@mui/material/styles";
-
-// import { themeOptions } from './theme';
 
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import DragableDropableArea from '@/components/DragableDropableArea';
+import BasicDragDrop from '@/components/BasicDragDrop';
 
 function ScreenPage() {
 	return (
-		<DragableDropableArea />
+		<BasicDragDrop />
 	)
 }
 
