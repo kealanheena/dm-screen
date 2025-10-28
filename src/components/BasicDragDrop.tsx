@@ -9,6 +9,7 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
+  DragOverlay,
 } from "@dnd-kit/core"
 import {
   arraySwap,
@@ -18,10 +19,13 @@ import {
   useSortable,
 } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { Card } from '@mui/material';
+import { restrictToParentElement } from '@dnd-kit/modifiers';
+
 import { Masonry } from "./Masonry"
 import { range } from "./range"
 
-const initialItems = range(15).map((id) => ({
+const initialItems = range(5).map((id) => ({
   id: id + 1,
   height: 100 + Math.random() * 400,
 }))
@@ -49,24 +53,26 @@ export default function BasicDragDrop() {
           setItems((items) => {
             const oldIndex = items.findIndex((item) => item.id === active.id)
             const newIndex = items.findIndex((item) => item.id === over.id)
+
             return arraySwap(items, oldIndex, newIndex)
           })
         }
       }}
     >
-      <div style={{
-        padding: '8px',
-      }}>
-        <SortableContext items={items} strategy={rectSwappingStrategy}>
-          <Masonry
-            items={items}
-            itemKey={(item) => item.id}
-            columnWidth={300}
-            gap={8}
-            renderItem={(item) => <Cell item={item} />}
-          />
-        </SortableContext>
-      </div>
+        <div style={{
+          padding: '8px',
+          height: '100%'
+        }}>
+          <SortableContext items={items} strategy={rectSwappingStrategy}>
+            <Masonry
+              items={items}
+              itemKey={(item) => item.id}
+              columnWidth={300}
+              gap={8}
+              renderItem={(item) => <Cell item={item} />}
+            />
+          </SortableContext>
+        </div>
     </DndContext>
   )
 }
@@ -95,7 +101,9 @@ function Cell({ item }: { item: Item }) {
 
   return (
     <div style={{ height: getPlaceholderHeight(), transition: "0.2s height" }}>
-      <div
+      <Card
+        // This is the ref and need to be put up so I can add restrictToParentElement
+        // otherwise it will not be moveable as the parent is just a container
         ref={sortable.setNodeRef}
         style={{
           height: item.height,
@@ -106,8 +114,6 @@ function Cell({ item }: { item: Item }) {
           //   sortable.isOver && sortable.over?.id !== sortable.active?.id
           //     ? 0.5
           //     : 1,
-          backgroundColor: 'blue',
-          color: 'white',
           fontWeight: 'bold',
           fontSize: '56px',
           textAlign: 'center',
@@ -116,7 +122,7 @@ function Cell({ item }: { item: Item }) {
         {...sortable.listeners}
       >
         {item.id}
-      </div>
+      </Card>
     </div>
   )
 }
