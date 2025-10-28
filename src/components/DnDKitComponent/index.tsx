@@ -18,26 +18,26 @@ import {
 } from "@dnd-kit/sortable"
 
 import { Masonry } from "./Masonry"
-import { range } from "./range"
-import Cell from './Cell';
 
 const initialItems = [{
   id: 1,
   title: 'Test Maps',
-  img: '',
-  height: 1000,
+  height: 250,
+  width: 4,
 }, {
   id: 2,
   title: 'Test Conditions',
-  height: 150,
+  height: 250,
+  width: 2,
 }, {
   id: 3,
   title: 'Test Combat Tracker',
   height: 250,
-}]
+  width: 100,
+}];
 
 const DnDKitComponent = () => {
-  const [items, setItems] = useState(initialItems)
+  const [cards, setCards] = useState(initialItems)
 
   const sensors = useSensors(
     useSensor(MouseSensor),
@@ -55,7 +55,7 @@ const DnDKitComponent = () => {
         console.log({ event })
         const { active, over } = event
         if (over && active.id !== over.id) {
-          setItems((items) => {
+          setCards((items) => {
             const oldIndex = items.findIndex((item) => item.id === active.id)
             const newIndex = items.findIndex((item) => item.id === over.id)
 
@@ -65,16 +65,14 @@ const DnDKitComponent = () => {
       }}
     >
         <div style={{
-          padding: '8px',
+          padding: '16px',
           height: '100%'
         }}>
-          <SortableContext items={items} strategy={rectSwappingStrategy}>
+          <SortableContext items={cards} strategy={rectSwappingStrategy}>
             <Masonry
-              items={items}
-              itemKey={(item) => item.id}
+              items={cards}
               columnWidth={300}
               gap={8}
-              renderItem={(item) => <Cell item={item} />}
             />
           </SortableContext>
         </div>

@@ -1,38 +1,32 @@
 
-import { Fragment, Key, ReactNode } from "react"
-import { range } from "./range"
-import { useSize } from "./useSizes"
+import React, { Fragment, Key, ReactNode } from "react";
 
-export function Masonry<T>({
+import Cell from './Cell';
+
+interface Item {
+	id: number;
+	title: string;
+	height?: number;
+  width: number;
+	img?: string;
+}
+
+export function Masonry({
   items,
-  itemKey,
-  columnWidth,
   gap,
-  renderItem,
 }: {
-  items: T[]
-  itemKey: (item: T) => Key
+  items: Item[]
   columnWidth: number
   gap?: number | string
-  renderItem: (item: T) => ReactNode
 }) {
-  const [sizeRef, size] = useSize()
-  const columnCount = Math.floor(size.width / columnWidth)
 
   return (
-    <div ref={sizeRef} style={{ gap, display: 'flex' }}>
-      {range(columnCount).map((columnIndex) => (
-        <div key={columnIndex} style={{
-          display: 'flex',
-          flexDirection: 'column',
-          flex: 1,
-          gap
+    <div style={{ gap, display: 'flex', flex: 'wrap' }}>
+      {items.map((item) => (
+        <div key={item.id} style={{
+          width: `${(item.width / 12)* 100}%`,
         }}>
-          {range(columnIndex, items.length, columnCount).map((itemIndex) => (
-            <Fragment key={itemKey(items[itemIndex])}>
-              {renderItem(items[itemIndex])}
-            </Fragment>
-          ))}
+          <Cell item={item}/>
         </div>
       ))}
     </div>

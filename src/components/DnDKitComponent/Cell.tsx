@@ -10,6 +10,7 @@ interface Item {
 	id: number;
 	title: string;
 	height: number;
+	width: number;
 	img?: string;
 }
 
