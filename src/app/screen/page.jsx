@@ -1,10 +1,10 @@
 import React from 'react'
 
-import BasicDragDrop from '@/components/BasicDragDrop';
+import DnDKitComponent from '@/components/DnDKitComponent';
 
 function ScreenPage() {
 	return (
-		<BasicDragDrop />
+		<DnDKitComponent />
 	)
 }
 
