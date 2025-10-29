@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
+import { find, findIndex, map } from 'lodash';
 import { Card, Grid } from "@mui/material";
 import {
   DndContext,
@@ -18,42 +19,31 @@ import {
   rectSortingStrategy
 } from "@dnd-kit/sortable";
 
+import { CardType } from "@/types";
+
 import SortableItem from "./SortableItem";
+
+const testData: CardType[] = [{
+  id: 1,
+	title: 'First Item DND',
+	width: 2
+}, {
+  id: 2,
+	title: 'New DND Item',
+	width: 5
+}, {
+  id: 3,
+	title: 'DND Maps',
+	width: 3
+}, {
+  id: 4,
+	title: 'Combat Tracker',
+	width: 2
+}] 
 
 const App = () => {
   const [activeId, setActiveId] = useState(null);
-  const [items, setItems] = useState([
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-    "25",
-    "26",
-    "27",
-    "28",
-    "29"
-  ]);
+  const [items, setItems] = useState<CardType[]>(testData);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -62,20 +52,30 @@ const App = () => {
   );
 
   const handleDragStart = (event) => {
+    console.log({ 
+      eventActoveId: event.active.id,
+      eventActove: event.active
+    })
     setActiveId(event.active.id);
   };
 
   const handleDragEnd = (event) => {
-    setActiveId(null);
     const { active, over } = event;
+    
+    setActiveId(null);
 
     if (active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
+      const oldIndex = findIndex(items, ['id', active.id]);
+      const newIndex = findIndex(items, ['id', over.id]);
 
-        return arrayMove(items, oldIndex, newIndex);
+      console.log({
+        oldIndex,
+        newIndex
       });
+
+      const newItems = arrayMove(items, oldIndex, newIndex);
+
+      setItems(newItems);
     }
   };
 
@@ -91,18 +91,10 @@ const App = () => {
         direction="row"
       >
         <SortableContext items={items} strategy={rectSortingStrategy}>
-          {items.map((id) => (
-            <SortableItem key={id} id={id} value={id} />
-          ))}
+          {map(items, ({ id }) => <SortableItem key={id} id={id} value={id} />)}
           <DragOverlay>
             {activeId ? (
-              <div
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  backgroundColor: "red"
-                }}
-              ></div>
+              <SortableItem key={activeId} id={activeId} value={activeId}  />
             ) : null}
           </DragOverlay>
         </SortableContext>
