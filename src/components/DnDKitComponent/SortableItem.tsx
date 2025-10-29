@@ -1,7 +1,8 @@
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Card } from "@mui/material";
+import { Card, CardContent, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import OpenWithIcon from '@mui/icons-material/OpenWith';
 
 const SortableItem = (props) => {
   const {
@@ -16,8 +17,8 @@ const SortableItem = (props) => {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    width: props.id % 2 === 0 ? "100px" : "200px",
-    height: "100px",
+    width: props.id % 2 === 0 ? "250px" : "500px",
+    height: "200px",
     border: "2px solid red",
     backgroundColor: "#cccccc",
     margin: "10px",
@@ -25,14 +26,20 @@ const SortableItem = (props) => {
     opacity: isDragging ? 0.3 : 1,
   };
 
-  console.log({ props, modulus: props.id % 2 });
-
   return (
-    <div ref={setNodeRef} style={style}>
-      <Card>
-        <button {...listeners} {...attributes}>
-          Drag handle
-        </button>
+    <Card ref={setNodeRef} style={style}>
+      <CardContent>
+        <Grid container sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography>
+            Title
+          </Typography>
+          <Tooltip title="Move card">
+            <IconButton>
+              <OpenWithIcon {...listeners} {...attributes} />
+            </IconButton>
+          </Tooltip>
+        </Grid>
+
         <div
           style={{
             minWidth: props.id % 2 === 0 ? "30px" : "60px",
@@ -43,8 +50,8 @@ const SortableItem = (props) => {
         >
           {props.value}
         </div>
-      </Card>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
