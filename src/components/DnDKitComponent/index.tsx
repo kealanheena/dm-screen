@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { find, findIndex, map } from 'lodash';
-import { Card, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import {
   DndContext,
   closestCenter,
@@ -10,7 +10,9 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragOverlay
+  DragOverlay,
+  DragStartEvent,
+  DragEndEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -22,6 +24,9 @@ import {
 import { CardType } from "@/types";
 
 import SortableItem from "./SortableItem";
+import ActiveItem from "./ActiveItem";
+
+const GRIDSPACEING = 2;
 
 const testData: CardType[] = [{
   id: 1,
@@ -42,7 +47,7 @@ const testData: CardType[] = [{
 }] 
 
 const App = () => {
-  const [activeId, setActiveId] = useState(null);
+  const [activeItem, setActiveItem] = useState<CardType | null>(null);
   const [items, setItems] = useState<CardType[]>(testData);
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -51,27 +56,24 @@ const App = () => {
     })
   );
 
-  const handleDragStart = (event) => {
-    console.log({ 
-      eventActoveId: event.active.id,
-      eventActove: event.active
-    })
-    setActiveId(event.active.id);
+  const handleDragStart = (event: DragStartEvent) => {
+    const newActiveItem: CardType | null = find(items, ['id', event.active.id]) || null;
+
+    setActiveItem(newActiveItem);
   };
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     
-    setActiveId(null);
+    setActiveItem(null);
+
+    if (!active || !over) {
+      return;
+    }
 
     if (active.id !== over.id) {
       const oldIndex = findIndex(items, ['id', active.id]);
       const newIndex = findIndex(items, ['id', over.id]);
-
-      console.log({
-        oldIndex,
-        newIndex
-      });
 
       const newItems = arrayMove(items, oldIndex, newIndex);
 
@@ -89,13 +91,19 @@ const App = () => {
       <Grid
         container
         direction="row"
+        spacing={GRIDSPACEING}
       >
         <SortableContext items={items} strategy={rectSortingStrategy}>
-          {map(items, ({ id }) => <SortableItem key={id} id={id} value={id} />)}
+
+          {map(items, (item) => (
+            <SortableItem
+              key={item.id}
+              {...item}
+            />
+          ))}
+
           <DragOverlay>
-            {activeId ? (
-              <SortableItem key={activeId} id={activeId} value={activeId}  />
-            ) : null}
+            {activeItem ? <ActiveItem {...activeItem}/>  : null}
           </DragOverlay>
         </SortableContext>
       </Grid>

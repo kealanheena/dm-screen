@@ -9,7 +9,7 @@ import { LayoutType } from '@/types';
 
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([10, 12])
-	const [layouts, setLayouts] = useState<Layout[]>([
+	const [layouts, setLayouts] = useState<LayoutType[]>([
 		{ id: 1, start: 0, width: 5 },
 	 	{ id: 2, start: 5, width: 3  },
 	 	{ id: 3, start: 8, width: 2  },
