@@ -1,79 +1,114 @@
-"use client"
+'use client'
 
-import React, { useState } from "react"
+import React, { useState } from "react";
+import { Card, Grid } from "@mui/material";
 import {
-  closestCorners,
   DndContext,
+  closestCenter,
   KeyboardSensor,
-  MouseSensor,
-  TouchSensor,
+  PointerSensor,
   useSensor,
   useSensors,
-} from "@dnd-kit/core"
+  DragOverlay
+} from "@dnd-kit/core";
 import {
-  arraySwap,
-  rectSwappingStrategy,
+  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-} from "@dnd-kit/sortable"
+  rectSortingStrategy
+} from "@dnd-kit/sortable";
 
-import { Masonry } from "./Masonry"
-import { CardType } from "@/types"
+import SortableItem from "./SortableItem";
 
-const initialItems: CardType[] = [{
-  id: 3,
-  title: 'Test Combat Tracker',
-  height: 25,
-  width: 11,
-}, {
-  id: 3,
-  title: 'Test Combat Tracker',
-  height: 25,
-  width: 11,
-}];
-
-const DnDKitComponent = () => {
-  const [cards, setCards] = useState(initialItems)
-
+const App = () => {
+  const [activeId, setActiveId] = useState(null);
+  const [items, setItems] = useState([
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29"
+  ]);
   const sensors = useSensors(
-    useSensor(MouseSensor),
-    useSensor(TouchSensor),
+    useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  )
+      coordinateGetter: sortableKeyboardCoordinates
+    })
+  );
+
+  const handleDragStart = (event) => {
+    setActiveId(event.active.id);
+  };
+
+  const handleDragEnd = (event) => {
+    setActiveId(null);
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  };
 
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCorners}
-      onDragEnd={(event) => {
-        console.log({ event })
-        const { active, over } = event
-        if (over && active.id !== over.id) {
-          setCards((items) => {
-            const oldIndex = items.findIndex((item) => item.id === active.id)
-            const newIndex = items.findIndex((item) => item.id === over.id)
-
-            return arraySwap(items, oldIndex, newIndex)
-          })
-        }
-      }}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
     >
-        <div style={{
-          padding: '16px',
-          height: '100%'
-        }}>
-          <SortableContext items={cards} strategy={rectSwappingStrategy}>
-            <Masonry
-              items={cards}
-              columnWidth={300}
-              gap={8}
-            />
-          </SortableContext>
-        </div>
+      <Grid
+        container
+        direction="row"
+      >
+        <SortableContext items={items} strategy={rectSortingStrategy}>
+          {items.map((id) => (
+            <SortableItem key={id} id={id} value={id} />
+          ))}
+          <DragOverlay>
+            {activeId ? (
+              <div
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  backgroundColor: "red"
+                }}
+              ></div>
+            ) : null}
+          </DragOverlay>
+        </SortableContext>
+      </Grid>
     </DndContext>
   );
-}
+};
 
-export default DnDKitComponent;
+export default App;

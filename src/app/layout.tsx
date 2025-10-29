@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body style={{ margin: 0, height: '100vh' }}>
+        <body style={{ margin: 0, height: '100vh', overscrollBehaviorY: "contain" }}>
           <ThemeProviderWrapper>
             <Navbar />
             <main style={{ height: '100%' }}>
