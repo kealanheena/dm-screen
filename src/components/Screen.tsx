@@ -5,7 +5,7 @@ import { find, map }  from 'lodash';
 
 import { Card, CardContent, Grid, Slider, Typography } from '@mui/material';
 import onChangeSection from '@/utils/onChangeSection'
-import { Layout } from '@/types';
+import { LayoutType } from '@/types';
 
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([10, 12])
@@ -20,7 +20,7 @@ export default function Screen() {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onChangeLayout = (e: any): void => {
-		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
+		const layout: LayoutType | undefined = find(layouts, ['id', currentLayoutId]);
 
 		if (!layout) {
 			return;
@@ -28,7 +28,7 @@ export default function Screen() {
 
 		const newRange: number[] = map(e.target.value, (value: string) => Number(value));
 
-		const newLayouts: Layout[] | undefined = onChangeSection({
+		const newLayouts: LayoutType[] | undefined = onChangeSection({
 			layoutId: currentLayoutId,
 			layouts,
 			newRange,
@@ -53,7 +53,7 @@ export default function Screen() {
 
 	const onClickSection = (id: number) => () => {
 		setCurrentLayoutId(id);
-		const layout: Layout | undefined = find(layouts, ['id', id]);
+		const layout: LayoutType | undefined = find(layouts, ['id', id]);
 
 		if (!layout) {
 			return;
@@ -87,7 +87,7 @@ export default function Screen() {
 			/>
 			</div>
 			<Grid container spacing={1} style={{ height: '100%', padding: '10px' }}>
-				{map(layouts, ({ id, width }: Layout) => {
+				{map(layouts, ({ id, width }: LayoutType) => {
 					const padding = getPadding(id);
 
 					return (

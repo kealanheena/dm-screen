@@ -18,22 +18,18 @@ import {
 } from "@dnd-kit/sortable"
 
 import { Masonry } from "./Masonry"
+import { CardType } from "@/types"
 
-const initialItems = [{
-  id: 1,
-  title: 'Test Maps',
-  height: 250,
-  width: 4,
-}, {
-  id: 2,
-  title: 'Test Conditions',
-  height: 250,
-  width: 2,
+const initialItems: CardType[] = [{
+  id: 3,
+  title: 'Test Combat Tracker',
+  height: 25,
+  width: 11,
 }, {
   id: 3,
   title: 'Test Combat Tracker',
-  height: 250,
-  width: 100,
+  height: 25,
+  width: 11,
 }];
 
 const DnDKitComponent = () => {

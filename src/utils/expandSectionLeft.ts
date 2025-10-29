@@ -1,15 +1,15 @@
-import { Layout } from "@/types";
+import { LayoutType } from "@/types";
 
 const expandSectionLeft = ({
 	layout,
 	layoutId,
 	shouldShrinkNextSection,
 }: {
-	layout: Layout,
+	layout: LayoutType,
 	layoutId: number,
 	shouldShrinkNextSection: boolean,
 }): {
-	newLayout: Layout,
+	newLayout: LayoutType,
 	newShouldShrinkNextSection: boolean,
 } => {
 	const { id, start, width } = layout;

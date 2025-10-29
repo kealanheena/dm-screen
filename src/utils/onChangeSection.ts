@@ -7,7 +7,7 @@ import {
 	map,
 } from 'lodash';
 
-import { Layout } from '@/types';
+import { LayoutType } from '@/types';
 import shrinkSectionRight from './shrinkSectionRight';
 import expandSectionRight from './expandSectionRight';
 import expandSectionLeft from './expandSectionLeft';
@@ -23,10 +23,10 @@ const onChangeSection = ({
 	range,
 }: {
 	layoutId: number,
-	layouts: Layout[],
+	layouts: LayoutType[],
 	newRange: number[],
 	range: number[],
-}): Layout[] | undefined => {
+}): LayoutType[] | undefined => {
 	const [rangeStart, rangeEnd] = range;
 	const [newRangeStart, newRangeEnd] = newRange;
 
@@ -37,7 +37,7 @@ const onChangeSection = ({
 
 	const isShrinkingTooMuch = some(
 		layouts,
-		({ id, start }: Layout) => (
+		({ id, start }: LayoutType) => (
 			start === newRangeEnd && id === layoutId
 		)
 	)
