@@ -1,4 +1,6 @@
 import { LayoutType } from "@/types";
+import { WIDTHCHANGEINTERVAL, MINCOLUMNWIDTH } from '@/constants';
+
 
 const shrinkSectionRight = ({
 	layout,
@@ -14,17 +16,13 @@ const shrinkSectionRight = ({
 } => {
 	const { id, start, width } = layout;
 
-	console.log({ test: 'test' });
-	console.log({
-		layout, 
-		layoutId,
-	});
+	// if (width > MINCOLUMNWIDTH) {
 
 	if (shouldExpandNextSection) {
 		const newLayout = {
 			...layout,
-			start: start - 1,
-			width: width + 1,
+			start: start - WIDTHCHANGEINTERVAL,
+			width: width + WIDTHCHANGEINTERVAL,
 		};
 
 		return {
@@ -33,10 +31,10 @@ const shrinkSectionRight = ({
 		}
 	}
 
-	if (id === layoutId) {
+	if (id === layoutId && width > MINCOLUMNWIDTH) {
 		const newLayout = {
 			...layout,
-			width: width - 1,
+			width: width - WIDTHCHANGEINTERVAL,
 		};
 
 		return {

@@ -2,19 +2,18 @@ import {
 	find,
 	filter,
 	reduce,
-	reverse,
 	some,
 	map,
 } from 'lodash';
 
 import { LayoutType } from '@/types';
+import { MINTOTALWIDTH, COLUMNSTART } from '@/constants';
+
 import shrinkSectionRight from './shrinkSectionRight';
 import expandSectionRight from './expandSectionRight';
 import expandSectionLeft from './expandSectionLeft';
 import shrinkSectionLeft from './shrinkSectionLeft'
 
-const MINTOTALWIDTH = 12;
-const COLUMNSTART = 0;
 
 const getTotalWidth = (layouts: LayoutType[]) => (
 	reduce(layouts, (sum, { width }) => (
