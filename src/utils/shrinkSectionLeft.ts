@@ -14,8 +14,6 @@ const shrinkSectionRight = ({
 } => {
 	const { id, start, width } = layout;
 
-	console.log({ layout, id: layout.id, layoutId })
-
 	if (shouldExpandNextSection) {
 		const newLayout = {
 			...layout,
@@ -35,13 +33,6 @@ const shrinkSectionRight = ({
 			width: width - 1,
 			start: start + 1,
 		};
-
-		console.log({
-			newLayout,
-			width
-		});
-
-
 
 		return {
 			newLayout,

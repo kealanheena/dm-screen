@@ -13,8 +13,15 @@ import expandSectionRight from './expandSectionRight';
 import expandSectionLeft from './expandSectionLeft';
 import shrinkSectionLeft from './shrinkSectionLeft'
 
-const MAXCOLUMNAMOUNT = 12;
+const MINTOTALWIDTH = 12;
 const COLUMNSTART = 0;
+
+const getTotalWidth = (layouts: LayoutType[]) => (
+	reduce(layouts, (sum, { width }) => (
+		sum + width
+	), 0)
+);
+
 
 const onChangeSection = ({
 	layoutId,
@@ -58,9 +65,7 @@ const onChangeSection = ({
 		return isLeft ? true : false
 	});
 
-	const leftSectionsTotalWidth = reduce(leftSections, (sum, { width }) => (
-		sum + width
-	), 0);
+	const leftSectionsTotalWidth = getTotalWidth(leftSections);
 
 	const isExpandingTooMuch = leftSectionsTotalWidth <= leftSections.length;
 
@@ -74,7 +79,8 @@ const onChangeSection = ({
 		return
 	}
 
-	if (isExpandingEnd && ((width + start) >= MAXCOLUMNAMOUNT)) {
+	// width + start will always add up to total width
+	if (isExpandingEnd && ((width + start) >= MINTOTALWIDTH)) {
 		return;
 	}
 
@@ -84,12 +90,14 @@ const onChangeSection = ({
 	let shouldShrinkNextSection = false;
 	let shouldExpandNextSection = false;
 
+	// >>>>>>>>Left Side<<<<<<<<
 	// This means the the left side is expanding or shrinking
 	if (rangeStart !== newRangeStart) {
-
+		const newLayouts = [];
 		
 		// Expand left
-		const newLayouts = map(reverse(layouts), (layout) => {
+		for (let i = layouts.length -1; i >= 0; i--) {
+			const layout = layouts[i];
 			// >>>>>>>>Expand Left<<<<<<<<
 			if (isExpandingStart) {
 				const { newLayout, newShouldShrinkNextSection } = expandSectionLeft({
@@ -100,7 +108,8 @@ const onChangeSection = ({
 
 				shouldShrinkNextSection = newShouldShrinkNextSection;
 
-				return newLayout;
+				newLayouts.unshift(newLayout);
+				continue;
 			}
 
 			// >>>>>>>>Shrink Right<<<<<<<<
@@ -113,23 +122,30 @@ const onChangeSection = ({
 
 				shouldExpandNextSection = newShouldExpandNextSection;
 
-				return newLayout;
+				newLayouts.unshift(newLayout);
+				continue;
 			}
 
-			return layout;
-		});
+			newLayouts.unshift(layout);
+		}
 
-		// // if shouldShrinkNextSection is still true we did not
-		// // shrink any section.
-		// // This means the sections where too small to shrink, so
-		// // return undefines so we don't update sections
-		// if (shouldShrinkNextSection) {
-		// 	return;
-		// }
+		// if shouldShrinkNextSection is still true we did not
+		// shrink any section.
+		// This means the sections where too small to shrink, so
+		// return undefines so we don't update sections
+		if (shouldShrinkNextSection) {
+			return;
+		}
 
-		return reverse(newLayouts);		
+		const newTotalWidth = getTotalWidth(newLayouts);
+		if (newTotalWidth !== MINTOTALWIDTH) {
+			return;
+		}
+
+		return newLayouts;		
 	}
 
+	// >>>>>>>>Right Side<<<<<<<<
 	// This means the the right side is expanding or shrinking
 	if (rangeEnd !== newRangeEnd) {
 		const newLayouts = map(layouts, (layout) => {
@@ -167,6 +183,11 @@ const onChangeSection = ({
 		// This means the sections where too small to shrink, so
 		// return undefines so we don't update sections
 		if (shouldShrinkNextSection) {
+			return;
+		}
+
+		const newTotalWidth = getTotalWidth(newLayouts);
+		if (newTotalWidth !== MINTOTALWIDTH) {
 			return;
 		}
 
