@@ -1,8 +1,18 @@
 import React from "react";
+import { currentUser } from "@clerk/nextjs/server";
 
+import { getDbUserId } from "@/actions/user.action";
 import Screen from "@/components/Screen";
+import SignInPage from "./sign-in/page";
+
 
 export default async function Home() {
+  const user = await currentUser();
+  const dbUserId = await getDbUserId();
+
+  if (!user) {
+    return <SignInPage />;
+  }
 
   return (
     <Screen />
