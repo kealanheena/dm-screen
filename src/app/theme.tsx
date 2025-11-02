@@ -1,4 +1,5 @@
 import { ThemeOptions } from '@mui/material/styles';
+import { APPBARHEIGHT } from '@/constants';
 
 export const themeOptions: ThemeOptions = {
   palette: {
@@ -24,7 +25,7 @@ export const themeOptions: ThemeOptions = {
           background: '#242527',
           color: '#E40712',
           borderBottom: '1.5px solid #E40712',
-          height: '64px',
+          height: APPBARHEIGHT,
         }
       }
     },

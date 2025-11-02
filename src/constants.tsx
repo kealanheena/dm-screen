@@ -1,3 +1,7 @@
+// Styles constants
+export const APPBARHEIGHT: string = '64px';
+
+// Layout constants
 export const MINTOTALWIDTH: number = 12;
 export const MINCOLUMNWIDTH: number = 2;
 export const WIDTHCHANGEINTERVAL: number = 1;
