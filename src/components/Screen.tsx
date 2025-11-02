@@ -13,10 +13,30 @@ import Layout from './Layout';
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([10, 12])
 	const [layouts, setLayouts] = useState<LayoutType[]>([
-		{ id: 1, start: 0, width: 5 },
-	 	{ id: 2, start: 5, width: 3  },
-	 	{ id: 3, start: 8, width: 2  },
-	 	{ id: 4, start: 10, width: 2  },
+		{ 
+			id: 1, start: 0, width: 5, cards: [
+				{ id: 1, title: 'First Card' },
+				{ id: 1, title: '2nd Card' }
+			],
+		},
+	 	{
+			id: 2, start: 5, width: 3, cards: [
+				{ id: 1, title: 'Test Img Card' },
+				{ id: 1, title: 'NPCs Card' }
+			],
+		},
+	 	{ 
+			id: 3, start: 8, width: 2, cards: [
+				{ id: 1, title: 'List Cards' },
+				{ id: 1, title: 'Noice Cardo' }
+			],
+		},
+	 	{ 
+			id: 4, start: 10, width: 2, cards: [
+				{ id: 1, title: 'This is a new Test' },
+				{ id: 1, title: '2nd Test' }
+			],
+		},
 	]);
 	const [currentLayoutId, setCurrentLayoutId] = useState<number>(4);
 
@@ -116,7 +136,7 @@ export default function Screen() {
 					height: '100%',
 				}}
 			>
-				<Grid container style={{ height: '100%', padding: '10px' }}>
+				<Grid container style={{ height: '100%' }}>
 					{map(layouts, (layout: LayoutType) => (
 						<Layout layout={layout} onClickLayout={onClickSection} />
 					))}

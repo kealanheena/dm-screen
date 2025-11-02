@@ -1,22 +1,19 @@
 "use client"
 
 import React from 'react';
+import { map } from 'lodash';
 
 import {
-	Card, 
-	CardContent, 
 	Grid,
-	IconButton, 
-	Tooltip,
-	Typography
 } from '@mui/material';
-import { OpenWith } from '@mui/icons-material';
 import { LayoutType } from '@/types';
-import DeleteButton from './DeleteButton';
-import AddButton from './AddButton';
 
-export default function Screen({ layout, onClickLayout }: { layout: LayoutType, onClickLayout: Function }) {
-	const { id, width } = layout;
+import AddButton from './AddButton';
+import DeleteButton from './DeleteButton';
+import LayoutCard from './LayoutCard';
+
+export default function Layout({ layout, onClickLayout }: { layout: LayoutType, onClickLayout: Function }) {
+	const { id, cards, width } = layout;
 	
 
   return (
@@ -52,50 +49,10 @@ export default function Screen({ layout, onClickLayout }: { layout: LayoutType, 
 					onClick={() => {}}
 				/>
 			</Grid>
-			
-			
-			<Card>
-				<CardContent>
-					<Grid container flexDirection="column">
-						<Grid
-							container
-							sx={{ justifyContent: 'space-between', alignItems: 'center' }}
-						>
-							<Typography>
-								size={width}
-							</Typography>
 
-							<Tooltip title="Move card">
-								<IconButton 
-									// {...listeners}
-									// {...attributes}
-								>
-									<OpenWith />
-								</IconButton>
-							</Tooltip>
-						</Grid>
-
-						<Grid>
-							<Typography >
-								{id}
-							</Typography>
-						</Grid>
-
-						<Grid
-							container
-							alignItems="center"
-							justifyContent="end"
-						>
-							<DeleteButton
-								icon="icon_only"
-								tooltip="Delete card"
-								onClick={() => {}}
-							/>
-						</Grid>
-					</Grid>
-
-				</CardContent>
-			</Card>
+			{map(cards, (card) => (
+				<LayoutCard card={card} />
+			))}
 		</Grid>
   );
 }
