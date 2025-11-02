@@ -8,6 +8,8 @@ import { Delete, OpenWith } from '@mui/icons-material';
 import onChangeSection from '@/utils/onChangeSection'
 import { LayoutType } from '@/types';
 
+import Layout from './Layout';
+
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([10, 12])
 	const [layouts, setLayouts] = useState<LayoutType[]>([
@@ -68,9 +70,11 @@ export default function Screen() {
 
 	const getPadding = (id: number) => (
 		hoverTarget === id ? { 
-			padding: '0px'
+			padding: '0px',
+			transition: "transform 0.15s ease-in-out",
 		} : {
-			padding: '5px'
+			padding: '5px',
+			transition: "transform 0.15s ease-in-out",
 		}
 	);
 
@@ -95,11 +99,16 @@ export default function Screen() {
 			</div>
 			<Paper
 				elevation={1}
-				// variant="outlined"
-				style={{ border: '2px #D4D4D4 dashed', backgroundColor: 'transparent',height: '100%', margin: '24px 16px 16px 16px' }}
+				style={{
+					border: '2px #D4D4D4 dashed',
+					backgroundColor: 'transparent',
+					height: '100%',
+				}}
 			>
 				<Grid container spacing={1} style={{ height: '100%', padding: '10px' }}>
-					{map(layouts, ({ id, width }: LayoutType) => {
+					{map(layouts, (layout: LayoutType) => {
+
+						return <Layout layout={layout} onClickLayout={onClickSection} />;
 						const padding = getPadding(id);
 
 						return (
