@@ -1,3 +1,7 @@
+import { getUserByClerkId } from '@/actions/user.action'
+
+export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
+
 export interface LayoutType {
 	id: number;
 	// Using MUIs grid which is made up of 12 sections
