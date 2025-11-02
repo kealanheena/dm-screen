@@ -9,6 +9,7 @@ import onChangeSection from '@/utils/onChangeSection'
 import { LayoutType } from '@/types';
 
 import Layout from './Layout';
+import DeleteButton from './DeleteButton';
 
 export default function Screen() {
 	const [range, setRange] = useState<number[]>([10, 12])
@@ -104,24 +105,13 @@ export default function Screen() {
 							<Grid
 								container
 								alignItems="center"
-								justifyContent="space-between"
+								justifyContent="end"
 							>
-								<Tooltip title="Move section left">
-									<IconButton 
-										// {...listeners}
-										// {...attributes}
-									>
-										<ArrowBackIos />
-									</IconButton>
-								</Tooltip>
-								<Tooltip title="Move section right">
-									<IconButton 
-										// {...listeners}
-										// {...attributes}
-									>
-										<ArrowForwardIos />
-									</IconButton>
-								</Tooltip>
+								<DeleteButton
+									icon='icon_only'
+									tooltip='Delete column'
+									onClick={() => {}}
+								/>
 							</Grid>
 						)}
 					</Grid>
@@ -138,7 +128,11 @@ export default function Screen() {
 			>
 				<Grid container style={{ height: '100%' }}>
 					{map(layouts, (layout: LayoutType) => (
-						<Layout layout={layout} onClickLayout={onClickSection} />
+						<Layout
+							isCurrentLayout={layout.id === currentLayoutId}
+							layout={layout} 
+							onClickLayout={onClickSection}
+						/>
 					))}
 				</Grid>
 			</Paper>

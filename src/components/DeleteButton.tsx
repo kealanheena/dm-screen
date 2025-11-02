@@ -8,7 +8,7 @@ import { Delete } from '@mui/icons-material';
 interface DeleteButtonProps { 
 	onClick: Function;
 	text?: string;
-	tooltip: string;
+	tooltip?: string;
 	icon?: 'icon_plus_text' | 'icon_only' | 'no_icon';
 }
 
