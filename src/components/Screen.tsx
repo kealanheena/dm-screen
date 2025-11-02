@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { find, map }  from 'lodash';
 
-import { Card, CardContent, Grid, Paper, Slider, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Paper, Slider, IconButton, Tooltip, Typography } from '@mui/material';
+import { Delete, OpenWith } from '@mui/icons-material';
 import onChangeSection from '@/utils/onChangeSection'
 import { LayoutType } from '@/types';
 
@@ -73,6 +74,12 @@ export default function Screen() {
 		}
 	);
 
+	const getStyle = (id: number) => (
+		id === hoverTarget ? {
+			transition: "transform 0.15s ease-in-out",
+		} : {}
+	)
+
   return (
 		<div style={{ height: '100%'  }}>
 			<div style={{ padding: '10px' }}>
@@ -105,12 +112,47 @@ export default function Screen() {
 								onClick= {onClickSection(id)}
 							>
 								<Card
-									style={id === hoverTarget ? {
-										transition: "transform 0.15s ease-in-out",
-									} : {}}
+									// ref={setNodeRef}
+									style={getStyle(id)}
 								>
 									<CardContent>
-										<Typography>size={width}</Typography>
+										<Grid container flexDirection="column">
+											<Grid
+												container
+												sx={{ justifyContent: 'space-between', alignItems: 'center' }}
+											>
+												<Typography>
+													size={width}
+												</Typography>
+
+												<Tooltip title="Move card">
+													<IconButton 
+														// {...listeners}
+														// {...attributes}
+													>
+														<OpenWith />
+													</IconButton>
+												</Tooltip>
+											</Grid>
+
+											<Grid>
+												<Typography >
+													{id}
+												</Typography>
+											</Grid>
+
+											<Grid
+												container
+												sx={{ justifyContent: 'end', alignItems: 'center' }}
+											>
+												<Tooltip title="Move card">
+													<IconButton>
+														<Delete />
+													</IconButton>
+												</Tooltip>
+											</Grid>
+										</Grid>
+
 									</CardContent>
 								</Card>
 							</Grid>
