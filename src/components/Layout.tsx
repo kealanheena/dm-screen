@@ -1,9 +1,16 @@
 "use client"
 
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Button, Card, CardContent, Grid, Paper, Slider, IconButton, Tooltip, Typography } from '@mui/material';
-import { Delete, OpenWith } from '@mui/icons-material';
+import {
+	Card, 
+	CardContent, 
+	Grid,
+	IconButton, 
+	Tooltip,
+	Typography
+} from '@mui/material';
+import { OpenWith } from '@mui/icons-material';
 import { LayoutType } from '@/types';
 import DeleteButton from './DeleteButton';
 import AddButton from './AddButton';
@@ -31,7 +38,8 @@ export default function Screen({ layout, onClickLayout }: { layout: LayoutType, 
 		>
 			<Grid
 				container
-				sx={{ justifyContent: 'end', alignItems: 'center' }}
+				alignItems="center"
+				justifyContent="end"
 			>
 				<DeleteButton
 					icon="icon_only"
@@ -75,7 +83,8 @@ export default function Screen({ layout, onClickLayout }: { layout: LayoutType, 
 
 						<Grid
 							container
-							sx={{ justifyContent: 'end', alignItems: 'center' }}
+							alignItems="center"
+							justifyContent="end"
 						>
 							<DeleteButton
 								icon="icon_only"

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { find, map }  from 'lodash';
 
 import { Button, Card, CardContent, Grid, Paper, Slider, IconButton, Tooltip, Typography } from '@mui/material';
-import { Delete, OpenWith } from '@mui/icons-material';
+import { ArrowBackIos, ArrowForwardIos, Delete, OpenWith } from '@mui/icons-material';
 import onChangeSection from '@/utils/onChangeSection'
 import { LayoutType } from '@/types';
 
@@ -18,7 +18,6 @@ export default function Screen() {
 	 	{ id: 3, start: 8, width: 2  },
 	 	{ id: 4, start: 10, width: 2  },
 	]);
-	const [hoverTarget, setHoverTarget] = useState<number | null>(null)
 	const [currentLayoutId, setCurrentLayoutId] = useState<number>(4);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -66,24 +65,6 @@ export default function Screen() {
 		setRange([start, start + width]);
 	}
 
-	const onMouseLeaveSection = () => setHoverTarget(null);
-
-	const getPadding = (id: number) => (
-		hoverTarget === id ? { 
-			padding: '0px',
-			transition: "transform 0.15s ease-in-out",
-		} : {
-			padding: '5px',
-			transition: "transform 0.15s ease-in-out",
-		}
-	);
-
-	const getStyle = (id: number) => (
-		id === hoverTarget ? {
-			transition: "transform 0.15s ease-in-out",
-		} : {}
-	)
-
   return (
 		<div style={{ height: '100%'  }}>
 			<div style={{ padding: '10px' }}>
@@ -96,6 +77,36 @@ export default function Screen() {
 				valueLabelDisplay="auto"
 				onChange={onChangeLayout}
 			/>
+			<Grid container>
+				{map(layouts, ({ id, width }) => (
+					<Grid size={width}>
+						{currentLayoutId === id && (
+							<Grid
+								container
+								alignItems="center"
+								justifyContent="space-between"
+							>
+								<Tooltip title="Move section left">
+									<IconButton 
+										// {...listeners}
+										// {...attributes}
+									>
+										<ArrowBackIos />
+									</IconButton>
+								</Tooltip>
+								<Tooltip title="Move section right">
+									<IconButton 
+										// {...listeners}
+										// {...attributes}
+									>
+										<ArrowForwardIos />
+									</IconButton>
+								</Tooltip>
+							</Grid>
+						)}
+					</Grid>
+				))}
+			</Grid>
 			</div>
 			<Paper
 				elevation={1}
@@ -105,74 +116,10 @@ export default function Screen() {
 					height: '100%',
 				}}
 			>
-				<Grid container spacing={1} style={{ height: '100%', padding: '10px' }}>
-					{map(layouts, (layout: LayoutType) => {
-
-						return <Layout layout={layout} onClickLayout={onClickSection} />;
-						const padding = getPadding(id);
-
-						return (
-							<Grid 
-								style={padding}
-								key={id}
-								size={width}
-								onMouseEnter={() => setHoverTarget(id)}
-								onMouseLeave={onMouseLeaveSection}
-								onClick= {onClickSection(id)}
-							>
-								<Button variant="outlined" color="error">
-									<Typography
-										sx={{ p: 0.5 }}
-									>Delete Column</Typography>
-									<Delete />
-								</Button>
-								<Card
-									// ref={setNodeRef}
-									style={getStyle(id)}
-								>
-									<CardContent>
-										<Grid container flexDirection="column">
-											<Grid
-												container
-												sx={{ justifyContent: 'space-between', alignItems: 'center' }}
-											>
-												<Typography>
-													size={width}
-												</Typography>
-
-												<Tooltip title="Move card">
-													<IconButton 
-														// {...listeners}
-														// {...attributes}
-													>
-														<OpenWith />
-													</IconButton>
-												</Tooltip>
-											</Grid>
-
-											<Grid>
-												<Typography >
-													{id}
-												</Typography>
-											</Grid>
-
-											<Grid
-												container
-												sx={{ justifyContent: 'end', alignItems: 'center' }}
-											>
-												<Tooltip title="Delete card">
-													<IconButton>
-														<Delete />
-													</IconButton>
-												</Tooltip>
-											</Grid>
-										</Grid>
-
-									</CardContent>
-								</Card>
-							</Grid>
-						)}
-					)}
+				<Grid container style={{ height: '100%', padding: '10px' }}>
+					{map(layouts, (layout: LayoutType) => (
+						<Layout layout={layout} onClickLayout={onClickSection} />
+					))}
 				</Grid>
 			</Paper>
 		</div>
