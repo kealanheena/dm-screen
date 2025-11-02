@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { find, map }  from 'lodash';
 
-import { Card, CardContent, Grid, Slider, Typography } from '@mui/material';
+import { Card, CardContent, Grid, Paper, Slider, Typography } from '@mui/material';
 import onChangeSection from '@/utils/onChangeSection'
 import { LayoutType } from '@/types';
 
@@ -86,32 +86,38 @@ export default function Screen() {
 				onChange={onChangeLayout}
 			/>
 			</div>
-			<Grid container spacing={1} style={{ height: '100%', padding: '10px' }}>
-				{map(layouts, ({ id, width }: LayoutType) => {
-					const padding = getPadding(id);
+			<Paper
+				elevation={1}
+				// variant="outlined"
+				style={{ border: '2px #D4D4D4 dashed', backgroundColor: 'transparent',height: '100%', margin: '24px 16px 16px 16px' }}
+			>
+				<Grid container spacing={1} style={{ height: '100%', padding: '10px' }}>
+					{map(layouts, ({ id, width }: LayoutType) => {
+						const padding = getPadding(id);
 
-					return (
-						<Grid 
-							style={padding}
-							key={id}
-							size={width}
-							onMouseEnter={() => setHoverTarget(id)}
-							onMouseLeave={onMouseLeaveSection}
-							onClick= {onClickSection(id)}
-						>
-							<Card
-								style={id === hoverTarget ? {
-									transition: "transform 0.15s ease-in-out",
-								} : {}}
+						return (
+							<Grid 
+								style={padding}
+								key={id}
+								size={width}
+								onMouseEnter={() => setHoverTarget(id)}
+								onMouseLeave={onMouseLeaveSection}
+								onClick= {onClickSection(id)}
 							>
-								<CardContent>
-									<Typography>size={width}</Typography>
-								</CardContent>
-							</Card>
-						</Grid>
+								<Card
+									style={id === hoverTarget ? {
+										transition: "transform 0.15s ease-in-out",
+									} : {}}
+								>
+									<CardContent>
+										<Typography>size={width}</Typography>
+									</CardContent>
+								</Card>
+							</Grid>
+						)}
 					)}
-				)}
-			</Grid>
+				</Grid>
+			</Paper>
 		</div>
   );
 }
