@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { find, map }  from 'lodash';
 
-import { Card, CardContent, Grid, Paper, Slider, IconButton, Tooltip, Typography } from '@mui/material';
+import { Button, Card, CardContent, Grid, Paper, Slider, IconButton, Tooltip, Typography } from '@mui/material';
 import { Delete, OpenWith } from '@mui/icons-material';
 import onChangeSection from '@/utils/onChangeSection'
 import { LayoutType } from '@/types';
@@ -111,6 +111,12 @@ export default function Screen() {
 								onMouseLeave={onMouseLeaveSection}
 								onClick= {onClickSection(id)}
 							>
+								<Button variant="outlined" color="error">
+									<Typography
+										sx={{ p: 0.5 }}
+									>Delete Column</Typography>
+									<Delete />
+								</Button>
 								<Card
 									// ref={setNodeRef}
 									style={getStyle(id)}
@@ -145,7 +151,7 @@ export default function Screen() {
 												container
 												sx={{ justifyContent: 'end', alignItems: 'center' }}
 											>
-												<Tooltip title="Move card">
+												<Tooltip title="Delete card">
 													<IconButton>
 														<Delete />
 													</IconButton>
