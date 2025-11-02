@@ -41,6 +41,16 @@ model User {
   notificationCreated Notification[] @relation("notificationCreator") // notifications triggered by a user
 }
 
+model Layout {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  cards Card[]
+}
+
 model Post {
   id String @id @default(cuid())
   authorId String
