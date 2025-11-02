@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { find, map, orderBy }  from 'lodash';
+import { compact, find, filter, map, orderBy }  from 'lodash';
 
 import { Button, Card, CardContent, Grid, Paper, Slider, IconButton, Tooltip, Typography } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos, Delete, OpenWith } from '@mui/icons-material';
@@ -101,7 +101,39 @@ export default function Screen() {
 	}
 
 	const onDeleteSection = () => {
-		console.log('Test');
+		let deletedLayout: LayoutType | null = null;
+
+		const newLayouts = compact(
+			map(layouts, (layout) => {
+				if (currentLayoutId === layout.id) {
+					deletedLayout = layout;
+					return;
+				}
+
+				if (deletedLayout) {
+					const newLayout = {
+						...layout,
+						width: layout.width + deletedLayout.width,
+						start: deletedLayout.start
+					};
+
+					deletedLayout = null;
+
+					return newLayout;
+				}
+
+				return layout;
+
+			})
+		);
+
+		console.log({ newLayouts });
+
+
+		const currentLayout = newLayouts[0];
+		setCurrentLayoutId(currentLayout.id)
+		setRange([currentLayout.start, currentLayout.width])
+		setLayouts(newLayouts);
 	};
 
   return (
@@ -118,7 +150,9 @@ export default function Screen() {
 			/>
 			<Grid container>
 				{map(layouts, ({ id, width }) => (
-					<Grid size={width}>
+					<Grid size={width} sx={{
+						transition: "transform 0.15s ease-in-out",
+					}}>
 						{currentLayoutId === id && (
 							<Grid
 								container
