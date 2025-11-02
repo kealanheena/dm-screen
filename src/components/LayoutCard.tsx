@@ -15,7 +15,7 @@ import DeleteButton from './DeleteButton';
 
 
 const LayoutCard = ({ card }: { card: CardType }) => (
-	<Card>
+	<Card sx={{ mt: 1, mb: 1 }}>
 		<CardContent>
 			<Grid container flexDirection="column">
 				<Grid
