@@ -24,12 +24,15 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body style={bodyStyle}>
+          
           <ThemeProviderWrapper>
             <Navbar />
+
             <main style={mainStyle}>
               {children}
             </main>
           </ThemeProviderWrapper>
+        
         </body>
       </html>
     </ClerkProvider>

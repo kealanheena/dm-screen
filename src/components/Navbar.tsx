@@ -3,6 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { syncUser } from "@/actions/user.action";
 
 import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material';
+import { SignInButton } from '@clerk/nextjs';
 
 
 export default async function Navbar() {
@@ -20,7 +21,9 @@ export default async function Navbar() {
             DM screen
           </Typography>
 
-          <Button color="inherit">Login</Button>
+          <SignInButton mode="modal">
+            <Button color="inherit">Login</Button>
+          </SignInButton>
         </Toolbar>
       </AppBar>
     </Box>

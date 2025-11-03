@@ -36,5 +36,12 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '0.375rem',
+        }
+      }
+    },
   },
 };

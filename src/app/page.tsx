@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 import { getDbUserId } from "@/actions/user.action";
 import Screen from "@/components/Screen";
-import SignInPage from "./sign-in/page";
+import LogInPage from "./log-in/page";
 
 
 export default async function Home() {
@@ -11,7 +11,7 @@ export default async function Home() {
   const dbUserId = await getDbUserId();
 
   if (!user) {
-    return <SignInPage />;
+    return <LogInPage />;
   }
 
   return (
