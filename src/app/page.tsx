@@ -7,13 +7,6 @@ import LogInPage from "./log-in/page";
 
 
 export default async function Home() {
-  const user = await currentUser();
-  const dbUserId = await getDbUserId();
-
-  if (!user) {
-    return <LogInPage />;
-  }
-
   return (
     <Screen />
   );
