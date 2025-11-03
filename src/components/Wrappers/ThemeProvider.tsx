@@ -2,26 +2,22 @@
 
 import React from 'react';
 
-import { Toaster } from "react-hot-toast";
-
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme } from "@mui/material/styles";
+import { WrapperProps } from '@/types';
 
-import { themeOptions } from '../app/theme';
+import { themeOptions } from '../../app/theme';
 
 
 function ThemeProviderWrapper({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: WrapperProps) {
 	const theme = createTheme(themeOptions);
 
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline /> 
-				{children}
-			<Toaster />
+			{children}
 		</ThemeProvider>
 	)
 }

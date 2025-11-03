@@ -2,6 +2,10 @@ import { getUserByClerkId } from '@/actions/user.action'
 
 export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 
+export type WrapperProps = Readonly<{
+	children: React.ReactNode;
+}>
+
 export interface LayoutType {
 	id: number;
 	// Using MUIs grid which is made up of 12 sections
