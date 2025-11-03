@@ -11,6 +11,18 @@ export async function syncUser() {
 		const { userId } = await auth();
 		const user = await currentUser();
 
+		if (userId) {
+			const existingUser = await prisma.user.findUnique({
+				where: {
+					clerkId: userId,
+				}
+			});
+
+			if (existingUser) {
+				return existingUser;
+			}
+		}
+
 		if (user && userId) {
 			const email = user.emailAddresses[0].emailAddress;
 
@@ -25,18 +37,6 @@ export async function syncUser() {
 			});
 
 			return dbUser;
-		}
-
-		if (userId) {
-			const existingUser = await prisma.user.findUnique({
-				where: {
-					clerkId: userId,
-				}
-			});
-
-			if (existingUser) {
-				return existingUser;
-			}
 		}
 
 		return;
