@@ -47,7 +47,7 @@ export default function Layout({
 			onClick={onClickLayout(id)}
 		>
 			{map(cards, (card) => (
-				<LayoutCard card={card} />
+				<LayoutCard key={card.id} card={card} />
 			))}
 		</Grid>
   );
