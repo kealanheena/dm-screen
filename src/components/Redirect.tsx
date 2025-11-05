@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { includes } from 'lodash';
 import { redirect, RedirectType, usePathname } from 'next/navigation';
 
-import { ACCESSABLEPATHSWITHOUTLOGIN } from '@/constants';
+import { ACCESSABLE_PATHS_WITHOUT_LOGIN } from '@/constants';
 
 type RedirectProps = {
 	isUser: boolean;
@@ -13,7 +13,7 @@ type RedirectProps = {
 function Redirect({ isUser }: RedirectProps) {
 	const pathname = usePathname();
 	const isPageAccessable = (
-		isUser || includes(ACCESSABLEPATHSWITHOUTLOGIN, pathname)
+		isUser || includes(ACCESSABLE_PATHS_WITHOUT_LOGIN, pathname)
 	);
 
 	if (!isPageAccessable) {

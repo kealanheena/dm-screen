@@ -1,11 +1,11 @@
 // Styles constants
-export const APPBARHEIGHT: string = '64px';
+export const APP_BAR_HEIGHT: string = '64px';
 
 // Auth constants
-export const ACCESSABLEPATHSWITHOUTLOGIN = ['/log-in', '/screen']
+export const ACCESSABLE_PATHS_WITHOUT_LOGIN = ['/log-in', '/screen']
 
 // Layout constants
-export const MINTOTALWIDTH: number = 12;
-export const MINCOLUMNWIDTH: number = 2;
-export const WIDTHCHANGEINTERVAL: number = 1;
-export const COLUMNSTART: number = 0;
+export const MIN_TOTAL_WIDTH: number = 12;
+export const MIN_COLUMN_WIDTH: number = 2;
+export const WIDTH_CHANGE_INTERVAL: number = 1;
+export const COLUMN_START: number = 0;

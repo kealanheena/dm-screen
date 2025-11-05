@@ -1,5 +1,5 @@
 import { LayoutType } from "@/types";
-import { MINCOLUMNWIDTH, WIDTHCHANGEINTERVAL } from '@/constants';
+import { MIN_COLUMN_WIDTH, WIDTH_CHANGE_INTERVAL } from '@/constants';
 
 
 const expandSectionRight = ({
@@ -22,10 +22,10 @@ const expandSectionRight = ({
 	if (shouldShrinkNextSection) {
 		const newLayout = {
 			...layout,
-			start: start + WIDTHCHANGEINTERVAL,
+			start: start + WIDTH_CHANGE_INTERVAL,
 		};
 
-		if (width <= MINCOLUMNWIDTH) {
+		if (width <= MIN_COLUMN_WIDTH) {
 			return {
 				newLayout,
 				newShouldShrinkNextSection: shouldShrinkNextSection,
@@ -35,7 +35,7 @@ const expandSectionRight = ({
 		return {
 			newLayout: {
 				...newLayout,
-				width: width - WIDTHCHANGEINTERVAL,
+				width: width - WIDTH_CHANGE_INTERVAL,
 			},
 			newShouldShrinkNextSection: false,
 		}
@@ -44,7 +44,7 @@ const expandSectionRight = ({
 	if (id === layoutId) {
 		const newLayout = {
 			...layout,
-			width: width + WIDTHCHANGEINTERVAL,
+			width: width + WIDTH_CHANGE_INTERVAL,
 		}
 
 		return {

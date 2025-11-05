@@ -1,7 +1,7 @@
 // import type { Metadata } from "next";
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from "react-hot-toast";
-import { APPBARHEIGHT } from '@/constants';
+import { APP_BAR_HEIGHT } from '@/constants';
 
 import ThemeProvider from "@/components/Wrappers/ThemeProvider";
 import Redirect from "@/components/Redirect";
@@ -19,7 +19,7 @@ export default function RootLayout({
   };
 
   const mainStyle = {
-    height: `calc(100% - ${APPBARHEIGHT})`
+    height: `calc(100% - ${APP_BAR_HEIGHT})`
   };
   
   return (

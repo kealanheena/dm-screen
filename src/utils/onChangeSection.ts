@@ -7,7 +7,7 @@ import {
 } from 'lodash';
 
 import { LayoutType } from '@/types';
-import { MINTOTALWIDTH, COLUMNSTART } from '@/constants';
+import { MIN_TOTAL_WIDTH, COLUMN_START } from '@/constants';
 
 import shrinkSectionRight from './shrinkSectionRight';
 import expandSectionRight from './expandSectionRight';
@@ -74,12 +74,12 @@ const onChangeSection = ({
 
 	const { width, start } = layoutById;
 
-	if (isExpandingStart && (start === COLUMNSTART || isExpandingTooMuch)) {
+	if (isExpandingStart && (start === COLUMN_START || isExpandingTooMuch)) {
 		return
 	}
 
 	// width + start will always add up to total width
-	if (isExpandingEnd && ((width + start) >= MINTOTALWIDTH)) {
+	if (isExpandingEnd && ((width + start) >= MIN_TOTAL_WIDTH)) {
 		return;
 	}
 
@@ -137,7 +137,7 @@ const onChangeSection = ({
 		}
 
 		const newTotalWidth = getTotalWidth(newLayouts);
-		if (newTotalWidth !== MINTOTALWIDTH) {
+		if (newTotalWidth !== MIN_TOTAL_WIDTH) {
 			return;
 		}
 
@@ -186,7 +186,7 @@ const onChangeSection = ({
 		}
 
 		const newTotalWidth = getTotalWidth(newLayouts);
-		if (newTotalWidth !== MINTOTALWIDTH) {
+		if (newTotalWidth !== MIN_TOTAL_WIDTH) {
 			return;
 		}
 
