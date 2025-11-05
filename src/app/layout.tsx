@@ -1,8 +1,10 @@
 // import type { Metadata } from "next";
 import { ClerkProvider } from '@clerk/nextjs'
+import { Toaster } from "react-hot-toast";
 import { APPBARHEIGHT } from '@/constants';
 
-import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
+import ThemeProvider from "@/components/Wrappers/ThemeProvider";
+import Redirect from "@/components/Redirect";
 import Navbar from "@/components/Navbar";
 
 
@@ -25,13 +27,15 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body style={bodyStyle}>
           
-          <ThemeProviderWrapper>
+          <ThemeProvider>
             <Navbar />
 
             <main style={mainStyle}>
               {children}
             </main>
-          </ThemeProviderWrapper>
+            
+            <Toaster />
+          </ThemeProvider>
         
         </body>
       </html>
