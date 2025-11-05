@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { syncUser } from "@/actions/user.action";
 
 import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material';
-import { SignInButton } from '@clerk/nextjs';
+import { SignInButton, SignOutButton } from '@clerk/nextjs';
 
 import Redirect from './Redirect';
 
@@ -11,26 +11,28 @@ import Redirect from './Redirect';
 export default async function Navbar() {
   const user = await currentUser();
 
-  // if (!user && ) {
-
-  // }
-
   if (user) {
     syncUser()
   }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Redirect user={user} />
+      {user && <Redirect isUser={!!user} />}
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             DM screen
           </Typography>
 
-          <SignInButton mode="modal">
-            <Button color="inherit">Login</Button>
-          </SignInButton>
+          {user ? (
+             <SignOutButton>
+              <Button color="inherit">Log out</Button>
+            </SignOutButton>
+          ) : (
+            <SignInButton mode="modal">
+              <Button color="inherit">Log in</Button>
+            </SignInButton>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
