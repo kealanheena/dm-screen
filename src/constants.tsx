@@ -9,3 +9,4 @@ export const MIN_TOTAL_WIDTH: number = 12;
 export const MIN_COLUMN_WIDTH: number = 2;
 export const WIDTH_CHANGE_INTERVAL: number = 1;
 export const COLUMN_START: number = 0;
+export const BASE_LAYOUT = { start: 10, width: 2, cards: [] };

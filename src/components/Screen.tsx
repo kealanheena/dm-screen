@@ -1,21 +1,32 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { compact, find, map, orderBy }  from 'lodash';
+import { compact, find, map, max, orderBy }  from 'lodash';
 
-import { Grid, Paper, Slider } from '@mui/material';
+import { Grid, IconButton, Paper, Slider } from '@mui/material';
 import onChangeSection from '@/utils/onChangeSection'
 import { LayoutType } from '@/types';
 
 import Layout from './Layout';
 import DeleteButton from './DeleteButton';
+import { AddCircleOutlineRounded } from '@mui/icons-material';
+import { BASE_LAYOUT } from '@/constants';
 
 const testLayouts: LayoutType[] = [
 	{
-		id: 3, start: 0, width: 12, cards: [
+		id: 3,
+		start: 0,
+		width: 2,
+		cards: [
 			{ id: 1, title: 'Test Img Card' },
 			{ id: 2, title: 'NPCs Card' }
 		],
+	},
+	{
+		id: 3,
+		start: 2,
+		width: 10,
+		cards: [],
 	},
 ];
 
@@ -79,6 +90,15 @@ export default function Screen() {
 		setRange([start, start + width]);
 	}
 
+	const onAddSection = () => {
+		const maxIdLayout = max(layouts, ({ id }: LayoutType) => id);
+
+		const newLayout: LayoutType = {
+			id: (maxIdLayout?.id || 1) +1,
+			...BASE_LAYOUT,
+		}
+	};
+
 	const onDeleteSection = () => {
 		let deletedLayout: LayoutType | null = null;
 
@@ -140,6 +160,11 @@ export default function Screen() {
 								alignItems="center"
 								justifyContent="end"
 							>
+								<IconButton 
+									onClick={onAddSection}
+								>
+									<AddCircleOutlineRounded />
+								</IconButton>
 								<DeleteButton
 									icon='icon_only'
 									tooltip='Delete column'

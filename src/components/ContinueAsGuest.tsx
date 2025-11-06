@@ -59,7 +59,11 @@ function ContinueAsGuest() {
 
 						<List>
 							{map(guestLimitationsList, ({ id, text, icon }) => (
-								<ListItem sx={{ p: '4px 0 ' }} dense key={id}>
+								<ListItem 
+									key={id}
+									dense
+									sx={{ p: '4px 0 ' }}
+								>
 									<ListItemIcon>{icon}</ListItemIcon>
 									<ListItemText
 										primary={text} 
