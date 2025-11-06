@@ -12,9 +12,9 @@ import DeleteButton from './DeleteButton';
 
 const testLayouts: LayoutType[] = [
 	{
-		id: 2, start: 0, width: 12, cards: [
+		id: 3, start: 0, width: 12, cards: [
 			{ id: 1, title: 'Test Img Card' },
-			{ id: 1, title: 'NPCs Card' }
+			{ id: 2, title: 'NPCs Card' }
 		],
 	},
 ];
@@ -82,14 +82,14 @@ export default function Screen() {
 	const onDeleteSection = () => {
 		let deletedLayout: LayoutType | null = null;
 
-		const newLayouts = compact(
+		const newLayouts: LayoutType[] = compact(
 			map(layouts, (layout) => {
 				if (currentLayoutId === layout.id) {
 					deletedLayout = layout;
 					return;
 				}
 
-				if (deletedLayout) {
+				if (deletedLayout && layout.width > 2) {
 					const newLayout = {
 						...layout,
 						width: layout.width + deletedLayout.width,
@@ -106,13 +106,13 @@ export default function Screen() {
 			})
 		);
 
-		console.log({ newLayouts });
-
-
 		const currentLayout = newLayouts[0];
-		setCurrentLayoutId(currentLayout.id)
-		setRange([currentLayout.start, currentLayout.width])
-		setLayouts(newLayouts);
+		if (currentLayout) {
+			setCurrentLayoutId(currentLayout.id)
+			setRange([currentLayout.start, currentLayout.width])
+			setLayouts(newLayouts);
+		}
+
 	};
 
   return (
@@ -129,9 +129,11 @@ export default function Screen() {
 			/>
 			<Grid container>
 				{map(layouts, ({ id, width }) => (
-					<Grid size={width} sx={{
-						transition: "transform 0.15s ease-in-out",
-					}}>
+					<Grid
+						key={id}
+						size={width}
+						sx={{ transition: "transform 0.15s ease-in-out" }}
+					>
 						{currentLayoutId === id && (
 							<Grid
 								container
@@ -158,8 +160,9 @@ export default function Screen() {
 				}}
 			>
 				<Grid container style={{ height: '100%' }}>
-					{map(layouts, (layout: LayoutType) => (
+					{map(layouts, (layout) => (
 						<Layout
+							key={layout.id}
 							isCurrentLayout={layout.id === currentLayoutId}
 							layout={layout} 
 							onClickLayout={onClickSection}
