@@ -14,15 +14,15 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
+  id Int @id @default(autoincrement())
+  clerkId String @unique
+
   email String @unique
   username String @unique
-  clerkId String @unique
+
   name String?
-  bio String?
   image String?
-  location String? 
-  website String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -34,11 +34,13 @@ model User {
 }
 
 model Layout {
-  id String @id @default(cuid())
-  userId String
+  id Int @id @default(autoincrement())
+  userId Int
 
   start Int
   width Int
+
+  isDefault Boolean
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -52,8 +54,8 @@ model Layout {
 }
 
 model Card {
-  id String @id @default(cuid())
-  layoutId String
+  id Int @id @default(autoincrement())
+  layoutId Int
   
   title String
   type CardType
