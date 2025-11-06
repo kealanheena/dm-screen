@@ -46,16 +46,32 @@ model Layout {
   updatedAt DateTime @updatedAt
 
   // Relations
-  cards Card[]
+  blocks Block[]
   // "onDelete: cascade" means delete all posts if the author is deleted
   owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index(userId)
 }
 
-model Card {
+model Block {
   id Int @id @default(autoincrement())
   layoutId Int
+
+  start Int
+  width Int
+
+  cards Card[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation
+  layout Layout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+}
+
+model Card {
+  id Int @id @default(autoincrement())
+  blockId Int
   
   title String
   type CardType
@@ -65,11 +81,10 @@ model Card {
   updatedAt DateTime @updatedAt
 
   // Relation
-  layout Layout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  block Block @relation(fields: [blockId], references: [id], onDelete: Cascade)
 
-  @@index(layoutId) // composite index for faster queries
-  // this prevents a user duplicating a title on a layout something twice
-  // @@unique([layoutId, title]) 
+  @@index(blockId) // composite index for faster queries
+  // @@unique([layoutId, title]) // this prevents a user duplicating a title on a layout something twice
 }
 
 enum CardType {
