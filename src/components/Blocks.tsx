@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { compact, find, head, map, max, orderBy }  from 'lodash';
 
-import { Grid, IconButton, Paper, Slider } from '@mui/material';
+import { Grid, Paper, Slider } from '@mui/material';
 import onChangeSection from '@/utils/onChangeSection'
 import { Layout } from '@/types';
 
 import Block from './Layout';
-import DeleteButton from './DeleteButton';
-import { AddCircleOutlineRounded } from '@mui/icons-material';
 
 import { BASE_LAYOUT } from '@/constants';
 
@@ -117,7 +115,7 @@ export default function Blocks({ blocks, isCustomizing = false }) {
 	} = currentBlock || {}
 
   return (
-		<div style={{ height: '100%'  }}>
+		<div style={{ height: '100%' }}>
 			{isCustomizing && (
 				<Slider
 					value={[start, width]}

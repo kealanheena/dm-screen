@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { compact, head, map, get }  from 'lodash';
 
-import { Box, Grid, FormControl, InputLabel, MenuItem, Select, IconButton } from '@mui/material';
-import { AddCircleOutline, Check, Edit, Settings } from '@mui/icons-material';
+import { Box, Grid, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { Layout } from '@/types';
+import IconButton from './IconButton';
 
 import Blocks from './Blocks';
 
@@ -57,20 +57,29 @@ export default function Screen({ layouts }: ScreenProps) {
 							))}
 						</Select>
 					</FormControl>
-					<IconButton>
-						<Edit />
-					</IconButton>
+			
+					<IconButton
+						icon="EDIT"
+						onClick={() => {}} 
+						variant="icon_only"
+					/>
 				</Grid>
+
 				{currentLayout && (
 					<Grid>
-						<IconButton>
-							<AddCircleOutline />
-						</IconButton>
-						<IconButton onClick={() =>  setIsCustomizing(!isCustomizing)}>
-							{!isCustomizing ? <Settings/> : <Check />}
-						</IconButton>
+						<IconButton
+							icon="ADD"
+							onClick={() => {}} 
+							variant="icon_only"
+						/>
+						<IconButton
+							icon={isCustomizing ? 'CHECK' : 'SETTINGS'}
+							onClick={() =>  setIsCustomizing(!isCustomizing)} 
+							variant="icon_only"
+						/>
 					</Grid>
 				)}
+				
 			</Grid>
 			{currentLayout && (
 				<Blocks blocks={currentLayout.blocks} isCustomizing={isCustomizing} />
