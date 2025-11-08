@@ -37,9 +37,6 @@ model Layout {
   id Int @id @default(autoincrement())
   userId Int
 
-  start Int
-  width Int
-
   isDefault Boolean
 
   createdAt DateTime @default(now())
