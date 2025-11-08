@@ -12,6 +12,8 @@ import Block from './Layout';
 import DeleteButton from './DeleteButton';
 import { AddCircleOutlineRounded } from '@mui/icons-material';
 
+import { BASE_LAYOUT } from '@/constants';
+
 interface ScreenProps {
 	layouts: Layout[];
 }
@@ -30,7 +32,7 @@ export default function Screen({ layouts }: ScreenProps) {
 				alignItems="center"
 				justifyContent="space-between"
 			>
-				<Grid>
+				<Grid spacing={9}>
 					<FormControl
 						sx={{ m: 1, minWidth: 250 }}
 						size="small"
@@ -57,106 +59,113 @@ export default function Screen({ layouts }: ScreenProps) {
 					</FormControl>	
 				</Grid>
 				{currentLayout && (
-					<Grid>
+					<Grid spacing={3}>
 						test
 					</Grid>
 				)}
 			</Grid>
+			{currentLayout && (
+				<Blocks blocks={currentLayout.blocks} />
+			)}
 		</Box>
 	);
 }
 
-export function Blocks({ layouts }: ScreenProps) {
-	const [currentLayout, setCurrentLayout] = useState<Layout>();
+export function Blocks({ blocks }) {
+	const [currentBlocks, setCurrentBlocks] = useState(blocks);
+	const [currentBlock, setCurrentBlock] = useState();
 	const [range, setRange] = useState<number[]>([])
 
 	useEffect(() => {
-		const orderedLayouts = orderBy(layouts, 'blocks.start');
+		const orderedBlocks = orderBy(blocks, 'blocks.start');
 
-		console.log( { layouts, layoutsOne: get(orderedLayouts, '[0].blocks')  } );
-
-		if (layouts) {
-			const { id, start, width } = get(orderedLayouts, '[0].blocks[0]');
+		if (blocks) {
+			console.log(orderedBlocks)
+			const firstBlock = head(orderedBlocks);
+			const { start, width } = firstBlock;
 
 	
-			// setLayouts(orderBy(testLayouts, 'start'));
-			setCurrentLayout(orderedLayouts[0]);
+			setCurrentBlocks(orderBy(blocks, 'start'));
+			setCurrentBlock(firstBlock);
 			setRange([start, width]);
 		}
 	}, [])
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onChangeLayout = (e: any): void => {
-		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
+		// const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
 
-		if (!layout) {
+		if (!currentBlock) {
 			return;
 		}
 
 		const newRange: number[] = map(e.target.value, (value: string) => Number(value));
 
-		const newLayouts: Layout[] | undefined = onChangeSection({
-			layoutId: currentLayoutId,
-			layouts,
+		const newBlocks = onChangeSection({
+			layoutId: currentBlock?.id,
+			layouts: currentBlocks,
 			newRange,
 			range,
 		});
 
-		if (!newLayouts) {
+		if (!newBlocks) {
 			return;
 		}
 
-		const newLayout = find(newLayouts, ['id', currentLayoutId]);
+		const newBlock = find(newBlocks, ['id', currentBlock?.id]);
 
-		if (!newLayout) {
+		if (!newBlock) {
 			return;
 		}
 
-		const { start, width } = newLayout;
+		const { start, width } = newBlock;
 
-		// setLayouts(newLayouts)
+		setCurrentBlocks(newBlock)
 		setRange([start, start + width]);
 	};
 
 	const onClickSection = (id: number) => () => {
-		setCurrentLayoutId(id);
-		const layout: Layout | undefined = find(layouts, ['id', id]);
+		setCurrentBlock(find(currentBlocks, ['id', id]));
+	
+		const block = find(currentBlocks, ['id', id]);
 
-		if (!layout) {
+		if (!block) {
 			return;
 		}
 
-		const { start, width } = layout;
+		const { start, width } = block;
 		setRange([start, start + width]);
 	}
 
 	const onAddSection = () => {
-		// const maxIdLayout = max(layouts, ({ id }: Layout) => id);
+		const maxIdLayout = max(block, ({ id }: Layout) => id);
 
-		// const newLayout: Layout = {
-		// 	id: (maxIdLayout?.id || 1) +1,
-		// 	...BASE_LAYOUT,
-		// }
+		const newBlocks = {
+			id: (maxIdLayout?.id || 1) +1,
+			...BASE_LAYOUT,
+		}
+
+		setCurrentBlocks(newBlocks);
 	};
 
 	const onDeleteSection = () => {
-		let deletedLayout: Layout | null = null;
+		let deletedBlock = null;
 
-		const newLayouts: Layout[] = compact(
-			map(layouts, (layout) => {
-				if (currentLayoutId === layout.id) {
-					deletedLayout = layout;
+		const newBlocks = compact(
+			map(currentBlocks, (layout) => {
+				if (currentBlock?.id === layout.id) {
+					deletedBlock = layout;
 					return;
 				}
 
-				if (deletedLayout && layout.width > 2) {
+				if (deletedBlock && layout.width > 2) {
 					const newLayout = {
 						...layout,
-						width: layout.width + deletedLayout.width,
-						start: deletedLayout.start
+						width: layout.width + deletedBlock.width,
+						start: deletedBlock.start
 					};
 
-					deletedLayout = null;
+					deletedBlock = null;
 
 					return newLayout;
 				}
@@ -166,11 +175,12 @@ export function Blocks({ layouts }: ScreenProps) {
 			})
 		);
 
-		const currentLayout = newLayouts[0];
-		if (currentLayout) {
-			setCurrentLayoutId(currentLayout.id)
-			setRange([currentLayout.start, currentLayout.width])
-			// setLayouts(newLayouts);
+		const newBlock = newBlocks[0];
+
+		if (currentBlock) {
+			setCurrentBlocks(newBlocks)
+			setRange([currentBlock.start, currentBlock.width])
+			setCurrentBlock(newBlock);
 		}
 
 	};
@@ -188,13 +198,13 @@ export function Blocks({ layouts }: ScreenProps) {
 				onChange={onChangeLayout}
 			/>
 			<Grid container>
-				{map(layouts, ({ id, width }) => (
+				{map(currentBlocks, ({ id, width }) => (
 					<Grid
 						key={id}
 						size={width}
 						sx={{ transition: "transform 0.15s ease-in-out" }}
 					>
-						{currentLayoutId === id && (
+						{currentBlock?.id === id && (
 							<Grid
 								container
 								alignItems="center"
@@ -225,11 +235,11 @@ export function Blocks({ layouts }: ScreenProps) {
 				}}
 			>
 				<Grid container style={{ height: '100%' }}>
-					{map(layouts, (layout) => (
+					{map(currentBlocks, (block) => (
 						<Block
-							key={layout.id}
-							isCurrentLayout={layout.id === currentLayout.id}
-							layout={layout} 
+							key={block.id}
+							isCurrentLayout={block.id === currentBlock?.id}
+							layout={block} 
 							onClickLayout={onClickSection}
 						/>
 					))}

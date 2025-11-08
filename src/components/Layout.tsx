@@ -22,7 +22,8 @@ export default function Layout({
 	isCurrentLayout,
 	onClickLayout
 }: LayoutProps ) {
-	const { id, cards, width } = layout;
+	// console.log({ layoutTEST: layout });
+	// const { id, cards, width } = layout;
 
 	const hoverStyle = isCurrentLayout ? {
 		cursor: 'pointer',
@@ -34,8 +35,8 @@ export default function Layout({
 
   return (
 		<Grid
-			key={id}
-			size={width}
+			key={layout?.id}
+			size={layout?.width}
 			sx={{
 				'&:hover': hoverStyle,
 				border: isCurrentLayout ? 3 : 0,
@@ -44,10 +45,10 @@ export default function Layout({
 				transition: "transform 0.15s ease-in-out",
 				p: 1,
 			}}
-			onClick={onClickLayout(id)}
+			onClick={onClickLayout(layout?.id)}
 		>
-			{map(cards, (card) => (
-				<LayoutCard key={card.id} card={card} />
+			{map(layout?.cards || [], (card) => (
+				<LayoutCard key={card?.id} card={card} />
 			))}
 		</Grid>
   );
