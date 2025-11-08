@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { compact, head, map, get }  from 'lodash';
 
-import { Box, Grid, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Box, Grid, FormControl, InputLabel, MenuItem, Select, IconButton } from '@mui/material';
+import { AddCircle, Check, Settings } from '@mui/icons-material';
 import { Layout } from '@/types';
 
 import Blocks from './Blocks';
@@ -15,6 +16,7 @@ interface ScreenProps {
 
 export default function Screen({ layouts }: ScreenProps) {
 	const [currentLayout, setCurrentLayout] = useState<Layout | undefined>(head(layouts));
+	const [isCustomizing, setIsCustomizing] = useState(false);
 
 	const handleChange = (e) => setCurrentLayout(e.target.value);
 
@@ -27,7 +29,7 @@ export default function Screen({ layouts }: ScreenProps) {
 				alignItems="center"
 				justifyContent="space-between"
 			>
-				<Grid spacing={9}>
+				<Grid>
 					<FormControl
 						sx={{ m: 1, minWidth: 250 }}
 						size="small"
@@ -54,8 +56,13 @@ export default function Screen({ layouts }: ScreenProps) {
 					</FormControl>	
 				</Grid>
 				{currentLayout && (
-					<Grid spacing={3}>
-						test
+					<Grid>
+						<IconButton>
+							<AddCircle />
+						</IconButton>
+						<IconButton onClick={() =>  setIsCustomizing(!isCustomizing)}>
+							{!isCustomizing ? <Settings/> : <Check />}
+						</IconButton>
 					</Grid>
 				)}
 			</Grid>
