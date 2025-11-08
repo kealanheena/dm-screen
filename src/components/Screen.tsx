@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { compact, head, map, get }  from 'lodash';
 
 import { Box, Grid, FormControl, InputLabel, MenuItem, Select, IconButton } from '@mui/material';
-import { AddCircle, Check, Settings } from '@mui/icons-material';
+import { AddCircleOutline, Check, Edit, Settings } from '@mui/icons-material';
 import { Layout } from '@/types';
 
 import Blocks from './Blocks';
@@ -29,7 +29,10 @@ export default function Screen({ layouts }: ScreenProps) {
 				alignItems="center"
 				justifyContent="space-between"
 			>
-				<Grid>
+				<Grid
+					container
+					alignItems="center"
+				>
 					<FormControl
 						sx={{ m: 1, minWidth: 250 }}
 						size="small"
@@ -53,12 +56,15 @@ export default function Screen({ layouts }: ScreenProps) {
 								</MenuItem>
 							))}
 						</Select>
-					</FormControl>	
+					</FormControl>
+					<IconButton>
+						<Edit />
+					</IconButton>
 				</Grid>
 				{currentLayout && (
 					<Grid>
 						<IconButton>
-							<AddCircle />
+							<AddCircleOutline />
 						</IconButton>
 						<IconButton onClick={() =>  setIsCustomizing(!isCustomizing)}>
 							{!isCustomizing ? <Settings/> : <Check />}
@@ -67,7 +73,7 @@ export default function Screen({ layouts }: ScreenProps) {
 				)}
 			</Grid>
 			{currentLayout && (
-				<Blocks blocks={currentLayout.blocks} />
+				<Blocks blocks={currentLayout.blocks} isCustomizing={isCustomizing} />
 			)}
 		</Box>
 	);

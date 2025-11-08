@@ -11,10 +11,9 @@ import { AddCircleOutlineRounded } from '@mui/icons-material';
 
 import { BASE_LAYOUT } from '@/constants';
 
-export default function Blocks({ blocks }) {
+export default function Blocks({ blocks, isCustomizing = false }) {
 	const [currentBlocks, setCurrentBlocks] = useState(blocks);
 	const [currentBlock, setCurrentBlock] = useState();
-	const [range, setRange] = useState<number[]>([])
 
 	useEffect(() => {
 		const orderedBlocks = orderBy(blocks, 'blocks.start');
@@ -27,7 +26,6 @@ export default function Blocks({ blocks }) {
 	
 			setCurrentBlocks(orderBy(blocks, 'start'));
 			setCurrentBlock(firstBlock);
-			setRange([start, width]);
 		}
 	}, [])
 
@@ -45,7 +43,7 @@ export default function Blocks({ blocks }) {
 			layoutId: currentBlock?.id,
 			layouts: currentBlocks,
 			newRange,
-			range,
+			range: [currentBlock?.start, currentBlock?.width],
 		});
 
 		if (!newBlocks) {
@@ -58,23 +56,12 @@ export default function Blocks({ blocks }) {
 			return;
 		}
 
-		const { start, width } = newBlock;
-
-		setCurrentBlocks(newBlock)
-		setRange([start, start + width]);
+		setCurrentBlocks(newBlock);
 	};
 
 	const onClickSection = (id: number) => () => {
+		console.log({ id, currentBlock });
 		setCurrentBlock(find(currentBlocks, ['id', id]));
-	
-		const block = find(currentBlocks, ['id', id]);
-
-		if (!block) {
-			return;
-		}
-
-		const { start, width } = block;
-		setRange([start, start + width]);
 	}
 
 	const onAddSection = () => {
@@ -119,53 +106,30 @@ export default function Blocks({ blocks }) {
 
 		if (currentBlock) {
 			setCurrentBlocks(newBlocks)
-			setRange([currentBlock.start, currentBlock.width])
 			setCurrentBlock(newBlock);
 		}
 
 	};
 
+	const {
+		start = 0,
+		width = 0,
+	} = currentBlock || {}
+
   return (
 		<div style={{ height: '100%'  }}>
-			<div style={{ padding: '10px' }}>
-			<Slider
-				value={range}
-				min={0}
-				max={12}
-				marks
-				aria-label="width slider"
-				valueLabelDisplay="auto"
-				onChange={onChangeLayout}
-			/>
-			<Grid container>
-				{map(currentBlocks, ({ id, width }) => (
-					<Grid
-						key={id}
-						size={width}
-						sx={{ transition: "transform 0.15s ease-in-out" }}
-					>
-						{currentBlock?.id === id && (
-							<Grid
-								container
-								alignItems="center"
-								justifyContent="end"
-							>
-								<IconButton 
-									onClick={onAddSection}
-								>
-									<AddCircleOutlineRounded />
-								</IconButton>
-								<DeleteButton
-									icon='icon_only'
-									tooltip='Delete column'
-									onClick={onDeleteSection}
-								/>
-							</Grid>
-						)}
-					</Grid>
-				))}
-			</Grid>
-			</div>
+			{isCustomizing && (
+				<Slider
+					value={[start, width]}
+					min={0}
+					max={12}
+					marks
+					aria-label="width slider"
+					valueLabelDisplay="auto"
+					onChange={onChangeLayout}
+				/>
+			)}
+			
 			<Paper
 				elevation={1}
 				style={{
