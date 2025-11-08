@@ -1,36 +1,86 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { compact, find, map, max, orderBy }  from 'lodash';
+import { compact, find, head, map, max, get, orderBy }  from 'lodash';
 
-import { Grid, IconButton, Paper, Slider } from '@mui/material';
+import { Box, Grid, FormControl, InputLabel, IconButton, MenuItem, Paper, Select, Slider, Typography } from '@mui/material';
+import { Map } from '@mui/icons-material';
 import onChangeSection from '@/utils/onChangeSection'
 import { Layout } from '@/types';
 
-import Layout from './Layout';
+import Block from './Layout';
 import DeleteButton from './DeleteButton';
 import { AddCircleOutlineRounded } from '@mui/icons-material';
-import { BASE_LAYOUT } from '@/constants';
 
 interface ScreenProps {
 	layouts: Layout[];
 }
 
-
 export default function Screen({ layouts }: ScreenProps) {
-	const [currentLayoutId, setCurrentLayoutId] = useState<number>(0);
+	const [currentLayout, setCurrentLayout] = useState<Layout | undefined>(head(layouts));
+
+	const handleChange = (e) => setCurrentLayout(e.target.value);
+
+	return (
+		<Box
+			sx={{ p: 2, height: '100%' }}
+		>
+			<Grid
+				container
+				alignItems="center"
+				justifyContent="space-between"
+			>
+				<Grid>
+					<FormControl
+						sx={{ m: 1, minWidth: 250 }}
+						size="small"
+					>
+						<InputLabel id="current-dm-screen-label">Current dm screen</InputLabel>
+						<Select
+							labelId="current-dm-screen-label"
+							id="dm-screen-select"
+							label="Current dm screen"
+							value={get(currentLayout, 'id', 0)}
+							onChange={handleChange}
+						>
+							<MenuItem disabled value={0}><em>Choose a dm screen</em></MenuItem>
+
+							{map(compact(layouts), ({ id, title }) => (
+								<MenuItem
+									key={`dm_screen_select_${id}`}
+									value={id}
+								>
+									{title}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>	
+				</Grid>
+				{currentLayout && (
+					<Grid>
+						test
+					</Grid>
+				)}
+			</Grid>
+		</Box>
+	);
+}
+
+export function Blocks({ layouts }: ScreenProps) {
+	const [currentLayout, setCurrentLayout] = useState<Layout>();
 	const [range, setRange] = useState<number[]>([])
 
 	useEffect(() => {
-		const orderedLayouts = orderBy(layouts, 'start');
+		const orderedLayouts = orderBy(layouts, 'blocks.start');
 
-		console.log( { layouts } );
+		console.log( { layouts, layoutsOne: get(orderedLayouts, '[0].blocks')  } );
 
 		if (layouts) {
-			const { id, start, width } = orderedLayouts[0];
+			const { id, start, width } = get(orderedLayouts, '[0].blocks[0]');
+
 	
 			// setLayouts(orderBy(testLayouts, 'start'));
-			setCurrentLayoutId(id);
+			setCurrentLayout(orderedLayouts[0]);
 			setRange([start, width]);
 		}
 	}, [])
@@ -176,9 +226,9 @@ export default function Screen({ layouts }: ScreenProps) {
 			>
 				<Grid container style={{ height: '100%' }}>
 					{map(layouts, (layout) => (
-						<Layout
+						<Block
 							key={layout.id}
-							isCurrentLayout={layout.id === currentLayoutId}
+							isCurrentLayout={layout.id === currentLayout.id}
 							layout={layout} 
 							onClickLayout={onClickSection}
 						/>

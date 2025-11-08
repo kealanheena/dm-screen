@@ -1,9 +1,9 @@
 import { getUserByClerkId } from '@/actions/user.action'
-import { getDefaultLayouts } from '@/actions/layout.action'
+import { getDefaultLayout } from '@/actions/layout.action'
 
 export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 
-export type Layout = Awaited<ReturnType<typeof getDefaultLayouts>>;
+export type Layout = Awaited<ReturnType<typeof getDefaultLayout>>;
 
 export type WrapperProps = Readonly<{
 	children: React.ReactNode;
