@@ -1,10 +1,10 @@
 import shrinkSectionRight from '@/utils/shrinkSectionRight';
-import { LayoutType } from '@/types';
+import { Layout } from '@/types';
 
 describe("#increaseSectionSizeRight", () => {
 	
 	it("Should return layout with decreased width and a true shouldExpandNextSection", () => {
-		 const layout: LayoutType = {
+		 const layout: Layout = {
 			id: 1,
 			start: 0,
 			width: 9,

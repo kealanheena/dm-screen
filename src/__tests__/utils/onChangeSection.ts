@@ -1,10 +1,10 @@
 import onChangeSection from "@/utils/onChangeSection";
-import { LayoutType } from '@/types';
+import { Layout } from '@/types';
 
 describe("#onChangeSection", () => {
 	
 	it("Should do nothing if start plus width is greater than 12", () => {
-		const layouts: LayoutType[] = [{
+		const layouts: Layout[] = [{
 			id: 1,
 			start: 0,
 			width: 12,
@@ -20,7 +20,7 @@ describe("#onChangeSection", () => {
 	});
 
 	it("Should add 1 to both the width and start of a second layout", () => {
-		const layouts: LayoutType[] = [{
+		const layouts: Layout[] = [{
 			id: 1,
 			start: 0,
 			width: 9,
@@ -44,7 +44,7 @@ describe("#onChangeSection", () => {
 	});
 
 	it("Should add 1 to both the width and start of a second layout", () => {
-		const layouts: LayoutType[] = [{
+		const layouts: Layout[] = [{
 			id: 1,
 			start: 0,
 			width: 9,

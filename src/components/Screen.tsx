@@ -5,49 +5,39 @@ import { compact, find, map, max, orderBy }  from 'lodash';
 
 import { Grid, IconButton, Paper, Slider } from '@mui/material';
 import onChangeSection from '@/utils/onChangeSection'
-import { LayoutType } from '@/types';
+import { Layout } from '@/types';
 
 import Layout from './Layout';
 import DeleteButton from './DeleteButton';
 import { AddCircleOutlineRounded } from '@mui/icons-material';
 import { BASE_LAYOUT } from '@/constants';
 
-const testLayouts: LayoutType[] = [
-	{
-		id: 3,
-		start: 0,
-		width: 2,
-		cards: [
-			{ id: 1, title: 'Test Img Card' },
-			{ id: 2, title: 'NPCs Card' }
-		],
-	},
-	{
-		id: 3,
-		start: 2,
-		width: 10,
-		cards: [],
-	},
-];
+interface ScreenProps {
+	layouts: Layout[];
+}
 
-export default function Screen() {
-	const [layouts, setLayouts] = useState<LayoutType[]>([]);
+
+export default function Screen({ layouts }: ScreenProps) {
 	const [currentLayoutId, setCurrentLayoutId] = useState<number>(0);
 	const [range, setRange] = useState<number[]>([])
 
 	useEffect(() => {
-		const orderedLayouts = orderBy(testLayouts, 'start');
+		const orderedLayouts = orderBy(layouts, 'start');
 
-		const { id, start, width} = orderedLayouts[0];
+		console.log( { layouts } );
+
+		if (layouts) {
+			const { id, start, width } = orderedLayouts[0];
 	
-		setLayouts(orderBy(testLayouts, 'start'));
-		setCurrentLayoutId(id);
-		setRange([start, width]);
+			// setLayouts(orderBy(testLayouts, 'start'));
+			setCurrentLayoutId(id);
+			setRange([start, width]);
+		}
 	}, [])
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onChangeLayout = (e: any): void => {
-		const layout: LayoutType | undefined = find(layouts, ['id', currentLayoutId]);
+		const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
 
 		if (!layout) {
 			return;
@@ -55,7 +45,7 @@ export default function Screen() {
 
 		const newRange: number[] = map(e.target.value, (value: string) => Number(value));
 
-		const newLayouts: LayoutType[] | undefined = onChangeSection({
+		const newLayouts: Layout[] | undefined = onChangeSection({
 			layoutId: currentLayoutId,
 			layouts,
 			newRange,
@@ -74,13 +64,13 @@ export default function Screen() {
 
 		const { start, width } = newLayout;
 
-		setLayouts(newLayouts)
+		// setLayouts(newLayouts)
 		setRange([start, start + width]);
 	};
 
 	const onClickSection = (id: number) => () => {
 		setCurrentLayoutId(id);
-		const layout: LayoutType | undefined = find(layouts, ['id', id]);
+		const layout: Layout | undefined = find(layouts, ['id', id]);
 
 		if (!layout) {
 			return;
@@ -91,18 +81,18 @@ export default function Screen() {
 	}
 
 	const onAddSection = () => {
-		const maxIdLayout = max(layouts, ({ id }: LayoutType) => id);
+		// const maxIdLayout = max(layouts, ({ id }: Layout) => id);
 
-		const newLayout: LayoutType = {
-			id: (maxIdLayout?.id || 1) +1,
-			...BASE_LAYOUT,
-		}
+		// const newLayout: Layout = {
+		// 	id: (maxIdLayout?.id || 1) +1,
+		// 	...BASE_LAYOUT,
+		// }
 	};
 
 	const onDeleteSection = () => {
-		let deletedLayout: LayoutType | null = null;
+		let deletedLayout: Layout | null = null;
 
-		const newLayouts: LayoutType[] = compact(
+		const newLayouts: Layout[] = compact(
 			map(layouts, (layout) => {
 				if (currentLayoutId === layout.id) {
 					deletedLayout = layout;
@@ -130,7 +120,7 @@ export default function Screen() {
 		if (currentLayout) {
 			setCurrentLayoutId(currentLayout.id)
 			setRange([currentLayout.start, currentLayout.width])
-			setLayouts(newLayouts);
+			// setLayouts(newLayouts);
 		}
 
 	};

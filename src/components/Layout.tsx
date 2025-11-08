@@ -6,13 +6,13 @@ import { map } from 'lodash';
 import {
 	Grid,
 } from '@mui/material';
-import { LayoutType } from '@/types';
+import { Layout } from '@/types';
 
 import LayoutCard from './LayoutCard';
 
 
 interface LayoutProps { 
-	layout: LayoutType;
+	layout: Layout;
 	isCurrentLayout: boolean;
 	onClickLayout: Function;
 }
