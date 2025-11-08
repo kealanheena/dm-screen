@@ -22,6 +22,7 @@ Potential feature:
 ## Tools
 
 - database (neon): https://console.neon.tech/
+    - pusing schema: npx prisma db push
 - image upload (uploadthing): https://uploadthing.com/
 - signin (clerk): https://dashboard.clerk.com/
 - hosting (vercel): https://vercel.com/
