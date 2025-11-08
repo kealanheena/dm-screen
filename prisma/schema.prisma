@@ -37,6 +37,7 @@ model Layout {
   id Int @id @default(autoincrement())
   userId Int
 
+  title String
   isDefault Boolean
 
   createdAt DateTime @default(now())
