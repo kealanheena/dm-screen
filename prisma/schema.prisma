@@ -30,10 +30,10 @@ model User {
 
   // Relations
 
-  layouts Layout[]
+  screens Screen[]
 }
 
-model Layout {
+model Screen {
   id Int @id @default(autoincrement())
   userId Int
 
@@ -44,16 +44,16 @@ model Layout {
   updatedAt DateTime @updatedAt
 
   // Relations
-  blocks Block[]
+  sections Section[]
   // "onDelete: cascade" means delete all posts if the author is deleted
   owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index(userId)
 }
 
-model Block {
+model Section {
   id Int @id @default(autoincrement())
-  layoutId Int
+  screenId Int
 
   start Int
   width Int
@@ -64,12 +64,12 @@ model Block {
   updatedAt DateTime @updatedAt
 
   // Relation
-  layout Layout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  screen Screen @relation(fields: [screenId], references: [id], onDelete: Cascade)
 }
 
 model Card {
   id Int @id @default(autoincrement())
-  blockId Int
+  sectionId Int
   
   title String
   type CardType
@@ -79,14 +79,17 @@ model Card {
   updatedAt DateTime @updatedAt
 
   // Relation
-  block Block @relation(fields: [blockId], references: [id], onDelete: Cascade)
+  section Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
 
-  @@index(blockId) // composite index for faster queries
-  // @@unique([layoutId, title]) // this prevents a user duplicating a title on a layout something twice
+  @@index(sectionId) // composite index for faster queries
+  // @@unique([screenId, title]) // this prevents a user duplicating a title on a screen something twice
 }
 
 enum CardType {
   LIKE     
   COMMENT 
-  FOLLOW   
+  FOLLOW
+  TEXT
+  LIST
+  IMAGE
 }
