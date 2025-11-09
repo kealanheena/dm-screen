@@ -33,7 +33,7 @@ export default function CreateNewScreen() {
 				onChange={handleChange}
 				label="Title"
 				value={title}
-				sx={{ m: 1, minWidth: 250 }}
+				sx={{ m: 1 }}
 			/>
 			<Button variant="contained">
 				Create screen

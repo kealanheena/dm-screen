@@ -47,6 +47,21 @@ export const themeOptions: ThemeOptions = {
       defaultProps: {
         size: 'small',
       },
+      styleOverrides: {
+        root: {
+          minWidth: 250
+        }
+      }
     },
+    MuiFormControl: {
+      defaultProps: {
+        size: 'small',
+      },
+      styleOverrides: {
+        root: {
+          minWidth: 250
+        }
+      }
+    }
   },
 };

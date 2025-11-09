@@ -13,6 +13,7 @@ import {
 	SelectChangeEvent,
 } from '@mui/material';
 import { Layout } from '@/types';
+import { Add } from '@mui/icons-material';
 
 import IconButton from './IconButton';
 // import Blocks from './Blocks';
@@ -31,8 +32,11 @@ export default function Screen({ layouts }: ScreenProps) {
 
 	const handleChange = (event: SelectChangeEvent<number>) => {
 		const newLayoutId = event.target.value;
-		const newLayout: Layout | undefined = find(layouts, ['id', newLayoutId]);
+		if (newLayoutId) {
+			return;
+		}
 
+		const newLayout: Layout | undefined = find(layouts, ['id', newLayoutId]);
 		if (!newLayout) {
 			// Add toast notification
 			return;
@@ -40,6 +44,8 @@ export default function Screen({ layouts }: ScreenProps) {
 
 		setSelectedLayout(newLayout);
 	};
+
+	const onClick = () => console.log({ tetsing: 'ste'})
 
 	return (
 		<Box sx={{ p: 2, height: '100%' }}>
@@ -52,10 +58,7 @@ export default function Screen({ layouts }: ScreenProps) {
 					container
 					alignItems="center"
 				>
-					<FormControl
-						sx={{ m: 1, minWidth: 250 }}
-						size="small"
-					>
+					<FormControl>
 						<InputLabel id="current-dm-screen-label">Current dm screen</InputLabel>
 						<Select
 							labelId="current-dm-screen-label"
@@ -74,6 +77,11 @@ export default function Screen({ layouts }: ScreenProps) {
 									{title}
 								</MenuItem>
 							))}
+
+							<MenuItem onClick={onClick}>
+								<Add sx={{ pr: 1, fontSize: 30 }} />
+								Create screen
+							</MenuItem>
 						</Select>
 					</FormControl>
 
