@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { syncUser } from "@/actions/user.action";
 
 import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
-import { SignInButton, SignOutButton } from '@clerk/nextjs';
+import { SignInButton, UserButton } from '@clerk/nextjs';
 
 import Redirect from './Redirect';
 
@@ -25,9 +25,7 @@ export default async function Navbar() {
           </Typography>
 
           {user ? (
-             <SignOutButton>
-              <Button color="inherit">Log out</Button>
-            </SignOutButton>
+             <UserButton />
           ) : (
             <SignInButton mode="modal">
               <Button color="inherit">Log in</Button>
