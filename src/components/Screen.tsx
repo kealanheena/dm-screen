@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { compact, head, map, get }  from 'lodash';
+import { useRouter } from 'next/navigation';
 
 import {
 	Box,
@@ -22,6 +23,7 @@ import { updateLayout } from '@/actions/layout.action';
 
 import IconButton from './IconButton';
 import Blocks from './Blocks';
+import TitleDialog from './TitleDialog';
 
 
 interface ScreenProps {
@@ -29,6 +31,8 @@ interface ScreenProps {
 }
 
 export default function Screen({ layouts }: ScreenProps) {
+	const router = useRouter();
+
 	const [currentLayout, setCurrentLayout] = useState<Layout | undefined>(head(layouts));
 	const [isCustomizing, setIsCustomizing] = useState(false);
 	const [title, setTitle] = useState(head(layouts)?.title || '')
@@ -48,6 +52,8 @@ export default function Screen({ layouts }: ScreenProps) {
 				title,
 			});
 			handleClose();
+
+			router.refresh();
 		}
 	}
 
@@ -88,38 +94,8 @@ export default function Screen({ layouts }: ScreenProps) {
 							))}
 						</Select>
 					</FormControl>
-			
-					<IconButton
-						icon="EDIT"
-						onClick={() => setOpen(true)} 
-						variant="icon_only"
-					/>
 
-					<Dialog
-						open={open}
-						onClose={handleClose}
-						fullWidth
-					>
-						<DialogTitle>
-							Edit title
-						</DialogTitle>
-						<DialogContent>
-							<TextField
-								autoFocus
-								fullWidth 
-								onChange={handleTitleChange}
-								variant="outlined"
-								label="Title"
-								value={title}
-							/>
-						</DialogContent>
-						<DialogActions>
-							<Button onClick={handleClose} color="secondary">Close</Button>
-							<Button onClick={onSave} variant="contained">
-								Save
-							</Button>
-						</DialogActions>
-					</Dialog>
+					<TitleDialog id={currentLayout.id} title={currentLayout?.title || ''} />
 				</Grid>
 
 				{currentLayout && (
