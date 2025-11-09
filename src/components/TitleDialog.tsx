@@ -9,7 +9,7 @@ import {
 	DialogTitle,
 	TextField,
 } from '@mui/material';
-import { updateLayout } from '@/actions/layout.action';
+import { updateScreen } from '@/actions/screen.action';
 
 import IconButton from './IconButton';
 
@@ -40,7 +40,7 @@ export default function TitleDialog({
 		setIsLoading(true);
 	
 		try {
-			await updateLayout({ id, title });
+			await updateScreen({ id, title });
 
 			refresh();
 			handleClose();
