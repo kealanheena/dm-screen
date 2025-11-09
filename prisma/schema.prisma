@@ -86,9 +86,6 @@ model Card {
 }
 
 enum CardType {
-  LIKE     
-  COMMENT 
-  FOLLOW
   TEXT
   LIST
   IMAGE
