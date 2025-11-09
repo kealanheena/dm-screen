@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 import { APP_BAR_HEIGHT } from '@/constants';
 
 import ThemeProvider from "@/components/Wrappers/ThemeProvider";
-import Redirect from "@/components/Redirect";
 import Navbar from "@/components/Navbar";
 
 

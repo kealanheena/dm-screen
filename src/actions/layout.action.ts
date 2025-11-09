@@ -25,7 +25,11 @@ export async function getDefaultLayout() {
 			}
 		});
 	} catch (error) {
-		throw new Error('Default layout not found (404)');
+		if (error) {
+			throw new Error('Error: ', error);
+		}
+
+		throw new Error('Unknown Error occured');
 	}
 }
 

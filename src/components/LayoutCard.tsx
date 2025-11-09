@@ -4,11 +4,9 @@ import {
 	Card, 
 	CardContent, 
 	Grid,
-	Tooltip,
 	Typography
 } from '@mui/material';
-import { OpenWith } from '@mui/icons-material';
-import { CardType } from '@/types';
+import { Card as CardType } from '@/types';
 import IconButton from './IconButton';
 
 

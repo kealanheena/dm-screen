@@ -2,7 +2,7 @@ import React from 'react';
 import { currentUser } from "@clerk/nextjs/server";
 import { syncUser } from "@/actions/user.action";
 
-import { AppBar, Box, Toolbar, Typography, Button, IconButton } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
 import { SignInButton, SignOutButton } from '@clerk/nextjs';
 
 import Redirect from './Redirect';

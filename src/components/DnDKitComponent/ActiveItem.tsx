@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, CardContent, Grid, IconButton, Tooltip, Typography } from "@mui/material";
-import { CardType } from "@/types";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Card as CardType } from "@/types";
 
 
-const ActiveItem = ({ id, title, width  }: CardType) => { 
+const ActiveItem = ({ id, title }: CardType) => { 
   const style = {
 		minWidth: '200px',
     height: "200px",
@@ -11,7 +11,7 @@ const ActiveItem = ({ id, title, width  }: CardType) => {
   };
 
   return (
-    <Grid  size={width}>
+    <Grid>
       <Card style={style}>
         <CardContent>
           <Grid

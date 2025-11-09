@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { compact, find, head, map, get }  from 'lodash';
-import { useRouter } from 'next/navigation';
 
 import {
 	Box,
@@ -16,7 +15,7 @@ import {
 import { Layout } from '@/types';
 
 import IconButton from './IconButton';
-import Blocks from './Blocks';
+// import Blocks from './Blocks';
 import TitleDialog from './TitleDialog';
 
 
@@ -25,11 +24,7 @@ interface ScreenProps {
 }
 
 export default function Screen({ layouts }: ScreenProps) {
-	const layout = head(layouts);
-	if (!layout || layout.id) {
-		return;
-	}
-	const [selectedLayout, setSelectedLayout] = useState<Layout>(layout);
+	const [selectedLayout, setSelectedLayout] = useState<Layout | undefined>(head(layouts));
 	const [isCustomizing, setIsCustomizing] = useState(false);
 	
 
@@ -81,7 +76,9 @@ export default function Screen({ layouts }: ScreenProps) {
 						</Select>
 					</FormControl>
 
-					<TitleDialog id={selectedLayout.id} title={selectedLayout?.title || ''} />
+					{selectedLayout?.id && (
+						<TitleDialog id={selectedLayout.id} title={selectedLayout.title} />
+					)}
 				</Grid>
 
 				{selectedLayout && (
@@ -100,9 +97,9 @@ export default function Screen({ layouts }: ScreenProps) {
 				)}
 				
 			</Grid>
-			{selectedLayout && (
+			{/* {selectedLayout && (
 				<Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
-			)}
+			)} */}
 		</Box>
 	);
 }
