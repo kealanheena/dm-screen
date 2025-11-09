@@ -1,25 +1,19 @@
 "use client"
 
 import React, { useState } from 'react';
-import { compact, head, map, get }  from 'lodash';
+import { compact, find, head, map, get }  from 'lodash';
 import { useRouter } from 'next/navigation';
 
 import {
 	Box,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogTitle,
 	Grid,
 	FormControl,
 	InputLabel,
 	MenuItem,
 	Select,
-	TextField,
+	SelectChangeEvent,
 } from '@mui/material';
 import { Layout } from '@/types';
-import { updateLayout } from '@/actions/layout.action';
 
 import IconButton from './IconButton';
 import Blocks from './Blocks';
@@ -31,36 +25,28 @@ interface ScreenProps {
 }
 
 export default function Screen({ layouts }: ScreenProps) {
-	const router = useRouter();
-
-	const [currentLayout, setCurrentLayout] = useState<Layout | undefined>(head(layouts));
+	const layout = head(layouts);
+	if (!layout || layout.id) {
+		return;
+	}
+	const [selectedLayout, setSelectedLayout] = useState<Layout>(layout);
 	const [isCustomizing, setIsCustomizing] = useState(false);
-	const [title, setTitle] = useState(head(layouts)?.title || '')
-	const [open, setOpen] = useState(false);
 	
 
-	const handleChange = (e) => setCurrentLayout(e.target.value);
+	const handleChange = (event: SelectChangeEvent<number>) => {
+		const newLayoutId = event.target.value;
+		const newLayout: Layout | undefined = find(layouts, ['id', newLayoutId]);
 
-	const handleTitleChange = (e) => setTitle(e.target.value);
-
-	const handleClose = () => setOpen(false)
-
-	const onSave = () => {
-		if (currentLayout) {
-			updateLayout({
-				id: currentLayout.id,
-				title,
-			});
-			handleClose();
-
-			router.refresh();
+		if (!newLayout) {
+			// Add toast notification
+			return;
 		}
-	}
+
+		setSelectedLayout(newLayout);
+	};
 
 	return (
-		<Box
-			sx={{ p: 2, height: '100%' }}
-		>
+		<Box sx={{ p: 2, height: '100%' }}>
 			<Grid
 				container
 				alignItems="center"
@@ -79,7 +65,7 @@ export default function Screen({ layouts }: ScreenProps) {
 							labelId="current-dm-screen-label"
 							id="dm-screen-select"
 							label="Current dm screen"
-							value={get(currentLayout, 'id', 0)}
+							value={get(selectedLayout, 'id', 0)}
 							onChange={handleChange}
 						>
 							<MenuItem disabled value={0}><em>Choose a dm screen</em></MenuItem>
@@ -95,10 +81,10 @@ export default function Screen({ layouts }: ScreenProps) {
 						</Select>
 					</FormControl>
 
-					<TitleDialog id={currentLayout.id} title={currentLayout?.title || ''} />
+					<TitleDialog id={selectedLayout.id} title={selectedLayout?.title || ''} />
 				</Grid>
 
-				{currentLayout && (
+				{selectedLayout && (
 					<Grid>
 						<IconButton
 							icon="ADD"
@@ -114,8 +100,8 @@ export default function Screen({ layouts }: ScreenProps) {
 				)}
 				
 			</Grid>
-			{currentLayout && (
-				<Blocks blocks={currentLayout.blocks} isCustomizing={isCustomizing} />
+			{selectedLayout && (
+				<Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
 			)}
 		</Box>
 	);
