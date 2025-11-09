@@ -17,6 +17,7 @@ import { Layout } from '@/types';
 import IconButton from './IconButton';
 // import Blocks from './Blocks';
 import TitleDialog from './TitleDialog';
+import CreateNewScreen from './CreateNewScreen';
 
 
 interface ScreenProps {
@@ -87,19 +88,24 @@ export default function Screen({ layouts }: ScreenProps) {
 							icon="ADD"
 							onClick={() => {}} 
 							variant="icon_only"
+							tooltip="Add section"
 						/>
 						<IconButton
 							icon={isCustomizing ? 'CHECK' : 'SETTINGS'}
 							onClick={() =>  setIsCustomizing(!isCustomizing)} 
 							variant="icon_only"
+							tooltip={isCustomizing ? 'Finish changes' : 'Start changing'}
 						/>
 					</Grid>
 				)}
 				
 			</Grid>
-			{/* {selectedLayout && (
-				<Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
-			)} */}
+			
+			{selectedLayout ? (
+				<div/>
+			) : <CreateNewScreen />}
 		</Box>
 	);
 }
+
+// <Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
