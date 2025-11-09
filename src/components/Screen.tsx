@@ -3,10 +3,24 @@
 import React, { useState } from 'react';
 import { compact, head, map, get }  from 'lodash';
 
-import { Box, Grid, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+	Box,
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	Grid,
+	FormControl,
+	InputLabel,
+	MenuItem,
+	Select,
+	TextField,
+} from '@mui/material';
 import { Layout } from '@/types';
-import IconButton from './IconButton';
+import { updateLayout } from '@/actions/layout.action';
 
+import IconButton from './IconButton';
 import Blocks from './Blocks';
 
 
@@ -17,8 +31,25 @@ interface ScreenProps {
 export default function Screen({ layouts }: ScreenProps) {
 	const [currentLayout, setCurrentLayout] = useState<Layout | undefined>(head(layouts));
 	const [isCustomizing, setIsCustomizing] = useState(false);
+	const [title, setTitle] = useState(head(layouts)?.title || '')
+	const [open, setOpen] = useState(false);
+	
 
 	const handleChange = (e) => setCurrentLayout(e.target.value);
+
+	const handleTitleChange = (e) => setTitle(e.target.value);
+
+	const handleClose = () => setOpen(false)
+
+	const onSave = () => {
+		if (currentLayout) {
+			updateLayout({
+				id: currentLayout.id,
+				title,
+			});
+			handleClose();
+		}
+	}
 
 	return (
 		<Box
@@ -60,9 +91,35 @@ export default function Screen({ layouts }: ScreenProps) {
 			
 					<IconButton
 						icon="EDIT"
-						onClick={() => {}} 
+						onClick={() => setOpen(true)} 
 						variant="icon_only"
 					/>
+
+					<Dialog
+						open={open}
+						onClose={handleClose}
+						fullWidth
+					>
+						<DialogTitle>
+							Edit title
+						</DialogTitle>
+						<DialogContent>
+							<TextField
+								autoFocus
+								fullWidth 
+								onChange={handleTitleChange}
+								variant="outlined"
+								label="Title"
+								value={title}
+							/>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={handleClose} color="secondary">Close</Button>
+							<Button onClick={onSave} variant="contained">
+								Save
+							</Button>
+						</DialogActions>
+					</Dialog>
 				</Grid>
 
 				{currentLayout && (

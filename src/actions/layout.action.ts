@@ -60,3 +60,15 @@ export async function getLayout(id: number) {
 		}
 	});
 }
+
+interface UpdateLayout {
+	id: number;
+	title?: string;
+}
+
+export async function updateLayout({ id, title }: UpdateLayout) {
+ return prisma.layout.update({
+		where: { id },
+		data: { title }
+	});
+}
