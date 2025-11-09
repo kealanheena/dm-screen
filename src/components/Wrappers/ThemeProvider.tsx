@@ -4,14 +4,17 @@ import React from 'react';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme } from "@mui/material/styles";
-import { WrapperProps } from '@/types';
 
 import { themeOptions } from '../../app/theme';
+
+export type ThemeProviderWapperProps = Readonly<{
+	children: React.ReactNode;
+}>
 
 
 function ThemeProviderWrapper({
   children,
-}: WrapperProps) {
+}: ThemeProviderWapperProps) {
 	const theme = createTheme(themeOptions);
 
 	return (
