@@ -12,12 +12,17 @@ export async function createSection(screenId: number, data: Pick<Section, "start
 		return;
 	}
 
-	const { title } = data;
+	// we need to get the screen
+	// check what 
 
-	return prisma.screen.create({
-		data: {
-			title: trim(title),
-			userId,
-		}
-	});
+	return;
+
+	// const { start, width } = data;
+
+	// return prisma.screen.create({
+	// 	data: {
+	// 		title: trim(title),
+	// 		userId,
+	// 	}
+	// });
 }
