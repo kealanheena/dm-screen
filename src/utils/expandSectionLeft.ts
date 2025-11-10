@@ -1,4 +1,4 @@
-import { Layout } from "@/types";
+import { Screen } from "@/types";
 import { MIN_COLUMN_WIDTH, WIDTH_CHANGE_INTERVAL } from '@/constants';
 
 
@@ -7,11 +7,11 @@ const expandSectionLeft = ({
 	layoutId,
 	shouldShrinkNextSection,
 }: {
-	layout: Layout,
+	layout: Screen,
 	layoutId: number,
 	shouldShrinkNextSection: boolean,
 }): {
-	newLayout: Layout,
+	newLayout: Screen,
 	newShouldShrinkNextSection: boolean,
 } => {
 	const { id, start, width } = layout;

@@ -3,9 +3,9 @@
 
 // import { Grid, Paper, Slider } from '@mui/material';
 // import onChangeSection from '@/utils/onChangeSection'
-// import { Layout } from '@/types';
+// import { Screen } from '@/types';
 
-// import Block from './Layout';
+// import Block from './Screen';
 
 // import { BASE_LAYOUT } from '@/constants';
 
@@ -29,7 +29,7 @@
 
 // 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 // 	const onChangeLayout = (e: any): void => {
-// 		// const layout: Layout | undefined = find(layouts, ['id', currentLayoutId]);
+// 		// const layout: Screen | undefined = find(layouts, ['id', currentLayoutId]);
 
 // 		if (!currentBlock) {
 // 			return;
@@ -63,7 +63,7 @@
 // 	}
 
 // 	const onAddSection = () => {
-// 		const maxIdLayout = max(block, ({ id }: Layout) => id);
+// 		const maxIdLayout = max(block, ({ id }: Screen) => id);
 
 // 		const newBlocks = {
 // 			id: (maxIdLayout?.id || 1) +1,

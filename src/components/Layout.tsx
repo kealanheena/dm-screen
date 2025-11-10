@@ -4,7 +4,7 @@
 // import {
 // 	Grid,
 // } from '@mui/material';
-// import { Layout as LayoutType } from '@/types';
+// import { Screen as LayoutType } from '@/types';
 
 // import LayoutCard from './LayoutCard';
 
@@ -15,7 +15,7 @@
 // 	onClickLayout: Function;
 // }
 
-// export default function Layout({
+// export default function Screen({
 // 	layout,
 // 	isCurrentLayout,
 // 	onClickLayout

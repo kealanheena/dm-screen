@@ -2,7 +2,7 @@ import { getUserByClerkId } from '@/actions/user.action'
 
 export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 
-export interface Layout {
+export interface Screen {
 	id: number;
 	title: string;
 	isTemplate: boolean;

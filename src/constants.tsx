@@ -4,7 +4,7 @@ export const APP_BAR_HEIGHT: string = '64px';
 // Auth constants
 export const ACCESSABLE_PATHS_WITHOUT_LOGIN = ['/log-in', '/screen']
 
-// Layout constants
+// Screen constants
 export const MIN_TOTAL_WIDTH: number = 12;
 export const MIN_COLUMN_WIDTH: number = 2;
 export const WIDTH_CHANGE_INTERVAL: number = 1;

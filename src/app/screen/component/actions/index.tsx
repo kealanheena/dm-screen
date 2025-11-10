@@ -14,7 +14,7 @@ import {
 	SelectChangeEvent,
 	Slider,
 } from '@mui/material';
-import { Layout } from '@/types';
+import { Screen } from '@/types';
 import { Add } from '@mui/icons-material';
 
 import IconButton from '@/components/IconButton';
@@ -22,11 +22,11 @@ import TitleDialog from './TitleDialog';
 
 
 interface ScreenActionsProps {
-	screens: Layout[];
+	screens: Screen[];
 }
 
 export default function ScreenActions({ screens }: ScreenActionsProps) {
-	const [selectedLayout, setSelectedLayout] = useState<Layout | undefined>(head(screens));
+	const [selectedLayout, setSelectedLayout] = useState<Screen | undefined>(head(screens));
 	const [isCustomizing, setIsCustomizing] = useState(false);
 	
 
@@ -36,7 +36,7 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 			return;
 		}
 
-		const newLayout: Layout | undefined = find(screens, ['id', newLayoutId]);
+		const newLayout: Screen | undefined = find(screens, ['id', newLayoutId]);
 		if (!newLayout) {
 			// Add toast notification
 			return;

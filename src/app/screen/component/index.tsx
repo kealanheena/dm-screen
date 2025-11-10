@@ -4,7 +4,7 @@ import React from 'react';
 import { head }  from 'lodash';
 
 import { Box, Paper } from '@mui/material';
-import { Layout } from '@/types';
+import { Screen } from '@/types';
 
 // import Blocks from './Blocks';
 // <Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
@@ -12,7 +12,7 @@ import CreateScreen from './actions/CreateScreen';
 
 
 interface ScreenProps {
-	screens: Layout[];
+	screens: Screen[];
 }
 
 export default function Screen({ screens }: ScreenProps) {

@@ -1,10 +1,10 @@
 import expandSectionRight from '@/utils/expandSectionRight';
-import { Layout } from '@/types';
+import { Screen } from '@/types';
 
 describe("#expandSectionRight", () => {
 	
 	it("Should return layout with increased width and a true newShouldShrinkNextSection", () => {
-		const layout: Layout = {
+		const layout: Screen = {
 			id: 1,
 			start: 0,
 			width: 9,

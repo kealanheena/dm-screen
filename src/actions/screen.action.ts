@@ -2,10 +2,10 @@
 
 import { trim } from 'lodash';
 import prisma from "@/lib/prisma";
-import { Layout } from "@/types";
+import { Screen } from "@/types";
 import { getDbUserId } from './user.action';
 
-export async function createScreen(data: Pick<Layout, "title">) {
+export async function createScreen(data: Pick<Screen, "title">) {
 	const userId = await getDbUserId();
 
 	if (!userId) {
@@ -23,7 +23,7 @@ export async function createScreen(data: Pick<Layout, "title">) {
 }
 
 export async function getScreens(
-	where?: Partial<Pick<Layout, 'title' | 'isTemplate'>>
+	where?: Partial<Pick<Screen, 'title' | 'isTemplate'>>
 ) {
  return prisma.screen.findMany({
 		where,
@@ -50,7 +50,7 @@ export async function getScreens(
 
 export async function updateScreen(
 	id: number,
-	data: Pick<Layout, "title">,
+	data: Pick<Screen, "title">,
 ) {
 	const { title } = data;
 
