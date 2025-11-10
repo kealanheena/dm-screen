@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import { Layout } from '@/types';
 import { Add } from '@mui/icons-material';
-import { createScreen } from "@/actions/screen.action";
 
 import IconButton from './IconButton';
 // import Blocks from './Blocks';
@@ -23,93 +22,14 @@ import CreateNewScreen from './CreateNewScreen';
 
 
 interface ScreenProps {
-	layouts: Layout[];
+	screens: Layout[];
 }
 
-export default function Screen({ layouts }: ScreenProps) {
-	const [selectedLayout, setSelectedLayout] = useState<Layout | undefined>(head(layouts));
-	const [isCustomizing, setIsCustomizing] = useState(false);
-	
-
-	const handleChange = (event: SelectChangeEvent<number>) => {
-		const newLayoutId = event.target.value;
-		if (newLayoutId) {
-			return;
-		}
-
-		const newLayout: Layout | undefined = find(layouts, ['id', newLayoutId]);
-		if (!newLayout) {
-			// Add toast notification
-			return;
-		}
-
-		setSelectedLayout(newLayout);
-	};
-
-	const handleCreateClick = () => {};
+export default function Screen({ screens }: ScreenProps) {
+	const [selectedLayout, setSelectedLayout] = useState<Layout | undefined>(head(screens));
 
 	return (
-		<Box sx={{ p: 2, height: '100%' }}>
-			<Grid
-				container
-				alignItems="center"
-				justifyContent="space-between"
-			>
-				<Grid
-					container
-					alignItems="center"
-				>
-					<FormControl>
-						<InputLabel id="current-dm-screen-label">Current dm screen</InputLabel>
-						<Select
-							labelId="current-dm-screen-label"
-							id="dm-screen-select"
-							label="Current dm screen"
-							value={get(selectedLayout, 'id', 0)}
-							onChange={handleChange}
-						>
-							<MenuItem disabled value={0}><em>Choose a dm screen</em></MenuItem>
-
-							{map(compact(layouts), ({ id, title }) => (
-								<MenuItem
-									key={`dm_screen_select_${id}`}
-									value={id}
-								>
-									{title}
-								</MenuItem>
-							))}
-
-							<MenuItem onClick={handleCreateClick}>
-								<Add sx={{ pr: 1, fontSize: 30 }} />
-								Create screen
-							</MenuItem>
-						</Select>
-					</FormControl>
-
-					{selectedLayout?.id && (
-						<TitleDialog id={selectedLayout.id} title={selectedLayout.title} />
-					)}
-				</Grid>
-
-				{selectedLayout && (
-					<Grid>
-						<IconButton
-							icon="ADD"
-							onClick={() => {}} 
-							variant="icon_only"
-							tooltip="Add section"
-						/>
-						<IconButton
-							icon={isCustomizing ? 'CHECK' : 'SETTINGS'}
-							onClick={() =>  setIsCustomizing(!isCustomizing)} 
-							variant="icon_only"
-							tooltip={isCustomizing ? 'Finish changes' : 'Start changing'}
-						/>
-					</Grid>
-				)}
-				
-			</Grid>
-			
+		<Box sx={{ p: 2, height: '100%' }}>	
 			{selectedLayout ? (
 				<div/>
 			) : <CreateNewScreen />}
