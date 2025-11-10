@@ -110,7 +110,7 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 								/>
 
 								<IconButton
-									icon="DELETE"
+									icon="DELETE_SECTION"
 									onClick={() => {}} 
 									variant="icon_only"
 									tooltip="Delete section"

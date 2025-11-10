@@ -1,16 +1,25 @@
 import {
 	AddCircleOutline,
-	PostAdd,
+	CreateNewFolder,
 	Check,
 	Delete,
+	FolderDelete,
 	DragIndicator,
 	Edit,
 	QuestionMark,
 	Settings,
-	AddToPhotos,
+	NoteAdd,
 } from '@mui/icons-material';
 
-export type IconType = 'ADD' | 'ADD_SECTION' | 'ADD_CARD' | 'CHECK' | 'EDIT' | 'DELETE' | 'DRAG' | 'SETTINGS';
+export type IconType = 'ADD'
+	| 'ADD_SECTION'
+	| 'ADD_CARD'
+	| 'CHECK'
+	| 'EDIT'
+	| 'DELETE'
+	| 'DELETE_SECTION'
+	| 'DRAG'
+	| 'SETTINGS';
 
 
 const getIcon = (
@@ -20,15 +29,17 @@ const getIcon = (
 			case 'ADD':
 				return <AddCircleOutline />
 			case 'ADD_SECTION':
-				return <PostAdd />
+				return <CreateNewFolder />
 			case 'ADD_CARD':
-				return <AddToPhotos />
+				return <NoteAdd />
 			case 'CHECK':
 				return <Check />
 			case 'EDIT':
 				return <Edit />
 			case 'DELETE':
 				return <Delete />
+			case 'DELETE_SECTION':
+				return <FolderDelete />
 			case 'DRAG':
 				return <DragIndicator />
 			case 'SETTINGS':
