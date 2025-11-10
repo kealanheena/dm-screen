@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { trim } from 'lodash';
 
 import {
 	Button,

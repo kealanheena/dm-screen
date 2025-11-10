@@ -32,11 +32,11 @@ export default function CreateNewScreen() {
 			alignItems="center"
 			alignContent="center"
 			justifyContent="center"
-			sx={{ height: '50%'}} 
+			sx={{ height: '50%' }} 
 		>
-			<Map sx={{ fontSize: '5rem'}} color="primary"/>
+			<Map sx={{ fontSize: '5rem' }} color="primary"/>
 			<Typography variant="h5" pb={3}>
-				Opps! looks like you don't have any screens.
+				{"Opps! looks like you don't have any screens."}
 			</Typography>
 			
 			<TextField
@@ -55,5 +55,3 @@ export default function CreateNewScreen() {
 		</Grid>
 	);
 }
-
-// <Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
