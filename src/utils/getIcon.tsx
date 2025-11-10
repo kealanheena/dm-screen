@@ -1,6 +1,17 @@
-import { AddCircleOutline, Check, Delete, DragIndicator, Edit, QuestionMark, Settings } from '@mui/icons-material';
+import {
+	AddCircleOutline,
+	PostAdd,
+	Check,
+	Delete,
+	DragIndicator,
+	Edit,
+	QuestionMark,
+	Settings,
+	AddToPhotos,
+} from '@mui/icons-material';
 
-export type IconType = 'ADD' | 'CHECK' | 'EDIT' | 'DELETE' | 'DRAG' | 'SETTINGS';
+export type IconType = 'ADD' | 'ADD_SECTION' | 'ADD_CARD' | 'CHECK' | 'EDIT' | 'DELETE' | 'DRAG' | 'SETTINGS';
+
 
 const getIcon = (
 	icon: IconType
@@ -8,6 +19,10 @@ const getIcon = (
 		switch (icon) {
 			case 'ADD':
 				return <AddCircleOutline />
+			case 'ADD_SECTION':
+				return <PostAdd />
+			case 'ADD_CARD':
+				return <AddToPhotos />
 			case 'CHECK':
 				return <Check />
 			case 'EDIT':

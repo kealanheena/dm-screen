@@ -94,7 +94,16 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 						{isCustomizing && (
 							<Fragment>
 								<IconButton
-									icon="ADD"
+									icon="ADD_CARD"
+									onClick={() => {}} 
+									variant="icon_only"
+									tooltip="Add card"
+								/>
+
+								<Divider orientation="vertical" variant="middle" flexItem />
+
+								<IconButton
+									icon="ADD_SECTION"
 									onClick={() => {}} 
 									variant="icon_only"
 									tooltip="Add section"
@@ -106,24 +115,10 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 									variant="icon_only"
 									tooltip="Delete section"
 								/>
+
+								<Divider orientation="vertical" variant="middle" flexItem />
 							</Fragment>
 						)}
-
-						<IconButton
-							icon="ADD"
-							onClick={() => {}} 
-							variant="icon_only"
-							tooltip="Add section"
-						/>
-
-						<IconButton
-							icon="DELETE"
-							onClick={() => {}} 
-							variant="icon_only"
-							tooltip="Delete section"
-						/>
-
-						<Divider orientation="vertical" variant="middle" flexItem />
 						
 						<IconButton
 							icon={isCustomizing ? 'CHECK' : 'SETTINGS'}
@@ -135,6 +130,8 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 				)}
 				
 			</Grid>
+
+			<br/>
 
 			{isCustomizing && (
 				<Slider
