@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { getScreens } from "@/actions/screen.action";
 
 import Screen from "./component";
-import ScreenActions from './component/actions/ActionToolbar';
+import ScreenActions from './component/actions';
 
 
 export default async function ScreenPage() {

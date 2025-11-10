@@ -18,7 +18,7 @@ import { Layout } from '@/types';
 import { Add } from '@mui/icons-material';
 
 import IconButton from '@/components/IconButton';
-import TitleDialog from '@/components/TitleDialog';
+import TitleDialog from './TitleDialog';
 
 
 interface ScreenActionsProps {
