@@ -2,16 +2,17 @@ import { getUserByClerkId } from '@/actions/user.action'
 
 export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 
-export type Layout = {
+export interface Layout {
 	id: number;
 	title: string;
-	blocks: Block[];
+	isTemplate: boolean;
+	sections: Section[];
 }
 
-export interface Block {
+export interface Section {
 	id: number;
-	start: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 ; // Using MUIs grid which is made up of 12 sections
-	width: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 ; // the 2 makes it a minWidth of 2 sections
+	start: number;
+	width: number; // the 2 makes it a minWidth of 2 sections
 	cards: Card[];
 }
 

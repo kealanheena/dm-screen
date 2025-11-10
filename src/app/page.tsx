@@ -1,17 +1,13 @@
 import React from "react";
 
-import { getDefaultScreens } from "@/actions/screen.action";
+import { getScreens } from "@/actions/screen.action";
 import Screen from "@/components/Screen";
 
 
 export default async function Home() {
-  const defaultLayouts = await getDefaultScreens();
-
-  console.log({ defaultLayouts });
+  const screens = await getScreens();
 
   return (
-    <Screen
-      layouts={defaultLayouts || []}
-    />
+    <Screen layouts={screens} />
   );
 }

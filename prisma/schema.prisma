@@ -38,7 +38,7 @@ model Screen {
   userId Int
 
   title String
-  isDefault Boolean
+  isTemplate Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

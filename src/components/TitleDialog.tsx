@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { trim } from 'lodash';
 
 import {
 	Button,
@@ -40,7 +41,7 @@ export default function TitleDialog({
 		setIsLoading(true);
 	
 		try {
-			await updateScreen({ id, title });
+			await updateScreen(id, { title });
 
 			refresh();
 			handleClose();

@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { Layout } from '@/types';
 import { Add } from '@mui/icons-material';
+import { createScreen } from "@/actions/screen.action";
 
 import IconButton from './IconButton';
 // import Blocks from './Blocks';
@@ -45,7 +46,7 @@ export default function Screen({ layouts }: ScreenProps) {
 		setSelectedLayout(newLayout);
 	};
 
-	const onClick = () => console.log({ tetsing: 'ste'})
+	const handleCreateClick = () => {};
 
 	return (
 		<Box sx={{ p: 2, height: '100%' }}>
@@ -78,7 +79,7 @@ export default function Screen({ layouts }: ScreenProps) {
 								</MenuItem>
 							))}
 
-							<MenuItem onClick={onClick}>
+							<MenuItem onClick={handleCreateClick}>
 								<Add sx={{ pr: 1, fontSize: 30 }} />
 								Create screen
 							</MenuItem>

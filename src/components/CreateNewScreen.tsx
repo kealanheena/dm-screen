@@ -7,12 +7,23 @@ import {
 	Typography,
 } from '@mui/material';
 import { Map } from '@mui/icons-material';
+import { createScreen } from "@/actions/screen.action";
+import { trim } from 'lodash';
 
 
 export default function CreateNewScreen() {
 	const [title, setTitle] = useState('');
 	
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
+
+	const onClickSubmit = async () => {
+		if (!trim(title)) {
+			return;
+		}
+		
+		await createScreen({ title });
+		setTitle('');
+	};
 
 	return (
 		<Grid 
@@ -29,13 +40,16 @@ export default function CreateNewScreen() {
 			</Typography>
 			
 			<TextField
-				autoFocus
 				onChange={handleChange}
 				label="Title"
 				value={title}
 				sx={{ m: 1 }}
 			/>
-			<Button variant="contained">
+			<Button
+				onClick={onClickSubmit}
+				disabled={!trim(title)}
+				variant="contained"
+			>
 				Create screen
 			</Button>
 		</Grid>
