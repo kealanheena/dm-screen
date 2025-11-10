@@ -12,6 +12,7 @@ import {
 	MenuItem,
 	Select,
 	SelectChangeEvent,
+	Slider,
 } from '@mui/material';
 import { Layout } from '@/types';
 import { Add } from '@mui/icons-material';
@@ -134,6 +135,18 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 				)}
 				
 			</Grid>
+
+			{isCustomizing && (
+				<Slider
+					value={[0, 0]}
+					min={0}
+					max={12}
+					marks
+					aria-label="width slider"
+					valueLabelDisplay="auto"
+					onChange={() => {}}
+				/>
+			)}
 		</Box>
 	);
 }
