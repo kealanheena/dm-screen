@@ -10,6 +10,7 @@ interface IconButtonProps {
 	text?: string;
 	tooltip?: string;
 	variant?: 'icon_plus_text' | 'icon_only' | 'no_icon';
+	disabled?: boolean;
 }
 
 
@@ -19,11 +20,12 @@ const IconButtonComponent = ({
 	text,
 	tooltip,
 	variant = 'icon_plus_text',
+	disabled,
 }: IconButtonProps) => {	
 	if (variant === 'icon_only') {
 		return (
 			<Tooltip title={tooltip}>
-				<IconButton onClick={onClick}>
+				<IconButton onClick={onClick} disabled={disabled}>
 					{getIcon(icon)}
 				</IconButton>
 			</Tooltip>
@@ -31,7 +33,7 @@ const IconButtonComponent = ({
 	}
 
 	return (
-		<Button onClick={onClick} variant="outlined">
+		<Button onClick={onClick} variant="outlined" disabled={disabled}>
 			<Typography sx={{ p: variant !== 'no_icon' ? 0 : 0.5 }}>
 				{text}
 			</Typography>

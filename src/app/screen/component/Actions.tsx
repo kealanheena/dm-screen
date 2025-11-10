@@ -1,10 +1,11 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { compact, find, head, map, get }  from 'lodash';
 
 import {
 	Box,
+	Divider,
 	Grid,
 	FormControl,
 	InputLabel,
@@ -88,13 +89,41 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 				</div>
 
 				{selectedLayout && (
-					<Grid>
+					<Grid container>
+						{isCustomizing && (
+							<Fragment>
+								<IconButton
+									icon="ADD"
+									onClick={() => {}} 
+									variant="icon_only"
+									tooltip="Add section"
+								/>
+
+								<IconButton
+									icon="DELETE"
+									onClick={() => {}} 
+									variant="icon_only"
+									tooltip="Delete section"
+								/>
+							</Fragment>
+						)}
+
 						<IconButton
 							icon="ADD"
 							onClick={() => {}} 
 							variant="icon_only"
 							tooltip="Add section"
 						/>
+
+						<IconButton
+							icon="DELETE"
+							onClick={() => {}} 
+							variant="icon_only"
+							tooltip="Delete section"
+						/>
+
+						<Divider orientation="vertical" variant="middle" flexItem />
+						
 						<IconButton
 							icon={isCustomizing ? 'CHECK' : 'SETTINGS'}
 							onClick={handleCustomizeClick} 

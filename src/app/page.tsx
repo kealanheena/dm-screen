@@ -1,20 +1,6 @@
 import React, { Fragment } from "react";
 
-import {
-	Box,
-	Grid,
-	FormControl,
-	InputLabel,
-	MenuItem,
-	Select,
-	SelectChangeEvent,
-} from '@mui/material';
-
 import { getScreens } from "@/actions/screen.action";
-import Screen from "@/components/Screen";
-import ScreenActions from '@/components/ScreenActions';
-
-import { Layout } from "@/types";
 
 
 export default async function Home() {
@@ -22,9 +8,7 @@ export default async function Home() {
 
   return (
     <Fragment>
-      <ScreenActions screens={screens} />
-
-      <Screen screens={screens} />
+      <h1>Test</h1>
     </Fragment>
   );
 }
