@@ -20,7 +20,7 @@ import { Add } from '@mui/icons-material';
 
 import IconButton from '@/components/IconButton';
 import TitleDialog from './TitleDialog';
-import { createSection } from '@/actions/section.action';
+import { createSection, deleteSection } from '@/actions/section.action';
 
 
 interface ScreenActionsProps {
@@ -55,6 +55,16 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 		}
 
 		await createSection(selectedLayout.id, { start: 0, width: 12 });
+
+		refresh();
+	}
+
+	const handleDeleteSectionClick = async () => {
+		if (!selectedLayout) {
+			return;
+		}
+
+		await deleteSection(selectedLayout.id);
 
 		refresh();
 	}
@@ -127,7 +137,7 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 
 								<IconButton
 									icon="DELETE_SECTION"
-									onClick={() => {}} 
+									onClick={handleDeleteSectionClick} 
 									variant="icon_only"
 									tooltip="Delete section"
 								/>

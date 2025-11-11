@@ -30,5 +30,16 @@ export async function createSection(screenId: number, data: Pick<Section, "start
 	}
 
 	return;
-	
+}
+
+export async function deleteSection(sectionId: number) {
+	const userId = await getDbUserId();
+
+	if (!userId) {
+		return;
+	}
+
+	return prisma.section.delete({
+		where: { id: sectionId }
+	});	
 }
