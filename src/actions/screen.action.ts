@@ -5,6 +5,26 @@ import prisma from "@/lib/prisma";
 import { Screen } from "@/types";
 import { getDbUserId } from './user.action';
 
+const select = {
+	id: true,
+	title: true,
+	isTemplate: true,
+	sections: {
+		select: {
+			id: true,
+			start: true,
+			width: true,
+			cards: {
+				select: {
+					title: true,
+					height: true,
+				}
+			},
+		}
+	},
+}
+
+
 export async function createScreen(data: Pick<Screen, "title">) {
 	const userId = await getDbUserId();
 
@@ -27,24 +47,14 @@ export async function getScreens(
 ) {
  return prisma.screen.findMany({
 		where,
-		select: {
-			id: true,
-			title: true,
-			isTemplate: true,
-			sections: {
-				select: {
-					id: true,
-					start: true,
-					width: true,
-					cards: {
-						select: {
-							title: true,
-							height: true,
-						}
-					},
-				}
-			},
-		}
+		select,
+	});
+}
+
+export async function getScreen(id: number) {
+ return prisma.screen.findUnique({
+		where: { id },
+		select,
 	});
 }
 

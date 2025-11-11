@@ -2,6 +2,7 @@
 
 import React, { useState, Fragment } from 'react';
 import { compact, find, head, map, get }  from 'lodash';
+import { useRouter } from 'next/navigation';
 
 import {
 	Box,
@@ -19,6 +20,7 @@ import { Add } from '@mui/icons-material';
 
 import IconButton from '@/components/IconButton';
 import TitleDialog from './TitleDialog';
+import { createSection } from '@/actions/section.action';
 
 
 interface ScreenActionsProps {
@@ -26,6 +28,8 @@ interface ScreenActionsProps {
 }
 
 export default function ScreenActions({ screens }: ScreenActionsProps) {
+	const { refresh } = useRouter();
+
 	const [selectedLayout, setSelectedLayout] = useState<Screen | undefined>(head(screens));
 	const [isCustomizing, setIsCustomizing] = useState(false);
 	
@@ -45,7 +49,15 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 		setSelectedLayout(newLayout);
 	};
 
-	const handleCreateClick = () => {};
+	const handleCreateSectionClick = async () => {
+		if (!selectedLayout) {
+			return;
+		}
+
+		await createSection(selectedLayout.id, { start: 0, width: 12 });
+
+		refresh();
+	}
 
 	const handleCustomizeClick = () =>  setIsCustomizing(!isCustomizing);
 
@@ -77,7 +89,7 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 								</MenuItem>
 							))}
 
-							<MenuItem onClick={handleCreateClick}>
+							<MenuItem onClick={() => {}}>
 								<Add sx={{ pr: 1, fontSize: 30 }} />
 								Create screen
 							</MenuItem>
@@ -93,18 +105,22 @@ export default function ScreenActions({ screens }: ScreenActionsProps) {
 					<Grid container>
 						{isCustomizing && (
 							<Fragment>
-								<IconButton
-									icon="ADD_CARD"
-									onClick={() => {}} 
-									variant="icon_only"
-									tooltip="Add card"
-								/>
+								{selectedLayout?.sections?.length > 0 && (
+									<Fragment>
+										<IconButton
+											icon="ADD_CARD"
+											onClick={() => {}} 
+											variant="icon_only"
+											tooltip="Add card"
+										/>
 
-								<Divider orientation="vertical" variant="middle" flexItem />
+										<Divider orientation="vertical" variant="middle" flexItem />
+									</Fragment>
+								)}
 
 								<IconButton
 									icon="ADD_SECTION"
-									onClick={() => {}} 
+									onClick={handleCreateSectionClick} 
 									variant="icon_only"
 									tooltip="Add section"
 								/>

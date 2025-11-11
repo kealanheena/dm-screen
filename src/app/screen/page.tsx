@@ -7,7 +7,9 @@ import ScreenActions from './component/actions';
 
 
 export default async function ScreenPage() {
-	const screens = await getScreens({ isTemplate: false });
+	const screens = await getScreens();
+
+	console.log(screens)
 
 	return (
 		<Fragment>

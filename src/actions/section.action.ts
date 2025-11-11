@@ -1,9 +1,11 @@
 "use server";
 
-import { trim } from 'lodash';
 import prisma from "@/lib/prisma";
 import { Section } from "@/types";
+
 import { getDbUserId } from './user.action';
+import { getScreen } from './screen.action'
+
 
 export async function createSection(screenId: number, data: Pick<Section, "start" | "width">) {
 	const userId = await getDbUserId();
@@ -12,17 +14,21 @@ export async function createSection(screenId: number, data: Pick<Section, "start
 		return;
 	}
 
-	// we need to get the screen
-	// check what 
+	const screen = await getScreen(screenId);
+
+	if (!screen) {
+		return;
+	}
+
+	if (screen.sections.length <= 0) {
+		return prisma.section.create({
+			data: {
+				screenId,
+				...data,
+			}
+		});
+	}
 
 	return;
-
-	// const { start, width } = data;
-
-	// return prisma.screen.create({
-	// 	data: {
-	// 		title: trim(title),
-	// 		userId,
-	// 	}
-	// });
+	
 }
