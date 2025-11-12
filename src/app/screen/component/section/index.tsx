@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { get } from 'lodash';
+import React from 'react';
 
 import {
 	Card,
@@ -7,19 +6,19 @@ import {
 	Grid,
 	Typography,
 } from '@mui/material';
-import { Card as CardType } from '@/types';
-import { ScreenContext } from '@/app/context';
+// import { Card as CardType } from '@/types';
+// import { ScreenContext } from '@/app/context';
 
 // import LayoutCard from './LayoutCard';
 
 
-interface SectionProps { 
-	cards: CardType;
-}
+// interface SectionProps { 
+// 	cards: CardType;
+// }
 
 export default function Section({
-	cards,
-}: SectionProps) {
+	// cards,
+}) {
   return (
 		<Card>
 			<CardContent>

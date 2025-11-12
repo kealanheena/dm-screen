@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { find, head, map }  from 'lodash';
 
-import { Box, Grid, SelectChangeEvent, } from '@mui/material';
+import { Grid, SelectChangeEvent, } from '@mui/material';
 import { Screen as ScreenType, Section as SectionType } from '@/types';
 
 // import Blocks from './Blocks';

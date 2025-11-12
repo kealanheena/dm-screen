@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useState, Fragment, useContext } from 'react';
-import { compact, head, map, get }  from 'lodash';
+import React, { Fragment, useContext } from 'react';
+import { compact, map, get }  from 'lodash';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -14,7 +14,6 @@ import {
 	Select,
 	Slider,
 } from '@mui/material';
-import { Screen } from '@/types';
 import { Add } from '@mui/icons-material';
 
 import IconButton from '@/components/IconButton';
@@ -23,7 +22,7 @@ import { createSection, deleteSection } from '@/actions/section.action';
 import { ScreenContext } from '@/app/context';
 
 interface ScreenActionsProps {
-	handleChangeScreen: any;
+	handleChangeScreen: any; // TODO: find our what type this shoud be?
 	toggleIsCutomizing: React.MouseEventHandler<HTMLButtonElement>;
 }
 export default function ScreenActions({ 
