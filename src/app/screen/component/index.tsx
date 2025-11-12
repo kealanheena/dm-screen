@@ -84,20 +84,20 @@ export default function Screen({ screens }: ScreenProps) {
 				handleChangeScreen={handleChangeScreen}
 				toggleIsCutomizing={toggleIsCutomizing}
 			/>
-
+			<Grid container>
 				{map(currentScreen?.sections || [], (section) => (
 					<Grid
 						key={section.id}
 						size={section.width}
-						sx={{ ...sx, p: 1, mt: 1, mr: 2, ml: 2, minHeight: '100%' }}
+						sx={{ ...sx, p: 1, minHeight: '100%' }}
 						onClick={handleChangeSection(section.id)}
 					>
 						<Section section={section} />
 					</Grid>
 				))}
+			</Grid>
 
-				{!currentScreen && <CreateScreen />}
-			{/* </Box> */}
+			{!currentScreen && <CreateScreen />}
 		</ScreenContext.Provider>
 	);
 }

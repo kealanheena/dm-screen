@@ -45,9 +45,16 @@ export async function createScreen(data: Pick<Screen, "title">) {
 export async function getScreens(
 	where?: Partial<Pick<Screen, 'title' | 'isTemplate'>>
 ) {
- return prisma.screen.findMany({
+	return await prisma.screen.findMany({
 		where,
-		select,
+		include: {
+			sections: {
+				orderBy: {
+					start: 'asc'
+				},
+			}
+			
+		}
 	});
 }
 

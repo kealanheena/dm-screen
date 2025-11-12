@@ -146,7 +146,7 @@ export default function ScreenActions({
 
 			{isCustomizing && (
 				<Slider
-					value={[start, width]}
+					value={[start, start + width]}
 					min={0}
 					max={12}
 					marks
