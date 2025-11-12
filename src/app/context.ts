@@ -2,11 +2,12 @@
 
 import { createContext } from "react";
 
-import { Screen } from "@/types";
+import { Screen, Section } from "@/types";
 
 interface ScreenContextType {
 	screens: Screen[];
 	currentScreen: Screen;
+	currentSection: Section;
 	isCustomizing: boolean;
 }
 
