@@ -56,22 +56,26 @@ export default function Screen({ screens }: ScreenProps) {
 	const toggleIsCutomizing = () => {
 		setIsCustomizing(!isCustomizing)
 	};
-
+	
 	const sx = isCustomizing ? {
 		'&:hover': { cursor: 'pointer', p: 0.5 },
-		border: 2,
-		borderRadius: 2,
-		borderColor: 'primary.main',
-		transition: "transform 0.15s ease-in-out",
-	} : {
-		'&:hover': { cursor: 'pointer' },
 		borderColor: '#c4c4c4',
 		borderWidth: 1,
+		borderRadius: 2,
 		borderStyle: 'dashed',
+		transition: "transform 0.15s ease-in-out",
+		height: '100%'
+	} : {
+		'&:hover': { cursor: 'pointer' },
 		backgroundColor: 'transparent',
-		height: '100%',
-
+		height: '100%'
 	};
+
+	const selectedSx = {
+		...sx,
+		border: 2,
+		borderColor: 'primary.main',
+	}
 
 	return (
 		<ScreenContext.Provider value={{
@@ -89,7 +93,7 @@ export default function Screen({ screens }: ScreenProps) {
 					<Grid
 						key={section.id}
 						size={section.width}
-						sx={{ ...sx, p: 1, minHeight: '100%' }}
+						sx={currentSection.id === section.id ? selectedSx : sx}
 						onClick={handleChangeSection(section.id)}
 					>
 						<Section section={section} />
