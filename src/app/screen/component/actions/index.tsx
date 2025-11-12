@@ -35,26 +35,25 @@ export default function ScreenActions({
 
 	const screens = get(context, 'screens');
 	const currentScreen = get(context, 'currentScreen');
+	const { start, width } = get(context, 'currentSection', { start: 0, width: 0 });
 	const isCustomizing = get(context, 'isCustomizing');
 
-	const [selectedLayout, setSelectedLayout] = useState<Screen | undefined>(head(screens));
-
 	const handleCreateSectionClick = async () => {
-		if (!selectedLayout) {
+		if (!currentScreen) {
 			return;
 		}
 
-		await createSection(selectedLayout.id, { start: 0, width: 12 });
+		await createSection(currentScreen.id, { start: 0, width: 12 });
 
 		refresh();
 	}
 
 	const handleDeleteSectionClick = async () => {
-		if (!selectedLayout) {
+		if (!currentScreen) {
 			return;
 		}
 
-		await deleteSection(selectedLayout.id);
+		await deleteSection(currentScreen.id);
 
 		refresh();
 	}
@@ -73,8 +72,9 @@ export default function ScreenActions({
 							labelId="current-dm-screen-label"
 							id="dm-screen-select"
 							label="Current dm screen"
-							value={get(selectedLayout, 'id', 0)}
+							value={get(currentScreen, 'id', 0)}
 							onChange={handleChangeScreen}
+							sx={{ p: 0 }}
 						>
 							<MenuItem disabled value={0}><em>Choose a dm screen</em></MenuItem>
 
@@ -94,16 +94,16 @@ export default function ScreenActions({
 						</Select>
 					</FormControl>
 
-					{selectedLayout?.id && (
-						<TitleDialog id={selectedLayout.id} title={selectedLayout.title} />
+					{currentScreen?.id && (
+						<TitleDialog id={currentScreen.id} title={currentScreen.title} />
 					)}
 				</div>
 
-				{selectedLayout && (
+				{currentScreen && (
 					<Grid container>
 						{isCustomizing && (
 							<Fragment>
-								{selectedLayout?.sections?.length > 0 && (
+								{currentScreen?.sections?.length > 0 && (
 									<Fragment>
 										<IconButton
 											icon="ADD_CARD"
@@ -145,11 +145,9 @@ export default function ScreenActions({
 				
 			</Grid>
 
-			<br/>
-
 			{isCustomizing && (
 				<Slider
-					value={[0, 0]}
+					value={[start, width]}
 					min={0}
 					max={12}
 					marks

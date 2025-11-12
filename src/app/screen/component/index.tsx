@@ -1,16 +1,18 @@
 "use client"
 
 import React, { useState } from 'react';
-import { find, head }  from 'lodash';
+import { find, head, map }  from 'lodash';
 
-import { Box, Paper, SelectChangeEvent, } from '@mui/material';
-import { Screen as ScreenType } from '@/types';
+import { Box, Grid, SelectChangeEvent, } from '@mui/material';
+import { Screen as ScreenType, Section as SectionType } from '@/types';
 
 // import Blocks from './Blocks';
 // <Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
 import CreateScreen from './actions/CreateScreen';
 import ScreenActions from './actions';
 import { ScreenContext } from '@/app/context';
+
+import Section from './section';
 
 
 interface ScreenProps {
@@ -22,8 +24,15 @@ export default function Screen({ screens }: ScreenProps) {
 	const [currentScreen, setCurrentScreen] = useState<ScreenType | undefined>(
 		head(screens)
 	);
+	const [currentSection, setCurrentSection] = useState<SectionType | undefined>(
+		head(head(screens)?.sections)
+	);
 
 	const handleChangeScreen = (event: SelectChangeEvent<number>) => {
+		if (!isCustomizing) {
+			return;
+		}
+
 		const currentScreenId = event.target.value;
 		if (currentScreenId) {
 			// Add toast notification
@@ -37,13 +46,37 @@ export default function Screen({ screens }: ScreenProps) {
 		}
 
 		setCurrentScreen(newScreen);
+		setCurrentSection(head(newScreen.sections));
 	};
 
-	const toggleIsCutomizing = () => setIsCustomizing(!isCustomizing);
+	const handleChangeSection = (sectionId: number) => () => setCurrentSection(
+		find(currentScreen?.sections, ['id', sectionId])
+	);
+
+	const toggleIsCutomizing = () => {
+		setIsCustomizing(!isCustomizing)
+	};
+
+	const sx = isCustomizing ? {
+		'&:hover': { cursor: 'pointer', p: 0.5 },
+		border: 2,
+		borderRadius: 2,
+		borderColor: 'primary.main',
+		transition: "transform 0.15s ease-in-out",
+	} : {
+		'&:hover': { cursor: 'pointer' },
+		borderColor: '#c4c4c4',
+		borderWidth: 1,
+		borderStyle: 'dashed',
+		backgroundColor: 'transparent',
+		height: '100%',
+
+	};
 
 	return (
 		<ScreenContext.Provider value={{
 			screens,
+			currentSection,
 			currentScreen,
 			isCustomizing,
 		}}>
@@ -52,20 +85,19 @@ export default function Screen({ screens }: ScreenProps) {
 				toggleIsCutomizing={toggleIsCutomizing}
 			/>
 
-			<Box sx={{ p: 2, height: '100%' }}>
-				{head(screens) ? (
-					<Paper
-						elevation={1}
-						style={{
-							border: '2px #D4D4D4 dashed',
-							backgroundColor: 'transparent',
-							height: '100%',
-						}}
+				{map(currentScreen?.sections || [], (section) => (
+					<Grid
+						key={section.id}
+						size={section.width}
+						sx={{ ...sx, p: 1, mt: 1, mr: 2, ml: 2, minHeight: '100%' }}
+						onClick={handleChangeSection(section.id)}
 					>
-						test
-					</Paper>
-				) : <CreateScreen />}
-			</Box>
+						<Section section={section} />
+					</Grid>
+				))}
+
+				{!currentScreen && <CreateScreen />}
+			{/* </Box> */}
 		</ScreenContext.Provider>
 	);
 }

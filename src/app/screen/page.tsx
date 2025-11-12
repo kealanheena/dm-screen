@@ -8,9 +8,5 @@ import Screen from "./component";
 export default async function ScreenPage() {
 	const screens = await getScreens() || [];
 
-	return (
-		<Screen
-			screens={screens}
-		/>
-	);
+	return <Screen screens={screens} />;
 }

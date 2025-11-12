@@ -62,6 +62,13 @@ export const themeOptions: ThemeOptions = {
           minWidth: 250
         }
       }
+    },
+    MuiSlider: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        }
+      }
     }
   },
 };
