@@ -56,26 +56,6 @@ export default function Screen({ screens }: ScreenProps) {
 	const toggleIsCutomizing = () => {
 		setIsCustomizing(!isCustomizing)
 	};
-	
-	const sx = isCustomizing ? {
-		'&:hover': { cursor: 'pointer', p: 0.5 },
-		borderColor: '#c4c4c4',
-		borderWidth: 2,
-		borderRadius: 2,
-		borderStyle: 'dashed',
-		transition: "transform 0.15s ease-in-out",
-		height: '100%'
-	} : {
-		'&:hover': { cursor: 'pointer' },
-		backgroundColor: 'transparent',
-		height: '100%'
-	};
-
-	const selectedSx = {
-		...sx,
-		borderStyle: 'solid',
-		borderColor: 'primary.main',
-	}
 
 	return (
 		<ScreenContext.Provider value={{
@@ -89,18 +69,7 @@ export default function Screen({ screens }: ScreenProps) {
 				toggleIsCutomizing={toggleIsCutomizing}
 			/>
 			<Grid container sx={{ m: 2 }} >
-				{map(currentScreen?.sections || [], (section) => (
-						<Grid
-							key={section.id}
-							size={section.width}
-							sx={{ p: 0.5 }}
-							onClick={handleChangeSection(section.id)}
-						>
-							<Box sx={currentSection.id === section.id ? selectedSx : sx}>
-								<Section section={section} />
-							</Box>	
-						</Grid>
-				))}
+				{map(currentScreen?.sections || [], (section) => <Section section={section} />)}
 			</Grid>
 
 			{!currentScreen && <CreateScreen />}
