@@ -9,13 +9,13 @@ import {
 	DialogActions,
 	DialogContent,
 	DialogTitle,
+	IconButton,
 	TextField,
 } from '@mui/material';
 
 import { updateScreen } from '@/actions/screen.action';
 import { DMScreenType } from '@/types';
-
-import IconButton from '@/components/IconButton';
+import { Edit } from '@mui/icons-material';
 
 
 interface EditTitleDialog {
@@ -53,11 +53,9 @@ export default function EditTitleDIalog({ screen }: EditTitleDialog) {
 
 	return (
 		<Fragment>
-			<IconButton
-				icon="EDIT"
-				onClick={handleOpen} 
-				variant="icon_only"
-			/>
+			<IconButton onClick={handleOpen}>
+				<Edit />
+			</IconButton>
 
 			<Dialog
 				open={open}
