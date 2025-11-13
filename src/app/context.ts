@@ -5,7 +5,7 @@ import { createContext } from "react";
 import { Screen, Section } from "@/types";
 
 interface ScreenContextType {
-	screens: Screen[];
+	screens: Screen[] | undefined;
 	currentScreen: Screen;
 	currentSection: Section;
 	isCustomizing: boolean;

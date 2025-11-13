@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { find, head, map }  from 'lodash';
 
-import { Grid, SelectChangeEvent, } from '@mui/material';
+import { Box, Grid, SelectChangeEvent, } from '@mui/material';
 import { Screen as ScreenType, Section as SectionType } from '@/types';
 
 // import Blocks from './Blocks';
@@ -60,7 +60,7 @@ export default function Screen({ screens }: ScreenProps) {
 	const sx = isCustomizing ? {
 		'&:hover': { cursor: 'pointer', p: 0.5 },
 		borderColor: '#c4c4c4',
-		borderWidth: 1,
+		borderWidth: 2,
 		borderRadius: 2,
 		borderStyle: 'dashed',
 		transition: "transform 0.15s ease-in-out",
@@ -73,7 +73,7 @@ export default function Screen({ screens }: ScreenProps) {
 
 	const selectedSx = {
 		...sx,
-		border: 2,
+		borderStyle: 'solid',
 		borderColor: 'primary.main',
 	}
 
@@ -88,16 +88,18 @@ export default function Screen({ screens }: ScreenProps) {
 				handleChangeScreen={handleChangeScreen}
 				toggleIsCutomizing={toggleIsCutomizing}
 			/>
-			<Grid container>
+			<Grid container sx={{ m: 2 }} >
 				{map(currentScreen?.sections || [], (section) => (
-					<Grid
-						key={section.id}
-						size={section.width}
-						sx={currentSection.id === section.id ? selectedSx : sx}
-						onClick={handleChangeSection(section.id)}
-					>
-						<Section section={section} />
-					</Grid>
+						<Grid
+							key={section.id}
+							size={section.width}
+							sx={{ p: 0.5 }}
+							onClick={handleChangeSection(section.id)}
+						>
+							<Box sx={currentSection.id === section.id ? selectedSx : sx}>
+								<Section section={section} />
+							</Box>	
+						</Grid>
 				))}
 			</Grid>
 
