@@ -12,10 +12,12 @@ import {
 } from '@mui/material';
 import { Add } from '@mui/icons-material';
 
+import { DMScreenType } from '@/types';
+
 
 interface SelectScreen {
-	screen: Screen;
-	screens: Screen[];
+	screen: DMScreenType;
+	screens: DMScreenType[];
 }
 
 const SelectScreen = ({ screen, screens }: SelectScreen) => {

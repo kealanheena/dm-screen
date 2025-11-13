@@ -1,9 +1,10 @@
 import React from 'react';
+import { find } from 'lodash';
 
-import { getScreenById, getScreens } from '@/actions/screen.action';
+import { getScreens } from '@/actions/screen.action';
 import { Box, Grid } from '@mui/material'; 
 
-import { Screen } from '@/types';
+import { DMScreenType } from '@/types';
 
 import SelectScreen from './components/SelectScreen';
 import EditTitleDIalog from './components/EditTitleDIalog';
@@ -12,9 +13,11 @@ interface ScreenActionsPageProps {
 	id: number;
 }
 
+const emptyScreen = { id: 0, title: '' }
+
 const ScreenActionsPage = async ({ id }: ScreenActionsPageProps) => {
-	const screen: Screen = await getScreenById(id);
-	const screens: Screen[] = await getScreens();
+	const screens: DMScreenType[] = await getScreens();
+	const screen: DMScreenType = find(screens, ['id', id]) || emptyScreen;
 
 	return (
 		<Box sx={{ pl: 2, pt: 2, pr: 2 }}>

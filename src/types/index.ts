@@ -2,21 +2,21 @@ import { getUserByClerkId } from '@/actions/user.action'
 
 export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 
-export interface Screen {
+export interface DMScreenType {
 	id: number;
 	title: string;
 	// isTemplate: boolean;
 	// sections: Section[];
 }
 
-export interface Section {
+export interface SectionType {
 	id: number;
 	start: number;
 	width: number;
-	cards: Card[];
+	cards: CardType[];
 }
 
-export interface Card {
+export interface CardType {
 	id: number;
 	title: string;
 	height?: number;

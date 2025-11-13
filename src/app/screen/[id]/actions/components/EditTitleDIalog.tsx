@@ -13,13 +13,13 @@ import {
 } from '@mui/material';
 
 import { updateScreen } from '@/actions/screen.action';
-import { Screen } from '@/types';
+import { DMScreenType } from '@/types';
 
 import IconButton from '@/components/IconButton';
 
 
 interface EditTitleDialog {
-	screen: Screen;
+	screen: DMScreenType;
 }
 
 export default function EditTitleDIalog({ screen }: EditTitleDialog) {
