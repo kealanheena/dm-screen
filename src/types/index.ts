@@ -5,8 +5,8 @@ export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 export interface Screen {
 	id: number;
 	title: string;
-	isTemplate: boolean;
-	sections: Section[];
+	// isTemplate: boolean;
+	// sections: Section[];
 }
 
 export interface Section {
