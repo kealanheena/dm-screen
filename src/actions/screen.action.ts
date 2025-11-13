@@ -1,8 +1,10 @@
 "use server";
 
 import { trim } from 'lodash';
+
 import prisma from "@/lib/prisma";
 import { Screen } from "@/types";
+
 import { getDbUserId } from './user.action';
 
 const select = {
@@ -42,23 +44,16 @@ export async function createScreen(data: Pick<Screen, "title">) {
 	});
 }
 
-export async function getScreens(
-	where?: Partial<Pick<Screen, 'title' | 'isTemplate'>>
-) {
+export async function getScreens() {
 	return await prisma.screen.findMany({
-		where,
-		include: {
-			sections: {
-				orderBy: {
-					start: 'asc'
-				},
-			}
-			
+		select: {
+			id: true,
+			title: true,
 		}
 	});
 }
 
-export async function getScreen(id: number) {
+export async function getScreenById(id: number) {
  return prisma.screen.findUnique({
 		where: { id },
 		select,
