@@ -1,14 +1,15 @@
 "use server";
 
+import { map } from "lodash";
+
 import prisma from "@/lib/prisma";
-import { Section } from "@/types";
+import { SectionType } from "@/types";
 
 import { getDbUserId } from './user.action';
-import { getScreen } from './screen.action'
-import { map, orderBy } from "lodash";
+import { getScreenById } from './screen.action'
 
 
-export async function createSection(screenId: number, data: Pick<Section, "start" | "width">) {
+export async function createSection(screenId: number, data: Pick<SectionType, "start" | "width">) {
 	const userId = await getDbUserId();
 
 	console.log('userId ', userId);
@@ -17,7 +18,7 @@ export async function createSection(screenId: number, data: Pick<Section, "start
 		return;
 	}
 
-	const screen = await getScreen(screenId);
+	const screen = await getScreenById(screenId);
 
 	console.log('screen ', screen);
 
@@ -36,7 +37,7 @@ export async function createSection(screenId: number, data: Pick<Section, "start
 
 	const width = 12 / newTotalSections;
 
-	const tasks = map(screen.sections, async (section: Section) => {
+	const tasks = map(screen.sections, async (section: SectionType) => {
 		await prisma.section.update({
 			where: { id: section.id },
 			data: {
