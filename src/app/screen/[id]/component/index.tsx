@@ -23,7 +23,6 @@ interface ScreenProps {
 }
 
 export default function Screen({ screen }: ScreenProps) {
-
 	const { isCustomizing, selectedSection } = useContext(ScreenContext);
 
 	return (	

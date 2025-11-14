@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { capitalize } from 'lodash';
+import { useParams, useRouter } from 'next/navigation';
 
 import { IconButton, Tooltip, IconButtonProps } from '@mui/material';
-
 import { PlaylistAdd, PlaylistRemove } from '@mui/icons-material';
-import { useParams, useRouter } from 'next/navigation';
+
 import { createSection, deleteSection } from '@/actions/section.action';
+import { ScreenContext } from '@/app/context';
 
 interface SectionButtonProps extends IconButtonProps {
   sectionAction: 'ADD' | 'DELETE';
@@ -14,6 +15,7 @@ interface SectionButtonProps extends IconButtonProps {
 const SectionButton = ({ sectionAction, ...props }: SectionButtonProps) => {
 	const { id } = useParams();
 	const { refresh } = useRouter();
+	const { selectedSection } = useContext(ScreenContext);
 
 	const sectionActionLowercase = capitalize(sectionAction);
 
@@ -22,7 +24,13 @@ const SectionButton = ({ sectionAction, ...props }: SectionButtonProps) => {
 		{ start: 0, width: 12 }
 	);
 
-	const handleDeleteSection = async () => deleteSection(Number(id));
+	const handleDeleteSection = async () => {
+		if (!selectedSection) {
+			return;
+		}
+
+		await deleteSection(selectedSection.id);
+	};
 
 	return (
 		<Tooltip title={`${sectionActionLowercase} section`}>

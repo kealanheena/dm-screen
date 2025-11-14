@@ -37,11 +37,11 @@ export async function createSection(screenId: number, data: Pick<SectionType, "s
 
 	const width = 12 / newTotalSections;
 
-	const tasks = map(screen.sections, async (section: SectionType) => {
+	const tasks = map(screen.sections, async (section: SectionType, index) => {
 		await prisma.section.update({
 			where: { id: section.id },
 			data: {
-				start: start,
+				start: width * index,
 				width,
 			}
 		});
@@ -60,14 +60,18 @@ export async function createSection(screenId: number, data: Pick<SectionType, "s
 	});
 }
 
-export async function deleteSection(sectionId: number) {
+export async function deleteSection(id: number) {
 	const userId = await getDbUserId();
 
 	if (!userId) {
 		return;
 	}
 
+	console.log({ id })
+
+	const test =  await prisma.section.findUnique({ where: { id }});
+
 	return prisma.section.delete({
-		where: { id: sectionId }
-	});	
+		where: { id }
+	});
 }

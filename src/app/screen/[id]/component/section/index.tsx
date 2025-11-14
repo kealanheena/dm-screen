@@ -54,7 +54,7 @@ export default function Section({ section }: SectionProps) {
 					<CardContent>
 						<Grid container flexDirection="column">
 								<Typography>
-									{/* {card.title} */} Test
+									ID: {section.id}
 								</Typography>
 
 							<Grid>
