@@ -1,14 +1,18 @@
 "use client"
 
 import React, { Fragment, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { Divider, Grid, IconButton } from '@mui/material'; 
 import { AddBox, DisabledByDefault, Settings } from '@mui/icons-material';
 import SectionButton from '@/components/SectionButton';
+import { useParams } from 'next/navigation';
 
 
-const SectionButtons = () => {
+const CustomizationModeButtons = () => {
 	const [isCustomizing, setIsCustomizing] = useState(false);
+
+	const { id } = useParams();
 
 	return (
 		<Grid container>
@@ -38,4 +42,4 @@ const SectionButtons = () => {
 	)
 }
 
-export default SectionButtons;
+export default CustomizationModeButtons;
