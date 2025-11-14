@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useContext } from 'react';
-import { compact, map, get }  from 'lodash';
-import { redirect } from 'next/navigation'
+import React, { useEffect, useState } from 'react';
+import { find, map }  from 'lodash';
+import { redirect, RedirectType, useParams } from 'next/navigation'
 
 import {
 	FormControl,
@@ -16,12 +16,12 @@ import { DMScreenType } from '@/types';
 
 
 interface SelectScreen {
-	screen: DMScreenType;
 	screens: DMScreenType[];
 }
 
-const SelectScreen = ({ screen, screens }: SelectScreen) => {
-	// const handleOnClickCreateScreen = () => {};
+const SelectScreen = ({ screens }: SelectScreen) => {
+	const { id } = useParams();
+
 
 	return (
 		<FormControl>
@@ -30,11 +30,11 @@ const SelectScreen = ({ screen, screens }: SelectScreen) => {
 				labelId="current-dm-screen-label"
 				id="dm-screen-select"
 				label="Current dm screen"
-				value={screen.id}
-				onChange={(event) => redirect(`screen/${event.target.value}`)}
+				value={id}
+				onChange={(event) => redirect(`${event.target.value}`, RedirectType.replace)}
 				sx={{ p: 0 }}
 			>
-				<MenuItem disabled value={0}><em>Choose a dm screen</em></MenuItem>
+				<MenuItem disabled><em>Choose a dm screen</em></MenuItem>
 
 				{map(screens, ({ id, title }) => (
 					<MenuItem key={`screen_${id}`} value={id}>
