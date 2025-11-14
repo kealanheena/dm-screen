@@ -2,12 +2,11 @@
 
 import { createContext } from "react";
 
-import { Screen, Section } from "@/types";
+import { DMScreenType, SectionType } from "@/types";
 
 interface ScreenContextType {
-	screens: Screen[] | undefined;
-	currentScreen: Screen;
-	currentSection: Section;
+	screens: DMScreenType[];
+	currentSection: SectionType;
 	isCustomizing: boolean;
 }
 

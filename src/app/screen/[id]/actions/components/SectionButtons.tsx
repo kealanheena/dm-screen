@@ -3,7 +3,8 @@
 import React, { Fragment, useState } from 'react';
 
 import { Divider, Grid, IconButton } from '@mui/material'; 
-import { AddBox, DisabledByDefault, PlaylistAdd, PlaylistRemove, Settings } from '@mui/icons-material';
+import { AddBox, DisabledByDefault, Settings } from '@mui/icons-material';
+import SectionButton from '@/components/SectionButton';
 
 
 const SectionButtons = () => {
@@ -13,9 +14,7 @@ const SectionButtons = () => {
 		<Grid container>
 			{isCustomizing && (
 				<Fragment>
-					<IconButton onClick={() => {}}>
-						<PlaylistAdd />
-					</IconButton>
+					<SectionButton type="ADD" />
 	
 					<IconButton disabled onClick={() => {}}>
 						<AddBox />
@@ -23,9 +22,7 @@ const SectionButtons = () => {
 
 					<Divider orientation="vertical" variant="middle" flexItem />
 
-					<IconButton color="error" onClick={() => {}}>
-						<PlaylistRemove />
-					</IconButton>
+					<SectionButton type="DELETE" />
 
 					<IconButton disabled color="error" onClick={() => {}}>
 						<DisabledByDefault />
