@@ -19,9 +19,7 @@ interface SectionProps {
 }
 
 export default function Section({ section }: SectionProps) {
-	const context = useContext(ScreenContext);
-
-	const isCustomizing = get(context, 'isCustomizing');
+	const { isCustomizing, selectedSection, setSelectedSection } = useContext(ScreenContext);
 
 	const sx = isCustomizing ? {
 		'&:hover': { cursor: 'pointer', p: 0.5 },
@@ -43,16 +41,15 @@ export default function Section({ section }: SectionProps) {
 		borderColor: 'primary.main',
 	}
 
-	// const handleChangeSection = (sectionId) => {};
+	const handleChangeSection = () => setSelectedSection(section);
 	
 	
   return (
 		<Grid
 			size={section.width}
 			sx={{ p: 0.5 }}
-			// onClick={handleChangeSection(section.id)}
 		>
-			<Box>
+			<Box onClick={handleChangeSection}>
 				<Card>
 					<CardContent>
 						<Grid container flexDirection="column">
@@ -62,7 +59,10 @@ export default function Section({ section }: SectionProps) {
 
 							<Grid>
 								<Typography>
-									Id Example
+									Start: {section.start}
+								</Typography>
+								<Typography>
+									Width: {section.width}
 								</Typography>
 							</Grid>
 						</Grid>

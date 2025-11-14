@@ -1,7 +1,6 @@
 "use client"
 
 import React, { Fragment, useContext } from 'react';
-import { useParams } from 'next/navigation';
 
 import { Divider, Grid, IconButton } from '@mui/material'; 
 import { AddBox, Check, DisabledByDefault, Settings } from '@mui/icons-material';
@@ -12,15 +11,13 @@ import SectionButton from '@/components/SectionButton';
 
 
 const CustomizationModeButtons = () => {
-	const { isCustomizing, setIsCustomizing } = useContext(ScreenContext);
-
-	const { id } = useParams();
+	const { isCustomizing, setIsCustomizing, selectedSection } = useContext(ScreenContext);
 
 	return (
 		<Grid container>
 			{isCustomizing && (
 				<Fragment>
-					<SectionButton type="ADD" />
+					<SectionButton sectionAction="ADD" />
 	
 					<IconButton disabled onClick={() => {}}>
 						<AddBox />
@@ -28,7 +25,10 @@ const CustomizationModeButtons = () => {
 
 					<Divider orientation="vertical" variant="middle" flexItem />
 
-					<SectionButton type="DELETE" />
+					<SectionButton
+						disabled={!selectedSection}
+						sectionAction="DELETE"
+					/>
 
 					<IconButton disabled color="error" onClick={() => {}}>
 						<DisabledByDefault />

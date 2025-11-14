@@ -24,13 +24,16 @@ interface ScreenProps {
 
 export default function Screen({ screen }: ScreenProps) {
 
-	const { isCustomizing } = useContext(ScreenContext);
+	const { isCustomizing, selectedSection } = useContext(ScreenContext);
 
 	return (	
 		<Grid container sx={{ m: 2 }} >
-			{isCustomizing && (
+			{isCustomizing && selectedSection && (
 				<Slider
-					value={[0, 0]}
+					value={[
+						selectedSection.start,
+						selectedSection.start + selectedSection.width,
+					]}
 					min={0}
 					max={12}
 					marks
@@ -40,7 +43,9 @@ export default function Screen({ screen }: ScreenProps) {
 				/>
 			)}
 
-			{map(screen.sections || [], (section) => <Section key={section.id} section={section} />)} 
+			{map(screen.sections || [], (section) => (
+				<Section key={`section_${section.id}`} section={section} />
+			))} 
 		</Grid>
 	);
 }
