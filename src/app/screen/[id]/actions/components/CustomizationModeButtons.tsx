@@ -1,15 +1,18 @@
 "use client"
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
+import { useParams } from 'next/navigation';
 
 import { Divider, Grid, IconButton } from '@mui/material'; 
-import { AddBox, DisabledByDefault, Settings } from '@mui/icons-material';
+import { AddBox, Check, DisabledByDefault, Settings } from '@mui/icons-material';
+import { ScreenContext } from '@/app/context';
+
 import SectionButton from '@/components/SectionButton';
-import { useParams } from 'next/navigation';
+
 
 
 const CustomizationModeButtons = () => {
-	const [isCustomizing, setIsCustomizing] = useState(false);
+	const { isCustomizing, setIsCustomizing } = useContext(ScreenContext);
 
 	const { id } = useParams();
 
@@ -35,7 +38,7 @@ const CustomizationModeButtons = () => {
 			)}
 			
 			<IconButton onClick={() => setIsCustomizing(!isCustomizing)}>
-				<Settings />
+				{isCustomizing ? <Check /> : <Settings />}
 			</IconButton>
 		</Grid>
 	)

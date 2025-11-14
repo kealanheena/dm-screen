@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Box, CircularProgress } from '@mui/material';
 
-import { getScreenById, getScreens } from "@/actions/screen.action";
+import { getScreenById } from "@/actions/screen.action";
+import ScreenContextWrapper from "@/components/Wrappers/ScreenContextWrapper";
 
 import Screen from "./component";
 import ScreenActions from "./actions/page";
@@ -16,7 +17,7 @@ export default async function ScreenPage({ params }: ScreenPageProps) {
 	const screen = await getScreenById(Number(id));
 
 	return (
-		<Fragment>
+		<ScreenContextWrapper>
 
 			<ScreenActions id={Number(id)} />
 			
@@ -28,6 +29,6 @@ export default async function ScreenPage({ params }: ScreenPageProps) {
 				</Box>
 			)}
 			
-		</Fragment>
+		</ScreenContextWrapper>
 	)
 }

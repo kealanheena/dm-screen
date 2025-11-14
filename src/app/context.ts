@@ -2,12 +2,20 @@
 
 import { createContext } from "react";
 
-import { DMScreenType, SectionType } from "@/types";
+import { SectionType } from "@/types";
 
 interface ScreenContextType {
-	screens: DMScreenType[];
-	currentSection: SectionType;
+	selectedSection: SectionType | undefined;
+	setSelectedSection: Function;
 	isCustomizing: boolean;
+	setIsCustomizing: Function;
 }
 
-export const ScreenContext = createContext<ScreenContextType[] | undefined>(undefined);
+const defaultScreenContext = {
+	selectedSection: undefined,
+	setSelectedSection: () => {},
+	isCustomizing: false,
+	setIsCustomizing: () => {},
+}
+
+export const ScreenContext = createContext<ScreenContextType[]>(defaultScreenContext);
