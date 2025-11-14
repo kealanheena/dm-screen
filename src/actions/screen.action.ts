@@ -3,7 +3,7 @@
 import { trim } from 'lodash';
 
 import prisma from "@/lib/prisma";
-import { Screen } from "@/types";
+import { DMScreenType } from "@/types";
 
 import { getDbUserId } from './user.action';
 
@@ -27,7 +27,7 @@ const select = {
 }
 
 
-export async function createScreen(data: Pick<Screen, "title">) {
+export async function createScreen(data: Pick<DMScreenType, "title">) {
 	const userId = await getDbUserId();
 
 	if (!userId) {
@@ -62,7 +62,7 @@ export async function getScreenById(id: number) {
 
 export async function updateScreen(
 	id: number,
-	data: Pick<Screen, "title">,
+	data: Pick<DMScreenType, "title">,
 ) {
 	const { title } = data;
 
