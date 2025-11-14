@@ -7,8 +7,9 @@ import { Box, Grid } from '@mui/material';
 import { DMScreenType } from '@/types';
 
 import SelectScreen from './components/SelectScreen';
-import SectionButtons from './components/SectionButtons';
-import EditTitleDIalog from './components/EditTitleDIalog';
+import CustomizeModeButtons from './components/CustomizationModeButtons';
+import EditTitleDialog from './components/EditTitleDialog';
+
 
 interface ScreenActionsPageProps {
 	id: number;
@@ -29,13 +30,13 @@ const ScreenActionsPage = async ({ id }: ScreenActionsPageProps) => {
 			>
 				{screen && (
 					<div>
-						<SelectScreen screen={screen} screens={screens} />
-						<EditTitleDIalog screen={screen} />
+						<SelectScreen screens={screens} />
+						<EditTitleDialog screen={screen} />
 					</div>
 				)}
 
 				{screen && (
-					<SectionButtons />
+					<CustomizeModeButtons />
 				)}
 			</Grid>
 		</Box>
