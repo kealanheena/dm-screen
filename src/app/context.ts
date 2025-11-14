@@ -18,4 +18,4 @@ const defaultScreenContext = {
 	setIsCustomizing: () => {},
 }
 
-export const ScreenContext = createContext<ScreenContextType[]>(defaultScreenContext);
+export const ScreenContext = createContext<ScreenContextType>(defaultScreenContext);
