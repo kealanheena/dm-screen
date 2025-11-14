@@ -22,7 +22,7 @@ interface EditTitleDialog {
 	screen: DMScreenType;
 }
 
-export default function EditTitleDIalog({ screen }: EditTitleDialog) {
+export default function EditTitleDialog({ screen }: EditTitleDialog) {
 	const { refresh } = useRouter();
 
 	const [isLoading, setIsLoading] = useState(false);
