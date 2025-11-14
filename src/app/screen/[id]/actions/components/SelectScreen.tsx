@@ -16,7 +16,7 @@ import { DMScreenType } from '@/types';
 
 
 interface SelectScreen {
-	screens: DMScreenType[];
+	screens: Pick<DMScreenType, "id" | "title">[];
 }
 
 const SelectScreen = ({ screens }: SelectScreen) => {

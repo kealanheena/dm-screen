@@ -5,15 +5,14 @@ export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 export interface DMScreenType {
 	id: number;
 	title: string;
-	// isTemplate: boolean;
-	// sections: Section[];
+	sections: SectionType[];
 }
 
 export interface SectionType {
 	id: number;
 	start: number;
 	width: number;
-	cards: CardType[];
+	// cards: CardType[];
 }
 
 export interface CardType {

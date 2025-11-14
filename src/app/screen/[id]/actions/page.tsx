@@ -18,8 +18,8 @@ interface ScreenActionsPageProps {
 const emptyScreen = { id: 0, title: '' }
 
 const ScreenActionsPage = async ({ id }: ScreenActionsPageProps) => {
-	const screens: DMScreenType[] = await getScreens();
-	const screen: DMScreenType = find(screens, ['id', id]) || emptyScreen;
+	const screens: Pick<DMScreenType, "id" | "title">[] = await getScreens();
+	const screen: Pick<DMScreenType, "id" | "title"> = find(screens, ['id', id]) || emptyScreen;
 
 	return (
 		<Box sx={{ pl: 2, pt: 2, pr: 2 }}>

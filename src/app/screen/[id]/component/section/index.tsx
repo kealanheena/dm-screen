@@ -2,12 +2,13 @@ import React, { useContext, useState } from 'react';
 import { get } from 'lodash';
 
 import {
+	Box,
 	Card,
 	CardContent,
 	Grid,
 	Typography,
 } from '@mui/material';
-import { Section as SectionType } from '@/types';
+import { SectionType } from '@/types';
 import { ScreenContext } from '@/app/context';
 
 // import LayoutCard from './LayoutCard';
@@ -17,9 +18,7 @@ interface SectionProps {
 	section: SectionType;
 }
 
-export default function Section({
-	section,
-}) {
+export default function Section({ section }: SectionProps) {
 	const context = useContext(ScreenContext);
 
 	const isCustomizing = get(context, 'isCustomizing');
@@ -43,16 +42,17 @@ export default function Section({
 		borderStyle: 'solid',
 		borderColor: 'primary.main',
 	}
+
+	// const handleChangeSection = (sectionId) => {};
 	
 	
   return (
 		<Grid
-			key={section.id}
 			size={section.width}
 			sx={{ p: 0.5 }}
-			onClick={handleChangeSection(section.id)}
+			// onClick={handleChangeSection(section.id)}
 		>
-			<Box sx={currentSection.id === section.id ? selectedSx : sx}>
+			<Box>
 				<Card>
 					<CardContent>
 						<Grid container flexDirection="column">

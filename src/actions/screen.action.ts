@@ -10,18 +10,18 @@ import { getDbUserId } from './user.action';
 const select = {
 	id: true,
 	title: true,
-	isTemplate: true,
 	sections: {
 		select: {
 			id: true,
 			start: true,
 			width: true,
-			cards: {
-				select: {
-					title: true,
-					height: true,
-				}
-			},
+			// cards: {
+			// 	select: {
+			// 		id: true,
+			// 		title: true,
+			// 		height: true,
+			// 	}
+			// },
 		}
 	},
 }

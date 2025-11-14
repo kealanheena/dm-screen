@@ -1,27 +1,32 @@
 import React, { Fragment } from "react";
 import { Box, CircularProgress } from '@mui/material';
 
-import { getScreens } from "@/actions/screen.action";
+import { getScreenById, getScreens } from "@/actions/screen.action";
 
 import Screen from "./component";
 import ScreenActions from "./actions/page";
 
 
-export default async function ScreenPage({ params }) {
+type ScreenPageProps = {
+  params: { id: string };
+};
+
+export default async function ScreenPage({ params }: ScreenPageProps) {
 	const { id } = await params;
+	const screen = await getScreenById(Number(id));
 
 	return (
 		<Fragment>
 
 			<ScreenActions id={Number(id)} />
-{/* 			
-			{screens ? (
-				<Screen screens={screens} /> 
+			
+			{screen ? (
+				<Screen screen={screen} /> 
 			) : (
 				<Box sx={{ display: 'flex' }}>
 					<CircularProgress />
 				</Box>
-			)} */}
+			)}
 			
 		</Fragment>
 	)

@@ -19,7 +19,7 @@ import { Edit } from '@mui/icons-material';
 
 
 interface EditTitleDialog {
-	screen: DMScreenType;
+	screen: Pick<DMScreenType, "id" | "title">;
 }
 
 export default function EditTitleDialog({ screen }: EditTitleDialog) {
