@@ -6,6 +6,7 @@ import ScreenContextWrapper from "@/components/Wrappers/ScreenContextWrapper";
 
 import Screen from "./component";
 import ScreenActions from "./actions/page";
+import CreateNewScreen from "./actions/components/CreateScreen";
 
 
 type ScreenPageProps = {
@@ -24,9 +25,7 @@ export default async function ScreenPage({ params }: ScreenPageProps) {
 			{screen ? (
 				<Screen screen={screen} /> 
 			) : (
-				<Box sx={{ display: 'flex' }}>
-					<CircularProgress />
-				</Box>
+				<CreateNewScreen />
 			)}
 			
 		</ScreenContextWrapper>

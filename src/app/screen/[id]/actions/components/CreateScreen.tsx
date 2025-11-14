@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 
 import {
@@ -36,7 +38,7 @@ export default function CreateNewScreen() {
 		>
 			<Map sx={{ fontSize: '5rem' }} color="primary"/>
 			<Typography variant="h5" pb={3}>
-				{"Opps! looks like you don't have any screens."}
+				{"Opps! looks like you we couldn't find that screen"}
 			</Typography>
 			
 			<TextField
