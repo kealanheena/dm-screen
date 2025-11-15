@@ -8,7 +8,6 @@ import { DMScreenType } from '@/types';
 
 import SelectScreen from './components/SelectScreen';
 import CustomizeModeButtons from './components/CustomizationModeButtons';
-import EditTitleDialog from './components/EditTitleDialog';
 
 
 interface ScreenActionsPageProps {
@@ -28,12 +27,7 @@ const ScreenActionsPage = async ({ id }: ScreenActionsPageProps) => {
 				alignItems="center"
 				justifyContent="space-between"
 			>
-				{screen && (
-					<div>
-						<SelectScreen screens={screens} />
-						{/* <EditTitleDialog screen={screen} /> */}
-					</div>
-				)}
+				<SelectScreen screens={screens} />
 
 				{screen && (
 					<CustomizeModeButtons />
