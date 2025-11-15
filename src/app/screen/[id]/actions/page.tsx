@@ -31,7 +31,7 @@ const ScreenActionsPage = async ({ id }: ScreenActionsPageProps) => {
 				{screen && (
 					<div>
 						<SelectScreen screens={screens} />
-						<EditTitleDialog screen={screen} />
+						{/* <EditTitleDialog screen={screen} /> */}
 					</div>
 				)}
 

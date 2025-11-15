@@ -1,19 +1,36 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { find, map }  from 'lodash';
-import { redirect, RedirectType, useParams } from 'next/navigation'
+import { redirect, RedirectType, useParams, useRouter } from 'next/navigation'
 
 import {
+	ClickAwayListener,
 	FormControl,
+	IconButton,
+	InputAdornment,
 	InputLabel,
 	MenuItem,
 	Select,
+	TextField,
+	Tooltip,
 } from '@mui/material';
-import { Add } from '@mui/icons-material';
+import { Check, Close, Edit } from '@mui/icons-material';
 
+import { useDebounce } from '@/app/hooks';
 import { DMScreenType } from '@/types';
+import { updateScreen } from '@/actions/screen.action';
 
+
+const TextFieldEndAdornment = ({ onClick }: { onClick: any }) => (
+	<InputAdornment position="end">
+		<Tooltip title="Cancel">
+			<IconButton onClick={onClick}>
+				<Close fontSize="small" />
+			</IconButton>
+		</Tooltip>
+	</InputAdornment>
+)
 
 interface SelectScreen {
 	screens: Pick<DMScreenType, "id" | "title">[];
@@ -21,33 +38,86 @@ interface SelectScreen {
 
 const SelectScreen = ({ screens }: SelectScreen) => {
 	const { id } = useParams();
+	const { refresh } = useRouter();
 
+	const screen = find(screens, ['id', Number(id)]);
+
+	const [isEditing, setIsEditing] = useState(false);
+	const [title, setTitle] = useState(screen?.title || '');
+
+	const debounce = useDebounce(async (title: string) => {
+		await updateScreen(Number(id), { title });
+		
+		refresh();
+	}, 500);
+
+	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTitle(event.target.value);
+
+		debounce(event.target.value);
+	};
+
+	const handleIsEditingOpen = () => setIsEditing(true);
+
+	const handleIsEditingClose = () => {
+		if (isEditing && screen) {
+			setTitle(screen.title);
+		}
+
+		setIsEditing(false);
+	}
 
 	return (
-		<FormControl>
-			<InputLabel id="current-dm-screen-label">Current dm screen</InputLabel>
-			<Select
-				labelId="current-dm-screen-label"
-				id="dm-screen-select"
-				label="Current dm screen"
-				value={id}
-				onChange={(event) => redirect(`${event.target.value}`, RedirectType.replace)}
-				sx={{ p: 0 }}
-			>
-				<MenuItem disabled><em>Choose a dm screen</em></MenuItem>
+		<ClickAwayListener onClickAway={handleIsEditingClose}>
+			<div>
+				<FormControl>
+					<InputLabel id="dm-screen-label">
+						{isEditing ? 'New title' : 'Current dm screen'}
+					</InputLabel>
+					
+					{isEditing ? (
+							<Tooltip title="Change your title here" arrow open>
+								<TextField
+									autoFocus
+									focused
+									fullWidth
+									required
+									value={title}
+									label="New title"
+									onChange={handleTitleChange}
+									slotProps={{
+										input: { 
+											endAdornment: <TextFieldEndAdornment onClick={handleIsEditingClose} />,
+										}
+									}}
+								/>
+							</Tooltip>
+					): (
+							<Select
+								labelId="dm-screen-label"
+								label="Current dm screen"
+								value={id}
+								onChange={(event) => redirect(`${event.target.value}`, RedirectType.replace)}
+								sx={{ p: 0 }}
+							>
+								<MenuItem disabled><em>Choose a dm screen</em></MenuItem>
 
-				{map(screens, ({ id, title }) => (
-					<MenuItem key={`screen_${id}`} value={id}>
-						{title}
-					</MenuItem>
-				))}
+								{map(screens, ({ id, title }) => (
+									<MenuItem key={`screen_${id}`} value={id}>{title}</MenuItem>
+								))}
+							</Select>
+						)}
+				</FormControl>
 
-				<MenuItem>  {/* add onClick handler for add new screen */}
-					<Add sx={{ pr: 1, fontSize: 30 }} />
-					Create screen
-				</MenuItem>
-			</Select>
-		</FormControl>
+				{screen && (
+					<Tooltip title={isEditing ? 'Save title' : 'Edit title'}>
+						<IconButton disabled={!title} onClick={isEditing ? handleIsEditingClose : handleIsEditingOpen}>
+							{isEditing ? <Check /> : <Edit />}
+						</IconButton>
+					</Tooltip>
+				)}
+			</div>
+		</ClickAwayListener>
 	);
 }
 
