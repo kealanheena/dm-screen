@@ -22,9 +22,9 @@ import { DMScreenType } from '@/types';
 import { updateScreen } from '@/actions/screen.action';
 
 
-const TextFieldEndAdornment = ({ onClick }: { onClick: any }) => (
+const TextFieldEndAdornment = ({ onClick }: { onClick: any }) => ( // change any to onClick handler type 
 	<InputAdornment position="end">
-		<Tooltip title="Cancel">
+		<Tooltip title="Undo">
 			<IconButton onClick={onClick}>
 				<Close fontSize="small" />
 			</IconButton>
@@ -44,6 +44,7 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 
 	const [isEditing, setIsEditing] = useState(false);
 	const [title, setTitle] = useState(screen?.title || '');
+	const [previousTitle, setPreviousTitle] = useState(screen?.title || '');
 
 	const debounce = useDebounce(async (title: string) => {
 		await updateScreen(Number(id), { title });
@@ -62,7 +63,16 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 	const handleIsEditingClose = () => {
 		if (isEditing && screen) {
 			setTitle(screen.title);
+			setPreviousTitle(screen.title);
 		}
+
+		setIsEditing(false);
+	}
+
+	const handleCancel = async () => {
+		setTitle(previousTitle);
+
+		await debounce(previousTitle);
 
 		setIsEditing(false);
 	}
@@ -76,7 +86,7 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 					</InputLabel>
 					
 					{isEditing ? (
-							<Tooltip title="Change your title here" arrow open>
+							<Tooltip title="Make your changes here" arrow open>
 								<TextField
 									autoFocus
 									focused
@@ -87,7 +97,7 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 									onChange={handleTitleChange}
 									slotProps={{
 										input: { 
-											endAdornment: <TextFieldEndAdornment onClick={handleIsEditingClose} />,
+											endAdornment: <TextFieldEndAdornment onClick={handleCancel} />,
 										}
 									}}
 								/>
@@ -110,7 +120,7 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 				</FormControl>
 
 				{screen && (
-					<Tooltip title={isEditing ? 'Save title' : 'Edit title'}>
+					<Tooltip title={isEditing ? 'Save' : 'Edit'}>
 						<IconButton disabled={!title} onClick={isEditing ? handleIsEditingClose : handleIsEditingOpen}>
 							{isEditing ? <Check /> : <Edit />}
 						</IconButton>
