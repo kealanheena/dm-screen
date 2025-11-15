@@ -16,7 +16,7 @@ export const themeOptions: ThemeOptions = {
     },
   },
   shape: {
-    borderRadius: 4,
+    borderRadius: 3,
   },
   components: {
     MuiAppBar: {
@@ -43,6 +43,13 @@ export const themeOptions: ThemeOptions = {
         }
       }
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          paddingRight: 0,
+        }
+      }
+    },
     MuiTextField: {
       defaultProps: {
         size: 'small',
@@ -53,7 +60,7 @@ export const themeOptions: ThemeOptions = {
         }
       }
     },
-    MuiFormControl: {
+    MuiSelect: {
       defaultProps: {
         size: 'small',
       },
