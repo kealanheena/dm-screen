@@ -21,7 +21,7 @@ const SectionButton = ({ sectionAction, ...props }: SectionButtonProps) => {
 
 	const handleCreateSection = async () => createSection(
 		Number(id),
-		{ start: 0, width: 12 }
+		// { start: 0, width: 12 }
 	);
 
 	const handleDeleteSection = async () => {

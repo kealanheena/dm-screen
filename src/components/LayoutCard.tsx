@@ -6,8 +6,8 @@ import {
 	Grid,
 	Typography
 } from '@mui/material';
-import { Card as CardType } from '@/types';
-import IconButton from './IconButton';
+import { CardType } from '@/types';
+// import IconButton from './IconButton';
 
 
 const LayoutCard = ({ card }: { card: CardType }) => (
@@ -29,12 +29,12 @@ const LayoutCard = ({ card }: { card: CardType }) => (
 					alignItems="center"
 					justifyContent="end"
 				>
-					<IconButton 
+					{/* <IconButton 
 						icon="DRAG"
 						onClick={() => {}}
 						variant="icon_only"
 						tooltip="Move card"
-					/>
+					/> */}
 				</Grid>
 			</Grid>
 

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, MouseEventHandler } from 'react';
 import { find, map }  from 'lodash';
 import { redirect, RedirectType, useParams, useRouter } from 'next/navigation'
 
@@ -22,7 +22,7 @@ import { DMScreenType } from '@/types';
 import { updateScreen } from '@/actions/screen.action';
 
 
-const TextFieldEndAdornment = ({ onClick }: { onClick: any }) => ( // change any to onClick handler type 
+const TextFieldEndAdornment = ({ onClick }: { onClick: MouseEventHandler<HTMLButtonElement> }) => (
 	<InputAdornment position="end">
 		<Tooltip title="Undo">
 			<IconButton onClick={onClick}>

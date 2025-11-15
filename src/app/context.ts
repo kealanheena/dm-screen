@@ -6,9 +6,9 @@ import { SectionType } from "@/types";
 
 interface ScreenContextType {
 	selectedSection: SectionType | undefined;
-	setSelectedSection: Function;
+	setSelectedSection: React.Dispatch<React.SetStateAction<SectionType | undefined>>;
 	isCustomizing: boolean;
-	setIsCustomizing: Function;
+	setIsCustomizing: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const defaultScreenContext = {

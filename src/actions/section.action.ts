@@ -9,7 +9,10 @@ import { getDbUserId } from './user.action';
 import { getScreenById } from './screen.action'
 
 
-export async function createSection(screenId: number, data: Pick<SectionType, "start" | "width">) {
+export async function createSection(
+	screenId: number,
+	// data: Pick<SectionType, "start" | "width">
+) {
 	const userId = await getDbUserId();
 
 	console.log('userId ', userId);
@@ -66,10 +69,6 @@ export async function deleteSection(id: number) {
 	if (!userId) {
 		return;
 	}
-
-	console.log({ id })
-
-	const test =  await prisma.section.findUnique({ where: { id }});
 
 	return prisma.section.delete({
 		where: { id }

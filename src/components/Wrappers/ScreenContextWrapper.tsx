@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Fragment, ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 
 import { SectionType } from "@/types";
 import { ScreenContext } from "@/app/context";

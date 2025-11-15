@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { Box, CircularProgress } from '@mui/material';
+import React from "react";
 
 import { getScreenById } from "@/actions/screen.action";
 import ScreenContextWrapper from "@/components/Wrappers/ScreenContextWrapper";

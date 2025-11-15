@@ -6,7 +6,7 @@ import {
 	map,
 } from 'lodash';
 
-import { Screen } from '@/types';
+import { SectionType } from '@/types';
 import { MIN_TOTAL_WIDTH, COLUMN_START } from '@/constants';
 
 import shrinkSectionRight from './shrinkSectionRight';
@@ -15,7 +15,7 @@ import expandSectionLeft from './expandSectionLeft';
 import shrinkSectionLeft from './shrinkSectionLeft'
 
 
-const getTotalWidth = (layouts: Screen[]) => (
+const getTotalWidth = (layouts: SectionType[]) => (
 	reduce(layouts, (sum, { width }) => (
 		sum + width
 	), 0)
@@ -29,10 +29,10 @@ const onChangeSection = ({
 	range,
 }: {
 	layoutId: number,
-	layouts: Screen[],
+	layouts: SectionType[],
 	newRange: number[],
 	range: number[],
-}): Screen[] | undefined => {
+}): SectionType[] | undefined => {
 	const [rangeStart, rangeEnd] = range;
 	const [newRangeStart, newRangeEnd] = newRange;
 
@@ -43,7 +43,7 @@ const onChangeSection = ({
 
 	const isShrinkingTooMuch = some(
 		layouts,
-		({ id, start }: Screen) => (
+		({ id, start }: SectionType) => (
 			start === newRangeEnd && id === layoutId
 		)
 	)

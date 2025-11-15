@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { get } from 'lodash';
+import React, { useContext } from 'react';
 
 import {
 	Box,
@@ -19,30 +18,9 @@ interface SectionProps {
 }
 
 export default function Section({ section }: SectionProps) {
-	const { isCustomizing, selectedSection, setSelectedSection } = useContext(ScreenContext);
-
-	const sx = isCustomizing ? {
-		'&:hover': { cursor: 'pointer', p: 0.5 },
-		borderColor: '#c4c4c4',
-		borderWidth: 2,
-		borderRadius: 2,
-		borderStyle: 'dashed',
-		transition: "transform 0.15s ease-in-out",
-		height: '100%'
-	} : {
-		'&:hover': { cursor: 'pointer' },
-		backgroundColor: 'transparent',
-		height: '100%'
-	};
-
-	const selectedSx = {
-		...sx,
-		borderStyle: 'solid',
-		borderColor: 'primary.main',
-	}
+	const { setSelectedSection } = useContext(ScreenContext);
 
 	const handleChangeSection = () => setSelectedSection(section);
-	
 	
   return (
 		<Grid
