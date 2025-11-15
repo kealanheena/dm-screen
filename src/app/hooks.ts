@@ -2,7 +2,7 @@ import React from 'react';
 import { debounce }  from 'lodash';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useDebounce(callback: any, delay: number) {
+export function useDebounce<CallbackType extends (...args: any[]) => any>(callback: CallbackType, delay: number) {
   const callbackRef = React.useRef(callback)
 
   React.useLayoutEffect(() => {
