@@ -6,9 +6,6 @@ import { map }  from 'lodash';
 import { Grid, Slider } from '@mui/material';
 import { DMScreenType, SectionType } from '@/types';
 
-// import Blocks from './Blocks';
-// <Blocks blocks={selectedLayout.blocks} isCustomizing={isCustomizing} />
-
 import Section from './section';
 import { ScreenContext } from '@/app/context';
 
@@ -23,7 +20,27 @@ interface ScreenProps {
 }
 
 export default function Screen({ screen }: ScreenProps) {
-	const { isCustomizing, selectedSection } = useContext(ScreenContext);
+	const {
+		isCustomizing,
+		selectedSection,
+		setSelectedSection
+	} = useContext(ScreenContext);
+	
+	const handleSliderChange = (event) => {
+		console.log({ selectedSection })
+		if (!selectedSection) {
+			return;
+		}
+		
+		const [start, end] = event.target.value;
+		const newSelectedSection = {
+			...selectedSection,
+			start,
+			width: end - start,
+		}
+
+		setSelectedSection(newSelectedSection);
+	}
 
 	return (	
 		<Grid container sx={{ m: 2 }} >
@@ -38,13 +55,18 @@ export default function Screen({ screen }: ScreenProps) {
 					marks
 					aria-label="width slider"
 					valueLabelDisplay="auto"
-					onChange={() => {}}
+					onChange={handleSliderChange}
 				/>
 			)}
 
-			{map(screen.sections || [], (section) => (
-				<Section key={`section_${section.id}`} section={section} />
-			))} 
+			{map(screen.sections || [], (sectionItem) => {
+				const { id } = sectionItem;
+				const section = selectedSection && selectedSection.id === id 
+					? selectedSection
+					: sectionItem;
+
+				return <Section key={`section_${id}`} section={section} />
+			})} 
 		</Grid>
 	);
 }
