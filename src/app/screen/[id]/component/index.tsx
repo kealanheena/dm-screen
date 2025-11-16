@@ -26,13 +26,12 @@ export default function Screen({ screen }: ScreenProps) {
 		setSelectedSection
 	} = useContext(ScreenContext);
 	
-	const handleSliderChange = (event) => {
-		console.log({ selectedSection })
+	const handleSliderChange = (_: Event, newValue: number[]) => {
 		if (!selectedSection) {
 			return;
 		}
 		
-		const [start, end] = event.target.value;
+		const [start, end] = newValue;
 		const newSelectedSection = {
 			...selectedSection,
 			start,
