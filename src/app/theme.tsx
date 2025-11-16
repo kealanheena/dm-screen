@@ -1,20 +1,49 @@
-import { ThemeOptions } from '@mui/material/styles';
+import { ThemeOptions, PaletteOptions, PaletteColor  } from '@mui/material/styles';
 import { APP_BAR_HEIGHT } from '@/constants';
 
-export const themeOptions: ThemeOptions = {
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#E40712',
-    },
-    secondary: {
-      main: '#242527',
-    },
-    background: {
-      default: '#f0f0f0',
-      paper: '#fdfdfd',
-    },
+interface Color extends Pick<PaletteColor, "main"> {
+  light?: string;
+  dark?: string;
+  contrastText?: string;
+}
+
+interface Palette extends PaletteOptions {
+  primary: Color;
+  secondary: Color;
+}
+
+const palette: Palette  = {
+  mode: 'light',
+  primary: {
+    // Orchid
+    main: '#db77c2',
   },
+  secondary: {
+    main: '#131e31',
+  },
+  background: {
+    default: '#f0f0f0',
+    paper: '#fdfdfd',
+  },
+  // blueViolet: {
+  //   main: '#5953bb',
+  // },
+  // brightSun: {
+  //   main: '#fec140',
+  // },
+  // orchid: {
+  //   main: '#9e5777',
+  // },
+  // pomegranate: {
+  //   main: '#f64315'
+  // },
+  // viking: {
+  //   main: '#77d0db',
+  // }
+};
+
+export const themeOptions: ThemeOptions = {
+  palette,
   shape: {
     borderRadius: 3,
   },
@@ -22,19 +51,19 @@ export const themeOptions: ThemeOptions = {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          background: '#242527',
-          color: '#E40712',
-          borderBottom: '1.5px solid #E40712',
+          background: palette.secondary.main,
+          color: palette.primary.main,
+          borderBottom: `4px solid ${palette.primary.main}`,
           height: APP_BAR_HEIGHT,
-        }
-      }
+        },
+      },
     },
     MuiButton: {
       styleOverrides: {
         root: {
           borderRadius: 100,
         },
-      },
+      }, 
     },
     MuiCard: {
       styleOverrides: {
