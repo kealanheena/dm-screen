@@ -18,7 +18,6 @@ export default async function ScreenPage({ params }: ScreenPageProps) {
 
 	return (
 		<ScreenContextWrapper>
-
 			<ScreenActions id={Number(id)} />
 			
 			{screen ? (
@@ -26,7 +25,6 @@ export default async function ScreenPage({ params }: ScreenPageProps) {
 			) : (
 				<CreateNewScreen />
 			)}
-			
 		</ScreenContextWrapper>
 	)
 }

@@ -1,14 +1,16 @@
 "use client"
 
-import React, { useContext } from 'react';
-import { map }  from 'lodash';
+import React, { useContext, useState } from 'react';
+import { find, map }  from 'lodash';
 
 import { Grid, Slider } from '@mui/material';
 import { DMScreenType, SectionType } from '@/types';
 
-import Section from './section';
 import { ScreenContext } from '@/app/context';
+// import onChangeSection from "@/utils/onChangeSection";
 
+import Section from './section';
+import onChangeSection from '@/utils/onChangeSection';
 
 
 interface FullDMScreenType extends DMScreenType {
@@ -19,25 +21,40 @@ interface ScreenProps {
 	screen: FullDMScreenType;
 }
 
-export default function Screen({ screen }: ScreenProps) {
+export default function Screen({ screen: initialScreen }: ScreenProps) {
+	const [screen, setScreen] = useState<FullDMScreenType>(initialScreen);
 	const {
 		isCustomizing,
 		selectedSection,
 		setSelectedSection
 	} = useContext(ScreenContext);
 	
-	const handleSliderChange = (_: Event, newValue: number[]) => {
+	
+	const handleSliderChange = (_: Event, newRange: number[]) => {
 		if (!selectedSection) {
 			return;
 		}
-		
-		const [start, end] = newValue;
-		const newSelectedSection = {
-			...selectedSection,
-			start,
-			width: end - start,
+
+		const { sections } = screen;
+		const { id, start, width } = selectedSection
+
+		const newSections = onChangeSection({
+			layoutId: id,
+			layouts: sections,
+			newRange,
+			range: [start, start + width]
+		});
+
+		if (!newSections) {
+			return;
 		}
 
+		const newSelectedSection = find(newSections, ['id', id])
+
+		setScreen({
+			...screen,
+			sections: newSections,
+		});
 		setSelectedSection(newSelectedSection);
 	}
 
