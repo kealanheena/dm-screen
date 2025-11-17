@@ -4,9 +4,9 @@ import { SectionType } from '@/types';
 describe("#onChangeSection", () => {
 
 	let section1: SectionType,
-			section2: SectionType,
-			section3: SectionType,
-			section4: SectionType;
+			section2: SectionType;
+			// section3: SectionType,
+			// section4: SectionType;
 
 	beforeAll(() => {
 		section1 = {
