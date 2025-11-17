@@ -6,7 +6,7 @@ import { Divider, Grid, IconButton } from '@mui/material';
 import { AddBox, Check, DisabledByDefault, Settings } from '@mui/icons-material';
 import { ScreenContext } from '@/app/context';
 
-import SectionButton from '@/components/SectionButton';
+import SectionButton from '@/components/client/SectionButton';
 
 
 

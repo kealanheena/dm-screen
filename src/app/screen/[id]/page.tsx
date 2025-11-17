@@ -1,11 +1,11 @@
 import React from "react";
 
 import { getScreenById } from "@/actions/screen.action";
-import ScreenContextWrapper from "@/components/Wrappers/ScreenContextWrapper";
+import ScreenContextWrapper from "@/components/client/Wrappers/ScreenContextWrapper";
 
 import Screen from "./component";
-import ScreenActions from "../../../components/actions/page";
-import CreateNewScreen from "../../../components/actions/components/CreateScreen";
+import ScreenActions from "@/components/server/ScreenActions";
+import CreateNewScreen from "@/components/client/CreateScreen";
 
 
 type ScreenPageProps = {

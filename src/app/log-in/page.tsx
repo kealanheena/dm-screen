@@ -8,7 +8,7 @@ import {
 } from '@clerk/nextjs';
 import { Divider, Grid } from '@mui/material';
 
-import ContinueAsGuest from '@/components/ContinueAsGuest';
+import ContinueAsGuest from '@/components/client/ContinueAsGuest';
 
 
 function LogInPage() {

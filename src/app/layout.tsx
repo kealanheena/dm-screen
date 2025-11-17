@@ -3,8 +3,8 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from "react-hot-toast";
 import { APP_BAR_HEIGHT } from '@/constants';
 
-import ThemeProvider from "@/components/Wrappers/ThemeProvider";
-import Navbar from "@/components/Navbar";
+import ThemeProvider from "@/components/client/Wrappers/ThemeProvider";
+import Navbar from "@/components/client/Navbar";
 
 
 export default function RootLayout({

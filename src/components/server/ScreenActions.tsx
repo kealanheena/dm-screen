@@ -6,8 +6,8 @@ import { Box, Grid } from '@mui/material';
 
 import { DMScreenType } from '@/types';
 
-import SelectScreen from './components/SelectScreen';
-import CustomizeModeButtons from './components/CustomizationModeButtons';
+import SelectScreen from '@/components/client/SelectScreen';
+import CustomizeModeButtons from '@/components/client/CustomizationModeButtons';
 
 
 interface ScreenActionsPageProps {
