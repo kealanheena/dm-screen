@@ -36,13 +36,12 @@ export default function ScreenPageClient({ screen: initialScreen }: ScreenProps)
 		}
 
 		const { sections } = screen;
-		const { id, start, width } = selectedSection
+		const { id } = selectedSection
 
 		const newSections = onChangeSection({
-			layoutId: id,
+			section: selectedSection,
 			layouts: sections,
 			newRange,
-			range: [start, start + width]
 		});
 
 		if (!newSections) {

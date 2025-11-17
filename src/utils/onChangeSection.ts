@@ -23,28 +23,28 @@ const getTotalWidth = (layouts: SectionType[]) => (
 
 
 const onChangeSection = ({
-	layoutId,
+	section,
 	layouts,
 	newRange,
-	range,
 }: {
-	layoutId: number,
+	section: SectionType,
 	layouts: SectionType[],
 	newRange: number[],
-	range: number[],
+	// range: number[],
 }): SectionType[] | undefined => {
-	const [rangeStart, rangeEnd] = range;
+	const rangeStart = section.start;
+	const rangeEnd = section.start + section.width;
 	const [newRangeStart, newRangeEnd] = newRange;
 
 	const isExpandingStart = newRangeStart < rangeStart;
 	const isExpandingEnd = newRangeEnd > rangeEnd;
 
-	const layoutById = find(layouts, ['id', layoutId])
+	const layoutById = find(layouts, ['id', section.id])
 
 	const isShrinkingTooMuch = some(
 		layouts,
 		({ id, start }: SectionType) => (
-			start === newRangeEnd && id === layoutId
+			start === newRangeEnd && id === section.id
 		)
 	)
 
@@ -56,7 +56,7 @@ const onChangeSection = ({
 	// sections to the lest of LayoutId
 	let isLeft = true;
 	const leftSections = filter(layouts, ({ id }) => {
-		if (id === layoutId) {
+		if (id === section.id) {
 			isLeft = false;
 			return false;
 		}
@@ -101,7 +101,7 @@ const onChangeSection = ({
 			if (isExpandingStart) {
 				const { newLayout, newShouldShrinkNextSection } = expandSectionLeft({
 					layout,
-					layoutId,
+					layoutId: section.id,
 					shouldShrinkNextSection,
 				});
 
@@ -115,7 +115,7 @@ const onChangeSection = ({
 			if (!isExpandingStart) {
 				const { newLayout, newShouldExpandNextSection} = shrinkSectionLeft({
 					layout,
-					layoutId,
+					layoutId: section.id,
 					shouldExpandNextSection,
 				});
 
@@ -152,7 +152,7 @@ const onChangeSection = ({
 			if (isExpandingEnd) {
 				const { newLayout, newShouldShrinkNextSection } = expandSectionRight({
 					layout,
-					layoutId,
+					layoutId: section.id,
 					shouldShrinkNextSection,
 				});
 
@@ -165,7 +165,7 @@ const onChangeSection = ({
 			if (!isExpandingEnd) {
 				const { newLayout, newShouldExpandNextSection} = shrinkSectionRight({
 					layout,
-					layoutId,
+					layoutId: section.id,
 					shouldExpandNextSection,
 				});
 

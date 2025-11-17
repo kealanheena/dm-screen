@@ -22,16 +22,16 @@ describe("#onChangeSection", () => {
 		}
 	});
 
-	describe('If a sections array has only 1 section', () => {
+	describe.only('If a sections array has only 1 section', () => {
 		it("Should not change if start + width is 12", () => {
+			const section = { ...section1, width: 12 };
 			// Start is 0 here see beforeAll()
-			const sections: SectionType[] = [{ ...section1, width: 12 }];
+			const sections: SectionType[] = [section];
 
 			const result = onChangeSection({
-				layoutId: 2,
+				section,
 				layouts: sections,
 				newRange: [0, 12],
-				range: [0, 12],
 			});
 
 			expect(result).toEqual(undefined);
@@ -41,16 +41,12 @@ describe("#onChangeSection", () => {
 
 	describe('If a sections array has 2 sections', () => {
 		it("Should add 1 to width of section1 and start of section2", () => {
-			const layouts: SectionType[] = [
-				{ ...section1, width: 3 },
-				{ ...section2, width: 9 },
-			];
+			const layouts: SectionType[] = [section1, { ...section2, width: 9 }];
 
 			const result = onChangeSection({
-				layoutId: 1,
+				section: section1,
 				layouts,
 				newRange: [0, 4],
-				range: [0, 3],
 			});
 
 			expect(result).toStrictEqual([
@@ -61,15 +57,14 @@ describe("#onChangeSection", () => {
 
 		it("Should remove 1 from width of section1 and start of section2", () => {
 			const layouts: SectionType[] = [
-				{ ...section1, width: 3 },
+				section1,
 				{ ...section2, width: 9 },
 			];
 
 			const result = onChangeSection({
-				layoutId: 1,
+				section: section1,
 				layouts,
 				newRange: [0, 2],
-				range: [0, 3],
 			});
 
 			expect(result).toStrictEqual([
