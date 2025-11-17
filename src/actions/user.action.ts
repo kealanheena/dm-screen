@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { Prisma } from "@prisma/client";
 // import { revalidatePath } from "next/cache";
 
 
@@ -67,4 +68,22 @@ export async function getDbUserId() {
 	}
 
 	return user?.id;
+}
+
+export async function getUserScreens(userId: number) {
+	const where: Prisma.ScreenFindManyArgs['where'] =  {
+		userId,
+	}
+  const [screens, count] = await prisma.$transaction([
+    prisma.screen.findMany({
+			where,
+			select: {
+				id: true,
+				title: true,
+			}
+		}),
+    prisma.screen.count({ where })
+  ]);
+
+	return { screens, count };
 }
