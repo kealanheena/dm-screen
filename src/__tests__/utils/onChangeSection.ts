@@ -1,7 +1,7 @@
 import onChangeSection from "@/utils/onChangeSection";
 import { SectionType } from '@/types';
 
-describe.only("#onChangeSection", () => {
+describe("#onChangeSection", () => {
 
 	let section1: SectionType,
 			section2: SectionType,
