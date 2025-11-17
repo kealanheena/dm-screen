@@ -3,7 +3,7 @@ import React from "react";
 import { getScreenById } from "@/actions/screen.action";
 import ScreenContextWrapper from "@/components/client/Wrappers/ScreenContextWrapper";
 
-import Screen from "./component";
+import ScreenPageClient from "./ScreenPageClient";
 import ScreenActions from "@/components/server/ScreenActions";
 import CreateNewScreen from "@/components/client/CreateScreen";
 
@@ -21,7 +21,7 @@ export default async function ScreenPage({ params }: ScreenPageProps) {
 			<ScreenActions id={Number(id)} />
 			
 			{screen ? (
-				<Screen screen={screen} /> 
+				<ScreenPageClient screen={screen} /> 
 			) : (
 				<CreateNewScreen />
 			)}

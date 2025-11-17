@@ -21,7 +21,7 @@ interface ScreenProps {
 	screen: FullDMScreenType;
 }
 
-export default function Screen({ screen: initialScreen }: ScreenProps) {
+export default function ScreenPageClient({ screen: initialScreen }: ScreenProps) {
 	const [screen, setScreen] = useState<FullDMScreenType>(initialScreen);
 	const {
 		isCustomizing,
