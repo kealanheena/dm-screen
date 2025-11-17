@@ -2,10 +2,11 @@ import React from 'react';
 import { currentUser } from "@clerk/nextjs/server";
 import { syncUser } from "@/actions/user.action";
 
-import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, Box, Divider, Toolbar, Typography, Button } from '@mui/material';
+import { Map } from '@mui/icons-material';
 import { SignInButton, UserButton } from '@clerk/nextjs';
 
-import Redirect from './Redirect';
+import Redirect from '@/components/client/Redirect';
 
 
 export default async function Navbar() {
@@ -20,7 +21,9 @@ export default async function Navbar() {
       {user && <Redirect isUser={!!user} />}
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Map />
+        
+          <Typography variant="h6" component="div" sx={{ pl: 1, flexGrow: 1 }}>
             DM screen
           </Typography>
 

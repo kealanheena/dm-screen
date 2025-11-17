@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { APP_BAR_HEIGHT } from '@/constants';
 
 import ThemeProvider from "@/components/client/Wrappers/ThemeProvider";
-import Navbar from "@/components/client/Navbar";
+import Navbar from "@/components/server/Navbar";
 
 
 export default function RootLayout({
