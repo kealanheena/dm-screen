@@ -26,16 +26,32 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // TODO: add DB Relations Screens, Players, Messages
+  // Relations
+  campaigns Campaign[]
+  screens Screen[]
+}
+
+model Campaign {
+  id Int @id @default(autoincrement())
+  userId Int
+
+  title String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-
   screens Screen[]
+  // "onDelete: cascade" means delete all posts if the author is deleted
+  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index(userId)
 }
 
 model Screen {
   id Int @id @default(autoincrement())
   userId Int
+  campaignId Int?
 
   title String
   isTemplate Boolean @default(false)
@@ -47,6 +63,7 @@ model Screen {
   sections Section[]
   // "onDelete: cascade" means delete all posts if the author is deleted
   owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
   @@index(userId)
 }
