@@ -45,7 +45,19 @@ export async function createScreen(data: Pick<DMScreenType, "title">) {
 }
 
 export async function getScreens() {
-	return await prisma.screen.findMany({
+	return prisma.screen.findMany({
+		select: {
+			id: true,
+			title: true,
+		}
+	});
+}
+
+export async function getScreensWithoutCampaign() {
+	return prisma.screen.findMany({
+		where: {
+			campaignId: null,
+		},
 		select: {
 			id: true,
 			title: true,

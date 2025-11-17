@@ -1,10 +1,14 @@
 import React from "react";
 import { map } from "lodash";
 
-import { getDbUserId, getUserScreens } from "@/actions/user.action";
+import { getDbUserId } from "@/actions/user.action";
+import { getCampains } from "@/actions/campaign.action";
+
 import { Card, CardContent, Grid, List, ListSubheader, Typography } from '@mui/material';
 import ScreenListItem from "@/components/client/ScreenListItem";
 import { Public } from "@mui/icons-material";
+import { getScreensWithoutCampaign } from "@/actions/screen.action";
+
 
 
 export default async function Home() {
@@ -14,14 +18,25 @@ export default async function Home() {
     return;
   }
 
-  const { screens, count } = await getUserScreens(userId);
+  const screensWithoutCampaign = await getScreensWithoutCampaign();
+
+  const unassignedScreens = { 
+    id: 0,
+    title: 'No campaign',
+    screens: screensWithoutCampaign,
+    _count: { screens: screensWithoutCampaign.length },
+  }
+
+  const campaigns = await getCampains() || [];
+
+  console.log({campaigns});
 
   return (
     <Grid container spacing={2} sx={{ p: 2 }}>
-      <Grid size={4}>
+      <Grid size={6}>
         <Card>
           <CardContent>
-            <Typography>{`Your DM Screens (${count})`}</Typography>
+            <Typography>{`Your DM Screens`}</Typography>
             <List
               sx={{
                 width: '100%',
@@ -33,13 +48,19 @@ export default async function Home() {
               }}
               subheader={<li />}
             >
-              {['Testing Campaign'].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
+              {[unassignedScreens, ...campaigns].map(({ id, title, screens, _count }) => (
+                <li key={`campaigns-${id}`}>
                   <ul>
-                    <ListSubheader>
-                      <Public />
-                      {sectionId}
+                    <ListSubheader
+                      sx={{
+                        alignItems: 'center',
+                        display: 'flex',
+                      }}
+                    >
+                      <Public sx={{ pr: 0.5 }}/>
+                      {`${title} (${_count.screens})`}
                     </ListSubheader>
+
                     {map(screens, (screen) => (
                       <ScreenListItem screen={screen} />
                     ))}
