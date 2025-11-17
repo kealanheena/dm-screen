@@ -24,6 +24,7 @@ describe.only("#onChangeSection", () => {
 
 	describe('If a sections array has only 1 section', () => {
 		it("Should not change if start + width is 12", () => {
+			// Start is 0 here see beforeAll()
 			const sections: SectionType[] = [{ ...section1, width: 12 }];
 
 			const result = onChangeSection({
@@ -39,7 +40,7 @@ describe.only("#onChangeSection", () => {
 	});
 
 	describe('If a sections array has 2 sections', () => {
-		it("Should add 1 to both the width and start of a second layout", () => {
+		it("Should add 1 to width of section1 and start of section2", () => {
 			const layouts: SectionType[] = [
 				{ ...section1, width: 3 },
 				{ ...section2, width: 9 },
@@ -52,15 +53,13 @@ describe.only("#onChangeSection", () => {
 				range: [0, 3],
 			});
 
-			console.log({ result });
-
 			expect(result).toStrictEqual([
 				{ id: 1, start: 0, width: 4 },
 				{ id: 2, start: 4, width: 8 }
 			]);
 		});
 
-		it.only("Should add 1 to both the width and start of a second layout", () => {
+		it("Should remove 1 from width of section1 and start of section2", () => {
 			const layouts: SectionType[] = [
 				{ ...section1, width: 3 },
 				{ ...section2, width: 9 },
