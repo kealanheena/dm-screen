@@ -9,7 +9,7 @@ import { DMScreenType, SectionType } from '@/types';
 import { ScreenContext } from '@/app/context';
 // import onChangeSection from "@/utils/onChangeSection";
 
-import Section from './section';
+import Section from '../../../../components/section';
 import onChangeSection from '@/utils/onChangeSection';
 
 

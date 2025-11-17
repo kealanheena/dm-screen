@@ -4,8 +4,8 @@ import { getScreenById } from "@/actions/screen.action";
 import ScreenContextWrapper from "@/components/Wrappers/ScreenContextWrapper";
 
 import Screen from "./component";
-import ScreenActions from "./actions/page";
-import CreateNewScreen from "./actions/components/CreateScreen";
+import ScreenActions from "../../../components/actions/page";
+import CreateNewScreen from "../../../components/actions/components/CreateScreen";
 
 
 type ScreenPageProps = {
