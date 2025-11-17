@@ -29,14 +29,12 @@ export default async function Home() {
 
   const campaigns = await getCampains() || [];
 
-  console.log({campaigns});
-
   return (
     <Grid container spacing={2} sx={{ p: 2 }}>
       <Grid size={6}>
         <Card>
           <CardContent>
-            <Typography>{`Your DM Screens`}</Typography>
+            <Typography>Your DM Screens</Typography>
             <List
               sx={{
                 width: '100%',
@@ -48,8 +46,8 @@ export default async function Home() {
               }}
               subheader={<li />}
             >
-              {[unassignedScreens, ...campaigns].map(({ id, title, screens, _count }) => (
-                <li key={`campaigns-${id}`}>
+              {[unassignedScreens, ...campaigns].map(({ _count, ...campaign }) => (
+                <li key={`campaigns-${campaign.id}`}>
                   <ul>
                     <ListSubheader
                       sx={{
@@ -58,11 +56,11 @@ export default async function Home() {
                       }}
                     >
                       <Public sx={{ pr: 0.5 }}/>
-                      {`${title} (${_count.screens})`}
+                      {`${campaign.title} (${_count.screens})`}
                     </ListSubheader>
 
-                    {map(screens, (screen) => (
-                      <ScreenListItem screen={screen} />
+                    {map(campaign.screens, (screen) => (
+                      <ScreenListItem key={`campaigns-${campaign.id}-screens-${screen.id}`} screen={screen} />
                     ))}
                   </ul>
                 </li>

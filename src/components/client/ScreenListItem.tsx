@@ -18,7 +18,7 @@ export default function ScreenListItem({ screen }: ScreenListItemProps) {
 
   return (
    <ListItemButton onClick={() => redirect(`/screen/${id}`, RedirectType.replace)}>
-			<ListItem key={`${title}`}>
+			<ListItem>
 				<Map />
 				<ListItemText sx={{ pl: 0.5 }} primary={`${title}`} />
 			</ListItem>

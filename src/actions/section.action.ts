@@ -15,15 +15,11 @@ export async function createSection(
 ) {
 	const userId = await getDbUserId();
 
-	console.log('userId ', userId);
-
 	if (!userId) {
 		return;
 	}
 
 	const screen = await getScreenById(screenId);
-
-	console.log('screen ', screen);
 
 	if (!screen) {
 		return;
@@ -31,8 +27,6 @@ export async function createSection(
 
 	const newTotalSections = screen.sections.length + 1;
 	let start: number = 0;
-
-	console.log('screen ', screen, newTotalSections % 12 !== 0);
 
 	if (12 % newTotalSections !== 0) {
 		return;
