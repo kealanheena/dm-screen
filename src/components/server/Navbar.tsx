@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import { syncUser } from "@/actions/user.action";
 
@@ -23,8 +24,8 @@ export default async function Navbar() {
         <Toolbar>
           <Map />
         
-          <Typography variant="h6" component="div" sx={{ pl: 1, flexGrow: 1 }}>
-            DM screen
+          <Typography variant="h6" sx={{ pl: 1, flexGrow: 1 }}>
+            <Link href="/" replace>DM screen</Link>
           </Typography>
 
           {user ? (

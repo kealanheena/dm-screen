@@ -7,7 +7,6 @@ import { getDbUserId } from "@/actions/user.action";
 import Campaigns from "@/components/server/Campaigns";
 
 
-
 export default async function Home() {
   const userId = await getDbUserId();
 
