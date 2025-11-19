@@ -1,12 +1,8 @@
 import React from "react";
-import { flatMap, map } from "lodash";
+
+import { Grid } from '@mui/material';
 
 import { getDbUserId } from "@/actions/user.action";
-import { getCampaigns } from "@/actions/campaign.action";
-import { getCampaignlessScreens } from "@/actions/screen.action";
-
-import { Card, CardContent, Grid, List, ListSubheader } from '@mui/material';
-import { Public } from "@mui/icons-material";
 
 import Campaigns from "@/components/server/Campaigns";
 
