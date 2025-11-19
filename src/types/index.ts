@@ -2,6 +2,11 @@ import { getUserByClerkId } from '@/actions/user.action'
 
 export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 
+export interface CampaignType {
+	id: number;
+	title: string;
+}
+
 export interface DMScreenType {
 	id: number;
 	title: string;

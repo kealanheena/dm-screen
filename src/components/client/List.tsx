@@ -6,13 +6,7 @@ import { map } from 'lodash';
 import { List as MuiList, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Public } from '@mui/icons-material';
 import { redirect, RedirectType } from "next/navigation";
-import { DMScreenType } from "@/types";
-
-
-interface CampaignType {
-	id: number;
-	title: string;
-}
+import { DMScreenType, CampaignType } from "@/types";
 
 interface ScreenListItemProps {
 	items: DMScreenType[] | CampaignType[];
