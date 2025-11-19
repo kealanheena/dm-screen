@@ -2,9 +2,10 @@
 
 import React from "react";
 
-import { ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { ListItem as MUIListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Public } from '@mui/icons-material';
 import { redirect, RedirectType } from "next/navigation";
+import { DMScreenType } from "@/types";
 
 
 interface CampaignType {
@@ -13,18 +14,18 @@ interface CampaignType {
 }
 
 interface ScreenListItemProps {
-	campaign: CampaignType;
+	item: DMScreenType | CampaignType;
 }
 
-export default function CampaignListItem({ campaign }: ScreenListItemProps) {
-	const { id, title} = campaign;
+export default function ListItem({ item }: ScreenListItemProps) {
+	const { id, title} = item;
 
   return (
    <ListItemButton onClick={() => redirect(`/screen/${id}`, RedirectType.replace)}>
-			<ListItem>
+			<MUIListItem>
 				<Public color="primary" />
 				<ListItemText sx={{ pl: 0.5 }} primary={`${title}`} />
-			</ListItem>
+			</MUIListItem>
 		</ListItemButton>
   );
 }

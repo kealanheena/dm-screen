@@ -5,6 +5,7 @@ import { Grid } from '@mui/material';
 import { getDbUserId } from "@/actions/user.action";
 
 import Campaigns from "@/components/server/Campaigns";
+import Screens from '@/components/server/Screens';
 
 
 export default async function Home() {
@@ -21,7 +22,11 @@ export default async function Home() {
       sx={{ p: 2, height: '100%' }}
     >
       <Grid size={4}>
-        <Campaigns />
+        <Grid flexDirection="column">
+          <Campaigns />
+
+          <Screens />
+        </Grid>
       </Grid>
     </Grid>
   );
