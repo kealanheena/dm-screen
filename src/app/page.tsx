@@ -22,7 +22,11 @@ export default async function Home() {
       sx={{ p: 2, height: '100%' }}
     >
       <Grid size={4}>
-        <Grid flexDirection="column">
+        <Grid 
+          container
+          flexDirection="column"
+          sx={{ height: '100%' }}
+        >
           <Campaigns />
 
           <Screens />

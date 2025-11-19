@@ -22,20 +22,26 @@ interface ScreenListItemProps {
 export default function List({ items, itemKey }: ScreenListItemProps) {
 	// const { id, title} = item;
 
+	const onClickRedirect = (id: number) => () => {
+		redirect(`/${itemKey}/${id}`, RedirectType.replace);
+	};
+
   return (
 		<MuiList
 			sx={{
 				width: '100%',
-				bgcolor: 'background.paper',
 				position: 'relative',
 				overflow: 'auto',
 				maxHeight: 300,
-				'& ul': { padding: 0 },
+				// '& ul': { padding: 0 },
 			}}
-			subheader={<li />}
+			// subheader={<li />}
 		>
 			{map(items, ({ id, title }) => (
-				<ListItemButton onClick={() => redirect(`/${itemKey}/${id}`, RedirectType.replace)}>
+				<ListItemButton
+					key={`${itemKey}_${id}`}
+					onClick={onClickRedirect(id)}
+				>
 					<ListItem>
 						<Public color="primary" />
 						<ListItemText sx={{ pl: 0.5 }} primary={`${title}`} />
