@@ -14,7 +14,7 @@ export default async function Campaigns() {
   return (
 		<Card sx={{ height: '100%'}}>
 			<CardContent>
-				<Typography> </Typography>
+				<Typography variant="h5">Campaigns</Typography>
 				{map(campaigns, (campaign) => (
 					<CampaignListItem
 						key={`campaigns-${campaign.id}`}
