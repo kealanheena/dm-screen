@@ -13,22 +13,70 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
-model User {
-  id Int @id @default(autoincrement())
-  clerkId String @unique
+enum CardType {
+  TEXT
+  LIST
+  IMAGE
+}
 
-  email String @unique
-  username String @unique
+enum ClassType {
+  BARBARIAN
+  BARD
+  CLERIC
+  DRUID
+  FIGHTER
+  MONK
+  PALADIN
+  RANGER
+  ROGUE
+  SORCERER
+  WARLOCK
+  WIZARD
+}
 
-  name String?
-  image String?
+enum SpeciesType {
+  AASIMAR
+  DRAGONBORN
+  DWARF
+  ELF
+  GNOME
+  GOLIATH
+  HALFLING
+  HUMAN
+  ORC
+  TIEFLING
+}
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  campaigns Campaign[]
-  screens Screen[]
+enum SubSpeciesType {
+  // Dragonborn
+  BLACKDRAGONBORN
+  BLUEDRAGONBORN
+  BRASSDRAGONBORN
+  BRONZEDRAGONBORN
+  COPPERDRAGONBORN
+  GOLDDRAGONBORN
+  GREENDRAGONBORN
+  REDDRAGONBORN
+  SILVERDRAGONBORN
+  WHITEDRAGONBORN
+  // Elf
+  DROWELF
+  HIGHELF
+  WOODELF
+  // Gnomes
+  ForestGnome
+  ROCKGNOME
+  // Goliath
+  CLOUDGOLIATH
+  FIREGOLIATH
+  FROSTGOLIATH
+  HILLGOLIATH
+  STONEGOLIATH
+  STORMGOLIATH
+  // Tiefling
+  ABYSSALTIEFLING
+  CHTHONICTIEFLING
+  INFERNALTIEFLING
 }
 
 model Campaign {
@@ -46,6 +94,34 @@ model Campaign {
   owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index(userId)
+}
+
+model Card {
+  id Int @id @default(autoincrement())
+  sectionId Int
+  
+  title String
+  type CardType
+  height Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation
+  section Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@index(sectionId) // composite index for faster queries
+  // @@unique([screenId, title]) // this prevents a user duplicating a title on a screen something twice
+}
+
+model PlayerCharacter {
+  id Int @id @default(autoincrement())
+
+  name String
+  class ClassType
+  
+  species SpeciesType
+  subSpecies SubSpeciesType?
 }
 
 model Screen {
@@ -84,26 +160,20 @@ model Section {
   screen Screen @relation(fields: [screenId], references: [id], onDelete: Cascade)
 }
 
-model Card {
+model User {
   id Int @id @default(autoincrement())
-  sectionId Int
-  
-  title String
-  type CardType
-  height Int
+  clerkId String @unique
+
+  email String @unique
+  username String @unique
+
+  name String?
+  image String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relation
-  section Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-
-  @@index(sectionId) // composite index for faster queries
-  // @@unique([screenId, title]) // this prevents a user duplicating a title on a screen something twice
-}
-
-enum CardType {
-  TEXT
-  LIST
-  IMAGE
+  // Relations
+  campaigns Campaign[]
+  screens Screen[]
 }
