@@ -1,39 +1,21 @@
 import React from "react";
-import { map } from "lodash";
 
 import { getScreens } from "@/actions/screen.action";
 
-import { Card, CardContent, List, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 
-import ListItem from "@/components/client/ListItem";
+import List from "@/components/client/List";
 
 
 export default async function Screens() {
   const screens = await getScreens() || [];
 
   return (
-		<Card sx={{ height: '100%'}}>
+		<Card sx={{ height: '50%'}}>
 			<CardContent>
 				<Typography variant="h5">Screens</Typography>
-				<List
-					sx={{
-						width: '100%',
-						// maxWidth: 360,
-						bgcolor: 'background.paper',
-						position: 'relative',
-						overflow: 'auto',
-						maxHeight: 300,
-						'& ul': { padding: 0 },
-					}}
-					subheader={<li />}
-				>
-					{map(screens, (screen) => (
-						<ListItem
-							key={`screens-${screen.id}`}
-							item={screen}
-						/>
-					))}
-				</List>
+
+				<List items={screens} itemKey="campaign"/>
 			</CardContent>
 		</Card>
   );

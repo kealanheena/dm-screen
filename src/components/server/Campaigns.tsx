@@ -1,39 +1,21 @@
 import React from "react";
-import { map } from "lodash";
 
 import { getCampaigns } from "@/actions/campaign.action";
 
-import { Card, CardContent, Typography, List } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 
-import ListItem from "@/components/client/ListItem";
+import List from "@/components/client/List";
 
 
 export default async function Campaigns() {
   const campaigns = await getCampaigns() || [];
 
   return (
-		<Card sx={{ height: '100%'}}>
+		<Card sx={{ height: '50%'}}>
 			<CardContent>
 				<Typography variant="h5">Campaigns</Typography>
-				<List
-					sx={{
-						width: '100%',
-						maxWidth: 360,
-						bgcolor: 'background.paper',
-						position: 'relative',
-						overflow: 'auto',
-						maxHeight: 300,
-						'& ul': { padding: 0 },
-					}}
-					subheader={<li />}
-				>
-					{map(campaigns, (campaign) => (
-						<ListItem
-							key={`campaigns-${campaign.id}`}
-							item={campaign}
-						/>
-					))}
-				</List>
+
+				<List items={campaigns} itemKey="campaign"/>
 			</CardContent>
 		</Card>
   );
