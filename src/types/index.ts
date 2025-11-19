@@ -21,3 +21,7 @@ export interface CardType {
 	height?: number;
 	img?: string;
 }
+
+export interface ServerPageProps {
+  params: { id: string };
+};

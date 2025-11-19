@@ -7,12 +7,10 @@ import ScreenPageClient from "./ScreenPageClient";
 import ScreenActions from "@/components/server/ScreenActions";
 import CreateNewScreen from "@/components/client/CreateScreen";
 
+import { ServerPageProps } from "@/types";
 
-type ScreenPageProps = {
-  params: { id: string };
-};
 
-export default async function ScreenPage({ params }: ScreenPageProps) {
+export default async function ScreenPage({ params }: ServerPageProps) {
 	const { id } = await params;
 	const screen = await getScreenById(Number(id));
 
