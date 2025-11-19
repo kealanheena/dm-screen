@@ -27,6 +27,15 @@ export interface CardType {
 	img?: string;
 }
 
+export interface FullDMScreenType extends DMScreenType {
+	sections: SectionType[];
+}
+
+export interface FullCampaignType extends CampaignType {
+	screens: FullDMScreenType[];
+}
+
+
 export interface ServerPageProps {
   params: { id: string };
 };
