@@ -11,7 +11,7 @@ export default async function Campaigns() {
   const campaigns = await getCampaigns() || [];
 
   return (
-		<Card sx={{ height: '50%'}}>
+		<Card sx={{ height: '49%'}}>
 			<CardContent>
 				<Typography variant="h5">Campaigns</Typography>
 

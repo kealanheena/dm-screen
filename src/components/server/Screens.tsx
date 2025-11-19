@@ -11,11 +11,11 @@ export default async function Screens() {
   const screens = await getScreens() || [];
 
   return (
-		<Card sx={{ height: '50%'}}>
+		<Card sx={{ height: '49%'}}>
 			<CardContent>
 				<Typography variant="h5">Screens</Typography>
 
-				<List items={screens} itemKey="campaign"/>
+				<List items={screens} itemKey="screen"/>
 			</CardContent>
 		</Card>
   );

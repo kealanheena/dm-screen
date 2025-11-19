@@ -18,12 +18,12 @@ export default async function Home() {
   return (
     <Grid
       container
-      spacing={2}
       sx={{ p: 2, height: '100%' }}
     >
-      <Grid size={4}>
-        <Grid 
+      <Grid size={3}>
+        <Grid
           container
+          justifyContent="space-between"
           flexDirection="column"
           sx={{ height: '100%' }}
         >
