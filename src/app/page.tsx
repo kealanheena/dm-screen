@@ -1,13 +1,13 @@
 import React from "react";
-import { map } from "lodash";
+import { flatMap, map } from "lodash";
 
 import { getDbUserId } from "@/actions/user.action";
-import { getCampains } from "@/actions/campaign.action";
+import { getCampaigns } from "@/actions/campaign.action";
 
 import { Card, CardContent, Grid, List, ListSubheader, Typography } from '@mui/material';
 import ScreenListItem from "@/components/client/ScreenListItem";
 import { Public } from "@mui/icons-material";
-import { getScreensWithoutCampaign } from "@/actions/screen.action";
+import { getCampaignlessScreens } from "@/actions/screen.action";
 
 
 
@@ -18,16 +18,30 @@ export default async function Home() {
     return;
   }
 
-  const screensWithoutCampaign = await getScreensWithoutCampaign();
+  const campaignlessScreens = await getCampaignlessScreens() || [];
+  const campaigns = await getCampaigns() || [];
 
-  const unassignedScreens = { 
-    id: 0,
-    title: 'No campaign',
-    screens: screensWithoutCampaign,
-    _count: { screens: screensWithoutCampaign.length },
+  const campaignScreens = flatMap(campaigns, ({ screens }) => screens);
+  const screens = [
+    ...campaignlessScreens,
+    ...campaignScreens
+  ]
+
+  const allScreens = { 
+    id: 'all_screens',
+    title: 'All screens',
+    screens,
+    _count: { screens: screens.length }
   }
 
-  const campaigns = await getCampains() || [];
+  const unassignedScreens = { 
+    id: 'unassigned_screens',
+    title: 'Screens without a campaign',
+    screens: campaignlessScreens,
+    _count: { screens: campaignlessScreens.length },
+  }
+
+  const allCampaigns = [allScreens, unassignedScreens, ...campaigns];
 
   return (
     <Grid container spacing={2} sx={{ p: 2 }}>
@@ -46,7 +60,7 @@ export default async function Home() {
               }}
               subheader={<li />}
             >
-              {[unassignedScreens, ...campaigns].map(({ _count, ...campaign }) => (
+              {map(allCampaigns, ({ _count, ...campaign }) => (
                 <li key={`campaigns-${campaign.id}`}>
                   <ul>
                     <ListSubheader

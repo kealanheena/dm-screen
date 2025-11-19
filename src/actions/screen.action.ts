@@ -53,7 +53,7 @@ export async function getScreens() {
 	});
 }
 
-export async function getScreensWithoutCampaign() {
+export async function getCampaignlessScreens() {
 	return prisma.screen.findMany({
 		where: {
 			campaignId: null,

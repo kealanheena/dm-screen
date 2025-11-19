@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { getDbUserId } from './user.action';
 
 
-export async function getCampains() {
+export async function getCampaigns() {
 	const userId = await getDbUserId();
 
 	if (!userId) {
