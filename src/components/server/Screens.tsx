@@ -3,7 +3,7 @@ import { map } from "lodash";
 
 import { getScreens } from "@/actions/screen.action";
 
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, List, Typography } from '@mui/material';
 
 import ListItem from "@/components/client/ListItem";
 
@@ -15,12 +15,25 @@ export default async function Screens() {
 		<Card sx={{ height: '100%'}}>
 			<CardContent>
 				<Typography variant="h5">Screens</Typography>
-				{map(screens, (screen) => (
-					<ListItem
-						key={`screens-${screen.id}`}
-						item={screen}
-					/>
-				))}
+				<List
+					sx={{
+						width: '100%',
+						// maxWidth: 360,
+						bgcolor: 'background.paper',
+						position: 'relative',
+						overflow: 'auto',
+						maxHeight: 300,
+						'& ul': { padding: 0 },
+					}}
+					subheader={<li />}
+				>
+					{map(screens, (screen) => (
+						<ListItem
+							key={`screens-${screen.id}`}
+							item={screen}
+						/>
+					))}
+				</List>
 			</CardContent>
 		</Card>
   );
