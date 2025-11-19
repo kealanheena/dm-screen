@@ -8,12 +8,17 @@ import { redirect, RedirectType } from "next/navigation";
 import { DMScreenType } from "@/types";
 
 
-interface ScreenListItemProps {
-	screen: Pick<DMScreenType, "id" | "title">;
+interface CampaignType {
+	id: number;
+	title: string;
 }
 
-export default function ScreenListItem({ screen }: ScreenListItemProps) {
-	const { id, title} = screen;
+interface ScreenListItemProps {
+	campaign: CampaignType;
+}
+
+export default function CampaignListItem({ campaign }: ScreenListItemProps) {
+	const { id, title} = campaign;
 
 
   return (
