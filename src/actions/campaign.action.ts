@@ -20,3 +20,19 @@ export async function getCampaigns() {
 		}
 	});
 }
+
+export async function getCampaignById(id: number) {
+	const userId = await getDbUserId();
+
+	if (!userId) {
+		return;
+	}
+
+	return prisma.campaign.findUnique({
+		where: { id },
+		include: {
+			_count: true,
+			screens: true
+		}
+	});
+}
