@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { find, map }  from 'lodash';
 
 import { Grid, Slider } from '@mui/material';
-import { DMScreenType, SectionType } from '@/types';
+import { FullDMScreenType } from '@/types';
 
 import { ScreenContext } from '@/app/context';
 // import onChangeSection from "@/utils/onChangeSection";
@@ -13,15 +13,11 @@ import Section from '@/components/client/Section';
 import onChangeSection from '@/utils/onChangeSection';
 
 
-interface FullDMScreenType extends DMScreenType {
-	sections: SectionType[];
-}
-
-interface ScreenProps {
+interface ScreenPageClientProps {
 	screen: FullDMScreenType;
 }
 
-export default function ScreenPageClient({ screen: initialScreen }: ScreenProps) {
+export default function ScreenPageClient({ screen: initialScreen }: ScreenPageClientProps) {
 	const [screen, setScreen] = useState<FullDMScreenType>(initialScreen);
 	const {
 		isCustomizing,
