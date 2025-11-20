@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 // import ScreenContextWrapper from "@/components/client/Wrappers/ScreenContextWrapper";
 

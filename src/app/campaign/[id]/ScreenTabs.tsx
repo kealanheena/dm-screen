@@ -10,7 +10,7 @@ import { Add } from "@mui/icons-material";
 
 
 interface ScreenTabsProps {
-	screens: FullDMScreenType[];
+	screens: Omit<FullDMScreenType, "sections">[];
 }
 
 const ScreenTabs = ({ screens }: ScreenTabsProps) => {
