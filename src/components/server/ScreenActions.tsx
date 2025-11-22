@@ -12,12 +12,13 @@ import CustomizeModeButtons from '@/components/client/CustomizationModeButtons';
 
 interface ScreenActionsPageProps {
 	id: number;
+	campaignId?: number;
 }
 
 const emptyScreen = { id: 0, title: '' }
 
-const ScreenActionsPage = async ({ id }: ScreenActionsPageProps) => {
-	const screens: Pick<DMScreenType, "id" | "title">[] = await getScreens();
+const ScreenActions = async ({ id, campaignId }: ScreenActionsPageProps) => {
+	const screens: Pick<DMScreenType, "id" | "title">[] = await getScreens({ campaignId });
 	const screen: Pick<DMScreenType, "id" | "title"> = find(screens, ['id', id]) || emptyScreen;
 
 	return (
@@ -37,4 +38,4 @@ const ScreenActionsPage = async ({ id }: ScreenActionsPageProps) => {
 	)
 }
 
-export default ScreenActionsPage;
+export default ScreenActions;
