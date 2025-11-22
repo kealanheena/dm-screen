@@ -14,9 +14,9 @@ export async function getCampaigns() {
 
 	return prisma.campaign.findMany({
 		where: { userId },
-		include: {
-			_count: true,
-			screens: true
+		select: {
+			id: true,
+			title: true,
 		}
 	});
 }
