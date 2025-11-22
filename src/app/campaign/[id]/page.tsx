@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 // import ScreenContextWrapper from "@/components/client/Wrappers/ScreenContextWrapper";
 
@@ -26,6 +26,9 @@ export default async function CampaignPage({ params }: ServerPageProps) {
 			<Typography variant="h4">{campaign.title}</Typography>
 
 			<ScreenTabs screens={campaign.screens} />
+			<Paper sx={{ height: '100%' }}>
+				<Typography>Testing</Typography>
+			</Paper>
 		</div>
 		// <ScreenContextWrapper>
 		// 	<ScreenActions id={Number(id)} />
