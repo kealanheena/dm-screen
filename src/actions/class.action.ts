@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { getDbUserId } from './user.action';
 
 
-export async function getClass() {
+export async function getClasses() {
 	const userId = await getDbUserId();
 
 	if (!userId) {
