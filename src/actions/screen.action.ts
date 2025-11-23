@@ -44,8 +44,11 @@ export async function createScreen(data: Pick<DMScreenType, "title">) {
 	});
 }
 
-export async function getScreens() {
+export async function getScreens(data?: { campaignId?: number }) {
+	const where = data || {};
+
 	return prisma.screen.findMany({
+		where,
 		select: {
 			id: true,
 			title: true,

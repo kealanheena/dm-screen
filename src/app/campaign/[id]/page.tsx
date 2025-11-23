@@ -1,16 +1,14 @@
 import React from "react";
 
-import { Paper, Typography } from "@mui/material";
+import ScreenContextWrapper from "@/components/client/Wrappers/ScreenContextWrapper";
 
-// import ScreenContextWrapper from "@/components/client/Wrappers/ScreenContextWrapper";
-
-// import CampaignPageClient from "./CampaignPageClient";
-// import ScreenActions from "@/components/server/ScreenActions";
-// import CreateNewScreen from "@/components/client/CreateScreen";
+import CreateNewScreen from "@/components/client/CreateScreen";
 import { getCampaignById } from "@/actions/campaign.action";
 
 import { ServerPageProps } from "@/types";
 import ScreenTabs from "./ScreenTabs";
+// import CampaignPageClient from "./CampaignPageClient";
+import CampaignActions from "@/components/server/CampaignActions";
 
 
 export default async function CampaignPage({ params }: ServerPageProps) {
@@ -22,22 +20,24 @@ export default async function CampaignPage({ params }: ServerPageProps) {
 	}
 
 	return (
-		<div>
-			<Typography variant="h4">{campaign.title}</Typography>
+		<ScreenContextWrapper>
+			<CampaignActions id={Number(id)} />
+
+			<br />
 
 			<ScreenTabs screens={campaign.screens} />
-			<Paper sx={{ height: '100%' }}>
-				<Typography>Testing</Typography>
-			</Paper>
-		</div>
+
+
+			{campaign ? (
+				// <CampaignPageClient campaign={campaign} /> 
+				<div />
+			) : (
+				<CreateNewScreen />
+			)}
+		</ScreenContextWrapper>
 		// <ScreenContextWrapper>
 		// 	<ScreenActions id={Number(id)} />
 			
-		// 	{campaign ? (
-		// 		<CampaignPageClient campaign={campaign} /> 
-		// 	) : (
-		// 		<CreateNewScreen />
-		// 	)}
 		// </ScreenContextWrapper>
 	)
 }
