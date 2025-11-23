@@ -4,21 +4,37 @@ import React from "react";
 import { map } from 'lodash';
 
 import { List as MuiList, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { Map, Public } from '@mui/icons-material';
+import { Groups, Map, Public } from '@mui/icons-material';
 import { redirect, RedirectType } from "next/navigation";
-import { DMScreenType, CampaignType } from "@/types";
 
+interface ItemsType {
+	id: number;
+	name?: string;
+	title?: string;
+}
 interface ScreenListItemProps {
-	items: DMScreenType[] | CampaignType[];
-	itemKey: 'screen' |  'campaign';
+	items: ItemsType[];
+	itemKey: 'campaign' | 'playerCharacter' | 'screen';
 }
 
 export default function List({ items, itemKey }: ScreenListItemProps) {
-	// const { id, title} = item;
 
 	const onClickRedirect = (id: number) => () => {
 		redirect(`/${itemKey}/${id}`, RedirectType.replace);
 	};
+
+	const getIcon = () => {
+		switch (itemKey) {
+			case 'campaign':
+				return <Public color="primary" />;
+			case 'playerCharacter':
+				return <Groups color="primary" />;
+			case 'screen':
+				return <Map color="primary" />;
+			default:
+			return <div />
+		}
+	}
 
   return (
 		<MuiList
@@ -31,14 +47,14 @@ export default function List({ items, itemKey }: ScreenListItemProps) {
 			}}
 			// subheader={<li />}
 		>
-			{map(items, ({ id, title }) => (
+			{map(items, (item) => (
 				<ListItemButton
-					key={`${itemKey}_${id}`}
-					onClick={onClickRedirect(id)}
+					key={`${itemKey}_${item.id}`}
+					onClick={onClickRedirect(item.id)}
 				>
 					<ListItem>
-						{itemKey === 'screen' ? <Map color="primary" /> : <Public color="primary" />}
-						<ListItemText sx={{ pl: 0.5 }} primary={`${title}`} />
+						{getIcon()}
+						<ListItemText sx={{ pl: 0.5 }} primary={`${item.title || item.name}`} />
 					</ListItem>
 				</ListItemButton>
 			))}

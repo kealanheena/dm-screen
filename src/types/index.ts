@@ -7,6 +7,11 @@ export interface CampaignType {
 	title: string;
 }
 
+export interface PlayerCharacterType {
+	id: number;
+	name: string;
+}
+
 export interface DMScreenType {
 	id: number;
 	title: string;
