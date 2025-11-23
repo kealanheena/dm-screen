@@ -80,6 +80,7 @@ enum SubSpeciesType {
 }
 
 enum AbilityScore {
+  STRENGTHORDEXTERITY
   STRENGTH
   DEXTERITY
   CONSTITUTION
@@ -126,10 +127,9 @@ model Card {
 
 model Class {
   id Int @id @default(autoincrement())
+  title String @unique
 
   primaryAbility AbilityScore
-  primaryAbilityBackup AbilityScore?
-
   secondaryAbility AbilityScore?
 
   spellcastingAbility AbilityScore?
