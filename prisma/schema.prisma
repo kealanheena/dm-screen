@@ -79,6 +79,15 @@ enum SubSpeciesType {
   INFERNALTIEFLING
 }
 
+enum AbilityScore {
+  STRENGTH
+  DEXTERITY
+  CONSTITUTION
+  INTELLIGENCE
+  WISDOM
+  CHARISMA
+}
+
 model Campaign {
   id Int @id @default(autoincrement())
   userId Int
@@ -115,17 +124,31 @@ model Card {
   // @@unique([screenId, title]) // this prevents a user duplicating a title on a screen something twice
 }
 
+model Class {
+  id Int @id @default(autoincrement())
+
+  primaryAbility AbilityScore
+  primaryAbilityBackup AbilityScore?
+
+  secondaryAbility AbilityScore?
+
+  spellcastingAbility AbilityScore?
+
+  playerCharacters PlayerCharacter[]
+}
+
 model PlayerCharacter {
   id Int @id @default(autoincrement())
   campaignId Int
+  classId Int?
 
   name String
-  class ClassType
   
   species SpeciesType
   subSpecies SubSpeciesType?
 
   campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  class Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
 }
 
 model Screen {
