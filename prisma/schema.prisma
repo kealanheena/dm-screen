@@ -146,7 +146,7 @@ model PlayerCharacter {
   classId Int?
 
   name String
-  url String?
+  characterSheetUrl String?
   
   species SpeciesType
   subSpecies SubSpeciesType?
