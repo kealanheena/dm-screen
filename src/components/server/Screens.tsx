@@ -13,7 +13,7 @@ export default async function Screens() {
   return (
 		<Card sx={{ height: '49%'}}>
 			<CardContent>
-				<Typography variant="h5">Screens</Typography>
+				<Typography variant="h6">Screens</Typography>
 
 				<List items={screens} itemKey="screen"/>
 			</CardContent>

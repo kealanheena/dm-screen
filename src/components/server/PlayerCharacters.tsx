@@ -7,13 +7,13 @@ import { Card, CardContent, Typography } from '@mui/material';
 import List from "@/components/client/List";
 
 
-export default async function Campaigns() {
+export default async function PlayerCharacters() {
   const campaigns = await getCampaigns() || [];
 
   return (
-		<Card sx={{ height: '49%'}}>
+		<Card sx={{ height: '100%'}}>
 			<CardContent>
-				<Typography variant="h6">Campaigns</Typography>
+				<Typography variant="h6">Player characters</Typography>
 
 				<List items={campaigns} itemKey="campaign"/>
 			</CardContent>

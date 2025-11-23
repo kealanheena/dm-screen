@@ -6,6 +6,7 @@ import { getDbUserId } from "@/actions/user.action";
 
 import Campaigns from "@/components/server/Campaigns";
 import Screens from '@/components/server/Screens';
+import PlayerCharacters from "@/components/server/PlayerCharacters";
 
 
 export default async function Home() {
@@ -18,6 +19,7 @@ export default async function Home() {
   return (
     <Grid
       container
+      spacing={2}
       sx={{ p: 2, height: '100%' }}
     >
       <Grid size={3}>
@@ -32,6 +34,10 @@ export default async function Home() {
           <Screens />
         </Grid>
       </Grid>
+
+      <Grid size={3}>
+          <PlayerCharacters />
+        </Grid>
     </Grid>
   );
 }

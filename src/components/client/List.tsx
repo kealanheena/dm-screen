@@ -4,7 +4,7 @@ import React from "react";
 import { map } from 'lodash';
 
 import { List as MuiList, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { Public } from '@mui/icons-material';
+import { Map, Public } from '@mui/icons-material';
 import { redirect, RedirectType } from "next/navigation";
 import { DMScreenType, CampaignType } from "@/types";
 
@@ -37,7 +37,7 @@ export default function List({ items, itemKey }: ScreenListItemProps) {
 					onClick={onClickRedirect(id)}
 				>
 					<ListItem>
-						<Public color="primary" />
+						{itemKey === 'screen' ? <Map color="primary" /> : <Public color="primary" />}
 						<ListItemText sx={{ pl: 0.5 }} primary={`${title}`} />
 					</ListItem>
 				</ListItemButton>
