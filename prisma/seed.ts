@@ -84,8 +84,14 @@ const prisma = new PrismaClient();
 async function main() {
 	const tasks = classes.map(async ({ id, ...data }) => prisma.class.upsert({
 		where: { id },
-		create: data,
-		update: data,
+		create: {
+			...data,
+			updatedAt: new Date(),
+		},
+		update:  {
+			...data,
+			updatedAt: new Date(),
+		},
 	}))
 
 	const createdClasses = await Promise.all(tasks);
