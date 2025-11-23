@@ -90,6 +90,7 @@ model Campaign {
 
   // Relations
   screens Screen[]
+  playerCharacters PlayerCharacter[]
   // "onDelete: cascade" means delete all posts if the author is deleted
   owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -116,12 +117,15 @@ model Card {
 
 model PlayerCharacter {
   id Int @id @default(autoincrement())
+  campaignId Int
 
   name String
   class ClassType
   
   species SpeciesType
   subSpecies SubSpeciesType?
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 }
 
 model Screen {
