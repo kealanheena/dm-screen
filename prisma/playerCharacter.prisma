@@ -1,0 +1,17 @@
+model PlayerCharacter {
+  id Int @id @default(autoincrement())
+  campaignId Int
+  classId Int?
+
+  name String
+  characterSheetUrl String?
+  
+  species SpeciesType
+  subSpecies SubSpeciesType?
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  class Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

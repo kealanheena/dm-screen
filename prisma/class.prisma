@@ -1,0 +1,14 @@
+model Class {
+  id Int @id @default(autoincrement())
+  title String @unique
+
+  primaryAbility AbilityScore
+  secondaryAbility AbilityScore?
+
+  spellcastingAbility AbilityScore?
+
+  playerCharacters PlayerCharacter[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
