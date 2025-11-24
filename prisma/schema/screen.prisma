@@ -1,0 +1,59 @@
+model Screen {
+  id Int @id @default(autoincrement())
+  userId Int
+  campaignId Int?
+
+  title String
+  isTemplate Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  sections Section[]
+  // "onDelete: cascade" means delete all posts if the author is deleted
+  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index(userId)
+}
+
+model Section {
+  id Int @id @default(autoincrement())
+  screenId Int
+
+  start Int
+  width Int
+
+  cards Card[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation
+  screen Screen @relation(fields: [screenId], references: [id], onDelete: Cascade)
+}
+
+model Card {
+  id Int @id @default(autoincrement())
+  sectionId Int
+  
+  title String
+  type CardType
+  height Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // Relation
+  section Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@index(sectionId) // composite index for faster queries
+  // @@unique([screenId, title]) // this prevents a user duplicating a title on a screen something twice
+}
+
+
+enum CardType {
+  TEXT
+  LIST
+  IMAGE
+}

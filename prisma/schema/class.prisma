@@ -12,3 +12,13 @@ model Class {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
+enum AbilityScore {
+  STR
+  DEX
+  CON
+  INT
+  WIS
+  CHA
+}

@@ -4,7 +4,7 @@ import { capitalize, map } from 'lodash';
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
 import { Card, CardContent, Grid, List, ListItem, ListItemText, Typography, IconButton } from '@mui/material';
-import { Add, Edit, Groups, Person } from '@mui/icons-material';
+import { Add, Groups, OpenInNew, Person } from '@mui/icons-material';
 
 
 export default async function PlayerCharacters() {
@@ -54,7 +54,7 @@ export default async function PlayerCharacters() {
 									sx={{ pl: 0.5 }} 
 								/>
 								<IconButton> 
-									<Edit />
+									<OpenInNew />
 								</IconButton>
 							</ListItem>
 						))}

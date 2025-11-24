@@ -4,10 +4,7 @@ model PlayerCharacter {
   classId Int?
 
   name String
-  characterSheetUrl String?
-  
-  species SpeciesType
-  subSpecies SubSpeciesType?
+  url String?
 
   campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   class Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
