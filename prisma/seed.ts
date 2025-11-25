@@ -115,20 +115,54 @@ const dndClasses = [{
   updatedAt: new Date(),
 }];
 
-export default dndClasses;
-
-console.log({ dndClasses });
+const playerCharacters = [{
+	id: 1,
+	name: 'Acer Venator',
+	classId: 7,
+	url: process.env.ACER_URL || null,
+	updatedAt: new Date(),
+}, {
+	id: 2,
+	name: 'Adelaide',
+	classId: 3,
+	url: process.env.ADELAIDE_URL || null,
+	updatedAt: new Date(),
+}, {
+	id: 3,
+	name: 'Agatha',
+	classId: 5,
+	url: process.env.AGATHA_URL || null,
+	updatedAt: new Date(),
+}, {
+	id: 4,
+	name: 'Futhark',
+	classId: 12,
+	url: process.env.FUTHARK_URL || null,
+	updatedAt: new Date(),
+}, {
+	id: 5,
+	name: 'Spots',
+	classId: 2,
+	url: process.env.SPOTS_URL || null,
+	updatedAt: new Date(),
+}]
 
 const prisma = new PrismaClient();
 
 async function main() {
-	const tasks = dndClasses.map(async (dndClass) => prisma.class.upsert({
+	const dndClassesTasks = dndClasses.map(async (dndClass) => prisma.class.upsert({
 		where: { id: dndClass.id },
 		create: dndClass,
 		update: dndClass,
 	}));
+	const playerCharacterTasks = playerCharacters.map(async (playerCharacter) => prisma.playerCharacter.upsert({
+		where: { id: playerCharacter.id },
+		create: playerCharacter,
+		update: playerCharacter,
+	}));
 
-	await Promise.all(tasks);
+	await Promise.all(dndClassesTasks);
+	await Promise.all(playerCharacterTasks);
 }
 
 main()

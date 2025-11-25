@@ -17,7 +17,6 @@ export async function getPlayerCharacters() {
 			id: true,
 			name: true,
 			class: true,
-			species: true,
 		},
 		orderBy: {
 			name: 'asc', // Sort by creation date in descending order
