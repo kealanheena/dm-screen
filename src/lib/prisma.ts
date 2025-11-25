@@ -3,8 +3,22 @@ import { PrismaClient } from "@prisma/client";
 const prismaClientSingleton = () => {
   const prismaClient = new PrismaClient();
 
+  const extendedPrismaClient = prismaClient.$extends({
+    query: {
+      $allOperations: async ({
+        // model,
+        // operation,
+        args,
+        query,
+      }) => {
+        // Todo: check user permissions
+        return query(args);
+      },
+    },
+  });
 
-  return prismaClient;
+
+  return extendedPrismaClient;
 };
 
 declare const globalThis: {
