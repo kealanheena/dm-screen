@@ -27,7 +27,7 @@ const classes = [{
 	id: 5,
 	title: 'Druid',
   primaryAbility: AbilityScore.WIS,
-  secondaryAbility: AbilityScore.STR,
+  secondaryAbility: AbilityScore.DEX,
 	spellcastingAbility: AbilityScore.WIS,
 }, {
 	id: 6,
