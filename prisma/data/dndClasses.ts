@@ -1,5 +1,6 @@
-import { AbilityScore, PrismaClient } from "@prisma/client";
+import { AbilityScore } from "@prisma/client";
 
+// TODO: Figure out why this data isn't being imported to seed.ts
 const dndClasses = [{
   id: 1,
   key: 'artificer',
@@ -116,25 +117,3 @@ const dndClasses = [{
 }];
 
 export default dndClasses;
-
-console.log({ dndClasses });
-
-const prisma = new PrismaClient();
-
-async function main() {
-	const tasks = dndClasses.map(async (dndClass) => prisma.class.upsert({
-		where: { id: dndClass.id },
-		create: dndClass,
-		update: dndClass,
-	}));
-
-	await Promise.all(tasks);
-}
-
-main()
-  .then(async () => { await prisma.$disconnect()})
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })

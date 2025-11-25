@@ -1,6 +1,7 @@
 model Class {
   id Int @id @default(autoincrement())
-  title String @unique
+  title String
+  key String @unique
 
   primaryAbility AbilityScore
   secondaryAbility AbilityScore?
