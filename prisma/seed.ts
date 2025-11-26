@@ -4,6 +4,11 @@ const species = [{
   key: 'aasimar',
   name: 'Aasimar',
   updatedAt: new Date(),
+},
+{
+  key: 'changling',
+  name: 'Changling',
+  updatedAt: new Date(),
 }, {
   key: 'dragonborn',
   name: 'Dragonborn',
@@ -42,6 +47,10 @@ const species = [{
     { key: 'gnome_rock', name: 'Rock' },
   ]
 }, {
+  key: 'hexblood',
+  name: 'Hexblood',
+  updatedAt: new Date(),
+}, {
   key: 'goliath',
   name: 'Goliath',
   updatedAt: new Date(),
@@ -62,10 +71,28 @@ const species = [{
   name: 'Human',
   updatedAt: new Date(),
 }, {
+  key: 'kalashtar',
+  name: 'Kalashtar',
+  updatedAt: new Date(),
+}, {
+  key: 'khoravar',
+  name: 'Khoravar',
+  updatedAt: new Date(),
+}, {
   key: 'orc',
   name: 'Orc',
   updatedAt: new Date(),
 }, {
+  key: 'shifter',
+  name: 'Shifter',
+  updatedAt: new Date(),
+  subspecies: [
+    { key: 'shifter_beasthide', name: 'Beasthide' },
+    { key: 'shifter_longtooth', name: 'Longtooth' },
+    { key: 'shifter_swiftstride', name: 'Swiftstride' },
+    { key: 'shifter_wildhunt', name: 'Wildhunt' },
+  ]
+},{
   key: 'tiefling',
   name: 'Tiefling',
   updatedAt: new Date(),
@@ -74,6 +101,10 @@ const species = [{
     { key: 'tiefling_chthonic', name: 'Chthonic' },
     { key: 'tiefling_infernal', name: 'Infernal' },
   ]
+}, {
+  key: 'warforged',
+  name: 'Warforged',
+  updatedAt: new Date(),
 }];
 
 const dndClasses = [{
@@ -181,35 +212,38 @@ const playerCharacters = [{
 	id: 1,
 	name: 'Acer Venator',
 	dndClass: 'gunslinger',
-  species: 'elf',
+  species: 'shifter',
+  subspecies: 'shifter_wildhunt',
 	url: process.env.ACER_URL || null,
 	updatedAt: new Date(),
 }, {
 	id: 2,
 	name: 'Adelaide',
 	dndClass: 'bard',
-  species: 'elf',
+  species: 'gnome',
+  subspecies: 'gnome_rock',
 	url: process.env.ADELAIDE_URL || null,
 	updatedAt: new Date(),
 }, {
 	id: 3,
 	name: 'Agatha',
 	dndClass: 'druid',
-  species: 'elf',
+  species: 'hexblood',
 	url: process.env.AGATHA_URL || null,
 	updatedAt: new Date(),
 }, {
 	id: 4,
 	name: 'Futhark',
 	dndClass: 'warlock',
-  species: 'elf',
+  species: 'warforged',
 	url: process.env.FUTHARK_URL || null,
 	updatedAt: new Date(),
 }, {
 	id: 5,
 	name: 'Spots',
 	dndClass: 'barbarian',
-  species: 'elf',
+  species: 'shifter',
+  subspecies: 'shifter_swiftstride',
 	url: process.env.SPOTS_URL || null,
 	updatedAt: new Date(),
 }]
@@ -255,21 +289,28 @@ async function main() {
 
 
 	const playerCharacterTasks = playerCharacters.map(
-    async ({ dndClass, species: speciesSingular,  ...playerCharacter }) => (
-      prisma.playerCharacter.upsert({
+    async ({ dndClass, species: speciesSingular,  subspecies: subspeciesSingular, ...playerCharacter }) => {
+      const dndClassItem = dndClassesResult.find(({ key }) => key === dndClass);
+      const speciesItem = speciesResult.find(({ key }) => key === speciesSingular);
+      const subspeciesItem = speciesItem?.subspecies.find(({ key }) => key === subspeciesSingular);
+      
+      
+      return prisma.playerCharacter.upsert({
         where: { id: playerCharacter.id },
         create: {
-          classId: dndClassesResult.find(({ key }) => key === dndClass)?.id || 1,
-          speciesId: speciesResult.find(({ key }) => key === speciesSingular)?.id || 1,
+          classId: dndClassItem?.id || 1,
+          speciesId: speciesItem?.id || 1,
+          subspeciesId: subspeciesItem?.id || null,
           ...playerCharacter
         },
         update: {
-          classId: dndClassesResult.find(({ key }) => key === dndClass)?.id,
-          speciesId: speciesResult.find(({ key }) => key === speciesSingular)?.id,
+          classId: dndClassItem?.id || 1,
+          speciesId: speciesItem?.id || 1,
+          subspeciesId: subspeciesItem?.id || null,
           ...playerCharacter
         },
       })
-    )
+    }
   );
 
 	await Promise.all(playerCharacterTasks);
