@@ -3,7 +3,7 @@ model Screen {
   userId Int
   campaignId Int?
 
-  title String
+  name String
   isTemplate Boolean @default(false)
 
   createdAt DateTime @default(now())
@@ -38,7 +38,7 @@ model Card {
   id Int @id @default(autoincrement())
   sectionId Int
   
-  title String
+  name String
   type CardType
   height Int
 
@@ -48,7 +48,7 @@ model Card {
   section Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
 
   @@index(sectionId) // composite index for faster queries
-  // @@unique([screenId, title]) // this prevents a user duplicating a title on a screen something twice
+  // @@unique([screenId, name]) // this prevents a user duplicating a name on a screen something twice
 }
 
 

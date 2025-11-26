@@ -9,7 +9,7 @@ import { getDbUserId } from './user.action';
 
 const select = {
 	id: true,
-	title: true,
+	name: true,
 	sections: {
 		select: {
 			id: true,
@@ -18,7 +18,7 @@ const select = {
 			// cards: {
 			// 	select: {
 			// 		id: true,
-			// 		title: true,
+			// 		name: true,
 			// 		height: true,
 			// 	}
 			// },
@@ -38,7 +38,7 @@ export async function createScreen(data: Pick<DMScreenType, "title">) {
 
 	return prisma.screen.create({
 		data: {
-			title: trim(title),
+			name: trim(title),
 			userId,
 		}
 	});
@@ -51,7 +51,7 @@ export async function getScreens(data?: { campaignId?: number }) {
 		where,
 		select: {
 			id: true,
-			title: true,
+			name: true,
 		}
 	});
 }
@@ -63,7 +63,7 @@ export async function getCampaignlessScreens() {
 		},
 		select: {
 			id: true,
-			title: true,
+			name: true,
 		}
 	});
 }
@@ -79,12 +79,12 @@ export async function updateScreen(
 	id: number,
 	data: Pick<DMScreenType, "title">,
 ) {
-	const { title } = data;
+	const { name } = data;
 
  	return prisma.screen.update({
 		where: { id },
 		data: {
-			title: trim(title),
+			name: trim(title),
 		}
 	});
 }

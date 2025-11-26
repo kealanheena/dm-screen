@@ -15,7 +15,7 @@ export async function getClasses() {
 	return prisma.class.findMany({
 		select: {
 			id: true,
-			title: true,
+			name: true,
 		}
 	});
 }

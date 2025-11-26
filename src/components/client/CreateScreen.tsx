@@ -14,17 +14,17 @@ import { trim } from 'lodash';
 
 
 export default function CreateNewScreen() {
-	const [title, setTitle] = useState('');
+	const [name, setName] = useState('');
 	
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
 
 	const onClickSubmit = async () => {
-		if (!trim(title)) {
+		if (!trim(name)) {
 			return;
 		}
 		
-		await createScreen({ title });
-		setTitle('');
+		await createScreen({ name });
+		setName('');
 	};
 
 	return (
@@ -43,13 +43,13 @@ export default function CreateNewScreen() {
 			
 			<TextField
 				onChange={handleChange}
-				label="Title"
-				value={title}
+				label="Name"
+				value={name}
 				sx={{ m: 1 }}
 			/>
 			<Button
 				onClick={onClickSubmit}
-				disabled={!trim(title)}
+				disabled={!trim(name)}
 				variant="contained"
 			>
 				Create screen

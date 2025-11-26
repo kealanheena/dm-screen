@@ -34,11 +34,11 @@ const ScreenTabs = ({ screens }: ScreenTabsProps) => {
 						icon={<Add />}
 					/>
 				</Tooltip>
-				{map(screens, ({ id, title }) => (
+				{map(screens, ({ id, name }) => (
 					<Tab
 						key={`screen_tab_${id}`}
 						value={id}
-						label={title}
+						label={name}
 					/>
 				))}
 			</Tabs>

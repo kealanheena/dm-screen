@@ -4,7 +4,7 @@ export type User = Awaited<ReturnType<typeof getUserByClerkId>>;
 
 export interface CampaignType {
 	id: number;
-	title: string;
+	name: string;
 }
 
 export interface PlayerCharacterType {
@@ -14,7 +14,7 @@ export interface PlayerCharacterType {
 
 export interface DMScreenType {
 	id: number;
-	title: string;
+	name: string;
 	sections: SectionType[];
 }
 
@@ -27,7 +27,7 @@ export interface SectionType {
 
 export interface CardType {
 	id: number;
-	title: string;
+	name: string;
 	height?: number;
 	img?: string;
 }

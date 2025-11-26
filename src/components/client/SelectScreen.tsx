@@ -33,7 +33,7 @@ const TextFieldEndAdornment = ({ onClick }: { onClick: MouseEventHandler<HTMLBut
 )
 
 interface SelectScreen {
-	screens: Pick<DMScreenType, "id" | "title">[];
+	screens: Pick<DMScreenType, "id" | "name">[];
 }
 
 const SelectScreen = ({ screens }: SelectScreen) => {
@@ -43,17 +43,17 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 	const screen = find(screens, ['id', Number(id)]);
 
 	const [isEditing, setIsEditing] = useState(false);
-	const [title, setTitle] = useState(screen?.title || '');
-	const [previousTitle, setPreviousTitle] = useState(screen?.title || '');
+	const [name, setName] = useState(screen?.name || '');
+	const [previousName, setPreviousName] = useState(screen?.name || '');
 
-	const debounce = useDebounce(async (title: string) => {
-		await updateScreen(Number(id), { title });
+	const debounce = useDebounce(async (name: string) => {
+		await updateScreen(Number(id), { name });
 		
 		refresh();
 	}, 500);
 
-	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value);
+	const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setName(event.target.value);
 
 		debounce(event.target.value);
 	};
@@ -62,17 +62,17 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 
 	const handleIsEditingClose = () => {
 		if (isEditing && screen) {
-			setTitle(screen.title);
-			setPreviousTitle(screen.title);
+			setName(screen.name);
+			setPreviousName(screen.name);
 		}
 
 		setIsEditing(false);
 	}
 
 	const handleCancel = async () => {
-		setTitle(previousTitle);
+		setName(previousName);
 
-		await debounce(previousTitle);
+		await debounce(previousName);
 
 		setIsEditing(false);
 	}
@@ -82,7 +82,7 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 			<div>
 				<FormControl>
 					<InputLabel id="dm-screen-label">
-						{isEditing ? 'New title' : 'Current dm screen'}
+						{isEditing ? 'New name' : 'Current dm screen'}
 					</InputLabel>
 					
 					{isEditing ? (
@@ -92,9 +92,9 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 									focused
 									fullWidth
 									required
-									value={title}
-									label="New title"
-									onChange={handleTitleChange}
+									value={name}
+									label="New name"
+									onChange={handleNameChange}
 									slotProps={{
 										input: { 
 											endAdornment: <TextFieldEndAdornment onClick={handleCancel} />,
@@ -112,8 +112,8 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 							>
 								<MenuItem disabled><em>Choose a dm screen</em></MenuItem>
 
-								{map(screens, ({ id, title }) => (
-									<MenuItem key={`screen_${id}`} value={id}>{title}</MenuItem>
+								{map(screens, ({ id, name }) => (
+									<MenuItem key={`screen_${id}`} value={id}>{name}</MenuItem>
 								))}
 							</Select>
 						)}
@@ -121,7 +121,7 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 
 				{screen && (
 					<Tooltip title={isEditing ? 'Save' : 'Edit'}>
-						<IconButton disabled={!title} onClick={isEditing ? handleIsEditingClose : handleIsEditingOpen}>
+						<IconButton disabled={!name} onClick={isEditing ? handleIsEditingClose : handleIsEditingOpen}>
 							{isEditing ? <Check /> : <Edit />}
 						</IconButton>
 					</Tooltip>

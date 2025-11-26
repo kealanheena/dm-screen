@@ -16,7 +16,7 @@ export async function getCampaigns() {
 		where: { userId },
 		select: {
 			id: true,
-			title: true,
+			name: true,
 		}
 	});
 }

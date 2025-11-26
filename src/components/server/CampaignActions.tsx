@@ -14,11 +14,11 @@ interface CampaignActionsPageProps {
 	id: number;
 }
 
-const emptyCampaign = { id: 0, title: '' }
+const emptyCampaign = { id: 0, name: '' }
 
 const CampaignActions = async ({ id }: CampaignActionsPageProps) => {
-	const campaigns: Pick<CampaignType, "id" | "title">[] = await getCampaigns() || [];
-	const campaign: Pick<CampaignType, "id" | "title"> = find(campaigns, ['id', id]) || emptyCampaign;
+	const campaigns: Pick<CampaignType, "id" | "name">[] = await getCampaigns() || [];
+	const campaign: Pick<CampaignType, "id" | "name"> = find(campaigns, ['id', id]) || emptyCampaign;
 
 	return (
 		<Box sx={{ pl: 2, pt: 2, pr: 2 }}>

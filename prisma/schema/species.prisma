@@ -1,0 +1,27 @@
+model Species {
+  id Int @id @default(autoincrement())
+	
+  name String
+  key String @unique
+
+	subSpecies SubSpecies[]	
+  playerCharacters PlayerCharacter[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SubSpecies {
+  id Int @id @default(autoincrement())
+	speciesId Int
+
+  name String
+  key String @unique
+
+  playerCharacters PlayerCharacter[]
+
+	species Species @relation(fields: [speciesId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

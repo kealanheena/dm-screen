@@ -46,8 +46,8 @@ export default async function PlayerCharacters() {
 									}
 									secondary={
 										<Fragment>
-											<Typography component="span" variant="body2">{`class: ${pc.class.title}`}</Typography>
-											{/* <Typography variant="body2">{`species: ${capitalize(pc.species?.title)}`}</Typography> */}
+											<Typography component="span" variant="body2">{`class: ${pc.class.name}`}</Typography>
+											{/* <Typography variant="body2">{`species: ${capitalize(pc.species?.name)}`}</Typography> */}
 											
 										</Fragment>
 									}

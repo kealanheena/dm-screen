@@ -3,7 +3,7 @@ import { AbilityScore, PrismaClient } from "@prisma/client";
 const dndClasses = [{
   id: 1,
   key: 'artificer',
-  title: 'Artificer',
+  name: 'Artificer',
   primaryAbility: AbilityScore.INT,
   secondaryAbility: AbilityScore.DEX,
   spellcastingAbility: AbilityScore.INT,
@@ -12,13 +12,13 @@ const dndClasses = [{
 {
   id: 2,
   key: 'barbarian',
-  title: 'Barbarian',
+  name: 'Barbarian',
   primaryAbility: AbilityScore.STR,
   secondaryAbility: AbilityScore.CON,
 },
 {
   id: 3,
-  title: 'Bard',
+  name: 'Bard',
   key: 'bard',
   primaryAbility: AbilityScore.CHA,
   secondaryAbility: AbilityScore.DEX,
@@ -27,7 +27,7 @@ const dndClasses = [{
 },
 {
   id: 4,
-  title: 'Cleric',
+  name: 'Cleric',
   key: 'cleric',
   primaryAbility: AbilityScore.WIS,
   secondaryAbility: AbilityScore.STR,
@@ -36,7 +36,7 @@ const dndClasses = [{
 },
 {
   id: 5,
-  title: 'Druid',
+  name: 'Druid',
   key: 'druid',
   primaryAbility: AbilityScore.WIS,
   secondaryAbility: AbilityScore.DEX,
@@ -46,27 +46,27 @@ const dndClasses = [{
 {
   id: 6,
   key: 'fighter',
-  title: 'Fighter',
+  name: 'Fighter',
   primaryAbility: AbilityScore.STR,
   secondaryAbility: AbilityScore.CON,
 },
 {
   id: 7,
   key: 'gunslinger',
-  title: 'Gunslinger',
+  name: 'Gunslinger',
   primaryAbility: AbilityScore.DEX,
 },
 {
   id: 8,
   key: 'monk',
-  title: 'Monk',
+  name: 'Monk',
   primaryAbility: AbilityScore.DEX,
   secondaryAbility: AbilityScore.WIS,
 },
 {
   id: 9,
   key: 'paladin',
-  title: 'Paladin',
+  name: 'Paladin',
   primaryAbility: AbilityScore.STR,
   secondaryAbility: AbilityScore.CHA,
   spellcastingAbility: AbilityScore.CHA,
@@ -74,7 +74,7 @@ const dndClasses = [{
 },
 {
   id: 10,
-  title: 'Ranger',
+  name: 'Ranger',
   key: 'ranger',
   primaryAbility: AbilityScore.DEX,
   secondaryAbility: AbilityScore.WIS,
@@ -83,13 +83,13 @@ const dndClasses = [{
 },
 {
   id: 11,
-  title: 'Rogue',
+  name: 'Rogue',
   key: 'rogue',
   primaryAbility: AbilityScore.DEX,
 },
 {
   id: 12,
-  title: 'Sorcerer',
+  name: 'Sorcerer',
   key: 'sorcerer',
   primaryAbility: AbilityScore.CHA,
   secondaryAbility: AbilityScore.DEX,
@@ -98,7 +98,7 @@ const dndClasses = [{
 },
 {
   id: 13,
-  title: 'Warlock',
+  name: 'Warlock',
   key: 'warlock',
   primaryAbility: AbilityScore.CHA,
   secondaryAbility: AbilityScore.DEX,
@@ -107,7 +107,7 @@ const dndClasses = [{
 },
 {
   id: 14,
-  title: 'Wizard',
+  name: 'Wizard',
   key: 'wizard',
   primaryAbility: AbilityScore.INT,
   secondaryAbility: AbilityScore.DEX,

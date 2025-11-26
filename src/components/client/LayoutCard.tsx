@@ -15,7 +15,7 @@ const LayoutCard = ({ card }: { card: CardType }) => (
 		<CardContent>
 			<Grid container flexDirection="column">
 					<Typography>
-						{card.title}
+						{card.name}
 					</Typography>
 
 				<Grid>
