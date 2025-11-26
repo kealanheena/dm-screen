@@ -18,6 +18,8 @@ export async function getPlayerCharacters() {
 			name: true,
 			url: true,
 			class: true,
+			species: true,
+			subspecies: true,
 		},
 		orderBy: {
 			name: 'asc', // Sort by creation date in descending order

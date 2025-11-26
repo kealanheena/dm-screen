@@ -8,7 +8,7 @@ const species = [{
   key: 'dragonborn',
   name: 'Dragonborn',
   updatedAt: new Date(),
-  subSpecies: [
+  subspecies: [
     { key: 'dragonborn_black', name: 'Black' },
     { key: 'dragonborn_blue', name: 'Blue' },
     { key: 'dragonborn_brass', name: 'Brass' },
@@ -28,7 +28,7 @@ const species = [{
   key: 'elf',
   name: 'Elf',
   updatedAt: new Date(),
-  subSpecies: [
+  subspecies: [
     { key: 'elf_drow', name: 'Drow' },
     { key: 'elf_high', name: 'High' },
     { key: 'elf_wood', name: 'Wood' },
@@ -37,7 +37,7 @@ const species = [{
   key: 'gnome',
   name: 'Gnome',
   updatedAt: new Date(),
-  subSpecies: [
+  subspecies: [
     { key: 'gnome_forest', name: 'Forest' },
     { key: 'gnome_rock', name: 'Rock' },
   ]
@@ -45,7 +45,7 @@ const species = [{
   key: 'goliath',
   name: 'Goliath',
   updatedAt: new Date(),
-  subSpecies: [
+  subspecies: [
     { key: 'goliath_cloud_giant', name: 'Cloud Giant' },
     { key: 'goliath_fire_giant', name: 'Fire Giant' },
     { key: 'goliath_frost_giant', name: 'Frost Giant' },
@@ -69,7 +69,7 @@ const species = [{
   key: 'tiefling',
   name: 'Tiefling',
   updatedAt: new Date(),
-  subSpecies: [
+  subspecies: [
     { key: 'tiefling_abyssal', name: 'Abyssal' },
     { key: 'tiefling_chthonic', name: 'Chthonic' },
     { key: 'tiefling_infernal', name: 'Infernal' },
@@ -222,32 +222,32 @@ async function main() {
 		create: dndClass,
 		update: dndClass,
 	}));
-  const speicesTasks = species.map(async ({ subSpecies = [], ...speciesSingular }) => {
+  const speicesTasks = species.map(async ({ subspecies = [], ...speciesSingular }) => {
     const newSpecies = await prisma.species.upsert({
       where: { key: speciesSingular.key },
       create: speciesSingular,
       update: speciesSingular,
     });
 
-    const subSpeciesTasks = subSpecies.map(async (subSpeciesSingular) => (
-      prisma.subSpecies.upsert({
-        where: { key: subSpeciesSingular.key },
+    const subspeciesTasks = subspecies.map(async (subspeciesSingular) => (
+      prisma.subspecies.upsert({
+        where: { key: subspeciesSingular.key },
         create: {
           speciesId: newSpecies.id,
-          ...subSpeciesSingular,
+          ...subspeciesSingular,
         },
         update: {
           speciesId: newSpecies.id,
-          ...subSpeciesSingular,
+          ...subspeciesSingular,
         },
       })
     ));
     
-    const newSubSpecies = await Promise.all(subSpeciesTasks);
+    const newSubspecies = await Promise.all(subspeciesTasks);
 
     return {
       ...newSpecies,
-      subSpecies: newSubSpecies,
+      subspecies: newSubspecies,
     }
   });
   const speciesResult = await Promise.all(speicesTasks);

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { map } from 'lodash';
+import { capitalize, map } from 'lodash';
 
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
@@ -47,7 +47,7 @@ export default async function PlayerCharacters() {
 									secondary={
 										<Fragment>
 											<Typography component="span" variant="body2">{`class: ${pc.class.name}`}</Typography>
-											{/* <Typography variant="body2">{`species: ${capitalize(pc.species?.name)}`}</Typography> */}
+											<Typography variant="body2">{`species${pc.subspecies?.name ? ' (subspecies)'  : ''}: ${capitalize(pc.species?.name)}${pc.subspecies?.name ? ` (${capitalize(pc.subspecies?.name)})`  : ''}`}</Typography>
 											
 										</Fragment>
 									}

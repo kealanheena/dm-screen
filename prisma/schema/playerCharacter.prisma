@@ -3,15 +3,15 @@ model PlayerCharacter {
   campaignId Int?
   classId Int
   speciesId Int
-  subSpeciesId Int?
+  subspeciesId Int?
 
   name String
   url String?
 
   campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
-  species Species? @relation(fields: [speciesId], references: [id], onDelete: Cascade)
-  subSpecies SubSpecies? @relation(fields: [subSpeciesId], references: [id], onDelete: Cascade)
+  species Species @relation(fields: [speciesId], references: [id], onDelete: Cascade)
+  subspecies Subspecies? @relation(fields: [subspeciesId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

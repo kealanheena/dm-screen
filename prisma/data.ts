@@ -1,4 +1,3 @@
-import PlayerCharacters from "@/components/server/PlayerCharacters";
 import { AbilityScore } from "@prisma/client";
 
 // TODO: Figure out why this data isn't being imported to seed.ts
@@ -142,7 +141,7 @@ const data = {
 		key: 'dragonborn',
 		name: 'Dragonborn',
 		updatedAt: new Date(),
-		subSpecies: [
+		subspecies: [
 			{ key: 'dragonborn_black', name: 'Black' },
 			{ key: 'dragonborn_blue', name: 'Blue' },
 			{ key: 'dragonborn_brass', name: 'Brass' },
@@ -162,7 +161,7 @@ const data = {
 		key: 'elf',
 		name: 'Elf',
 		updatedAt: new Date(),
-		subSpecies: [
+		subspecies: [
 			{ key: 'elf_drow', name: 'Drow' },
 			{ key: 'elf_high', name: 'High' },
 			{ key: 'elf_wood', name: 'Wood' },
@@ -171,7 +170,7 @@ const data = {
 		key: 'gnome',
 		name: 'Gnome',
 		updatedAt: new Date(),
-		subSpecies: [
+		subspecies: [
 			{ key: 'gnome_forest', name: 'Forest' },
 			{ key: 'gnome_rock', name: 'Rock' },
 		]
@@ -179,7 +178,7 @@ const data = {
 		key: 'goliath',
 		name: 'Goliath',
 		updatedAt: new Date(),
-		subSpecies: [
+		subspecies: [
 			{ key: 'goliath_cloud_giant', name: 'Cloud Giant' },
 			{ key: 'goliath_fire_giant', name: 'Fire Giant' },
 			{ key: 'goliath_frost_giant', name: 'Frost Giant' },
@@ -203,7 +202,7 @@ const data = {
 		key: 'tiefling',
 		name: 'Tiefling',
 		updatedAt: new Date(),
-		subSpecies: [
+		subspecies: [
 			{ key: 'tiefling_abyssal', name: 'Abyssal' },
 			{ key: 'tiefling_chthonic', name: 'Chthonic' },
 			{ key: 'tiefling_Infernal', name: 'Infernal' },
