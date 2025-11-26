@@ -3,7 +3,7 @@ import { capitalize, map } from 'lodash';
 
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
-import { Card, CardContent, Grid, List, ListItem, ListItemText, Typography, IconButton, Link } from '@mui/material';
+import { Card, CardContent, Grid, List, ListItem, ListItemText, Typography, IconButton } from '@mui/material';
 import { Add, Groups, OpenInNew, Person } from '@mui/icons-material';
 
 
@@ -47,7 +47,10 @@ export default async function PlayerCharacters() {
 									secondary={
 										<Fragment>
 											<Typography component="span" variant="body2">{`class: ${pc.class.name}`}</Typography>
-											<Typography variant="body2">{`species: ${pc.subspecies?.name ? ` ${capitalize(pc.subspecies?.name)} `  : ''}${capitalize(pc.species?.name)}`}</Typography>
+											<Typography variant="body2">{`species:
+												${pc.subspecies?.name ? ` ${capitalize(pc.subspecies?.name)} `  : ''}
+												${capitalize(pc.species?.name)}
+											`}</Typography>
 											
 										</Fragment>
 									}
