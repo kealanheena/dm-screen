@@ -16,6 +16,7 @@ export async function getPlayerCharacters() {
 		select: {
 			id: true,
 			name: true,
+			url: true,
 			class: true,
 		},
 		orderBy: {

@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
-import { capitalize, map } from 'lodash';
+import { map } from 'lodash';
 
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
-import { Card, CardContent, Grid, List, ListItem, ListItemText, Typography, IconButton } from '@mui/material';
+import { Card, CardContent, Grid, List, ListItem, ListItemText, Typography, IconButton, Link } from '@mui/material';
 import { Add, Groups, OpenInNew, Person } from '@mui/icons-material';
 
 
@@ -46,16 +46,21 @@ export default async function PlayerCharacters() {
 									}
 									secondary={
 										<Fragment>
-											<Typography component="span" variant="body2">{`class: ${pc.class?.title}`}</Typography>
-											<Typography variant="body2">{`species: ${capitalize(pc.species)}`}</Typography>
+											<Typography component="span" variant="body2">{`class: ${pc.class.title}`}</Typography>
+											{/* <Typography variant="body2">{`species: ${capitalize(pc.species?.title)}`}</Typography> */}
 											
 										</Fragment>
 									}
 									sx={{ pl: 0.5 }} 
 								/>
-								<IconButton> 
-									<OpenInNew />
-								</IconButton>
+								{pc.url && (
+									<IconButton
+										// TODO: for clickable element this must be a client component
+										// onClick={() => window.open(pc.url, '_blank')}
+									>
+										<OpenInNew />
+									</IconButton>
+								)}
 							</ListItem>
 						))}
 					</List>
