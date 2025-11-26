@@ -27,18 +27,18 @@ const select = {
 }
 
 
-export async function createScreen(data: Pick<DMScreenType, "title">) {
+export async function createScreen(data: Pick<DMScreenType, "name">) {
 	const userId = await getDbUserId();
 
 	if (!userId) {
 		return;
 	}
 
-	const { title } = data;
+	const { name } = data;
 
 	return prisma.screen.create({
 		data: {
-			name: trim(title),
+			name: trim(name),
 			userId,
 		}
 	});
@@ -77,14 +77,14 @@ export async function getScreenById(id: number) {
 
 export async function updateScreen(
 	id: number,
-	data: Pick<DMScreenType, "title">,
+	data: Pick<DMScreenType, "name">,
 ) {
 	const { name } = data;
 
  	return prisma.screen.update({
 		where: { id },
 		data: {
-			name: trim(title),
+			name: trim(name),
 		}
 	});
 }

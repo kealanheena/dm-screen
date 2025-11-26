@@ -80,7 +80,7 @@ export async function getUserScreens(userId: number) {
 			where,
 			select: {
 				id: true,
-				title: true,
+				name: true,
 			}
 		}),
     prisma.screen.count({ where })

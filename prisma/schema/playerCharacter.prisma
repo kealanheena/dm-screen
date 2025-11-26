@@ -2,7 +2,7 @@ model PlayerCharacter {
   id Int @id @default(autoincrement())
   campaignId Int?
   classId Int
-  speciesId Int?
+  speciesId Int
   subSpeciesId Int?
 
   name String
