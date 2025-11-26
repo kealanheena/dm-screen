@@ -9,8 +9,7 @@ import { redirect, RedirectType } from "next/navigation";
 
 interface ItemsType {
 	id: number;
-	name?: string;
-	title?: string;
+	name: string;
 }
 interface ScreenListItemProps {
 	items: ItemsType[];
@@ -54,7 +53,7 @@ export default function List({ items, itemKey }: ScreenListItemProps) {
 				>
 					<ListItem>
 						{getIcon()}
-						<ListItemText sx={{ pl: 0.5 }} primary={`${item.title || item.name}`} />
+						<ListItemText sx={{ pl: 0.5 }} primary={`${item.name}`} />
 					</ListItem>
 				</ListItemButton>
 			))}
