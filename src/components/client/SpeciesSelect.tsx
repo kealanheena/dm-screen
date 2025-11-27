@@ -34,7 +34,7 @@ export default function SpeciesSelect() {
 		getSpeciesData();
 	}, []);
 
-	const onChangeSpecies = (event: SelectChangeEvent<{ value: number }>) => {
+	const onChangeSpecies = (event: SelectChangeEvent) => {
 		const newSelectedSpecies = find(species, ['id', event.target.value]) || null;
 		setSelectedSpecies(newSelectedSpecies);
 
@@ -52,6 +52,8 @@ export default function SpeciesSelect() {
 					labelId="species-select"
 					id="species-select"
 					value={selectedSpecies?.id || null}
+					// @ts-expect-error MUI onChange accepts an SelectChangeEvent, however
+					// the onChange function here still throws an error which is unfixable
 					onChange={onChangeSpecies}
 					label="Species"
 				>
