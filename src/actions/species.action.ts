@@ -9,12 +9,11 @@ export async function getSpecies() {
 			id: true,
 			name: true,
 			subSpecies: {
-				select: {
-					id: true,
-					name: true,
-				}
+				select: { id: true, name: true },
+				orderBy: { name: 'asc' }
 			},
-		}
+		},
+		orderBy: { name: 'asc' }
 	})
 	
 }
