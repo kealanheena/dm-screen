@@ -16,3 +16,34 @@ model PlayerCharacter {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model NonPlayerCharacter {
+  id Int @id @default(autoincrement())
+  campaignId Int?
+
+  name String
+  creatureType CreatureType
+  url String?
+
+  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum CreatureType {
+  ABERRATIONS
+  BEASTS
+  CELESTIALS
+  CONSTRUCTS
+  DRAGONS
+  ELEMENTAL
+  FEY
+  FIENDS
+  GIANTS
+  HUMANOIDS
+  MONSTROSITIES
+  OOZES
+  PLANTS
+  UNDEAD
+}
