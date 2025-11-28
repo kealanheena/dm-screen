@@ -6,17 +6,8 @@ import { find, map } from 'lodash';
 import { MenuItem, SelectChangeEvent, TextField } from '@mui/material';
 import { getSpecies } from '@/actions/species.action';
 
+import { SpeciesType, SubspeciesType } from '@/types';
 
-interface SubspeciesType {
-	id: number;
-	name: string;
-}
-
-interface SpeciesType {
-	id: number;
-	name: string;
-	subSpecies: SubspeciesType[];
-}
 
 export default function SpeciesSelect() {
 	const [species, setSpecies] = useState<SpeciesType[]>([]);

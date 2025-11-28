@@ -44,3 +44,14 @@ export interface FullCampaignType extends CampaignType {
 export interface ServerPageProps {
   params: { id: string };
 };
+
+export interface SubspeciesType {
+	id: number;
+	name: string;
+}
+
+export interface SpeciesType {
+	id: number;
+	name: string;
+	subSpecies: SubspeciesType[];
+}
