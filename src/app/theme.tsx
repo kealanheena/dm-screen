@@ -107,6 +107,20 @@ export const themeOptions: ThemeOptions = {
           padding: 0,
         }
       }
-    }
+    },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          padding: 5,
+        }
+      }
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fontSize: 18,
+        }
+      }
+    },
   },
 };
