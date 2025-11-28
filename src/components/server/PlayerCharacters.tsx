@@ -4,7 +4,9 @@ import { capitalize, map } from 'lodash';
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
 import { Card, CardContent, Grid, List, ListItem, ListItemText, Typography, IconButton } from '@mui/material';
-import { Add, Groups, OpenInNew, Person } from '@mui/icons-material';
+import { Groups, OpenInNew, Person } from '@mui/icons-material';
+import PlayerCharacterFormDialog from "@/components/client/PlayerCharacterFormDialog";
+
 
 
 export default async function PlayerCharacters() {
@@ -19,9 +21,7 @@ export default async function PlayerCharacters() {
 						<Typography sx={{ pl: 1 }} variant="h6">Player characters</Typography>
 					</Grid>
 
-					<IconButton> 
-						<Add />
-					</IconButton>
+					<PlayerCharacterFormDialog />
 				</Grid>
 
 				<Grid>

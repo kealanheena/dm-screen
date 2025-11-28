@@ -3,7 +3,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { find, map } from 'lodash';
 
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { getClasses } from '@/actions/class.action';
 
 
@@ -27,30 +27,23 @@ export default function ClassSelect() {
 		getClassesData();
 	}, []);
 
-	const onChangeSpecies = (event: SelectChangeEvent) => {
+	const onChangeClass = (event: SelectChangeEvent) => {
 		const newSelectedSpecies = find(classes, ['id', event.target.value]) || null;
 		setSelectedClass(newSelectedSpecies);
 	};
 
 	return (
-		<Fragment>
-			<FormControl margin="dense" fullWidth>
-				<InputLabel id="species-select">Species</InputLabel>
-				<Select
-					autoFocus
-					labelId="species-select"
-					id="species-select"
-					value={selectedClass?.id || null}
-					// @ts-expect-error MUI onChange accepts an SelectChangeEvent, however
-					// the onChange function here still throws an error which is unfixable
-					onChange={onChangeSpecies}
-					label="Species"
-				>
-					{map(classes, ({ id, name }) => (
-						<MenuItem value={id}>{name}</MenuItem>
-					))}
-				</Select>
-			</FormControl>
-		</Fragment>
+		<TextField
+			select
+			value={selectedClass?.id || null}
+			// @ts-expect-error MUI onChange accepts an SelectChangeEvent, however
+			// the onChange function here still throws an error which is unfixable
+			onChange={onChangeClass}
+			label="Class"
+		>
+			{map(classes, ({ id, name }) => (
+				<MenuItem value={id}>{name}</MenuItem>
+			))}
+		</TextField>
 	);
 }

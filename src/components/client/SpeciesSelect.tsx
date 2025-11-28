@@ -3,7 +3,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { find, map } from 'lodash';
 
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { getSpecies } from '@/actions/species.action';
 
 
@@ -45,41 +45,30 @@ export default function SpeciesSelect() {
 
 	return (
 		<Fragment>
-			<FormControl margin="dense" fullWidth>
-				<InputLabel id="species-select">Species</InputLabel>
-				<Select
-					autoFocus
-					labelId="species-select"
-					id="species-select"
-					value={selectedSpecies?.id || null}
-					// @ts-expect-error MUI onChange accepts an SelectChangeEvent, however
-					// the onChange function here still throws an error which is unfixable
-					onChange={onChangeSpecies}
-					label="Species"
-				>
-					{map(species, ({ id, name }) => (
-						<MenuItem value={id}>{name}</MenuItem>
-					))}
-				</Select>
-			</FormControl>
+			<TextField
+				select
+				value={selectedSpecies?.id || null}
+				// @ts-expect-error MUI onChange accepts an SelectChangeEvent, however
+				// the onChange function here still throws an error which is unfixable
+				onChange={onChangeSpecies}
+				label="Species"
+			>
+				{map(species, ({ id, name }) => <MenuItem value={id}>{name}</MenuItem>)}
+			</TextField>
 
 			{selectedSpecies && selectedSpecies.subSpecies.length !== 0 && (
-				<FormControl margin="dense" fullWidth>
-					<InputLabel id="subspecies-select">Subspecies</InputLabel>
-					<Select
-						labelId="subspecies-select"
-						id="subspecies-select"
-						value={selectedSubspecies?.id || null}
-						onChange={(event) => setSelectedSubspecies(
-							find(selectedSpecies.subSpecies, ['id', event.target.value]) || null
-						)}
-						label="Subspecies"
-					>
-						{map(selectedSpecies.subSpecies, ({ id, name }) => (
-							<MenuItem value={id}>{name}</MenuItem>
-						))}
-					</Select>
-				</FormControl>
+				<TextField
+					select
+					value={selectedSubspecies?.id || null}
+					onChange={(event) => setSelectedSubspecies(
+						find(selectedSpecies.subSpecies, ['id', event.target.value]) || null
+					)}
+					label="Subspecies"
+				>
+					{map(selectedSpecies.subSpecies, ({ id, name }) => (
+						<MenuItem value={id}>{name}</MenuItem>
+					))}
+				</TextField>
 			)}
 		</Fragment>
 	);
