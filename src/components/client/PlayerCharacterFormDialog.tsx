@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState } from 'react';
 
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, TextField } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import SpeciesSelect from './SpeciesSelect';
 import ClassSelect from './ClassSelect';
