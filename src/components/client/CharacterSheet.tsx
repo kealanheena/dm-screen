@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import './CharacterSheet.css'
 
 import { Card, Divider, Grid, Radio, Typography } from '@mui/material';
 import { map } from 'lodash';
@@ -33,8 +34,45 @@ const ModifierCard = ({ ability: initialAbility, profiency = 2 }) => {
 	}
 
 	return (
-		<div style={{ padding: '8px' }}>
-			<Card sx={{ textAlign: 'center' }}>
+		<div style={{ padding: '4px', fontSize: '1rem' }}>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					borderColor: ability.color,
+					borderStyle: 'solid',
+					borderWidth: '2px',
+					borderRadius: '1rem'
+				}}
+			>
+				<p>{ability.name}</p>
+				<div style={{ display: 'flex' }}>
+					<div>
+						<p>{abilityModifier}</p>
+						<p>Modifier</p>
+					</div>
+
+					<div>
+						<p>{ability.score}</p>
+						<p>Score</p>
+					</div>
+				</div>
+				<div style={{ display: 'flex' }}>
+					<label>
+						<input
+							type="radio"
+							onClick={handleRadioClick(null, 'save')}
+							checked={ability.savingThrow.isProficient}
+						/>
+						{ability.savingThrow.isProficient
+							? abilityModifier + profiency
+							: abilityModifier
+						}
+					</label>
+					<p>Saving Throw</p>
+				</div>
+			</div>
+			{/* <Card sx={{ textAlign: 'center' }}>
 				<Typography variant='body1'>{ability.name}</Typography>
 				<Grid container justifyContent="center">
 					<Grid
@@ -89,17 +127,19 @@ const ModifierCard = ({ ability: initialAbility, profiency = 2 }) => {
 						</Grid>
 					))}
 				</Grid>
-			</Card>
+			</Card> */}
 		</div>
 	)
 }
 
 
 const CharacterSheet = () => {
+	const profiency = 2;
 	const [abilities, setAbilities] = useState([
 		{
 			name: 'STRENGTH',
 			score: 16,
+			color: 'red',
 			savingThrow: {
 				isProficient: false,
 			},
@@ -110,6 +150,7 @@ const CharacterSheet = () => {
 			}]
 		}, {
 			name: 'DEXTERITY',
+			color: 'green',
 			score: 8,
 			savingThrow: {
 				isProficient: false,
@@ -130,6 +171,7 @@ const CharacterSheet = () => {
 		}, {
 			name: 'CONSTITUTION',
 			score: 16,
+			color: 'yellow',
 			savingThrow: {
 				isProficient: false,
 			},
@@ -137,6 +179,7 @@ const CharacterSheet = () => {
 		}, {
 			name: 'INTELLIGENCE',
 			score: 16,
+			color: 'blue',
 			savingThrow: {
 				isProficient: true,
 			},
@@ -167,6 +210,7 @@ const CharacterSheet = () => {
 			savingThrow: {
 				isProficient: true,
 			},
+			color: 'violet',
 			skills: [{
 				id: 10,
 				name: 'Animal Handling',
@@ -191,6 +235,7 @@ const CharacterSheet = () => {
 		}, {
 			name: 'CHARISMA',
 			score: 14,
+			color: 'magenta',
 			savingThrow: {
 				isProficient: false,
 			},
@@ -216,22 +261,32 @@ const CharacterSheet = () => {
 	return (
 		<Grid container>
 			<Grid size={3} display="flex">
-				<Grid size={6}>
-					<Card>
-						<Typography>Profiency Bonus</Typography>
-						<Typography variant='h5'>+2</Typography>
-					</Card>
+				<Grid size={6} display="flex" flexDirection="column">
+					<Grid flexGrow={1}>
+						<div style={{ padding: '4px' }}>
+							<Card>
+								<Typography>Profiency Bonus</Typography>
+								<Typography variant='h5'>+{profiency}</Typography>
+							</Card>
+						</div>
+					</Grid>
+
 
 					{map(abilities.slice(0, 3), (ability) => <ModifierCard ability={ability} />)}
 
-					<Card>
-						<Typography>Heroic Inspiration</Typography>
-						<Divider />
-						<Radio
-							// checked
-							size="small"
-						/>
-					</Card>
+					<Grid flexGrow={1}>
+						<div style={{ padding: '4px' }}>
+							<Card>
+								<Typography>Heroic Inspiration</Typography>
+								<Divider />
+								<Radio
+									// checked
+									size="small"
+								/>
+							</Card>
+						</div>
+					</Grid>
+				
 				</Grid>
 
 				<Grid size={6}>
