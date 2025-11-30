@@ -7,6 +7,7 @@ import { map } from 'lodash';
 import ModifierScore from './ModifierScore';
 import Profiency from './Profiency';
 import SavingThrow from './SavingThrow';
+import Skill from './Skill';
 
 interface AbilityType {
 	name: string;
@@ -88,20 +89,7 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 					<hr />
 
 					{map(ability.skills, ({ id, name, isProficient }) => (
-						<div style={{ display: 'flex' }}>
-							<label>
-								<input
-									type="radio"
-									onClick={handleRadioClick(id)}
-									checked={isProficient}
-								/>
-								{isProficient
-									? abilityModifier + Profiency
-									: abilityModifier
-								}
-							</label>
-							<p>{name}</p>
-						</div>
+						<Skill key={id} name={name} score={ability.score} isProficient={isProficient} />
 					))}
 				</div>
 			</div>

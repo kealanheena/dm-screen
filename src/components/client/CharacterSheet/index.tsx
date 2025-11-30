@@ -10,7 +10,7 @@ import AbilityCard from './AbilityCard';
 import Abilities from './Abilities';
 import Profiency from './Profiency';
 
-import './styles.scss'
+// import './styles.scss'
 import ModifierScore from './ModifierScore';
 
 
