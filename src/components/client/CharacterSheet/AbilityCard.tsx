@@ -14,13 +14,11 @@ interface AbilityType {
 	savingThrow: {
 		isProficient: boolean;
 	}
-	skills: Skill[]
-}
-
-interface Skill {
-	id: number;
-	name: string;
-	isProficient: boolean;
+	skills: {
+		id: number;
+		name: string;
+		isProficient: boolean;
+	}[]
 }
 
 interface AbilityCardProps {
