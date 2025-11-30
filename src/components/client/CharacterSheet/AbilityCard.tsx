@@ -78,13 +78,13 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 						flexDirection: 'column',
 					}}
 				>
-					<p>{ability.name}</p>
+					<p style={{ textAlign: 'center', fontSize: '0.8rem', fontWeight: '900' }}>{ability.name}</p>
 
 					<ModifierScore ability={ability} />
 					
 					<hr />
 
-					<SavingThrow score={ability.score} isProficent={ability.savingThrow.isProficient} />
+					<SavingThrow score={ability.score} isProficient={ability.savingThrow.isProficient} />
 
 					<hr />
 
