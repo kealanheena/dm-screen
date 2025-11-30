@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Card, Divider, Grid, Radio, Typography } from '@mui/material';
 import { map } from 'lodash';
@@ -9,6 +9,9 @@ import AbilityCard from './AbilityCard';
 
 import Abilities from './Abilities';
 import Profiency from './Profiency';
+
+import './styles.scss'
+import ModifierScore from './ModifierScore';
 
 
 const CharacterSheet = () => {
@@ -49,6 +52,7 @@ const CharacterSheet = () => {
 			</Grid>
 
 			<Grid size={9}>
+				<ModifierScore ability={Abilities[0]} />
 				
 			</Grid>
 		</Grid>

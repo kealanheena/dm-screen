@@ -53,56 +53,69 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 	}
 
 	return (
-		<div style={{ padding: '4px', fontSize: '1rem' }}>
+		<div
+			style={{
+				borderColor: ability.color,
+				padding: '4px',
+				fontSize: '1rem',
+			}}
+			>
 			<div
+				className="box"
 				style={{
-					display: 'flex',
-					flexDirection: 'column',
 					borderColor: ability.color,
-					borderStyle: 'solid',
-					borderWidth: '2px',
-					borderRadius: '1rem'
+					padding: '4px',
+					fontSize: '1rem',
 				}}
 			>
-				<p>{ability.name}</p>
+				<div
+					className="box-inner"
+					style={{
+						borderColor: ability.color,
+						display: 'flex',
+						flexDirection: 'column',
+					}}
+				>
+					<p>{ability.name}</p>
 
-				<ModifierScore ability={ability} />
-				
-				<hr />
+					<ModifierScore ability={ability} />
+					
+					<hr />
 
-				<div style={{ display: 'flex' }}>
-					<label>
-						<input
-							type="radio"
-							onClick={handleRadioClick(null, 'save')}
-							checked={ability.savingThrow.isProficient}
-						/>
-						{ability.savingThrow.isProficient
-							? abilityModifier + Profiency
-							: abilityModifier
-						}
-					</label>
-					<p>Saving Throw</p>
-				</div>
-
-				<hr />
-
-				{map(ability.skills, ({ id, name, isProficient }) => (
 					<div style={{ display: 'flex' }}>
 						<label>
 							<input
 								type="radio"
-								onClick={handleRadioClick(id)}
-								checked={isProficient}
+								onClick={handleRadioClick(null, 'save')}
+								checked={ability.savingThrow.isProficient}
 							/>
-							{isProficient
+							{ability.savingThrow.isProficient
 								? abilityModifier + Profiency
 								: abilityModifier
 							}
 						</label>
-						<p>{name}</p>
+						<p>Saving Throw</p>
 					</div>
-				))}
+
+					<hr />
+
+					{map(ability.skills, ({ id, name, isProficient }) => (
+						<div style={{ display: 'flex' }}>
+							<label>
+								<input
+									type="radio"
+									onClick={handleRadioClick(id)}
+									checked={isProficient}
+								/>
+								{isProficient
+									? abilityModifier + Profiency
+									: abilityModifier
+								}
+							</label>
+							<p>{name}</p>
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	)
