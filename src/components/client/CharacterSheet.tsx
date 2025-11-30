@@ -1,10 +1,11 @@
 "use client"
 
 import React, { useState } from 'react';
-import './CharacterSheet.css'
 
 import { Card, Divider, Grid, Radio, Typography } from '@mui/material';
 import { map } from 'lodash';
+
+
 
 const ModifierCard = ({ ability: initialAbility, profiency = 2 }) => {
 	const [ability, setAbility] = useState(initialAbility);
@@ -57,6 +58,9 @@ const ModifierCard = ({ ability: initialAbility, profiency = 2 }) => {
 						<p>Score</p>
 					</div>
 				</div>
+
+				<hr />
+
 				<div style={{ display: 'flex' }}>
 					<label>
 						<input
@@ -71,6 +75,25 @@ const ModifierCard = ({ ability: initialAbility, profiency = 2 }) => {
 					</label>
 					<p>Saving Throw</p>
 				</div>
+
+				<hr />
+
+				{map(ability.skills, ({ id, name, isProficient }) => (
+					<div style={{ display: 'flex' }}>
+						<label>
+							<input
+								type="radio"
+								onClick={handleRadioClick(id)}
+								checked={isProficient}
+							/>
+							{isProficient
+								? abilityModifier + profiency
+								: abilityModifier
+							}
+						</label>
+						<p>{name}</p>
+					</div>
+				))}
 			</div>
 			{/* <Card sx={{ textAlign: 'center' }}>
 				<Typography variant='body1'>{ability.name}</Typography>
