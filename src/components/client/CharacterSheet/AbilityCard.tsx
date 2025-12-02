@@ -8,6 +8,7 @@ import ModifierScore from './ModifierScore';
 import Profiency from './Profiency';
 import SavingThrow from './SavingThrow';
 import Skill from './Skill';
+import { Divider } from '@mui/material';
 
 interface AbilityType {
 	name: string;
@@ -58,8 +59,8 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 		<div
 			style={{
 				borderColor: ability.color,
+				maxWidth: '200px',
 				padding: '4px',
-				fontSize: '1rem',
 			}}
 			>
 			<div
@@ -82,11 +83,11 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 
 					<ModifierScore ability={ability} />
 					
-					<hr />
+					<Divider />
 
 					<SavingThrow score={ability.score} isProficient={ability.savingThrow.isProficient} />
 
-					<hr />
+					<Divider />
 
 					{map(ability.skills, ({ id, name, isProficient }) => (
 						<Skill key={id} name={name} score={ability.score} isProficient={isProficient} />
