@@ -52,7 +52,7 @@ const CharacterSheet = () => {
 			</Grid>
 
 			<Grid size={9}>
-				<ModifierScore ability={Abilities[0]} />
+				<AbilityCard ability={Abilities[0]} />
 				
 			</Grid>
 		</Grid>
