@@ -19,7 +19,7 @@ const SavingThrow = ({ score, isProficient }: AbilityCardProps) => {
 			<label>
 				<input
 					type="radio"
-					checked={isProficient}
+					// checked={isProficient}
 					style={{ paddingRight: '1rem', height: '0.75rem', width: '0.75rem' }}
 				/>
 			</label>

@@ -50,7 +50,8 @@ const Ability = ({ ability }: { ability: AbilityType }) => {
 					justifyContent: 'center'
 				}}
 			>
-				<input
+				<p>{ability.score}</p>
+				{/* <input
 					type="text"
 					value={ability.score}
 					style={{
@@ -58,7 +59,7 @@ const Ability = ({ ability }: { ability: AbilityType }) => {
 						fontSize: '1rem',
 						maxWidth: '1.1rem'
 					}}
-				/>
+				/> */}
 			</div>
 			<p style={{ fontSize: '0.6rem' }}>SCORE</p>
 		</div>
