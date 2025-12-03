@@ -1,0 +1,19 @@
+p {
+	text-align: center;
+	font-size: 0.8rem;
+}
+
+.ability-card-container {
+	max-width: 200px;
+	padding: 4px;
+}
+
+.ability-card-container {
+	max-width: 200px;
+	padding: 4px;
+}
+
+.ability-card-inner {
+	display: flex;
+	flex-direction: column;
+}
