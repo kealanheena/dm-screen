@@ -9,6 +9,7 @@ import SavingThrow from '../SavingThrow';
 import Skill from '../Skill';
 import { Divider } from '@mui/material';
 
+import styled from 'styled-components';
 import './styles.css';
 
 interface AbilityType {
@@ -28,6 +29,31 @@ interface AbilityType {
 interface AbilityCardProps {
 	ability: AbilityType,
 }
+
+const AbilityCardGlow = styled.div`
+	position: relative;
+	max-width: 200px;
+	border-radius: 8px;
+	background-color: white;
+
+	&::after, &::before {
+		content: '';
+		position: absolute;
+		height: 75%;
+		width: 75%;
+		background-color: ${props => props.color || 'rgba(0, 0, 0, 0.5)'};
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		z-index: -1;
+		padding: -20px
+	}
+
+	&::before {
+		filter: blur(1.5rem);
+		opacity: 0.5;
+	}
+`;
 
 const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 	const [ability, setAbility] = useState(initialAbility);
@@ -58,19 +84,21 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 
 	return (
 		<div className='ability-card-container'>
-			<p style={{ textAlign: 'center', fontSize: '0.8rem', fontWeight: '900' }}>{ability.name}</p>
+			<AbilityCardGlow color={ability.color}>
+				<p>{ability.name}</p>
 
-			<ModifierScore ability={ability} />
-			
-			<Divider />
+				<ModifierScore ability={ability} />
+				
+				<Divider />
 
-			<SavingThrow score={ability.score} isProficient={ability.savingThrow.isProficient} />
+				<SavingThrow score={ability.score} isProficient={ability.savingThrow.isProficient} />
 
-			<Divider />
+				<Divider />
 
-			{map(ability.skills, ({ id, name, isProficient }) => (
-				<Skill key={id} name={name} score={ability.score} isProficient={isProficient} />
-			))}
+				{map(ability.skills, ({ id, name, isProficient }) => (
+					<Skill key={id} name={name} score={ability.score} isProficient={isProficient} />
+				))}
+			</AbilityCardGlow>
 		</div>
 	)
 };
