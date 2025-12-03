@@ -10,6 +10,8 @@ import AbilityCard from './AbilityCard';
 import Abilities from './Abilities';
 import Profiency from './Profiency';
 
+import './styles.css'
+
 
 const CharacterSheet = () => {
 	return (
@@ -26,7 +28,7 @@ const CharacterSheet = () => {
 					</Grid>
 
 
-					{map(Abilities.slice(0, 3), (ability) => <AbilityCard ability={ability} />)}
+					{map(Abilities.slice(0, 3), (ability) => <AbilityCard key={ability.name}  ability={ability} />)}
 
 					<Grid flexGrow={1}>
 						<div style={{ padding: '4px' }}>
@@ -44,13 +46,10 @@ const CharacterSheet = () => {
 				</Grid>
 
 				<Grid size={6}>
-					{map(Abilities.slice(3, 6), (ability) => <AbilityCard ability={ability} />)}
+					{map(Abilities.slice(3, 6), (ability) =>
+					<AbilityCard key={ability.name} ability={ability} />
+					)}
 				</Grid>
-			</Grid>
-
-			<Grid size={9}>
-				<AbilityCard ability={Abilities[0]} />
-				
 			</Grid>
 		</Grid>
 	)
