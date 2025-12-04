@@ -34,13 +34,14 @@ const AbilityCardGlow = styled.div`
 	position: relative;
 	max-width: 200px;
 	border-radius: 8px;
-	background-color: white;
+	// background-color: white;
 
 	&::after, &::before {
 		content: '';
 		position: absolute;
-		height: 75%;
-		width: 75%;
+		height: 100%;
+		width: 100%;
+		border-radius: 8px;
 		background-color: ${props => props.color || 'rgba(0, 0, 0, 0.5)'};
 		top: 50%;
 		left: 50%;
@@ -50,7 +51,7 @@ const AbilityCardGlow = styled.div`
 	}
 
 	&::before {
-		filter: blur(1.5rem);
+		filter: blur(0.5rem);
 		opacity: 0.5;
 	}
 `;
@@ -84,10 +85,21 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 
 	return (
 		<div className='ability-card-container'>
-			<AbilityCardGlow color={ability.color}>
-				<p>{ability.name}</p>
+			{/* <div className='border-container'>
+				<div className='corner-top-left' />
+				<div className='corner-top-right' />
+			</div> */}
 
-				<ModifierScore ability={ability} />
+			{/* <AbilityCardGlow color={ability.color}> */}
+				<div className='modifier-score-container'>
+					<div className='border-container'>
+						<div className='modifier-score-border-right' />
+						<div className='modifier-score-border-left' />
+					</div>
+					<p>{ability.name}</p>
+
+					<ModifierScore ability={ability} />
+				</div>
 				
 				<Divider />
 
@@ -98,7 +110,7 @@ const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
 				{map(ability.skills, ({ id, name, isProficient }) => (
 					<Skill key={id} name={name} score={ability.score} isProficient={isProficient} />
 				))}
-			</AbilityCardGlow>
+			{/* </AbilityCardGlow> */}
 		</div>
 	)
 };
