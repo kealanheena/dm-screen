@@ -3,7 +3,7 @@ import React from 'react';
 interface AbilityType {
 	name: string;
 	score: number;
-	color: 'red' | 'blue' | 'yellow' | 'green' | 'violet' | 'magenta';
+	color: string;
 	savingThrow: {
 		isProficient: boolean;
 	}

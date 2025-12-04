@@ -9,13 +9,13 @@ import SavingThrow from '../SavingThrow';
 import Skill from '../Skill';
 import { Divider } from '@mui/material';
 
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import './styles.css';
 
 interface AbilityType {
 	name: string;
 	score: number;
-	color: 'red' | 'blue' | 'yellow' | 'green' | 'violet' | 'magenta';
+	color: string;
 	savingThrow: {
 		isProficient: boolean;
 	}
@@ -30,34 +30,37 @@ interface AbilityCardProps {
 	ability: AbilityType,
 }
 
-const AbilityCardGlow = styled.div`
-	position: relative;
-	max-width: 200px;
-	border-radius: 8px;
-	// background-color: white;
+// const AbilityCardGlow = styled.div`
+// 	position: relative;
+// 	max-width: 200px;
+// 	border-radius: 8px;
+// 	// background-color: white;
 
-	&::after, &::before {
-		content: '';
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		border-radius: 8px;
-		background-color: ${props => props.color || 'rgba(0, 0, 0, 0.5)'};
-		top: 50%;
-		left: 50%;
-		translate: -50% -50%;
-		z-index: -1;
-		padding: -20px
-	}
+// 	&::after, &::before {
+// 		content: '';
+// 		position: absolute;
+// 		height: 100%;
+// 		width: 100%;
+// 		border-radius: 8px;
+// 		background-color: ${props => props.color || 'rgba(0, 0, 0, 0.5)'};
+// 		top: 50%;
+// 		left: 50%;
+// 		translate: -50% -50%;
+// 		z-index: -1;
+// 		padding: -20px
+// 	}
 
-	&::before {
-		filter: blur(0.5rem);
-		opacity: 0.5;
-	}
-`;
+// 	&::before {
+// 		filter: blur(0.5rem);
+// 		opacity: 0.5;
+// 	}
+// `;
 
 const AbilityCard = ({ ability: initialAbility }: AbilityCardProps) => {
-	const [ability, setAbility] = useState(initialAbility);
+	const [
+		ability,
+		// setAbility
+	] = useState(initialAbility);
 
 	// const abilityModifier = Math.floor((ability.score -10)/2);
 

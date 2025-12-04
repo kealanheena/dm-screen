@@ -28,7 +28,9 @@ const CharacterSheet = () => {
 					</Grid>
 
 
-					{map(Abilities.slice(0, 3), (ability) => <AbilityCard key={ability.name}  ability={ability} />)}
+					{map(Abilities.slice(0, 3), (ability) => (
+						<AbilityCard key={ability.name}  ability={ability} />
+					))}
 
 					<Grid flexGrow={1}>
 						<div style={{ padding: '4px' }}>
