@@ -2,7 +2,7 @@ import React from 'react';
 import { find } from 'lodash';
 
 import { getScreens } from '@/actions/screen.action';
-import { Box, Divider, Grid } from '@mui/material'; 
+import { Grid } from '@mui/material'; 
 
 import { DMScreenType } from '@/types';
 
