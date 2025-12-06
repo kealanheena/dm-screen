@@ -14,8 +14,6 @@ interface FormDataType extends PlayerCharacterType {
 
 
 interface ScreenContextType {
-	selectedSection: SectionType | undefined;
-	setSelectedSection: React.Dispatch<React.SetStateAction<SectionType | undefined>>;
 	isCustomizing: boolean;
 	setIsCustomizing: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -27,8 +25,6 @@ interface FormDataContextType {
 
 
 const defaultScreenContext = {
-	selectedSection: undefined,
-	setSelectedSection: () => {},
 	isCustomizing: false,
 	setIsCustomizing: () => {},
 }

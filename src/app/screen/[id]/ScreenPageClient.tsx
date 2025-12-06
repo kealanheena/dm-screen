@@ -8,6 +8,7 @@ import { FullDMScreenType } from '@/types'
 import { ScreenContext } from '@/app/context'
 
 import './styles.css'
+import { Card } from "@mui/material";
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -19,33 +20,23 @@ export default function BasicLayout({
 	cols = 12,
 	...props
 }) {
+	const { isCustomizing } = useContext(ScreenContext);
+	
 	const [layout, setLayout] = useState([]);
 	// const [screen, setScreen] = useState<FullDMScreenType>(initialScreen);
-	const {
-		isCustomizing,
-		selectedSection,
-		setSelectedSection
-	} = useContext(ScreenContext);
-	// const [items, setItems] = useState(itemsProps);
-  // constructor(props) {
-  //   super(props);
-
-  //   const layout = this.generateLayout();
-  //   this.state = { layout };
-  // }
 
   const generateDOM = () => {
     return _.map(_.range(items), function(i) {
       return (
-        <div key={i}>
+        <Card key={i}>
           <span className="text">{i}</span>
-        </div>
+        </Card>
       );
     });
   }
 
   const onLayoutChange = (layout) => {
-		console.log({ layout });
+		// console.log({ layout });
 		onLayoutChangeX(layout);
 	}
 
@@ -55,6 +46,8 @@ export default function BasicLayout({
 				<div />
 			) : (
 				<ReactGridLayout
+					isDraggable={isCustomizing}
+					isResizable={isCustomizing}
 					layout={layout}
 					onLayoutChange={onLayoutChange}
 					{...props}
@@ -62,7 +55,6 @@ export default function BasicLayout({
 					{generateDOM()}
 				</ReactGridLayout>
 			)}
-			
 		</Fragment>
 	);
 }

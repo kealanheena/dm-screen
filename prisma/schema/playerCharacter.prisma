@@ -1,16 +1,16 @@
 model PlayerCharacter {
-  id Int @id @default(autoincrement())
-  campaignId Int?
-  classId Int
-  speciesId Int
+  id           Int  @id @default(autoincrement())
+  campaignId   Int?
+  classId      Int
+  speciesId    Int
   subspeciesId Int?
 
   name String
-  url String?
+  url  String?
 
-  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
-  species Species @relation(fields: [speciesId], references: [id], onDelete: Cascade)
+  campaign   Campaign?   @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  class      Class       @relation(fields: [classId], references: [id], onDelete: Cascade)
+  species    Species     @relation(fields: [speciesId], references: [id], onDelete: Cascade)
   subspecies Subspecies? @relation(fields: [subspeciesId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
@@ -18,12 +18,12 @@ model PlayerCharacter {
 }
 
 model NonPlayerCharacter {
-  id Int @id @default(autoincrement())
+  id         Int  @id @default(autoincrement())
   campaignId Int?
 
-  name String
+  name         String
   creatureType CreatureType
-  url String?
+  url          String?
 
   campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 

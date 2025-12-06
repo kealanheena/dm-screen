@@ -1,56 +1,53 @@
 model Screen {
-  id Int @id @default(autoincrement())
-  userId Int
+  id         Int  @id @default(autoincrement())
+  userId     Int
   campaignId Int?
 
-  name String
+  name       String
   isTemplate Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relations
-  sections Section[]
+  cards    Card[]
   // "onDelete: cascade" means delete all posts if the author is deleted
-  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  owner    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
   @@index(userId)
 }
 
-model Section {
-  id Int @id @default(autoincrement())
-  screenId Int
-
-  start Int
-  width Int
-
-  cards Card[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relation
-  screen Screen @relation(fields: [screenId], references: [id], onDelete: Cascade)
-}
-
 model Card {
-  id Int @id @default(autoincrement())
-  sectionId Int
-  
-  name String
-  type CardType
-  height Int
+  id       Int @id @default(autoincrement())
+  screenId Int
+  layoutId Int @unique
+
+  // Card content here ...
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation
+  screen Screen     @relation(fields: [screenId], references: [id], onDelete: Cascade)
+  layout CardLayout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+}
+
+model CardLayout {
+  id     Int @id @default(autoincrement())
+  cardId Int?
+  // X & Y positions on the grid in grid units
+  x      Int @default(0)
+  y      Int @default(0)
+  // Width & Height in grid units, not pixels
+  w      Int @default(2)
+  h      Int @default(2)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   // Relation
-  section Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-
-  @@index(sectionId) // composite index for faster queries
-  // @@unique([screenId, name]) // this prevents a user duplicating a name on a screen something twice
+  card      Card?
 }
-
 
 enum CardType {
   TEXT

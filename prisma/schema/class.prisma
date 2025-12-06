@@ -2,9 +2,9 @@ model Class {
   id Int @id @default(autoincrement())
 
   name String
-  key String @unique
+  key  String @unique
 
-  primaryAbility AbilityScore
+  primaryAbility   AbilityScore
   secondaryAbility AbilityScore?
 
   spellcastingAbility AbilityScore?
@@ -14,7 +14,6 @@ model Class {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 
 enum AbilityScore {
   STR
