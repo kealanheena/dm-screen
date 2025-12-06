@@ -10,20 +10,7 @@ import { getDbUserId } from './user.action';
 const select = {
 	id: true,
 	name: true,
-	sections: {
-		select: {
-			id: true,
-			start: true,
-			width: true,
-			// cards: {
-			// 	select: {
-			// 		id: true,
-			// 		name: true,
-			// 		height: true,
-			// 	}
-			// },
-		}
-	},
+	cards: true
 }
 
 
@@ -69,10 +56,27 @@ export async function getCampaignlessScreens() {
 }
 
 export async function getScreenById(id: number) {
- return prisma.screen.findUnique({
+	const screen = prisma.screen.findUnique({
 		where: { id },
-		select,
-	});
+		select: {
+			cards: {
+				select: {
+					layoutId: true,
+					layout: {
+						select: {
+							id: true,
+							x: true,
+							y: true,
+							h: true,
+							w: true,
+						}
+					},
+				}
+			},
+		}
+	})
+	
+ return screen;
 }
 
 export async function updateScreen(

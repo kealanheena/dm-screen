@@ -1,39 +1,29 @@
 'use client'
 
 import React, { Fragment, useState, useContext } from "react";
-import _ from "lodash";
+import { map } from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
 
-import { FullDMScreenType } from '@/types'
+import { Card } from "@mui/material";
 import { ScreenContext } from '@/app/context'
+import { COLUMNS, ROWHEIGHT } from "@/constants";
 
 import './styles.css'
-import { Card } from "@mui/material";
 
 const ReactGridLayout = WidthProvider(RGL);
 
-export default function BasicLayout({
-	className = 'layout',
-	items = 2,
-	rowHeight = 30,
+export default function ScreenPageClient({
+	cards,
+	layouts,
+	items = 1,
 	onLayoutChangeX = () => {},
-	cols = 12,
 	...props
 }) {
 	const { isCustomizing } = useContext(ScreenContext);
 	
-	const [layout, setLayout] = useState([]);
-	// const [screen, setScreen] = useState<FullDMScreenType>(initialScreen);
+	const [layout, setLayout] = useState(layouts || []);
+	// const [cards, setCards] = useState(layouts || []);
 
-  const generateDOM = () => {
-    return _.map(_.range(items), function(i) {
-      return (
-        <Card key={i}>
-          <span className="text">{i}</span>
-        </Card>
-      );
-    });
-  }
 
   const onLayoutChange = (layout) => {
 		// console.log({ layout });
@@ -42,19 +32,21 @@ export default function BasicLayout({
 
 	return (
 		<Fragment>
-			{!layout ? (
-				<div />
-			) : (
-				<ReactGridLayout
-					isDraggable={isCustomizing}
-					isResizable={isCustomizing}
-					layout={layout}
-					onLayoutChange={onLayoutChange}
-					{...props}
-				>
-					{generateDOM()}
-				</ReactGridLayout>
-			)}
+			<ReactGridLayout
+				isDraggable={isCustomizing}
+				isResizable={isCustomizing}
+				layout={layout}
+				onLayoutChange={onLayoutChange}
+				cols={COLUMNS}
+				rowHeight={ROWHEIGHT}
+				{...props}
+			>
+				{map(cards, (card) => (
+					<Card key={card.layoutId}>
+						<span className="text">{card.layoutId}</span>
+					</Card>
+				))}
+			</ReactGridLayout>
 		</Fragment>
 	);
 }
