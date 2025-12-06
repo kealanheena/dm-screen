@@ -2,7 +2,7 @@ import React from 'react';
 import { find } from 'lodash';
 
 import { getScreens } from '@/actions/screen.action';
-import { Box, Grid } from '@mui/material'; 
+import { Box, Divider, Grid } from '@mui/material'; 
 
 import { DMScreenType } from '@/types';
 
@@ -22,19 +22,17 @@ const ScreenActions = async ({ id, campaignId }: ScreenActionsPageProps) => {
 	const screen: Pick<DMScreenType, "id" | "name"> = find(screens, ['id', id]) || emptyScreen;
 
 	return (
-		<Box sx={{ pl: 2, pt: 2, pr: 2 }}>
-			<Grid
-				container
-				alignItems="center"
-				justifyContent="space-between"
-			>
-				<SelectScreen screens={screens} />
+		<Grid
+			container
+			flexDirection="row"
+			sx={{ pl: 2, pt: 2, pr: 2 }}
+		>
+			<SelectScreen screens={screens} />
 
-				{screen && (
-					<CustomizeModeButtons />
-				)}
-			</Grid>
-		</Box>
+			{screen && (
+				<CustomizeModeButtons />
+			)}
+		</Grid>
 	)
 }
 

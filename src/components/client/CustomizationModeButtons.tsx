@@ -2,34 +2,32 @@
 
 import React, { Fragment, useContext } from 'react';
 
-import { Divider, Grid, IconButton } from '@mui/material'; 
-import { Check, DisabledByDefault, Settings } from '@mui/icons-material';
+import { Divider, Grid, IconButton, Tooltip } from '@mui/material'; 
+import { Add, LockOpen, LockOutline } from '@mui/icons-material';
 import { ScreenContext } from '@/app/context';
-
 
 
 const CustomizationModeButtons = () => {
 	const { isCustomizing, setIsCustomizing } = useContext(ScreenContext);
 
 	return (
-		<Grid container>
-			{isCustomizing && (
-				<Fragment>
-					<IconButton disabled color="error" onClick={() => {}}>
-						<DisabledByDefault />
-					</IconButton>
+		<Fragment>
+			<Tooltip title={isCustomizing ? 'Lock screen' : 'Unlock screen'}>
+				<IconButton onClick={() => setIsCustomizing(!isCustomizing)}>
+					{isCustomizing ? <LockOpen /> : <LockOutline />}
+				</IconButton>
+			</Tooltip>
 
-					<IconButton disabled color="error" onClick={() => {}}>
-						<DisabledByDefault />
+			<Divider orientation="vertical" variant="middle" flexItem={isCustomizing} />
+
+			{isCustomizing && (
+				<Tooltip title="Create new card">
+					<IconButton onClick={() => {}}>
+						<Add />
 					</IconButton>
-					<Divider orientation="vertical" variant="middle" flexItem />
-				</Fragment>
+				</Tooltip>
 			)}
-			
-			<IconButton onClick={() => setIsCustomizing(!isCustomizing)}>
-				{isCustomizing ? <Check /> : <Settings />}
-			</IconButton>
-		</Grid>
+		</Fragment>
 	)
 }
 

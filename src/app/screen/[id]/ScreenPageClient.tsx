@@ -49,8 +49,6 @@ export default function BasicLayout({
 		onLayoutChangeX(layout);
 	}
 
-	// console.log({ layout })
-
 	return (
 		<Fragment>
 			{!layout ? (

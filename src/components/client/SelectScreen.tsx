@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useState, MouseEventHandler } from 'react';
+import React, { useState, MouseEventHandler, Fragment, useContext } from 'react';
 import { find, map }  from 'lodash';
 import { redirect, RedirectType, useParams, useRouter } from 'next/navigation'
 
 import {
 	ClickAwayListener,
 	FormControl,
+	Grid,
 	IconButton,
 	InputAdornment,
 	InputLabel,
@@ -20,6 +21,7 @@ import { Check, Close, Edit } from '@mui/icons-material';
 import { useDebounce } from '@/app/hooks';
 import { DMScreenType } from '@/types';
 import { updateScreen } from '@/actions/screen.action';
+import { ScreenContext } from '@/app/context';
 
 
 const TextFieldEndAdornment = ({ onClick }: { onClick: MouseEventHandler<HTMLButtonElement> }) => (
@@ -39,10 +41,10 @@ interface SelectScreen {
 const SelectScreen = ({ screens }: SelectScreen) => {
 	const { id } = useParams();
 	const { refresh } = useRouter();
+	const { isCustomizing } = useContext(ScreenContext);
 
 	const screen = find(screens, ['id', Number(id)]);
 
-	const [isEditing, setIsEditing] = useState(false);
 	const [name, setName] = useState(screen?.name || '');
 	const [previousName, setPreviousName] = useState(screen?.name || '');
 
@@ -58,76 +60,35 @@ const SelectScreen = ({ screens }: SelectScreen) => {
 		debounce(event.target.value);
 	};
 
-	const handleIsEditingOpen = () => setIsEditing(true);
-
-	const handleIsEditingClose = () => {
-		if (isEditing && screen) {
-			setName(screen.name);
-			setPreviousName(screen.name);
-		}
-
-		setIsEditing(false);
-	}
-
-	const handleCancel = async () => {
-		setName(previousName);
-
-		await debounce(previousName);
-
-		setIsEditing(false);
+	if (isCustomizing) {
+		return (
+			<Tooltip title="Make your changes here" arrow open>
+				<TextField
+					autoFocus
+					focused
+					required
+					value={name}
+					label={isCustomizing ? 'DM screen name' : 'Current DM screen'}
+					onChange={handleNameChange}
+				/>
+			</Tooltip>
+		);
 	}
 
 	return (
-		<ClickAwayListener onClickAway={handleIsEditingClose}>
-			<div>
-				<FormControl>
-					<InputLabel id="dm-screen-label">
-						{isEditing ? 'New name' : 'Current dm screen'}
-					</InputLabel>
-					
-					{isEditing ? (
-							<Tooltip title="Make your changes here" arrow open>
-								<TextField
-									autoFocus
-									focused
-									fullWidth
-									required
-									value={name}
-									label="New name"
-									onChange={handleNameChange}
-									slotProps={{
-										input: { 
-											endAdornment: <TextFieldEndAdornment onClick={handleCancel} />,
-										}
-									}}
-								/>
-							</Tooltip>
-					): (
-							<Select
-								labelId="dm-screen-label"
-								label="Current dm screen"
-								value={id}
-								onChange={(event) => redirect(`${event.target.value}`, RedirectType.replace)}
-								sx={{ p: 0 }}
-							>
-								<MenuItem disabled><em>Choose a dm screen</em></MenuItem>
+		<TextField
+			label="Current dm screen"
+			select
+			value={id}
+			onChange={(event) => redirect(`${event.target.value}`, RedirectType.replace)}
+			sx={{ p: 0 }}
+		>
+			<MenuItem disabled><em>Choose a dm screen</em></MenuItem>
 
-								{map(screens, ({ id, name }) => (
-									<MenuItem key={`screen_${id}`} value={id}>{name}</MenuItem>
-								))}
-							</Select>
-						)}
-				</FormControl>
-
-				{screen && (
-					<Tooltip title={isEditing ? 'Save' : 'Edit'}>
-						<IconButton disabled={!name} onClick={isEditing ? handleIsEditingClose : handleIsEditingOpen}>
-							{isEditing ? <Check /> : <Edit />}
-						</IconButton>
-					</Tooltip>
-				)}
-			</div>
-		</ClickAwayListener>
+			{map(screens, ({ id, name }) => (
+				<MenuItem key={`screen_${id}`} value={id}>{name}</MenuItem>
+			))}
+		</TextField>
 	);
 }
 

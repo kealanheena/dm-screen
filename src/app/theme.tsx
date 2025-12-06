@@ -82,18 +82,6 @@ export const themeOptions: ThemeOptions = {
     MuiTextField: {
       defaultProps: {
         size: 'small',
-        margin: 'dense',
-        fullWidth: true,
-      },
-      styleOverrides: {
-        root: {
-          minWidth: 250
-        }
-      }
-    },
-    MuiSelect: {
-      defaultProps: {
-        size: 'small',
       },
       styleOverrides: {
         root: {
