@@ -115,12 +115,5 @@ export const themeOptions: ThemeOptions = {
         }
       }
     },
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          fontSize: 18,
-        }
-      }
-    },
   },
 };
