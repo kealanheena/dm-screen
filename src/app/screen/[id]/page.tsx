@@ -32,7 +32,7 @@ export default async function ScreenPage({ params }: ServerPageProps) {
 			<ScreenActions id={Number(id)} />
 			
 			{screen ? (
-				<ScreenPageClient layouts={layouts|| []} cards={screen?.cards || []} /> 
+				<ScreenPageClient layouts={layouts|| []} cards={screen?.cards || []} />
 			) : (
 				<CreateNewScreen />
 			)}

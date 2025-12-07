@@ -13,5 +13,5 @@ export const BASE_LAYOUT = { start: 10, width: 2, cards: [] };
 
 export const COLUMNS: number = 18;
 export const ROWHEIGHT: number = 70;
-export const MINH: number = 2;
-export const MINW: number = 2;
+export const MINH: number = 4;
+export const MINW: number = 6;

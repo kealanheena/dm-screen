@@ -4,11 +4,15 @@ import React, { Fragment, useState, useContext } from "react";
 import { map } from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
 
-import { Card, CardContent, Typography } from "@mui/material";
 import { ScreenContext } from '@/app/context'
 import { COLUMNS, ROWHEIGHT } from "@/constants";
 
 import './styles.css'
+import ListCard from "@/components/client/Cards/ListComponent";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
+import PlayerCharacterFormDialog from "@/components/client/PlayerCharacterFormDialog";
+import { Groups } from "@mui/icons-material";
+import ListComponent from "@/components/client/Cards/ListComponent";
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -17,7 +21,8 @@ export default function ScreenPageClient({
 	layouts,
 	items = 1,
 	onLayoutChangeX = () => {},
-	...props
+	children,
+	...props,
 }) {
 	const { isCustomizing } = useContext(ScreenContext);
 	
@@ -43,9 +48,18 @@ export default function ScreenPageClient({
 			>
 				{map(cards, (card) => (
 					<Card key={card.layout.id}>
-						<CardContent>
-							<Typography>{card.title}</Typography>
-							<span className="text">{card.layout.id}</span>
+						<CardContent sx={{ height: '100%'}}>
+							<Grid container justifyContent="space-between">
+								<Grid display="flex" alignItems="center">
+									<Groups color='primary'/>
+									<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
+								</Grid>
+
+								<PlayerCharacterFormDialog />
+							</Grid>
+
+							{/* List component */}
+							<ListComponent />
 						</CardContent>
 					</Card>
 				))}
