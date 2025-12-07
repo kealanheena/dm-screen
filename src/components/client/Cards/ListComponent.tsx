@@ -23,8 +23,6 @@ const ListComponent = ({ type = 'playerCharacters' }) => {
 		}
 	}, []);
 
-	console.log({items})
-
 	return (
 		<Grid
 			sx={{

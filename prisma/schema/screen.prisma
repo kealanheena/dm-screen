@@ -44,8 +44,8 @@ model CardLayout {
   x      Int @default(0)
   y      Int @default(0)
   // Width & Height in grid units, not pixels
-  w      Int @default(2)
-  h      Int @default(2)
+  w      Int @default(6)
+  h      Int @default(4)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

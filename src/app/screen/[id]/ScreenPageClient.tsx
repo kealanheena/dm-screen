@@ -19,8 +19,6 @@ const ReactGridLayout = WidthProvider(RGL);
 export default function ScreenPageClient({
 	cards,
 	layouts,
-	items = 1,
-	onLayoutChangeX = () => {},
 	children,
 	...props,
 }) {
@@ -29,11 +27,7 @@ export default function ScreenPageClient({
 	const [layout, setLayout] = useState(layouts || []);
 	// const [cards, setCards] = useState(layouts || []);
 
-
-  const onLayoutChange = (layout) => {
-		// console.log({ layout });
-		onLayoutChangeX(layout);
-	}
+  const onLayoutChange = (layout) => setLayout(layout);
 
 	return (
 		<Fragment>
