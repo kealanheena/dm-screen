@@ -59,6 +59,9 @@ export const themeOptions: ThemeOptions = {
       },
     },
     MuiButton: {
+      defaultProps: {
+        color: 'secondary',
+      },
       styleOverrides: {
         root: {
           borderRadius: 100,
@@ -86,13 +89,6 @@ export const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           minWidth: 250
-        }
-      }
-    },
-    MuiSlider: {
-      styleOverrides: {
-        root: {
-          padding: 0,
         }
       }
     },

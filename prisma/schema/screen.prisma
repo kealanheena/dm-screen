@@ -23,6 +23,11 @@ model Card {
   screenId Int
 
   // Card content here ...
+  title String
+  type CardType
+
+  // List content
+  listContent ListContentType
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -52,4 +57,9 @@ enum CardType {
   TEXT
   LIST
   IMAGE
+}
+
+enum ListContentType {
+  playerCharacter
+  nonPlayerCharacter
 }

@@ -4,7 +4,7 @@ import React, { Fragment, useState, useContext } from "react";
 import { map } from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
 
-import { Card } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { ScreenContext } from '@/app/context'
 import { COLUMNS, ROWHEIGHT } from "@/constants";
 
@@ -43,7 +43,10 @@ export default function ScreenPageClient({
 			>
 				{map(cards, (card) => (
 					<Card key={card.layout.id}>
-						<span className="text">{card.layout.id}</span>
+						<CardContent>
+							<Typography>{card.title}</Typography>
+							<span className="text">{card.layout.id}</span>
+						</CardContent>
 					</Card>
 				))}
 			</ReactGridLayout>

@@ -61,6 +61,7 @@ export async function getScreenById(id: number) {
 		select: {
 			cards: {
 				select: {
+					title: true,
 					layout: {
 						select: {
 							id: true,

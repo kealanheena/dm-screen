@@ -24,7 +24,7 @@ const ScreenActions = async ({ id, campaignId }: ScreenActionsPageProps) => {
 	return (
 		<Grid
 			container
-			flexDirection="row"
+			justifyContent="space-between"
 			sx={{ pl: 2, pt: 2, pr: 2 }}
 		>
 			<SelectScreen screens={screens} />
