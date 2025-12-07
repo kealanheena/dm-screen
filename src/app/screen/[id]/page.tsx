@@ -9,6 +9,7 @@ import ScreenActions from "@/components/server/ScreenActions";
 import CreateNewScreen from "@/components/client/CreateScreen";
 
 import { ServerPageProps } from "@/types";
+import { MINH, MINW } from "@/constants";
 
 
 export default async function ScreenPage({ params }: ServerPageProps) {
@@ -20,6 +21,8 @@ export default async function ScreenPage({ params }: ServerPageProps) {
 
 		return {
 			i: toString(id),
+			minH: MINH,
+			minW: MINW,
 			...rest
 		}
 	});
