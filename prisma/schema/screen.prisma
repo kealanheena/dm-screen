@@ -21,7 +21,7 @@ model Screen {
 model Card {
   id       Int @id @default(autoincrement())
   screenId Int
-  layoutId Int @unique
+  layoutId Int?
 
   // Card content here ...
 
@@ -30,12 +30,12 @@ model Card {
 
   // Relation
   screen Screen     @relation(fields: [screenId], references: [id], onDelete: Cascade)
-  layout CardLayout @relation(fields: [layoutId], references: [id], onDelete: Cascade)
+  layout CardLayout?
 }
 
 model CardLayout {
   id     Int @id @default(autoincrement())
-  cardId Int?
+  cardId Int @unique
   // X & Y positions on the grid in grid units
   x      Int @default(0)
   y      Int @default(0)
@@ -46,7 +46,7 @@ model CardLayout {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   // Relation
-  card      Card?
+  card      Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
 }
 
 enum CardType {
