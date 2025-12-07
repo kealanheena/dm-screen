@@ -6,9 +6,15 @@ import { Divider, IconButton, Tooltip } from '@mui/material';
 import { Add, LockOpen, LockOutline } from '@mui/icons-material';
 import { ScreenContext } from '@/app/context';
 
+import { createCard } from '@/actions/card.action';
+import { useParams } from 'next/navigation';
+
 
 const CustomizationModeButtons = () => {
 	const { isCustomizing, setIsCustomizing } = useContext(ScreenContext);
+	const { id } = useParams();
+
+
 
 	return (
 		<Fragment>
@@ -22,7 +28,9 @@ const CustomizationModeButtons = () => {
 
 			{isCustomizing && (
 				<Tooltip title="Create new card">
-					<IconButton onClick={() => {}}>
+					<IconButton
+						onClick={id ? () => createCard(Number(id)) : () => {}}
+					>
 						<Add />
 					</IconButton>
 				</Tooltip>

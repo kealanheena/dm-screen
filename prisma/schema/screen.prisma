@@ -21,7 +21,6 @@ model Screen {
 model Card {
   id       Int @id @default(autoincrement())
   screenId Int
-  layoutId Int?
 
   // Card content here ...
 

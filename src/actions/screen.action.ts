@@ -56,12 +56,11 @@ export async function getCampaignlessScreens() {
 }
 
 export async function getScreenById(id: number) {
-	const screen = prisma.screen.findUnique({
+	const screen = await prisma.screen.findUnique({
 		where: { id },
 		select: {
 			cards: {
 				select: {
-					layoutId: true,
 					layout: {
 						select: {
 							id: true,

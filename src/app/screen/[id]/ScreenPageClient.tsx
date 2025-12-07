@@ -42,8 +42,8 @@ export default function ScreenPageClient({
 				{...props}
 			>
 				{map(cards, (card) => (
-					<Card key={card.layoutId}>
-						<span className="text">{card.layoutId}</span>
+					<Card key={card.layout.id}>
+						<span className="text">{card.layout.id}</span>
 					</Card>
 				))}
 			</ReactGridLayout>
