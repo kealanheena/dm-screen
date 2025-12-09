@@ -8,19 +8,18 @@ import { ScreenContext } from '@/app/context'
 import { COLUMNS, ROWHEIGHT } from "@/constants";
 
 import './styles.css'
-import ListCard from "@/components/client/Cards/ListComponent";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import PlayerCharacterFormDialog from "@/components/client/PlayerCharacterFormDialog";
 import { Groups } from "@mui/icons-material";
 import ListComponent from "@/components/client/Cards/ListComponent";
+import ConditionsComponent from "@/components/client/Cards/ConditionsComponent";
 
 const ReactGridLayout = WidthProvider(RGL);
 
 export default function ScreenPageClient({
 	cards,
 	layouts,
-	children,
-	...props,
+	...props
 }) {
 	const { isCustomizing } = useContext(ScreenContext);
 	
@@ -40,7 +39,7 @@ export default function ScreenPageClient({
 				rowHeight={ROWHEIGHT}
 				{...props}
 			>
-				{map(cards, (card) => (
+				{map(cards, (card, index) => (
 					<Card key={card.layout.id}>
 						<CardContent sx={{ height: '100%'}}>
 							<Grid container justifyContent="space-between">
@@ -53,7 +52,7 @@ export default function ScreenPageClient({
 							</Grid>
 
 							{/* List component */}
-							<ListComponent />
+							{(index + 1) % 2 === 0 ? <ListComponent /> : <ConditionsComponent />}
 						</CardContent>
 					</Card>
 				))}
