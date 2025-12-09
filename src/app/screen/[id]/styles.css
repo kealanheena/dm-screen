@@ -13,49 +13,6 @@
   --glow-magenta: 0 0 20px rgba(255, 0, 170, 0.5), 0 0 40px rgba(255, 0, 170, 0.2);
 }
 
-h3 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--cyber-cyan);
-  text-shadow: var(--glow-cyan);
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 240, 255, 0.3);
-}
-
-h3 a {
-  color: var(--cyber-magenta);
-  text-decoration: none;
-  font-size: 14px;
-  margin-left: 10px;
-  text-shadow: 0 0 10px rgba(255, 0, 170, 0.5);
-  transition: all 0.2s ease;
-}
-
-h3 a:hover {
-  color: var(--cyber-yellow);
-  text-shadow: 0 0 15px rgba(250, 204, 21, 0.7);
-}
-
-p {
-  color: #a0a0a0;
-  line-height: 1.6;
-  margin-bottom: 15px;
-  padding-left: 12px;
-  border-left: 2px solid rgba(168, 85, 247, 0.4);
-}
-
-p code {
-  background: rgba(168, 85, 247, 0.2);
-  border: 1px solid var(--cyber-purple);
-  padding: 2px 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--cyber-purple);
-}
-
 /* === LAYOUT JSON PANEL === */
 .layoutJSON {
   background: linear-gradient(135deg, rgba(18, 18, 26, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%);
@@ -108,14 +65,6 @@ p code {
   font-size: 13px;
   color: var(--cyber-purple);
   text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-}
-
-.columns {
-  -moz-columns: 180px;
-  -webkit-columns: 180px;
-  columns: 180px;
-  margin-top: 15px;
-  column-gap: 15px;
 }
 
 .layoutItem {
