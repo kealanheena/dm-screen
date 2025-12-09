@@ -5,7 +5,7 @@ import { OpenInNew, Person } from "@mui/icons-material";
 import { CircularProgress, Grid, IconButton, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
-const ListComponent = ({ type = 'playerCharacters' }) => {
+const ListComponent = () => {
 	const [items, setItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 

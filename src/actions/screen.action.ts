@@ -7,12 +7,6 @@ import { DMScreenType } from "@/types";
 
 import { getDbUserId } from './user.action';
 
-const select = {
-	id: true,
-	name: true,
-	cards: true
-}
-
 
 export async function createScreen(data: Pick<DMScreenType, "name">) {
 	const userId = await getDbUserId();
