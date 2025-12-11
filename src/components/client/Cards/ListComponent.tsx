@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { capitalize, map } from "lodash";
+import { capitalize, filter, includes, map } from "lodash";
 
 import { OpenInNew, Person } from "@mui/icons-material";
-import { CircularProgress, Grid, IconButton, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { CircularProgress, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography } from "@mui/material";
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
 const ListComponent = () => {
+	const [search, setSearch] = useState('');
 	const [items, setItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -23,6 +24,8 @@ const ListComponent = () => {
 		}
 	}, []);
 
+	const filteredItems = filter(items, ({ name }) => includes(name, search));
+
 	return (
 		<Grid
 			sx={{
@@ -33,6 +36,12 @@ const ListComponent = () => {
 				maxHeight: '100%',
 			}}
 		>
+			<TextField
+				placeholder="Search ..."
+				value={search}
+				onChange={(e) => setSearch(e.target.value)}
+				fullWidth
+			/>
 			{isLoading ? (
 				<Grid display="flex" flexDirection="column" alignItems="center">
 					<br/>
@@ -44,7 +53,7 @@ const ListComponent = () => {
 						'& ul': { padding: 0 },
 					}}
 				>
-					{map(items, (item) => (
+					{map(filteredItems, (item) => (
 						<ListItem key={`player_character_${item.id}`}>
 							<ListItemText
 								primary={
