@@ -5,16 +5,16 @@ import ConditionsComponent from "./ConditionsComponent";
 import ListComponent from "./ListComponent";
 import ImageComponent from "./ImageComponent";
 
-const CardComponent = (type) => {
+const CardComponent = ({ type }) => {
 	switch (type) {
-		case 'IMAGE':
-			return <ConditionsComponent />
-		case 'IMAGE':
+		case 'INITATIVE':
+			return <InititiveComponent />
+		case 'LIST':
 			return <ListComponent />
 		case 'IMAGE':
 			return <ImageComponent />
 		default: 
-			return <InititiveComponent />
+			return <ConditionsComponent />
 	}
 	
 };
