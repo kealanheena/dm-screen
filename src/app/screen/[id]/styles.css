@@ -15,7 +15,7 @@
 
 /* === LAYOUT JSON PANEL === */
 .layoutJSON {
-  background: linear-gradient(135deg, rgba(18, 18, 26, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%);
+  /* background: linear-gradient(135deg, rgba(18, 18, 26, 0.95) 0%, rgba(10, 10, 15, 0.98) 100%); */
   border: 1px solid var(--cyber-cyan);
   border-left: 4px solid var(--cyber-magenta);
   margin-top: 30px;
@@ -34,7 +34,7 @@
   position: absolute;
   top: -12px;
   left: 20px;
-  background: var(--cyber-bg);
+  /* background: var(--cyber-bg); */
   padding: 2px 12px;
   font-family: 'Orbitron', sans-serif;
   font-size: 11px;
@@ -52,12 +52,12 @@
   right: -1px;
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, transparent 50%, var(--cyber-magenta) 50%);
+  /* background: linear-gradient(135deg, transparent 50%, var(--cyber-magenta) 50%); */
   box-shadow: var(--glow-magenta);
 }
 
 .layoutJSON > code {
-  background: rgba(168, 85, 247, 0.2);
+  /* background: rgba(168, 85, 247, 0.2); */
   border: 1px solid var(--cyber-purple);
   padding: 3px 10px;
   margin: 0 6px;
@@ -68,7 +68,7 @@
 }
 
 .layoutItem {
-  background: linear-gradient(90deg, rgba(0, 240, 255, 0.08) 0%, transparent 100%);
+  /* background: linear-gradient(90deg, rgba(0, 240, 255, 0.08) 0%, transparent 100%); */
   border-left: 2px solid var(--cyber-cyan);
   padding: 8px 12px;
   margin-bottom: 8px;
@@ -81,7 +81,7 @@
 }
 
 .layoutItem:hover {
-  background: linear-gradient(90deg, rgba(255, 0, 170, 0.15) 0%, transparent 100%);
+  /* background: linear-gradient(90deg, rgba(255, 0, 170, 0.15) 0%, transparent 100%); */
   border-left-color: var(--cyber-magenta);
   transform: translateX(4px);
   box-shadow: var(--glow-magenta);
@@ -98,10 +98,10 @@
 .react-grid-layout {
   background: var(--cyber-surface);
   margin-top: 10px;
-  border: 1px solid rgba(0, 240, 255, 0.2);
-  background-image: 
+  /* border: 1px solid rgba(0, 240, 255, 0.2); */
+  /* background-image: 
     linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px); */
   background-size: 20px 20px;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .react-grid-item:not(.react-grid-placeholder) {
-  background: linear-gradient(145deg, rgba(18, 18, 26, 0.9) 0%, rgba(30, 30, 45, 0.9) 100%);
+  /* background: linear-gradient(145deg, rgba(18, 18, 26, 0.9) 0%, rgba(30, 30, 45, 0.9) 100%); */
   border: 1px solid var(--cyber-cyan);
   box-shadow: 
     inset 0 1px 0 rgba(255, 255, 255, 0.05),

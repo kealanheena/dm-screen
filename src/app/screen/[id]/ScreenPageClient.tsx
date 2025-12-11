@@ -13,6 +13,7 @@ import PlayerCharacterFormDialog from "@/components/client/PlayerCharacterFormDi
 import { Groups } from "@mui/icons-material";
 import ListComponent from "@/components/client/Cards/ListComponent";
 import ConditionsComponent from "@/components/client/Cards/ConditionsComponent";
+import InititiveComponent from "@/components/client/Cards/InititiveComponent";
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -52,7 +53,9 @@ export default function ScreenPageClient({
 							</Grid>
 
 							{/* List component */}
-							{(index + 1) % 2 === 0 ? <ListComponent /> : <ConditionsComponent />}
+							{(index + 1) % 3 === 0 ? <ListComponent /> : 
+								(index + 1) % 3 === 1 ? <ConditionsComponent /> : <InititiveComponent />
+							}
 						</CardContent>
 					</Card>
 				))}
