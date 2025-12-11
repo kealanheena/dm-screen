@@ -24,7 +24,12 @@ model Card {
 
   // Card content here ...
   title String
+  description String?
+  
   type CardType
+
+  // Image content
+  img String?
 
   // List content
   listContent ListContentType
