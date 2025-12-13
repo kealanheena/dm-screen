@@ -1,8 +1,9 @@
 import React from "react";
 import { map } from "lodash";
 
-import { Diversity1, DirectionsRun, Elderly, HearingDisabled, Sick, OpenInNew, VisibilityOff, FrontHand, Boy, PersonOutlined, Terrain, Sledding, Hotel } from "@mui/icons-material";
-import { Grid, IconButton, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Diversity1, DirectionsRun, Elderly, HearingDisabled, Sick, OpenInNew, VisibilityOff, FrontHand, Boy, PersonOutlined, Terrain, Sledding, Hotel, Groups } from "@mui/icons-material";
+import { Card, CardContent, Grid, IconButton, List, ListItem, ListItemText, Typography } from "@mui/material";
+import PlayerCharacterFormDialog from "../PlayerCharacterFormDialog";
 
 const CONDITIONS = [{
 	name: 'Blinded',
@@ -199,6 +200,16 @@ const baseUrl = 'https://www.dndbeyond.com/sources/dnd/br-2024/rules-glossary'
 
 const ConditionsComponent = () => {
 	return (
+		<Card>
+						<CardContent sx={{ height: '100%'}}>
+							<Grid container justifyContent="space-between">
+								<Grid display="flex" alignItems="center">
+									<Groups color='primary'/>
+									<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
+								</Grid>
+
+								<PlayerCharacterFormDialog />
+							</Grid>
 		<Grid
 			sx={{
 				bgcolor: 'background.paper',
@@ -234,6 +245,8 @@ const ConditionsComponent = () => {
 					<br /> 
 				</List>
 		</Grid>
+			</CardContent>
+			</Card>
 	)
 };
 

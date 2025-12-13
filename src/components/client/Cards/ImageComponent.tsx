@@ -1,92 +1,37 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { capitalize, filter, includes, map } from "lodash";
+import React from "react";
 
-import { OpenInNew, Person } from "@mui/icons-material";
-import { CircularProgress, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography } from "@mui/material";
-import { getPlayerCharacters } from "@/actions/playerCharacter.action";
+import { Groups } from "@mui/icons-material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
+import PlayerCharacterFormDialog from "../PlayerCharacterFormDialog";
 
-const ImageComponent = () => {
-	const [search, setSearch] = useState('');
-	const [items, setItems] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+const ImageComponent = ({ card }: { card: { id: number, title: string }}) => {
 
-	useEffect(() => {
-		const getData = async () => {
-			const data = await getPlayerCharacters();
-			
-			setItems(data || []);
-		};
 
-		try {
-			getData();
-		} finally {
-			setIsLoading(false);
-		}
-	}, []);
-
-	const filteredItems = filter(items, ({ name }) => includes(name, search));
 
 	return (
-		<Grid
-			sx={{
-				bgcolor: 'background.paper',
-				position: 'relative',
-				overflow: 'scroll',
-				height: '100%',
-				maxHeight: '100%',
-			}}
-		>
-			<TextField
-				placeholder="Search ..."
-				value={search}
-				onChange={(e) => setSearch(e.target.value)}
-				fullWidth
-			/>
-			{isLoading ? (
-				<Grid display="flex" flexDirection="column" alignItems="center">
-					<br/>
-					<CircularProgress />
+		<Card>
+			<CardContent sx={{ height: '100%'}}>
+				<Grid container justifyContent="space-between">
+					<Grid display="flex" alignItems="center">
+						<Groups color='primary'/>
+						<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
+					</Grid>
+
+					<PlayerCharacterFormDialog />
 				</Grid>
-			) : (
-				<List
-					sx={{
-						'& ul': { padding: 0 },
+				<img 
+					style={{
+						maxWidth: '100%',
+						maxHeight: '100%',
+						height: 'auto',
+						width: 'auto',
+						margin: 'auto',
+						display: 'block'
 					}}
-				>
-					{map(filteredItems, (item) => (
-						<ListItem key={`player_character_${item.id}`}>
-							<ListItemText
-								primary={
-									<Grid display="flex">
-										<Person />
-										<Typography sx={{ pl: 1 }} >{item.name}</Typography>
-									</Grid>
-								}
-								secondary={
-									item?.class && (
-										<Fragment>
-											<Typography component="span" variant="body2">{`class: ${item.class.name}`}</Typography>
-											<Typography variant="body2">{`species:
-												${item.subspecies?.name ? ` ${capitalize(item.subspecies?.name)} `  : ''}
-												${capitalize(item.species?.name)}
-											`}</Typography>
-											
-										</Fragment>
-									)
-								}
-								sx={{ pl: 0.5 }} 
-							/>
-							{item?.url && (
-								<IconButton onClick={() => window.open(item.url, '_blank')}>
-									<OpenInNew />
-								</IconButton>
-							)}
-						</ListItem>
-					))}
-					<br /> 
-				</List>
-			)}
-		</Grid>
+					src="http://odcq35p17f.ufs.sh/f/imZyPGT0bjSH6NbzOMRx0HjrmGJ2CKLFWcvAnfubwoNPzXEk"
+				/>
+			</CardContent>
+		</Card>
 	)
 };
 
