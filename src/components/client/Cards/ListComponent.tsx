@@ -30,7 +30,6 @@ const ListComponent = ({ card }: { card: { id: number, title: string }}) => {
 	const filteredItems = filter(items, ({ name }) => includes(name, search));
 
 	return (
-		<Card>
 				<CardContent sx={{ height: '100%'}}>
 					<Grid container justifyContent="space-between">
 						<Grid display="flex" alignItems="center">
@@ -40,6 +39,12 @@ const ListComponent = ({ card }: { card: { id: number, title: string }}) => {
 
 						<PlayerCharacterFormDialog />
 					</Grid>
+					<TextField
+							placeholder="Search ..."
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}
+							fullWidth
+						/>
 					<Grid
 						sx={{
 							bgcolor: 'background.paper',
@@ -49,12 +54,6 @@ const ListComponent = ({ card }: { card: { id: number, title: string }}) => {
 							maxHeight: '100%',
 						}}
 					>
-						<TextField
-							placeholder="Search ..."
-							value={search}
-							onChange={(e) => setSearch(e.target.value)}
-							fullWidth
-						/>
 						{isLoading ? (
 							<Grid display="flex" flexDirection="column" alignItems="center">
 								<br/>
@@ -101,7 +100,6 @@ const ListComponent = ({ card }: { card: { id: number, title: string }}) => {
 						)}
 					</Grid>
 			</CardContent>
-		</Card>
 	)
 };
 

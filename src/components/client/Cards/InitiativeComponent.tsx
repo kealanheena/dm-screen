@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { map, reverse, sortBy } from "lodash";
 
-import { Bloodtype } from "@mui/icons-material";
+import { Bloodtype, Groups } from "@mui/icons-material";
 import { Card, CardContent, Divider, Grid, List, ListItem, Tooltip, Typography } from "@mui/material";
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
+import PlayerCharacterFormDialog from "../PlayerCharacterFormDialog";
 
 const InititiveComponent = () => {
 	const [search, setSearch] = useState('');
@@ -38,7 +39,6 @@ const InititiveComponent = () => {
 	}, []);
 
 	return (
-		<Card key={card.layout.id}>
 			<CardContent sx={{ height: '100%'}}>
 				<Grid container justifyContent="space-between">
 					<Grid display="flex" alignItems="center">
@@ -91,7 +91,6 @@ const InititiveComponent = () => {
 							</List>
 					</Grid>
 			</CardContent>
-		</Card>
 	)
 };
 

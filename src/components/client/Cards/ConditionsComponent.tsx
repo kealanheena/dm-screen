@@ -200,7 +200,6 @@ const baseUrl = 'https://www.dndbeyond.com/sources/dnd/br-2024/rules-glossary'
 
 const ConditionsComponent = ({ card }: { card: { id: number, title: string }}) => {
 	return (
-		<Card>
 			<CardContent sx={{ height: '100%'}}>
 				<Grid container justifyContent="space-between">
 					<Grid display="flex" alignItems="center">
@@ -246,7 +245,6 @@ const ConditionsComponent = ({ card }: { card: { id: number, title: string }}) =
 					</List>
 			</Grid>
 		</CardContent>
-	</Card>
 	)
 };
 

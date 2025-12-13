@@ -38,23 +38,10 @@ export default function ScreenPageClient({
 				rowHeight={ROWHEIGHT}
 				{...props}
 			>
-				{map(cards, (card, index) => (
+				{map(cards, (card) => (
 					<Card key={card.layout.id}>
-						<CardContent sx={{ height: '100%'}}>
-							<Grid container justifyContent="space-between">
-								<Grid display="flex" alignItems="center">
-									<Groups color='primary'/>
-									<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
-								</Grid>
-
-								<PlayerCharacterFormDialog />
-							</Grid>
-
-							{/* List component */}
-							{console.log(card.type)}
-							<CardComponent type={card.type}/> 
-						</CardContent>
-					</Card>
+						<CardComponent card={card} type={card.type}/>
+					</Card> 
 				))}
 			</ReactGridLayout>
 		</Fragment>
