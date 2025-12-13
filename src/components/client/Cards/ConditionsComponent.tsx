@@ -198,55 +198,55 @@ const CONDITIONS = [{
 
 const baseUrl = 'https://www.dndbeyond.com/sources/dnd/br-2024/rules-glossary'
 
-const ConditionsComponent = () => {
+const ConditionsComponent = ({ card }: { card: { id: number, title: string }}) => {
 	return (
 		<Card>
-						<CardContent sx={{ height: '100%'}}>
-							<Grid container justifyContent="space-between">
-								<Grid display="flex" alignItems="center">
-									<Groups color='primary'/>
-									<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
-								</Grid>
+			<CardContent sx={{ height: '100%'}}>
+				<Grid container justifyContent="space-between">
+					<Grid display="flex" alignItems="center">
+						<Groups color='primary'/>
+						<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
+					</Grid>
 
-								<PlayerCharacterFormDialog />
-							</Grid>
-		<Grid
-			sx={{
-				bgcolor: 'background.paper',
-				position: 'relative',
-				overflow: 'scroll',
-				height: '100%',
-				maxHeight: '100%',
-			}}
-		>
-				<List
+					<PlayerCharacterFormDialog />
+				</Grid>
+				<Grid
 					sx={{
-						'& ul': { padding: 0 },
+						bgcolor: 'background.paper',
+						position: 'relative',
+						overflow: 'scroll',
+						height: '100%',
+						maxHeight: '100%',
 					}}
 				>
-					{map(CONDITIONS, (condition) => (
-						<ListItem key={`condition_${condition.key}`}>
-							<ListItemText
-								primary={
-									<Grid display="flex">
-										<condition.icon color="primary" />
-										<Typography sx={{ pl: 1 }} >{condition.name}</Typography>
-									</Grid>
-								}
-								secondary={condition.description}
-								sx={{ pl: 0.5 }} 
-							/>
+					<List
+						sx={{
+							'& ul': { padding: 0 },
+						}}
+					>
+						{map(CONDITIONS, (condition) => (
+							<ListItem key={`condition_${condition.key}`}>
+								<ListItemText
+									primary={
+										<Grid display="flex">
+											<condition.icon color="primary" />
+											<Typography sx={{ pl: 1 }} >{condition.name}</Typography>
+										</Grid>
+									}
+									secondary={condition.description}
+									sx={{ pl: 0.5 }} 
+								/>
 
-							<IconButton onClick={() => window.open(`${baseUrl}${condition.url}`, '_blank')}>
-								<OpenInNew />
-							</IconButton>
-						</ListItem>
-					))}
-					<br /> 
-				</List>
-		</Grid>
-			</CardContent>
-			</Card>
+								<IconButton onClick={() => window.open(`${baseUrl}${condition.url}`, '_blank')}>
+									<OpenInNew />
+								</IconButton>
+							</ListItem>
+						))}
+						<br /> 
+					</List>
+			</Grid>
+		</CardContent>
+	</Card>
 	)
 };
 
