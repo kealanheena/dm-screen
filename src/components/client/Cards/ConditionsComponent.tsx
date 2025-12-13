@@ -206,8 +206,6 @@ const ConditionsComponent = ({ card }: { card: { id: number, title: string }}) =
 						<Groups color='primary'/>
 						<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
 					</Grid>
-
-					<PlayerCharacterFormDialog />
 				</Grid>
 				<Grid
 					sx={{
