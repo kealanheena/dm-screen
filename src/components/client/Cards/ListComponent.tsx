@@ -63,7 +63,7 @@ const ListComponent = ({ card }: { card: { id: number, title: string, listConent
 
 				{showSearch && !isCustomizing && (
 					<TextField
-						placeholder={`Search ${lowerCase(card.listContent)} ...`}
+						placeholder={`Search ${lowerCase(card.listContent)}s ...`}
 						autoFocus
 						value={search}
 						onChange={(e) => setSearch(e.target.value)}
