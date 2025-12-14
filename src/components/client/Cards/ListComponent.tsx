@@ -54,7 +54,11 @@ const ListComponent = ({ card }: { card: { id: number, title: string, listConent
 						</IconButton>
 					)}
 
-					{isCustomizing ? <CardDialog card={{}} icon={<Edit />} /> : <CardDialog card={{}} icon={<PersonAdd />} />}
+					{isCustomizing ? (
+						<CardDialog formData={{}} icon={<Edit />} /> 
+					) : (
+						<CardDialog icon={<PersonAdd />} />
+					)}
 				</Grid>
 		
 			</Grid>

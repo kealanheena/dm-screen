@@ -1,41 +1,80 @@
 import React, { useState, Fragment } from "react";
-import { capitalize, times, map, lowerCase } from "lodash";
 
-import { Close, Diversity3, Edit, OpenInNew, Person, PersonAdd, Search } from "@mui/icons-material";
-import { Button, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, InputAdornment, List, ListItem, ListItemText, Skeleton, TextField, Typography } from "@mui/material";
+import {
+	Button, 
+	Dialog, 
+	DialogActions, 
+	DialogContent,
+	DialogTitle, 
+	IconButton, 
+	TextField,
+} from "@mui/material";
+import { map } from "lodash";
 
-const CardDialog = ({ card, icon }) => {
+const formSchema = [{
+	name: 'Name',
+	key: 'name',
+	default: null,
+	isRequired: true,
+},  {
+	name: 'Url',
+	key: 'url',
+	default: null,
+	isRequired: false,
+}, {
+	name: 'Class',
+	key: 'classId',
+	default: null,
+	isRequired: true,
+}, {
+	name: 'Species',
+	key: 'speciesId',
+	default: null,
+	isRequired: true,
+}, {
+	name: 'Subspecies',
+	key: 'subspeciesId',
+	default: null,
+	isRequired: false,
+}, {
+	name: 'Campiagn',
+	key: 'campaignId',
+	default: null,
+	isRequired: false,
+}]
+
+const CardDialog = ({ formData, icon }: { formData: undefined | Object }) => {
 	const [open, setOpen] = useState<boolean>(false);
+	const [formDataCopy, setFormDataCopy] = useState(formData || {});
 
 	const handleClickOpen = () => setOpen(true);
 
 	const handleClose = () => setOpen(false);
-
-
 
 	return (
 		<Fragment>
       <IconButton onClick={handleClickOpen}>
 				{icon}
 			</IconButton>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{card ? `Edit ${card.title}` : 'Create player character'}</DialogTitle>
+      <Dialog open={open} onClose={handleClose} fullWidth>
+        <DialogTitle>{formData ? `Edit ${formData.title}` : 'Create player character'}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
-					<TextField
-						autoFocus
-						required
-						margin="dense"
-						id="name"
-						name="email"
-						label="Email Address"
-						type="email"
-						fullWidth
-						variant="standard"
-					/>
+					
+					{map(formSchema, ({ name, key, isRequired }) => (
+						<TextField
+							label={name}
+							value={formDataCopy[key] || ''}
+							onChange={(e) => setFormDataCopy({
+								...formDataCopy,
+								[key]: e.target.value
+							})}
+							type=""
+							required={isRequired}
+							size="medium"
+							fullWidth
+						/>
+					))}
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
