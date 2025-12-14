@@ -5,6 +5,7 @@ import { Close, Diversity3, Edit, OpenInNew, Person, PersonAdd, Search } from "@
 import { CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemText, Skeleton, TextField, Typography } from "@mui/material";
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 import { ScreenContext } from "@/app/context";
+import CardDialog from "./CardDialog";
 
 const ListComponent = ({ card }: { card: { id: number, title: string, listConent: string | null }}) => {
 	const { isCustomizing } = useContext(ScreenContext);
@@ -53,9 +54,7 @@ const ListComponent = ({ card }: { card: { id: number, title: string, listConent
 						</IconButton>
 					)}
 
-					<IconButton>
-						{isCustomizing ? <Edit /> : <PersonAdd />}
-					</IconButton>
+					{isCustomizing ? <CardDialog card={{}} icon={<Edit />} /> : <CardDialog card={{}} icon={<PersonAdd />} />}
 				</Grid>
 		
 			</Grid>
