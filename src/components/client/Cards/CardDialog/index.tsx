@@ -10,35 +10,42 @@ import {
 	TextField,
 } from "@mui/material";
 import { map } from "lodash";
+import CardDialogField from "./CardDialogField";
 
 const formSchema = [{
 	name: 'Name',
 	key: 'name',
+	type: 'text',
 	default: null,
 	isRequired: true,
-},  {
+}, {
 	name: 'Url',
 	key: 'url',
+	type: 'url',
 	default: null,
 	isRequired: false,
 }, {
 	name: 'Class',
 	key: 'classId',
+	type: 'select',
 	default: null,
 	isRequired: true,
 }, {
 	name: 'Species',
 	key: 'speciesId',
+	type: 'select',
 	default: null,
 	isRequired: true,
 }, {
 	name: 'Subspecies',
 	key: 'subspeciesId',
+	type: 'select',
 	default: null,
 	isRequired: false,
 }, {
 	name: 'Campiagn',
 	key: 'campaignId',
+	type: 'select',
 	default: null,
 	isRequired: false,
 }]
@@ -60,26 +67,22 @@ const CardDialog = ({ formData, icon }: { formData: undefined | Object }) => {
         <DialogTitle>{formData ? `Edit ${formData.title}` : 'Create player character'}</DialogTitle>
         <DialogContent>
 					
-					{map(formSchema, ({ name, key, isRequired }) => (
-						<TextField
-							label={name}
-							value={formDataCopy[key] || ''}
+					{map(formSchema, (schema) => (
+						<CardDialogField
+							schema={schema}
+							value={formDataCopy[schema.key]}
 							onChange={(e) => setFormDataCopy({
 								...formDataCopy,
-								[key]: e.target.value
+								[schema.key]: e.target.value
 							})}
-							type=""
-							required={isRequired}
-							size="medium"
-							fullWidth
-						/>
+						/> 
 					))}
 
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" form="subscription-form">
-            Subscribe
+          <Button variant="contained">
+            Create
           </Button>
         </DialogActions>
       </Dialog>
