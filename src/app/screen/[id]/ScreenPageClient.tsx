@@ -12,6 +12,7 @@ import { Card, CardContent, Grid, Typography } from "@mui/material";
 import PlayerCharacterFormDialog from "@/components/client/PlayerCharacterFormDialog";
 import { Groups } from "@mui/icons-material";
 import CardComponent from "@/components/client/Cards/CardComponent";
+import { useFetchScreenData } from "@/app/hooks";
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -20,6 +21,10 @@ export default function ScreenPageClient({
 	layouts,
 	...props
 }) {
+	const { data, isLoading, error } = useFetchScreenData();
+
+	console.log({ data, isLoading, error })
+
 	const { isCustomizing } = useContext(ScreenContext);
 	
 	const [layout, setLayout] = useState(layouts || []);
