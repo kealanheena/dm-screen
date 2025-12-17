@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, FC } from "react";
 
 import {
 	Button, 
@@ -7,7 +7,6 @@ import {
 	DialogContent,
 	DialogTitle, 
 	IconButton, 
-	TextField,
 } from "@mui/material";
 import { map } from "lodash";
 import CardDialogField from "./CardDialogField";
@@ -50,7 +49,10 @@ const formSchema = [{
 	isRequired: false,
 }]
 
-const CardDialog = ({ formData, icon }: { formData: undefined | Object }) => {
+const CardDialog = ({ formData, icon }: {
+	formData: undefined | { title: string }
+	icon: FC
+}) => {
 	const [open, setOpen] = useState<boolean>(false);
 	const [formDataCopy, setFormDataCopy] = useState(formData || {});
 
