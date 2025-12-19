@@ -3,15 +3,20 @@
 import React, { ReactNode, useState } from "react";
 
 import { ScreenContext } from "@/app/context";
-import { PlayerCharacterType } from "@/types";
+import { CharacterClassType, PlayerCharacterType, SpeciesType } from "@/types";
 
 
 type ScreenContextWrapperProps = {
+	classes?: CharacterClassType[];
+	species?: SpeciesType[];
 	playerCharacters?: PlayerCharacterType[];
   children: ReactNode;
 };
 
+
 const ScreenContextWrapper = ({
+	classes = [],
+	species = [],
 	playerCharacters = [],
 	children,
 }: ScreenContextWrapperProps) => {
@@ -20,6 +25,8 @@ const ScreenContextWrapper = ({
 	const screenContextValue = {
 		isCustomizing,
 		setIsCustomizing,
+		classes,
+		species,
 		playerCharacters,
 	};
 

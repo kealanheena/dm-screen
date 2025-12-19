@@ -13,7 +13,11 @@ export async function getClasses() {
 	}
 
 	return prisma.class.findMany({
-		select: { id: true, name: true },
+		select: {
+			id: true,
+			name: true,
+			key: true,
+		},
 		orderBy: { name: 'asc' }
 	});
 }

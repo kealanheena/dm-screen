@@ -12,6 +12,11 @@ export interface PlayerCharacterType {
 	name: string;
 }
 
+export interface CharacterClassType {
+	id: number;
+	name: string;
+}
+
 export interface DMScreenType {
 	id: number;
 	name: string;

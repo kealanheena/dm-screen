@@ -1,17 +1,16 @@
 'use client'
 
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { capitalize, filter, includes, times, map, lowerCase } from "lodash";
+import { capitalize, filter, includes, times, map, lowerCase, find } from "lodash";
 
 import { Close, Diversity3, Edit, OpenInNew, Person, PersonAdd, Search } from "@mui/icons-material";
 import { CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemText, Skeleton, TextField, Tooltip, Typography } from "@mui/material";
-import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 import { ScreenContext } from "@/app/context";
 import CardDialog from "./CardDialog";
 import Image from "next/image";
 
 const ListComponent = ({ card }: { card: { id: number; title: string; listContent: string | null; type: string }}) => {
-	const { isCustomizing, playerCharacters } = useContext(ScreenContext);
+	const { isCustomizing, playerCharacters, classes, species } = useContext(ScreenContext);
 
 	const [search, setSearch] = useState('');
 	const [showSearch, setShowSearch] = useState(false);	
@@ -92,42 +91,52 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 						'& ul': { padding: 0 },
 					}}
 				>
-					{map(filteredItems, (item) => (
-						<ListItem key={`player_character_${item.id}`}>
+					{map(filteredItems, ({ id, name, url, classId, speciesId, subspeciesId }) => {
+						const characterClass = find(classes, ['id', classId]);
+						const characterSpecies = find(species, ['id', speciesId]);
+						const characterSubspecies = find(characterSpecies.subSpecies, ['id', subspeciesId]);
+
+						console.log({
+							characterClass,
+							characterSpecies,
+							characterSubspecies
+						})
+
+						return (<ListItem key={`player_character_${id}`}>
 							<ListItemText
 								primary={
 									<Grid display="flex" alignItems="center">
-										<Tooltip title={item.class.name}>
+										<Tooltip title={characterClass.name}>
 											<Image
-												alt={`${item.class.key} class icon`}
-												src={`/icons/classes/${item.class.key}.jpeg`}
+												alt={`${characterClass.key} class icon`}
+												src={`/icons/classes/${characterClass.key}.jpeg`}
 												style={{ borderRadius: '2px' }}
 												height="25"
 												width="25"
 											/>
 										</Tooltip>
-										<Typography sx={{ pl: 1 }} >{item.name}</Typography>
+										<Typography sx={{ pl: 1 }} >{name}</Typography>
 									</Grid>
 								}
 								secondary={
-									item?.class && (
+									characterSpecies && (
 										<Fragment>
 											<Typography variant="body2">{`species:
-												${item.subspecies?.name ? ` ${capitalize(item.subspecies?.name)} `  : ''}
-												${capitalize(item.species?.name)}
+												${characterSubspecies?.name ? ` ${capitalize(characterSubspecies.name)} `  : ''}
+												${capitalize(characterSpecies?.name)}
 											`}</Typography>
 										</Fragment>
 									)
 								}
 								sx={{ pl: 0.5 }} 
 							/>
-							{item?.url && (
-								<IconButton onClick={() => window.open(item.url, '_blank')}>
+							{url && (
+								<IconButton onClick={() => window.open(url, '_blank')}>
 									<OpenInNew />
 								</IconButton>
 							)}
-						</ListItem>
-					))}
+						</ListItem>)
+					})}
 					<br /> 
 				</List>
 			</Grid>

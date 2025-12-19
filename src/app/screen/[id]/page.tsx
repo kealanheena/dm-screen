@@ -13,24 +13,17 @@ import { MINH, MINW } from "@/constants";
 import CardComponent from "@/components/client/Cards/CardComponent";
 import { Card } from "@mui/material";
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
+import { getClasses } from "@/actions/class.action";
+import { getSpecies } from "@/actions/species.action";
 
 
 export default async function ScreenPage({ params }: ServerPageProps) {
 	const { id } = await params;
 	// const screen = await getScreenById(Number(id));
 
+	const classes = await getClasses();
+	const species = await getSpecies();
 	const playerCharacters = await getPlayerCharacters();
-
-	// const layouts = map(screen?.cards, ({ layout }) => {
-	// 	const { id, ...rest } = layout;
-
-	// 	return {
-	// 		i: toString(id),
-	// 		minH: MINH,
-	// 		minW: MINW,
-	// 		...rest
-	// 	}
-	// });
 
 	const card = {
 		title: 'the Party',
@@ -38,10 +31,14 @@ export default async function ScreenPage({ params }: ServerPageProps) {
 		listContent: 'list'
 	}
 
-	console.log({ playerCharacters });
+	// console.log({ playe})
 
 	return (
-		<ScreenContextWrapper playerCharacters={playerCharacters}>
+		<ScreenContextWrapper
+			classes={classes}
+			species={species}
+			playerCharacters={playerCharacters}
+		>
 			<ScreenActions id={Number(id)} />
 
 			<Card sx={{ maxWidth: '300px', width: '300px', maxHeight: '500px', height: '500px' }}>
