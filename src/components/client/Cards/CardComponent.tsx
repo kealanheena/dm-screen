@@ -6,8 +6,8 @@ import ListComponent from "./ListComponent";
 import ImageComponent from "./ImageComponent";
 
 const CardComponent = ({ type, card }: {
-	type: string
-	card: { id: number, title: string, listConent: string | null }
+	type: string;
+	card: { id: number; title: string; listConent: string | null; type: string }
 }) => {
 	switch (type) {
 		case 'INITATIVE':

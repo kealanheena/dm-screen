@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState, useContext } from "react";
 import { map } from "lodash";
-import RGL, { WidthProvider } from "react-grid-layout";
+import RGL, { Layout, WidthProvider } from "react-grid-layout";
 
 import { ScreenContext } from '@/app/context'
 import { COLUMNS, ROWHEIGHT } from "@/constants";
@@ -20,6 +20,9 @@ export default function ScreenPageClient({
 	cards,
 	layouts,
 	...props
+}: {
+	cards: { id: number; title: string; listConent: string | null; type: string }[]
+	layouts: Layout[]
 }) {
 	const { data, isLoading, error } = useFetchScreenData();
 
@@ -27,10 +30,10 @@ export default function ScreenPageClient({
 
 	const { isCustomizing } = useContext(ScreenContext);
 	
-	const [layout, setLayout] = useState(layouts || []);
+	const [layout, setLayout] = useState<Layout[]>(layouts || []);
 	// const [cards, setCards] = useState(layouts || []);
 
-  const onLayoutChange = (layout) => setLayout(layout);
+  const onLayoutChange = (layout: Layout[]) => setLayout(layout);
 
 	return (
 		<Fragment>

@@ -7,7 +7,7 @@ import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 import { ScreenContext } from "@/app/context";
 import CardDialog from "./CardDialog";
 
-const ListComponent = ({ card }: { card: { id: number, title: string, listConent: string | null }}) => {
+const ListComponent = ({ card }: { card: { id: number; title: string; listConent: string | null; type: string }}) => {
 	const { isCustomizing } = useContext(ScreenContext);
 
 	const [search, setSearch] = useState('');
