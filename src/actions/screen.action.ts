@@ -60,7 +60,7 @@ export async function getScreenById(id: number) {
 					listContent: true,
 					layout: {
 						select: {
-							id: true,
+							i: true,
 							x: true,
 							y: true,
 							h: true,

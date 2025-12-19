@@ -10,32 +10,49 @@ import CreateNewScreen from "@/components/client/CreateScreen";
 
 import { ServerPageProps } from "@/types";
 import { MINH, MINW } from "@/constants";
+import CardComponent from "@/components/client/Cards/CardComponent";
+import { Card } from "@mui/material";
+import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 
 
 export default async function ScreenPage({ params }: ServerPageProps) {
 	const { id } = await params;
-	const screen = await getScreenById(Number(id));
+	// const screen = await getScreenById(Number(id));
 
-	const layouts = map(screen?.cards, ({ layout }) => {
-		const { id, ...rest } = layout;
+	const playerCharacters = await getPlayerCharacters();
 
-		return {
-			i: toString(id),
-			minH: MINH,
-			minW: MINW,
-			...rest
-		}
-	});
+	// const layouts = map(screen?.cards, ({ layout }) => {
+	// 	const { id, ...rest } = layout;
+
+	// 	return {
+	// 		i: toString(id),
+	// 		minH: MINH,
+	// 		minW: MINW,
+	// 		...rest
+	// 	}
+	// });
+
+	const card = {
+		title: 'the Party',
+		type: 'LIST',
+		listContent: 'list'
+	}
+
+	console.log({ playerCharacters });
 
 	return (
-		<ScreenContextWrapper>
+		<ScreenContextWrapper playerCharacters={playerCharacters}>
 			<ScreenActions id={Number(id)} />
+
+			<Card sx={{ maxWidth: '300px', width: '300px', maxHeight: '500px', height: '500px' }}>
+				<CardComponent card={card} />
+			</Card> 
 			
-			{screen ? (
+			{/* {screen ? (
 				<ScreenPageClient layouts={layouts|| []} cards={screen?.cards || []} />
 			) : (
 				<CreateNewScreen />
-			)}
+			)} */}
 		</ScreenContextWrapper>
 	)
 }

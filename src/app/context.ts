@@ -16,6 +16,7 @@ interface FormDataType extends PlayerCharacterType {
 interface ScreenContextType {
 	isCustomizing: boolean;
 	setIsCustomizing: React.Dispatch<React.SetStateAction<boolean>>
+	playerCharacters: PlayerCharacterType[]
 }
 
 interface FormDataContextType {
@@ -27,6 +28,7 @@ interface FormDataContextType {
 const defaultScreenContext = {
 	isCustomizing: false,
 	setIsCustomizing: () => {},
+	playerCharacters: [],
 }
 
 const defaultFormData = {
