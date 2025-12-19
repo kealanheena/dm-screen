@@ -4,10 +4,11 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { capitalize, filter, includes, times, map, lowerCase } from "lodash";
 
 import { Close, Diversity3, Edit, OpenInNew, Person, PersonAdd, Search } from "@mui/icons-material";
-import { CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemText, Skeleton, TextField, Typography } from "@mui/material";
+import { CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemText, Skeleton, TextField, Tooltip, Typography } from "@mui/material";
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 import { ScreenContext } from "@/app/context";
 import CardDialog from "./CardDialog";
+import Image from "next/image";
 
 const ListComponent = ({ card }: { card: { id: number; title: string; listContent: string | null; type: string }}) => {
 	const { isCustomizing, playerCharacters } = useContext(ScreenContext);
@@ -95,20 +96,26 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 						<ListItem key={`player_character_${item.id}`}>
 							<ListItemText
 								primary={
-									<Grid display="flex">
-										<Person />
+									<Grid display="flex" alignItems="center">
+										<Tooltip title={item.class.name}>
+											<Image
+												alt={`${item.class.key} class icon`}
+												src={`/icons/classes/${item.class.key}.jpeg`}
+												style={{ borderRadius: '2px' }}
+												height="25"
+												width="25"
+											/>
+										</Tooltip>
 										<Typography sx={{ pl: 1 }} >{item.name}</Typography>
 									</Grid>
 								}
 								secondary={
 									item?.class && (
 										<Fragment>
-											<Typography component="span" variant="body2">{`class: ${item.class.name}`}</Typography>
 											<Typography variant="body2">{`species:
 												${item.subspecies?.name ? ` ${capitalize(item.subspecies?.name)} `  : ''}
 												${capitalize(item.species?.name)}
 											`}</Typography>
-											
 										</Fragment>
 									)
 								}
