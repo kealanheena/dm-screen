@@ -246,6 +246,13 @@ const playerCharacters = [{
   subspecies: 'shifter_swiftstride',
 	url: process.env.SPOTS_URL || null,
 	updatedAt: new Date(),
+}, {
+	id: 6,
+	name: 'Aynrix Kessel d\'Cannith',
+	dndClass: 'wizard',
+  species: 'human',
+	url: process.env.AYNRIX_URL || null,
+	updatedAt: new Date(),
 }]
 
 const prisma = new PrismaClient();

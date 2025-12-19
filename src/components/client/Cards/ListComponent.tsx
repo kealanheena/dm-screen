@@ -102,40 +102,38 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 							characterSubspecies
 						})
 
-						return (<ListItem key={`player_character_${id}`}>
-							<ListItemText
-								primary={
-									<Grid display="flex" alignItems="center">
-										<Tooltip title={characterClass.name}>
-											<Image
-												alt={`${characterClass.key} class icon`}
-												src={`/icons/classes/${characterClass.key}.jpeg`}
-												style={{ borderRadius: '2px' }}
-												height="25"
-												width="25"
-											/>
-										</Tooltip>
-										<Typography sx={{ pl: 1 }} >{name}</Typography>
-									</Grid>
-								}
-								secondary={
-									characterSpecies && (
-										<Fragment>
-											<Typography variant="body2">{`species:
-												${characterSubspecies?.name ? ` ${capitalize(characterSubspecies.name)} `  : ''}
-												${capitalize(characterSpecies?.name)}
-											`}</Typography>
-										</Fragment>
-									)
-								}
-								sx={{ pl: 0.5 }} 
-							/>
-							{url && (
-								<IconButton onClick={() => window.open(url, '_blank')}>
-									<OpenInNew />
-								</IconButton>
-							)}
-						</ListItem>)
+						return (
+							<ListItem key={`player_character_${id}`}>
+								<Tooltip title={characterClass.name}>
+									<Image
+										alt={`${characterClass.key} class icon`}
+										src={`/icons/classes/${characterClass.key}.jpeg`}
+										style={{ borderRadius: '2px' }}
+										height="35"
+										width="35"
+									/>
+								</Tooltip>
+								<ListItemText
+									primary={<Typography >{name}</Typography>}
+									secondary={
+										characterSpecies && (
+											<Fragment>
+												<Typography variant="body2">{`species:
+													${characterSubspecies?.name ? ` ${capitalize(characterSubspecies.name)} `  : ''}
+													${capitalize(characterSpecies?.name)}
+												`}</Typography>
+											</Fragment>
+										)
+									}
+									sx={{ pl: 1, m: 0 }} 
+								/>
+								{url && (
+									<IconButton onClick={() => window.open(url, '_blank')}>
+										<OpenInNew />
+									</IconButton>
+								)}
+							</ListItem>
+						)
 					})}
 					<br /> 
 				</List>
