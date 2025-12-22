@@ -1,4 +1,4 @@
-import React, { useState, Fragment, FC } from "react";
+import React, { useState, Fragment, FC, useContext } from "react";
 
 import {
 	Button, 
@@ -6,10 +6,14 @@ import {
 	DialogActions, 
 	DialogContent,
 	DialogTitle, 
-	IconButton, 
+	IconButton,
+	MenuItem,
+	TextField, 
 } from "@mui/material";
 import { map } from "lodash";
 import CardDialogField from "./CardDialogField";
+import { ScreenContext } from "@/app/context";
+import Image from "next/image";
 
 const formSchema = [{
 	name: 'Name',
@@ -53,6 +57,8 @@ const CardDialog = ({ formData, icon }: {
 	formData: undefined | { title: string }
 	icon: FC
 }) => {
+	const { isCustomizing, playerCharacters, classes, species } = useContext(ScreenContext);
+
 	const [open, setOpen] = useState<boolean>(false);
 	const [formDataCopy, setFormDataCopy] = useState(formData || {});
 
@@ -68,7 +74,45 @@ const CardDialog = ({ formData, icon }: {
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>{formData ? `Edit ${formData.title}` : 'Create player character'}</DialogTitle>
         <DialogContent>
-					
+
+					<TextField
+						label="Class"
+						value={formDataCopy.classId || 0}
+						onChange={(e) => setFormDataCopy({
+							...formDataCopy,
+							classId: e.target.value
+						})}
+						required
+						select
+						size="medium"
+						fullWidth
+						slotProps={{
+							select: {
+								sx: {
+									"& .MuiSelect-select": {
+										display: 'flex',
+										alignItems: 'center'
+									},
+								},
+							},
+						}}
+					>
+						<MenuItem value={0}>Select class</MenuItem>
+
+						{map(classes, ({ id, name, key }) => (
+							<MenuItem sx={{ display: 'flex', alignItems: 'center' }} key={key} value={id} >
+								<Image
+									alt={`${key} class icon`}
+									src={`/icons/classes/${key}.jpeg`}
+									style={{ borderRadius: '4px', marginRight: '8px' }}
+									height="25"
+									width="25"
+								/>
+								{name}
+							</MenuItem>
+						))}
+					</TextField>
+{/* 					
 					{map(formSchema, (schema) => (
 						<CardDialogField
 							schema={schema}
@@ -78,7 +122,7 @@ const CardDialog = ({ formData, icon }: {
 								[schema.key]: e.target.value
 							})}
 						/> 
-					))}
+					))} */}
 
         </DialogContent>
         <DialogActions>

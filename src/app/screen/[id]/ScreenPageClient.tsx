@@ -24,10 +24,6 @@ export default function ScreenPageClient({
 	cards: { id: number; title: string; listConent: string | null; type: string }[]
 	layouts: Layout[]
 }) {
-	const { data, isLoading, error } = useFetchScreenData();
-
-	console.log({ data, isLoading, error })
-
 	const { isCustomizing } = useContext(ScreenContext);
 	
 	const [layout, setLayout] = useState<Layout[]>(layouts || []);
