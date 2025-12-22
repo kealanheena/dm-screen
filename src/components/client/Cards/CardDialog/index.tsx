@@ -115,10 +115,10 @@ const CardDialog = ({ formData, icon }: {
 
 					<TextField
 						label="Species"
-						value={formDataCopy.classId || 0}
+						value={formDataCopy.speciesId || 0}
 						onChange={(e) => setFormDataCopy({
 							...formDataCopy,
-							classId: e.target.value
+							speciesId: e.target.value
 						})}
 						required
 						select
