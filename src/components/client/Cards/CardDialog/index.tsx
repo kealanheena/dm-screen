@@ -112,6 +112,44 @@ const CardDialog = ({ formData, icon }: {
 							</MenuItem>
 						))}
 					</TextField>
+
+					<TextField
+						label="Species"
+						value={formDataCopy.classId || 0}
+						onChange={(e) => setFormDataCopy({
+							...formDataCopy,
+							classId: e.target.value
+						})}
+						required
+						select
+						size="medium"
+						fullWidth
+						slotProps={{
+							select: {
+								sx: {
+									"& .MuiSelect-select": {
+										display: 'flex',
+										alignItems: 'center'
+									},
+								},
+							},
+						}}
+					>
+						<MenuItem value={0}>Select species</MenuItem>
+
+						{map(species, ({ id, name, key }) => (
+							<MenuItem sx={{ display: 'flex', alignItems: 'center' }} key={key} value={id} >
+								<Image
+									alt={`${key} class icon`}
+									src={`/icons/species/${key}.png`}
+									style={{ borderRadius: '4px', marginRight: '8px' }}
+									height="25"
+									width="25"
+								/>
+								{name}
+							</MenuItem>
+						))}
+					</TextField>
 {/* 					
 					{map(formSchema, (schema) => (
 						<CardDialogField
