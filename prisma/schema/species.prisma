@@ -4,7 +4,7 @@ model Species {
   name String
   key  String @unique
 
-  subSpecies       Subspecies[]
+  subspecies       Subspecies[]
   playerCharacters PlayerCharacter[]
 
   createdAt DateTime @default(now())

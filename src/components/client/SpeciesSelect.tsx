@@ -29,8 +29,8 @@ export default function SpeciesSelect() {
 		const newSelectedSpecies = find(species, ['id', event.target.value]) || null;
 		setSelectedSpecies(newSelectedSpecies);
 
-		if (newSelectedSpecies && newSelectedSpecies.subSpecies.length !== 0) {
-			setSelectedSubspecies(newSelectedSpecies.subSpecies[0])
+		if (newSelectedSpecies && newSelectedSpecies.subspecies.length !== 0) {
+			setSelectedSubspecies(newSelectedSpecies.subspecies[0])
 		}
 	};
 
@@ -47,16 +47,16 @@ export default function SpeciesSelect() {
 				{map(species, ({ id, name }) => <MenuItem value={id}>{name}</MenuItem>)}
 			</TextField>
 
-			{selectedSpecies && selectedSpecies.subSpecies.length !== 0 && (
+			{selectedSpecies && selectedSpecies.subspecies.length !== 0 && (
 				<TextField
 					select
 					value={selectedSubspecies?.id || null}
 					onChange={(event) => setSelectedSubspecies(
-						find(selectedSpecies.subSpecies, ['id', event.target.value]) || null
+						find(selectedSpecies.subspecies, ['id', event.target.value]) || null
 					)}
 					label="Subspecies"
 				>
-					{map(selectedSpecies.subSpecies, ({ id, name }) => (
+					{map(selectedSpecies.subspecies, ({ id, name }) => (
 						<MenuItem value={id}>{name}</MenuItem>
 					))}
 				</TextField>

@@ -1,4 +1,4 @@
-import React, { useState, Fragment, FC, useContext } from "react";
+import React, { useState, Fragment, FC, useContext, useMemo } from "react";
 
 import {
 	Button, 
@@ -7,10 +7,11 @@ import {
 	DialogContent,
 	DialogTitle, 
 	IconButton,
+	InputAdornment,
 	MenuItem,
 	TextField, 
 } from "@mui/material";
-import { map } from "lodash";
+import { find, map } from "lodash";
 import CardDialogField from "./CardDialogField";
 import { ScreenContext } from "@/app/context";
 import Image from "next/image";
@@ -53,18 +54,31 @@ const formSchema = [{
 	isRequired: false,
 }]
 
-const CardDialog = ({ formData, icon }: {
-	formData: undefined | { title: string }
+const CardDialog = ({ data, icon }: {
+	data: undefined | { title: string }
 	icon: FC
 }) => {
 	const { isCustomizing, playerCharacters, classes, species } = useContext(ScreenContext);
 
 	const [open, setOpen] = useState<boolean>(false);
-	const [formDataCopy, setFormDataCopy] = useState(formData || {});
+
+	const [name, setName] = useState<string>(data?.name || '');
+	const [url, setUrl] = useState<string>(data?.name || '');
+	const [classId, setClassId] = useState(data?.classId || 0);
+	const [speciesId, setSpeciesId] = useState(data?.speciesId || 0);
+	const [subspeciesId, setSubspeciesId] = useState(data?.subspeciesId || 0);
 
 	const handleClickOpen = () => setOpen(true);
 
 	const handleClose = () => setOpen(false);
+
+	const subspecies = useMemo(() => {
+    return (
+			find(species, ['id', speciesId]) || {}
+		).subspecies;
+  }, [species, speciesId]); 
+
+	console.log({ subspecies })
 
 	return (
 		<Fragment>
@@ -72,32 +86,39 @@ const CardDialog = ({ formData, icon }: {
 				{icon}
 			</IconButton>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle>{formData ? `Edit ${formData.title}` : 'Create player character'}</DialogTitle>
+        <DialogTitle>{data?.id ? `Edit ${formData.title}` : 'Create player character'}</DialogTitle>
         <DialogContent>
 
 					<TextField
-						label="Class"
-						value={formDataCopy.classId || 0}
-						onChange={(e) => setFormDataCopy({
-							...formDataCopy,
-							classId: e.target.value
-						})}
+						label="Character name"
+						value={name || ''}
+						onChange={(e) => setName(e.target.value)}
 						required
-						select
-						size="medium"
 						fullWidth
+					/>
+
+					<TextField
+						label="Character url (D&D Beyond)"
+						value={url || ''}
+						onChange={(e) => setUrl(e.target.value)}
+						fullWidth
+						// sx={{ m: 1, width: '3ch' }}
 						slotProps={{
-							select: {
-								sx: {
-									"& .MuiSelect-select": {
-										display: 'flex',
-										alignItems: 'center'
-									},
-								},
+							input: {
+								startAdornment: <InputAdornment position="start">https://www.dndbeyond.com/characters/</InputAdornment>,
 							},
 						}}
+					/>
+
+					<TextField
+						label="Class"
+						value={classId || 0}
+						onChange={(e) => setClassId(e.target.value)}
+						required
+						select
+						fullWidth
 					>
-						<MenuItem value={0}>Select class</MenuItem>
+						<MenuItem value={0}>Select character class</MenuItem>
 
 						{map(classes, ({ id, name, key }) => (
 							<MenuItem sx={{ display: 'flex', alignItems: 'center' }} key={key} value={id} >
@@ -114,26 +135,12 @@ const CardDialog = ({ formData, icon }: {
 					</TextField>
 
 					<TextField
-						label="Species"
-						value={formDataCopy.speciesId || 0}
-						onChange={(e) => setFormDataCopy({
-							...formDataCopy,
-							speciesId: e.target.value
-						})}
+						label="Character species"
+						value={speciesId || 0}
+						onChange={(e) => setSpeciesId(e.target.value)}
 						required
 						select
-						size="medium"
 						fullWidth
-						slotProps={{
-							select: {
-								sx: {
-									"& .MuiSelect-select": {
-										display: 'flex',
-										alignItems: 'center'
-									},
-								},
-							},
-						}}
 					>
 						<MenuItem value={0}>Select species</MenuItem>
 
@@ -150,17 +157,32 @@ const CardDialog = ({ formData, icon }: {
 							</MenuItem>
 						))}
 					</TextField>
-{/* 					
-					{map(formSchema, (schema) => (
-						<CardDialogField
-							schema={schema}
-							value={formDataCopy[schema.key]}
-							onChange={(e) => setFormDataCopy({
-								...formDataCopy,
-								[schema.key]: e.target.value
-							})}
-						/> 
-					))} */}
+
+					{subspecies?.length !== 0 && (
+						<TextField
+							label="Character subspecies"
+							value={subspeciesId || 0}
+							onChange={(e) => setSubspeciesId(e.target.value)}
+							required
+							select
+							fullWidth
+						>
+							<MenuItem value={0}>Select subspecies</MenuItem>
+
+							{map(subspecies, ({ id, name, key }) => (
+								<MenuItem sx={{ display: 'flex', alignItems: 'center' }} key={key} value={id} >
+									{/* <Image
+										alt={`${key} class icon`}
+										src={`/icons/species/${key}.png`}
+										style={{ borderRadius: '4px', marginRight: '8px' }}
+										height="25"
+										width="25"
+									/> */}
+									{name}
+								</MenuItem>
+							))}
+						</TextField>
+					)}
 
         </DialogContent>
         <DialogActions>

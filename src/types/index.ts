@@ -58,5 +58,5 @@ export interface SubspeciesType {
 export interface SpeciesType {
 	id: number;
 	name: string;
-	subSpecies: SubspeciesType[];
+	subspecies: SubspeciesType[];
 }

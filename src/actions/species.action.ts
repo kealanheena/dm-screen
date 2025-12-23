@@ -9,7 +9,7 @@ export async function getSpecies() {
 			id: true,
 			name: true,
 			key: true,
-			subSpecies: {
+			subspecies: {
 				select: { id: true, name: true },
 				orderBy: { name: 'asc' }
 			},

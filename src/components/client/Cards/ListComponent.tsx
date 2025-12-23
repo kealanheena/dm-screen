@@ -86,57 +86,63 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 					maxHeight: '100%',
 				}}
 			>
-				<List
-					sx={{
-						'& ul': { padding: 0 },
-					}}
-				>
-					{map(filteredItems, ({ id, name, url, classId, speciesId, subspeciesId }) => {
-						const characterClass = find(classes, ['id', classId]);
-						const characterSpecies = find(species, ['id', speciesId]);
-						const characterSubspecies = find(characterSpecies.subSpecies, ['id', subspeciesId]);
+				{filteredItems.length !== 0 && (
+					<List
+						sx={{
+							'& ul': { padding: 0 },
+						}}
+					>
+						{map(filteredItems, ({ id, name, url, classId, speciesId, subspeciesId }) => {
+							const characterClass = find(classes, ['id', classId]);
+							const characterSpecies = find(species, ['id', speciesId]);
+							const characterSubspecies = find(characterSpecies.subspecies, ['id', subspeciesId]);
 
-						console.log({
-							characterClass,
-							characterSpecies,
-							characterSubspecies
-						})
+							console.log({
+								characterClass,
+								characterSpecies,
+								characterSubspecies
+							})
 
-						return (
-							<ListItem key={`player_character_${id}`}>
-								<Tooltip title={characterClass.name}>
-									<Image
-										alt={`${characterClass.key} class icon`}
-										src={`/icons/classes/${characterClass.key}.jpeg`}
-										style={{ borderRadius: '2px' }}
-										height="35"
-										width="35"
-									/>
-								</Tooltip>
-								<ListItemText
-									primary={<Typography >{name}</Typography>}
-									secondary={
-										characterSpecies && (
+							return (
+								<ListItem key={`player_character_${id}`}>
+									
+									<ListItemText
+										primary={<Typography >{name}</Typography>}
+										secondary={
 											<Fragment>
-												<Typography variant="body2">{`species:
-													${characterSubspecies?.name ? ` ${capitalize(characterSubspecies.name)} `  : ''}
-													${capitalize(characterSpecies?.name)}
-												`}</Typography>
+												<Tooltip title={characterSpecies.name}>
+													<Image
+														alt={`${characterSpecies.key} species icon`}
+														src={`/icons/species/${characterSpecies.key}.png`}
+														style={{ borderRadius: '4px' }}
+														height="50"
+														width="50"
+													/>
+												</Tooltip>
+												<Tooltip title={characterClass.name}>
+													<Image
+														alt={`${characterClass.key} class icon`}
+														src={`/icons/classes/${characterClass.key}.jpeg`}
+														style={{ borderRadius: '4px' }}
+														height="50"
+														width="50"
+													/>
+												</Tooltip>
 											</Fragment>
-										)
-									}
-									sx={{ pl: 1, m: 0 }} 
-								/>
-								{url && (
-									<IconButton onClick={() => window.open(url, '_blank')}>
-										<OpenInNew />
-									</IconButton>
-								)}
-							</ListItem>
-						)
-					})}
-					<br /> 
-				</List>
+										}
+										sx={{ m: 0 }} 
+									/>
+									{url && (
+										<IconButton onClick={() => window.open(url, '_blank')}>
+											<OpenInNew />
+										</IconButton>
+									)}
+								</ListItem>
+							)
+						})}
+						<br /> 
+					</List>
+				)}
 			</Grid>
 		</CardContent>
 	)

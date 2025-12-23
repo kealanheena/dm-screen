@@ -85,6 +85,11 @@ export const themeOptions: ThemeOptions = {
     MuiTextField: {
       defaultProps: {
         size: 'small',
+        slotProps: {
+          select: {
+            sx: { "& .MuiSelect-select": { display: 'flex', alignItems: 'center' } },
+          },
+        }
       },
       styleOverrides: {
         root: {
