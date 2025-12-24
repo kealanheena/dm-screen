@@ -31,8 +31,6 @@ export default async function ScreenPage({ params }: ServerPageProps) {
 		listContent: 'list'
 	}
 
-	// console.log({ playe})
-
 	return (
 		<ScreenContextWrapper
 			classes={classes}

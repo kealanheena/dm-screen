@@ -101,13 +101,8 @@ const CardDialog = ({ data, icon }: {
 						label="Character url (D&D Beyond)"
 						value={url || ''}
 						onChange={(e) => setUrl(e.target.value)}
+						placeholder="https://www.dndbeyond.com/characters/123456789"
 						fullWidth
-						// sx={{ m: 1, width: '3ch' }}
-						slotProps={{
-							input: {
-								startAdornment: <InputAdornment position="start">https://www.dndbeyond.com/characters/</InputAdornment>,
-							},
-						}}
 					/>
 
 					<TextField
@@ -137,7 +132,10 @@ const CardDialog = ({ data, icon }: {
 					<TextField
 						label="Character species"
 						value={speciesId || 0}
-						onChange={(e) => setSpeciesId(e.target.value)}
+						onChange={(e) => {
+							setSubspeciesId(0)
+							setSpeciesId(e.target.value)
+						}}
 						required
 						select
 						fullWidth
@@ -158,7 +156,7 @@ const CardDialog = ({ data, icon }: {
 						))}
 					</TextField>
 
-					{subspecies?.length !== 0 && (
+					{subspecies?.length ? (
 						<TextField
 							label="Character subspecies"
 							value={subspeciesId || 0}
@@ -182,7 +180,7 @@ const CardDialog = ({ data, icon }: {
 								</MenuItem>
 							))}
 						</TextField>
-					)}
+					) : <div />}
 
         </DialogContent>
         <DialogActions>

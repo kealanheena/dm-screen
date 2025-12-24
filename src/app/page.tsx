@@ -34,10 +34,6 @@ export default async function Home() {
           <Screens />
         </Grid>
       </Grid>
-
-      <Grid size={3}>
-          <PlayerCharacters />
-        </Grid>
     </Grid>
   );
 }
