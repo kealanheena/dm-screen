@@ -1,16 +1,31 @@
 'use client'
 
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { capitalize, filter, includes, times, map, lowerCase, find } from "lodash";
+import React, { Fragment, useContext, useState } from "react";
+import { filter, includes, map, lowerCase, find } from "lodash";
 
-import { Close, Diversity3, Edit, OpenInNew, Person, PersonAdd, Search } from "@mui/icons-material";
-import { CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemText, Skeleton, TextField, Tooltip, Typography } from "@mui/material";
+import { Close, Diversity3, Edit, OpenInNew, PersonAdd, Search } from "@mui/icons-material";
+import { CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemText, TextField, Tooltip, Typography } from "@mui/material";
 import { ScreenContext } from "@/app/context";
 import CardDialog from "./CardDialog";
 import Image from "next/image";
 
+
+          //   <ListItemButton>
+          //     <ListItemAvatar>
+          //       <Avatar
+          //         alt={`Avatar n°${value + 1}`}
+          //         src={`/static/images/avatar/${value + 1}.jpg`}
+          //       />
+          //     </ListItemAvatar>
+          //     <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+          //   </ListItemButton>
+          // </ListItem>
+
 const ListComponent = ({ card }: { card: { id: number; title: string; listContent: string | null; type: string }}) => {
 	const { isCustomizing, playerCharacters, classes, species } = useContext(ScreenContext);
+
+	const [open, setOpen] = useState<boolean>(false);
+	const [openItem, setOpenItem] = useState(null);
 
 	const [search, setSearch] = useState('');
 	const [showSearch, setShowSearch] = useState(false);	
@@ -19,9 +34,6 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 		setShowSearch(!showSearch)
 		setSearch('');
 	}
-
-	console.log({ playerCharacters })
-
 
 	const filteredItems = filter(playerCharacters, ({ name }) => includes(name, search));
 
@@ -40,13 +52,12 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 						</IconButton>
 					)}
 
-					{isCustomizing ? (
-						<CardDialog formData={{}} icon={<Edit />} /> 
-					) : (
-						<CardDialog icon={<PersonAdd />} />
-					)}
+					<IconButton onClick={() => setOpenItem({})}>
+						{isCustomizing ? <Edit /> : <PersonAdd />}
+					</IconButton>
+
+					<CardDialog data={openItem} setOpenItem={setOpenItem} />
 				</Grid>
-		
 			</Grid>
 
 
@@ -87,56 +98,61 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 				}}
 			>
 				{filteredItems.length !== 0 && (
-					<List
-						sx={{
-							'& ul': { padding: 0 },
-						}}
-					>
+					<List>
 						{map(filteredItems, ({ id, name, url, classId, speciesId, subspeciesId }) => {
 							const characterClass = find(classes, ['id', classId]);
 							const characterSpecies = find(species, ['id', speciesId]);
 							const characterSubspecies = find(characterSpecies.subspecies, ['id', subspeciesId]);
 
-							console.log({
-								characterClass,
-								characterSpecies,
-								characterSubspecies
-							})
-
 							return (
-								<ListItem key={`player_character_${id}`}>
-									
-									<ListItemText
-										primary={<Typography >{name}</Typography>}
-										secondary={
-											<Fragment>
-												<Tooltip title={characterSpecies.name}>
-													<Image
-														alt={`${characterSpecies.key} species icon`}
-														src={`/icons/species/${characterSpecies.key}.png`}
-														style={{ borderRadius: '4px' }}
-														height="50"
-														width="50"
-													/>
-												</Tooltip>
-												<Tooltip title={characterClass.name}>
-													<Image
-														alt={`${characterClass.key} class icon`}
-														src={`/icons/classes/${characterClass.key}.jpeg`}
-														style={{ borderRadius: '4px' }}
-														height="50"
-														width="50"
-													/>
-												</Tooltip>
-											</Fragment>
-										}
-										sx={{ m: 0 }} 
-									/>
-									{url && (
-										<IconButton onClick={() => window.open(url, '_blank')}>
+								<ListItem
+									key={`player_character_${id}`}
+									secondaryAction={
+										<IconButton 
+											onClick={() => window.open(url, '_blank')}
+											disabled={!url}
+										>
 											<OpenInNew />
 										</IconButton>
-									)}
+									}
+								>
+									<ListItemButton
+										onClick={() => setOpenItem({
+											id, 
+											name,
+											url,
+											classId,
+											speciesId,
+											subspeciesId
+										})}
+									>
+										<ListItemText
+											primary={<Typography >{name}</Typography>}
+											secondary={
+												<Fragment>
+													<Tooltip title={characterSpecies.name}>
+														<Image
+															alt={`${characterSpecies.key} species icon`}
+															src={`/icons/species/${characterSpecies.key}.png`}
+															style={{ borderRadius: '4px' }}
+															height="50"
+															width="50"
+														/>
+													</Tooltip>
+													<Tooltip title={characterClass.name}>
+														<Image
+															alt={`${characterClass.key} class icon`}
+															src={`/icons/classes/${characterClass.key}.jpeg`}
+															style={{ borderRadius: '4px' }}
+															height="50"
+															width="50"
+														/>
+													</Tooltip>
+												</Fragment>
+											}
+											sx={{ m: 0 }} 
+										/>
+									</ListItemButton>
 								</ListItem>
 							)
 						})}
