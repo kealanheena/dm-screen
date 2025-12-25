@@ -16,9 +16,17 @@ import { ScreenContext } from "@/app/context";
 import Image from "next/image";
 
 
+interface Data {
+		name: string;
+		url: string | undefined;
+		classId: number;
+		speciesId: number;
+		subspeciesId: number;
+	}
+
 const CardDialog = ({ setOpenItem, data }: {
-	setOpenItem: Function;
-	data: undefined | { title: string }
+	setOpenItem: React.Dispatch<React.SetStateAction<null | Data>>;
+	data?: Data;
 }) => {
 	const { playerCharacters, classes, species } = useContext(ScreenContext);
 
@@ -68,7 +76,7 @@ const CardDialog = ({ setOpenItem, data }: {
 				<TextField
 					label="Class"
 					value={classId || 0}
-					onChange={(e) => setClassId(e.target.value)}
+					onChange={(e) => setClassId(Number(e.target.value))}
 					required
 					select
 					fullWidth
@@ -94,7 +102,7 @@ const CardDialog = ({ setOpenItem, data }: {
 					value={speciesId || 0}
 					onChange={(e) => {
 						setSubspeciesId(0)
-						setSpeciesId(e.target.value)
+						setSpeciesId(Number(e.target.value))
 					}}
 					required
 					select
@@ -120,7 +128,7 @@ const CardDialog = ({ setOpenItem, data }: {
 					<TextField
 						label="Character subspecies"
 						value={subspeciesId || 0}
-						onChange={(e) => setSubspeciesId(e.target.value)}
+						onChange={(e) => setSubspeciesId(Number(e.target.value))}
 						required
 						select
 						fullWidth
