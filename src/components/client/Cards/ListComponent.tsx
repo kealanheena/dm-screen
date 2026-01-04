@@ -4,7 +4,7 @@ import React, { Fragment, useContext, useState } from "react";
 import { filter, includes, map, lowerCase, find } from "lodash";
 
 import { Close, Diversity3, Edit, OpenInNew, PersonAdd, Search } from "@mui/icons-material";
-import { CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemText, TextField, Tooltip, Typography } from "@mui/material";
+import { Card, CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemText, TextField, Tooltip, Typography } from "@mui/material";
 import { ScreenContext } from "@/app/context";
 import CardDialog from "./CardDialog";
 import Image from "next/image";
@@ -107,7 +107,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 							return (
 								<ListItem
 									style={{
-										background: `url("/backgrounds/classes/${characterClass.key}_background.png") no-repeat right center`,
+										background: `url("/backgrounds/classes_2014/${characterClass.key}.png") no-repeat right center`,
 										backgroundSize: 'auto 100%'
 									}}
 									key={`player_character_${id}`}
@@ -116,7 +116,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 											onClick={() => window.open(url, '_blank')}
 											disabled={!url}
 										>
-											<OpenInNew />
+											<OpenInNew color="secondary"/>
 										</IconButton>
 									}
 								>
@@ -131,30 +131,29 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 										})}
 									>
 										<ListItemText
-											primary={<Typography >{name}</Typography>}
-											secondary={
-												<Fragment>
+											primary={
+												<Grid display="flex">
+													<Typography>{name}</Typography>
 													<Tooltip title={characterSpecies.name}>
 														<Image
 															alt={`${characterSpecies.key} species icon`}
 															src={`/icons/species/${characterSpecies.key}.png`}
 															style={{ borderRadius: '4px' }}
-															height="50"
-															width="50"
+															height="25"
+															width="25"
 														/>
 													</Tooltip>
-													<Tooltip title={characterClass.name}>
-														<Image
-															alt={`${characterClass.key} class icon`}
-															src={`/icons/classes/${characterClass.key}.jpeg`}
-															style={{ borderRadius: '4px' }}
-															height="50"
-															width="50"
-														/>
-													</Tooltip>
+												</Grid>
+											}
+											secondary={
+												<Fragment>
+													<Typography>
+														{`${characterSubspecies ? `${characterSubspecies.name} ` : ''}`}
+														{`${characterSpecies.name} ${characterClass.name}`}
+													</Typography>
 												</Fragment>
 											}
-											sx={{ m: 0 }} 
+											sx={{ m: 0 }}
 										/>
 									</ListItemButton>
 								</ListItem>
