@@ -106,6 +106,10 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 
 							return (
 								<ListItem
+									style={{
+										background: `url("/backgrounds/classes/${characterClass.key}_background.png") no-repeat right center`,
+										backgroundSize: 'auto 100%'
+									}}
 									key={`player_character_${id}`}
 									secondaryAction={
 										<IconButton 
