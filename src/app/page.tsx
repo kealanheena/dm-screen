@@ -7,13 +7,16 @@ import { getDbUserId } from "@/actions/user.action";
 import Campaigns from "@/components/server/Campaigns";
 import Screens from '@/components/server/Screens';
 import PlayerCharacters from "@/components/server/PlayerCharacters";
+import LogIn from "@/components/server/LogIn";
 
 
 export default async function Home() {
   const userId = await getDbUserId();
 
   if (!userId) {
-    return;
+    return (
+      <LogIn />
+    );
   }
 
   return (

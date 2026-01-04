@@ -17,7 +17,7 @@ function Redirect({ isUser }: RedirectProps) {
 	);
 
 	if (!isPageAccessable) {
-		redirect('/log-in', RedirectType.replace);
+		redirect('/', RedirectType.replace);
 	}
 
 	return <Fragment />;

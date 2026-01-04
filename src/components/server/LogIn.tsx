@@ -1,17 +1,11 @@
 import React from 'react'
-import {
-	// ClerkLoaded,
-	// ClerkLoading,
-	// ClerkDegraded,
-	// ClerkFailed,
-	SignIn,
-} from '@clerk/nextjs';
+import { SignIn } from '@clerk/nextjs';
 import { Divider, Grid } from '@mui/material';
 
 import ContinueAsGuest from '@/components/client/ContinueAsGuest';
 
 
-function LogInPage() {
+function LogIn() {
 	return (
 		<Grid
 			container
@@ -30,4 +24,4 @@ function LogInPage() {
 	)
 }
 
-export default LogInPage;
+export default LogIn;
