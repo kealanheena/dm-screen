@@ -1,5 +1,3 @@
-import './globals.css'
-
 // import type { Metadata } from "next";
 import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from "react-hot-toast";
