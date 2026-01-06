@@ -295,7 +295,7 @@ const playerCharacters = [{
   dndClass: 'gunslinger',
 	species: 'shifter',
   subspecies: 'shifter_wildhunt',
-  url: process.env.AYNRIX_URL,
+  url: process.env.ACER_URL,
 	updatedAt: new Date(),
 }]
 
