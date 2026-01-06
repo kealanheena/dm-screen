@@ -99,7 +99,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 			>
 				{filteredItems.length !== 0 && (
 					<List>
-						{map(filteredItems, ({ id, name, url, classId, speciesId, subspeciesId }) => {
+						{map(filteredItems, ({ id, name, imageUrl, url, classId, speciesId, subspeciesId }) => {
 							const characterClass = find(classes, ['id', classId]);
 							const characterSpecies = find(species, ['id', speciesId]);
 							const characterSubspecies = find(characterSpecies.subspecies, ['id', subspeciesId]);
@@ -111,14 +111,6 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 										backgroundSize: 'auto 100%'
 									}}
 									key={`player_character_${id}`}
-									secondaryAction={
-										<IconButton 
-											onClick={() => window.open(url, '_blank')}
-											disabled={!url}
-										>
-											<OpenInNew color="secondary"/>
-										</IconButton>
-									}
 								>
 									<ListItemButton
 										onClick={() => setOpenItem({
@@ -130,21 +122,18 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 											subspeciesId
 										})}
 									>
+										{imageUrl ? <>Image Found</> :
+											<Image
+												alt={`${characterSpecies.key} species icon`}
+												src={`/icons/species/${characterSpecies.key}.png`}
+												style={{ borderRadius: '4px', border: '2px solid red' }}
+												height="40"
+												width="40"
+											/>
+										}
+										
 										<ListItemText
-											primary={
-												<Grid display="flex">
-													<Typography>{name}</Typography>
-													<Tooltip title={characterSpecies.name}>
-														<Image
-															alt={`${characterSpecies.key} species icon`}
-															src={`/icons/species/${characterSpecies.key}.png`}
-															style={{ borderRadius: '4px' }}
-															height="25"
-															width="25"
-														/>
-													</Tooltip>
-												</Grid>
-											}
+											primary={name}
 											secondary={
 												<Fragment>
 													<Typography>
@@ -153,7 +142,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 													</Typography>
 												</Fragment>
 											}
-											sx={{ m: 0 }}
+											sx={{ m: 0, pl: 1 }}
 										/>
 									</ListItemButton>
 								</ListItem>
