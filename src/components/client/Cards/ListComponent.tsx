@@ -121,7 +121,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 											<Image
 												alt={`${characterSpecies.key} species icon`}
 												src={`/icons/species/${characterSpecies.key}.png`}
-												style={{ borderRadius: '4px', border: '2px solid red' }}
+												style={{ backgroundColor: 'white', borderRadius: '4px', border: '2px solid red' }}
 												height="50"
 												width="50"
 											/>
@@ -136,7 +136,8 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 													</Typography>
 												</Fragment>
 											}
-											sx={{ m: 0, pl: 1 }}
+											secondaryTypographyProps={{ style: { color: '#ededed' } }}
+											sx={{ m: 0, pl: 1, color: 'white' }}
 										/>
 									</Grid>
 
