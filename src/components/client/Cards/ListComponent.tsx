@@ -4,7 +4,7 @@ import React, { Fragment, useContext, useState } from "react";
 import { filter, includes, map, lowerCase, find } from "lodash";
 
 import { Close, Diversity3, Edit, OpenInNew, PersonAdd, Search } from "@mui/icons-material";
-import { Card, CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemText, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Grid, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemText, Paper, TextField, Tooltip, Typography } from "@mui/material";
 import { ScreenContext } from "@/app/context";
 import CardDialog from "./CardDialog";
 import Image from "next/image";
@@ -107,21 +107,16 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 							return (
 								<ListItem
 									style={{
-										background: `url("/backgrounds/classes_2014/${characterClass.key}.png") no-repeat right center`,
-										backgroundSize: 'auto 100%'
+										display: 'flex',
+										flexDirection: 'column',
+										alignItems: 'flex-start',
+										background: `url("/icons/classes/${characterClass.key}.jpeg") no-repeat center center`,
+										backgroundSize: '70% auto'
 									}}
+									sx={{ p: 0, pt: 3, mb: 1 }}
 									key={`player_character_${id}`}
 								>
-									<ListItemButton
-										onClick={() => setOpenItem({
-											id, 
-											name,
-											url,
-											classId,
-											speciesId,
-											subspeciesId
-										})}
-									>
+									<Grid display="flex" sx={{ pb: 2 }}>
 										{imageUrl ? <div/> :
 											<Image
 												alt={`${characterSpecies.key} species icon`}
@@ -144,7 +139,13 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 											}
 											sx={{ m: 0, pl: 1 }}
 										/>
-									</ListItemButton>
+									</Grid>
+
+									<Paper sx={{ display: 'flex', justifyContent: 'space-around', p: 0.5, width: '100%' }}>
+										<Button>View</Button>
+										<Button>Edit</Button>
+										<Button>Remove</Button>
+									</Paper>
 								</ListItem>
 							)
 						})}
