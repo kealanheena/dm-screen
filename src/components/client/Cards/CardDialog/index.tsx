@@ -87,7 +87,7 @@ const CardDialog = ({ setOpenItem, data }: {
 						<MenuItem sx={{ display: 'flex', alignItems: 'center' }} key={key} value={id}>
 							<Image
 								alt={`${key} class icon`}
-								src={`/icons/classes/${key}.jpeg`}
+								src={`/icons/classes/${key}.png`}
 								style={{ borderRadius: '4px', marginRight: '8px' }}
 								height="25"
 								width="25"
