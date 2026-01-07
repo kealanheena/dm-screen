@@ -111,7 +111,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 										flexDirection: 'column',
 										alignItems: 'flex-start',
 										background: `url("/icons/classes/${characterClass.key}.jpeg") no-repeat center center`,
-										backgroundSize: '70% auto'
+										backgroundSize: '100% auto',
 									}}
 									sx={{ p: 0, pt: 3, mb: 1 }}
 									key={`player_character_${id}`}
@@ -122,8 +122,8 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 												alt={`${characterSpecies.key} species icon`}
 												src={`/icons/species/${characterSpecies.key}.png`}
 												style={{ borderRadius: '4px', border: '2px solid red' }}
-												height="40"
-												width="40"
+												height="50"
+												width="50"
 											/>
 										}
 										
