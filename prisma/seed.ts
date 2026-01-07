@@ -120,6 +120,7 @@ const dndClasses = [{
   name: 'Barbarian',
   primaryAbility: AbilityScore.STR,
   secondaryAbility: AbilityScore.CON,
+  updatedAt: new Date(),
 },
 {
   key: 'bard',
@@ -150,17 +151,20 @@ const dndClasses = [{
   name: 'Fighter',
   primaryAbility: AbilityScore.STR,
   secondaryAbility: AbilityScore.CON,
+  updatedAt: new Date(),
 },
 {
   key: 'gunslinger',
   name: 'Gunslinger',
   primaryAbility: AbilityScore.DEX,
+  updatedAt: new Date(),
 },
 {
   key: 'monk',
   name: 'Monk',
   primaryAbility: AbilityScore.DEX,
   secondaryAbility: AbilityScore.WIS,
+  updatedAt: new Date(),
 },
 {
   key: 'paladin',
@@ -182,6 +186,7 @@ const dndClasses = [{
   key: 'rogue',
   name: 'Rogue',
   primaryAbility: AbilityScore.DEX,
+  updatedAt: new Date(),
 },
 {
   key: 'sorcerer',

@@ -110,7 +110,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 										display: 'flex',
 										flexDirection: 'column',
 										alignItems: 'flex-start',
-										background: `url("/icons/classes/${characterClass.key}.jpeg") no-repeat center center`,
+										background: `url("/icons/classes/${characterClass.key}.png") no-repeat center center`,
 										backgroundSize: '100% auto',
 									}}
 									sx={{ p: 0, pt: 3, mb: 1 }}
@@ -141,10 +141,10 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 										/>
 									</Grid>
 
-									<Paper sx={{ display: 'flex', justifyContent: 'space-around', p: 0.5, width: '100%' }}>
-										<Button>View</Button>
-										<Button>Edit</Button>
-										<Button>Remove</Button>
+									<Paper sx={{ borderRadius: 0, display: 'flex', justifyContent: 'space-around', p: 0.5, width: '100%' }}>
+										<Button color="primary">View</Button>
+										<Button color="secondary">Edit</Button>
+										<Button color="error">Remove</Button>
 									</Paper>
 								</ListItem>
 							)
