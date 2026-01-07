@@ -122,7 +122,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 											subspeciesId
 										})}
 									>
-										{imageUrl ? <>Image Found</> :
+										{imageUrl ? <div/> :
 											<Image
 												alt={`${characterSpecies.key} species icon`}
 												src={`/icons/species/${characterSpecies.key}.png`}
