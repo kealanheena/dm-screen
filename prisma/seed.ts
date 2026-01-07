@@ -111,105 +111,91 @@ const dndClasses = [{
   key: 'artificer',
   name: 'Artificer',
   primaryAbility: AbilityScore.INT,
-  secondaryAbility: AbilityScore.DEX,
-  spellcastingAbility: AbilityScore.INT,
   updatedAt: new Date(),
-},
-{
+}, {
+  key: 'artificer',
+  name: 'Artificer',
+  primaryAbility: AbilityScore.INT,
+  updatedAt: new Date(),
+}, {
   key: 'barbarian',
   name: 'Barbarian',
   primaryAbility: AbilityScore.STR,
-  secondaryAbility: AbilityScore.CON,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'bard',
   name: 'Bard',
   primaryAbility: AbilityScore.CHA,
-  secondaryAbility: AbilityScore.DEX,
-  spellcastingAbility: AbilityScore.CHA,
   updatedAt: new Date(),
-},
-{
+}, {
+  key: 'blood_hunter',
+  name: 'Blood Hunter',
+  primaryAbility: AbilityScore.WIS,
+  updatedAt: new Date(),
+}, {
   key: 'cleric',
   name: 'Cleric',
   primaryAbility: AbilityScore.WIS,
-  secondaryAbility: AbilityScore.STR,
-  spellcastingAbility: AbilityScore.WIS,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'druid',
   name: 'Druid',
   primaryAbility: AbilityScore.WIS,
-  secondaryAbility: AbilityScore.DEX,
-  spellcastingAbility: AbilityScore.WIS,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'fighter',
   name: 'Fighter',
   primaryAbility: AbilityScore.STR,
-  secondaryAbility: AbilityScore.CON,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'gunslinger',
   name: 'Gunslinger',
   primaryAbility: AbilityScore.DEX,
   updatedAt: new Date(),
-},
-{
+},  {
+  key: 'illrigger',
+  name: 'Illrigger',
+  primaryAbility: AbilityScore.CHA,
+  updatedAt: new Date(),
+}, {
   key: 'monk',
   name: 'Monk',
   primaryAbility: AbilityScore.DEX,
-  secondaryAbility: AbilityScore.WIS,
   updatedAt: new Date(),
-},
-{
+}, {
+  key: 'monster_hunter',
+  name: 'Monster Hunter',
+  primaryAbility: AbilityScore.STR,
+  updatedAt: new Date(),
+}, {
   key: 'paladin',
   name: 'Paladin',
   primaryAbility: AbilityScore.STR,
-  secondaryAbility: AbilityScore.CHA,
-  spellcastingAbility: AbilityScore.CHA,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'ranger',
   name: 'Ranger',
   primaryAbility: AbilityScore.DEX,
-  secondaryAbility: AbilityScore.WIS,
-  spellcastingAbility: AbilityScore.WIS,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'rogue',
   name: 'Rogue',
   primaryAbility: AbilityScore.DEX,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'sorcerer',
   name: 'Sorcerer',
   primaryAbility: AbilityScore.CHA,
-  secondaryAbility: AbilityScore.DEX,
-  spellcastingAbility: AbilityScore.CHA,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'warlock',
   name: 'Warlock',
   primaryAbility: AbilityScore.CHA,
-  secondaryAbility: AbilityScore.DEX,
-  spellcastingAbility: AbilityScore.CHA,
   updatedAt: new Date(),
-},
-{
+}, {
   key: 'wizard',
   name: 'Wizard',
   primaryAbility: AbilityScore.INT,
-  secondaryAbility: AbilityScore.DEX,
-  spellcastingAbility: AbilityScore.INT,
   updatedAt: new Date(),
 }];
 
@@ -296,22 +282,55 @@ const playerCharacters = [{
 	updatedAt: new Date(),
 }, {
 	id: 13,
+	name: 'Bloody Butcher',
+  dndClass: 'blood_hunter',
+	species: 'gnome',
+  subspecies: 'gnome_forest',
+	updatedAt: new Date(),
+}, {
+	id: 14,
 	name: 'Deadey Ace',
   dndClass: 'gunslinger',
 	species: 'shifter',
   subspecies: 'shifter_wildhunt',
   url: process.env.ACER_URL,
 	updatedAt: new Date(),
+}, {
+	id: 15,
+	name: 'Lucifer Morningstar',
+  dndClass: 'illrigger',
+	species: 'tiefling',
+  subspecies: 'tiefling_chthonic',
+	updatedAt: new Date(),
+}, {
+	id: 16,
+	name: 'Mad Maddy',
+  dndClass: 'monster_hunter',
+	species: 'dragonborn',
+  subspecies: 'dragonborn_black',
+	updatedAt: new Date(),
 }]
 
 const prisma = new PrismaClient();
 
 async function main() {
-	const dndClassesTasks = dndClasses.map(async (dndClass) => prisma.class.upsert({
-		where: { key: dndClass.key },
-		create: dndClass,
-		update: dndClass,
-	}));
+	const dndClassesTasks = dndClasses.map(async ({ name, key, primaryAbility }) => {
+
+
+    return prisma.class.upsert({
+      where: { key },
+      create: {
+        name,
+        key,
+        primaryAbility,
+      },
+      update: {
+        name,
+        key,
+        primaryAbility,
+      },
+    })
+});
   const speicesTasks = species.map(async ({ subspecies = [], ...speciesSingular }) => {
     const newSpecies = await prisma.species.upsert({
       where: { key: speciesSingular.key },
