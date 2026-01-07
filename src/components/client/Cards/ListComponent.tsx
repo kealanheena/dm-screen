@@ -116,7 +116,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 									sx={{ p: 0, pt: 3, mb: 1 }}
 									key={`player_character_${id}`}
 								>
-									<Grid display="flex" sx={{ pb: 2 }}>
+									<Grid display="flex" sx={{ pb: 2, pl: 1, pr: 1 }}>
 										{imageUrl ? <div/> :
 											<Image
 												alt={`${characterSpecies.key} species icon`}
@@ -132,8 +132,7 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 											secondary={
 												<Fragment>
 													<Typography>
-														{`${characterSubspecies ? `${characterSubspecies.name} ` : ''}`}
-														{`${characterSpecies.name} ${characterClass.name}`}
+														{`Lvl 6 | ${characterSubspecies ? `${characterSubspecies.name} ` : ''} ${characterSpecies.name} | ${characterClass.name}`}
 													</Typography>
 												</Fragment>
 											}
