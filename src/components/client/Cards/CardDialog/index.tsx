@@ -6,9 +6,12 @@ import {
 	DialogActions, 
 	DialogContent,
 	DialogTitle, 
+	Grid, 
 	IconButton,
 	InputAdornment,
 	MenuItem,
+	Tab,
+	Tabs,
 	TextField, 
 } from "@mui/material";
 import { find, map } from "lodash";
@@ -72,6 +75,36 @@ const CardDialog = ({ setOpenItem, data }: {
 					placeholder="https://www.dndbeyond.com/characters/123456789"
 					fullWidth
 				/>
+
+				<Tabs variant="scrollable" scrollButtons="auto">
+					{map(classes, ({ id, name, key }) => (
+						<div
+							key={`${key}_${id}`}
+							style={{
+								minWidth: '100px',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+								flexDirection: 'column'
+							}}
+							onClick={() => setClassId(Number(id))}
+						>
+								<Image
+									alt={`${key} class icon`}
+									src={`/icons/classes/${key}.png`}
+									style={{
+										padding: '2px',
+										borderRadius: '50%',
+										border: `2px solid ${id === classId ? 'red' : ''}`,
+										filter: 'brightness(200%)',
+									}}
+									height="60"
+									width="60"
+								/>
+								{name}
+						</div>
+					))}
+				</Tabs>
 
 				<TextField
 					label="Class"

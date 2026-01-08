@@ -12,8 +12,8 @@ const ImageComponent = ({ card }: { card: { id: number, title: string }}) => {
 
 	return (
 		<Card>
-			<CardContent sx={{ height: '100%'}}>
-				<Grid container justifyContent="space-between">
+			<CardContent sx={{ height: '100%', width: '600px' }} style={{ background: `url("http://odcq35p17f.ufs.sh/f/imZyPGT0bjSH6NbzOMRx0HjrmGJ2CKLFWcvAnfubwoNPzXEk") no-repeat center center`, backgroundSize: '100%' }}>
+				<Grid container justifyContent="space-between" >
 					<Grid display="flex" alignItems="center">
 						<Groups color='primary'/>
 						<Typography sx={{ pl: 1 }} variant="h6">{card.title}</Typography>
@@ -21,7 +21,7 @@ const ImageComponent = ({ card }: { card: { id: number, title: string }}) => {
 
 					<PlayerCharacterFormDialog />
 				</Grid>
-				<img 
+				{/* <img 
 					style={{
 						maxWidth: '100%',
 						maxHeight: '100%',
@@ -31,7 +31,7 @@ const ImageComponent = ({ card }: { card: { id: number, title: string }}) => {
 						display: 'block'
 					}}
 					src="http://odcq35p17f.ufs.sh/f/imZyPGT0bjSH6NbzOMRx0HjrmGJ2CKLFWcvAnfubwoNPzXEk"
-				/>
+				/> */}
 			</CardContent>
 		</Card>
 	)
