@@ -37,6 +37,8 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 
 	const filteredItems = filter(playerCharacters, ({ name }) => includes(name, search));
 
+	const openEditPlayerCharacter = (item) => () => setOpenItem(item);
+
 	return (
 		<CardContent sx={{ height: '100%'}}>
 			<Grid container justifyContent="space-between">
@@ -99,7 +101,8 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 			>
 				{filteredItems.length !== 0 && (
 					<List>
-						{map(filteredItems, ({ id, name, imageUrl, url, classId, speciesId, subspeciesId }) => {
+						{map(filteredItems, (item) => {
+							const { id, name, imageUrl, url, classId, speciesId, subspeciesId } = item;
 							const characterClass = find(classes, ['id', classId]);
 							const characterSpecies = find(species, ['id', speciesId]);
 							const characterSubspecies = find(characterSpecies.subspecies, ['id', subspeciesId]);
@@ -142,8 +145,8 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 									</Grid>
 
 									<Paper sx={{ borderRadius: 0, display: 'flex', justifyContent: 'space-around', p: 0.5, width: '100%' }}>
-										<Button color="primary">View</Button>
-										<Button color="secondary">Edit</Button>
+										<Button color="primary" onClick={() => window.open(url, '_blank', 'noopener,noreferrer')} disabled={!url}>View</Button>
+										<Button color="secondary" onClick={openEditPlayerCharacter(item)}>Edit</Button>
 										<Button color="error">Remove</Button>
 									</Paper>
 								</ListItem>

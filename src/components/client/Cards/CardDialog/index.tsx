@@ -88,7 +88,7 @@ const CardDialog = ({ setOpenItem, data }: {
 							<Image
 								alt={`${key} class icon`}
 								src={`/icons/classes/${key}.png`}
-								style={{ borderRadius: '4px', marginRight: '8px' }}
+								style={{ borderRadius: '4px', marginRight: '8px',  filter: 'brightness(200%)'  }}
 								height="25"
 								width="25"
 							/>
