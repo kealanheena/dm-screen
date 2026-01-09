@@ -1,7 +1,7 @@
 model PlayerCharacter {
   id           Int  @id @default(autoincrement())
   campaign_id   Int?
-  class_id      Int
+  archtype_id      Int
   species_id    Int
   subspecies_id Int?
 
@@ -9,7 +9,7 @@ model PlayerCharacter {
   url  String?
 
   campaign   Campaign?   @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
-  archtype   Archtype    @relation(fields: [class_id], references: [id], onDelete: Cascade)
+  archtype   Archtype    @relation(fields: [archtype_id], references: [id], onDelete: Cascade)
   species    Species     @relation(fields: [species_id], references: [id], onDelete: Cascade)
   subspecies Subspecies? @relation(fields: [subspecies_id], references: [id], onDelete: Cascade)
 
