@@ -6,7 +6,7 @@ model Screen {
   name       String
 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 
   // Relations
   cards    Card[]

@@ -14,7 +14,7 @@ model PlayerCharacter {
   subspecies Subspecies? @relation(fields: [subspecies_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model NonPlayerCharacter {
@@ -28,7 +28,7 @@ model NonPlayerCharacter {
   campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 enum CreatureType {

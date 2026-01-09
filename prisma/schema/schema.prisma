@@ -25,7 +25,7 @@ model User {
   image String?
 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 
   // Relations
   campaigns Campaign[]

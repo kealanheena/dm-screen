@@ -8,7 +8,7 @@ model Species {
   player_characters PlayerCharacter[]
 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model Subspecies {
@@ -22,6 +22,6 @@ model Subspecies {
 
   species Species @relation(fields: [species_id], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
 }

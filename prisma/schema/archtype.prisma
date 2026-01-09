@@ -9,7 +9,7 @@ model Archtype {
   player_characters PlayerCharacter[]
 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 enum AbilityScore {
