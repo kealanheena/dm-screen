@@ -1,5 +1,5 @@
 model Campaign {
-  id     Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   user_id Int
 
   name String
@@ -8,8 +8,8 @@ model Campaign {
   updated_at DateTime @updatedAt @default(now())
 
   // Relations
-  screens            Screen[]
-  player_characters   Player_Character[]
+  screens Screen[]
+  player_characters Player_Character[]
   non_player_character Non_Player_Character[]
 
   // "onDelete: cascade" means delete all posts if the author is deleted

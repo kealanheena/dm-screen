@@ -5,6 +5,7 @@ model Archtype {
   key  String @unique
 
   spellcasting_ability Ability_Score?
+  feature_ability_modifier Ability_Score?
 
   player_characters Player_Character[]
 
@@ -13,10 +14,10 @@ model Archtype {
 }
 
 enum Ability_Score {
-  STR
-  DEX
-  CON
-  INT
-  WIS
-  CHA
+  STRENGTH
+  DEXTERITY
+  CONSTITUTION
+  INTELLIGENCE
+  WISDOM
+  CHARISMA
 }

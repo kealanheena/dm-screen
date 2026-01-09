@@ -1,25 +1,25 @@
 model Screen {
-  id         Int  @id @default(autoincrement())
-  user_id     Int
+  id Int  @id @default(autoincrement())
+  user_id Int
   campaign_id Int?
 
-  name       String
+  name String
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
 
   // Relations
-  cards    Card[]
+  cards Card[]
   layouts Layout[]
   // "onDelete: cascade" means delete all posts if the author is deleted
-  owner    User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  owner User @relation(fields: [user_id], references: [id], onDelete: Cascade)
   campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
 
   @@index(user_id)
 }
 
 model Card {
-  id       Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   layout_id Int
   screen_id Int
 
@@ -39,23 +39,23 @@ model Card {
   updated_at DateTime @updatedAt @default(now())
 
   // Relation
-  screen Screen     @relation(fields: [screen_id], references: [id], onDelete: Cascade)
+  screen Screen @relation(fields: [screen_id], references: [id], onDelete: Cascade)
 }
 
 model Layout {
-  i     Int @id @default(autoincrement())
+  i Int @id @default(autoincrement())
   screen_id Int
   // X & Y positions on the grid in grid units
-  x      Int @default(0)
-  y      Int @default(0)
+  x  Int @default(0)
+  y Int @default(0)
   // Width & Height in grid units, not pixels
-  w      Int @default(6)
-  h      Int @default(4)
+  w Int @default(6)
+  h Int @default(4)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
   // Relation
-  screen    Screen @relation(fields: [screen_id], references: [id], onDelete: Cascade)
+  screen Screen @relation(fields: [screen_id], references: [id], onDelete: Cascade)
 }
 
 enum Card_Type {
