@@ -105,6 +105,7 @@ const archtypes = [{
 }, {
   key: 'blood_hunter',
   name: 'Blood Hunter',
+  feature_ability_modifier: Ability_Score.INT,
 }, {
   key: 'cleric',
   name: 'Cleric',
@@ -119,15 +120,18 @@ const archtypes = [{
 }, {
   key: 'gunslinger',
   name: 'Gunslinger',
+  feature_ability_modifier: Ability_Score.DEX,
 },  {
   key: 'illrigger',
   name: 'Illrigger',
 }, {
   key: 'monk',
   name: 'Monk',
+  feature_ability_modifier: Ability_Score.WIS,
 }, {
   key: 'monster_hunter',
   name: 'Monster Hunter',
+  feature_ability_modifier: Ability_Score.INT,
 }, {
   key: 'paladin',
   name: 'Paladin',

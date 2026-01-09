@@ -1,20 +1,19 @@
 model Player_Character {
   id Int  @id @default(autoincrement())
   campaign_id Int?
-  ability_scores_id Int
   archtype_id Int
   species_id Int
   subspecies_id Int?
 
   name String
   url String?
+  ability_scores Ability_Scores?
 
   max_hit_points Int
   current_hit_points Int
   temporary_hit_points Int
 
   campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
-  ability_scores Ability_Scores @relation(fields: [archtype_id], references: [id], onDelete: Cascade)
   archtype Archtype @relation(fields: [archtype_id], references: [id], onDelete: Cascade)
   species Species @relation(fields: [species_id], references: [id], onDelete: Cascade)
   subspecies Subspecies? @relation(fields: [subspecies_id], references: [id], onDelete: Cascade)
@@ -26,13 +25,11 @@ model Player_Character {
 model Non_Player_Character {
   id Int  @id @default(autoincrement())
   campaign_id Int?
-  ability_scores_id Int
 
   name String
   creature_type Creature_Type
   url String?
 
-  ability_scores Ability_Scores @relation(fields: [ability_scores_id], references: [id], onDelete: Cascade)
   campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
@@ -41,16 +38,17 @@ model Non_Player_Character {
 
 model Ability_Scores {
   id Int  @id @default(autoincrement())
-  campaign_id Int?
-  ability_scores_id Int
+  player_character_id Int @unique
 
-  name String
-  creature_type Creature_Type
-  url String?
+  
+  strength Int
+  dexterity Int
+  constitiution Int
+  intelligence Int
+  wisdom Int
+  charisma Int
 
-  ability_scores Ability_Scores @relation(fields: [ability_scores_id], references: [id], onDelete: Cascade)
-
-  campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
+  player_character Player_Character @relation(fields: [player_character_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
