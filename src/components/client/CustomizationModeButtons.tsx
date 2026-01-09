@@ -8,7 +8,7 @@ import { Add, Check, Settings } from '@mui/icons-material';
 import { ScreenContext } from '@/app/context';
 
 import { useParams } from 'next/navigation';
-import { CardType, ListContentType } from '@prisma/client';
+import { Card_Type, List_Content_Type } from '@prisma/client';
 import { createCard } from '@/actions/card.action';
 
 
@@ -18,7 +18,7 @@ const CustomizationModeButtons = () => {
 
 	const [open, setOpen] = useState(false);
 	const [title, setTitle] = useState('');
-	const [type, setType] = useState<string>(CardType.TEXT);
+	const [type, setType] = useState<string>(Card_Type.TEXT);
 	const [listContent, setListContent] = useState<string | null>(null);
 
 	const handleClose = () => setOpen(false);
@@ -78,7 +78,7 @@ const CustomizationModeButtons = () => {
 							onChange={(e) => setType(e.target.value)}
               fullWidth
             >
-							{map(CardType, (value: string) => (
+							{map(Card_Type, (value: string) => (
 								<MenuItem value={value}>{capitalize(value)}</MenuItem>
 							))}
 						</TextField>
@@ -95,7 +95,7 @@ const CustomizationModeButtons = () => {
 								onChange={(e) => setListContent(e.target.value)}
 								fullWidth
 							>
-								{map(ListContentType, (value: string) => (
+								{map(List_Content_Type, (value: string) => (
 									<MenuItem value={value}>{capitalize(value)}</MenuItem>
 								))}
 							</TextField>

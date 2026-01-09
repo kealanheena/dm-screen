@@ -13,7 +13,7 @@ export async function getCampaigns() {
 	}
 
 	return prisma.campaign.findMany({
-		where: { userId },
+		where: { user_id: userId },
 		select: {
 			id: true,
 			name: true,

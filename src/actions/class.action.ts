@@ -12,7 +12,7 @@ export async function getClasses() {
 		return;
 	}
 
-	return prisma.class.findMany({
+	return prisma.archtype.findMany({
 		select: {
 			id: true,
 			name: true,

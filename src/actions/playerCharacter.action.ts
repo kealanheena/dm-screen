@@ -12,14 +12,14 @@ export async function getPlayerCharacters() {
 		return;
 	}
 
-	return prisma.playerCharacter.findMany({
+	return prisma.player_Character.findMany({
 		select: {
 			id: true,
 			name: true,
 			url: true,
-			classId: true,
-			speciesId: true,
-			subspeciesId: true,
+			archtype_id: true,
+			species_id: true,
+			subspecies_id: true,
 		},
 		orderBy: {
 			name: 'asc', // Sort by creation date in descending order

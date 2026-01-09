@@ -102,10 +102,10 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 				{filteredItems.length !== 0 && (
 					<List>
 						{map(filteredItems, (item) => {
-							const { id, name, imageUrl, url, classId, speciesId, subspeciesId } = item;
-							const characterClass = find(classes, ['id', classId]);
-							const characterSpecies = find(species, ['id', speciesId]);
-							const characterSubspecies = find(characterSpecies.subspecies, ['id', subspeciesId]);
+							const { id, name, imageUrl, url, archtype_id, species_id, subspecies_id } = item;
+							const characterClass = find(classes, ['id', archtype_id]);
+							const characterSpecies = find(species, ['id', species_id]);
+							const characterSubspecies = find(characterSpecies.subspecies, ['id', subspecies_id]);
 
 							return (
 								<ListItem
