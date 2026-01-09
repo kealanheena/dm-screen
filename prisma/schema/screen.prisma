@@ -1,22 +1,21 @@
 model Screen {
   id         Int  @id @default(autoincrement())
-  userId     Int
-  campaignId Int?
+  user_id     Int
+  campaign_id Int?
 
   name       String
-  isTemplate Boolean @default(false)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   // Relations
   cards    Card[]
   layouts Layout[]
   // "onDelete: cascade" means delete all posts if the author is deleted
-  owner    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  owner    User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
 
-  @@index(userId)
+  @@index(user_id)
 }
 
 model Card {

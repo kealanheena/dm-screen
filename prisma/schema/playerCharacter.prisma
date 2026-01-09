@@ -1,49 +1,49 @@
 model PlayerCharacter {
   id           Int  @id @default(autoincrement())
-  campaignId   Int?
-  classId      Int
-  speciesId    Int
-  subspeciesId Int?
+  campaign_id   Int?
+  class_id      Int
+  species_id    Int
+  subspecies_id Int?
 
   name String
   url  String?
 
-  campaign   Campaign?   @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  class      Class       @relation(fields: [classId], references: [id], onDelete: Cascade)
-  species    Species     @relation(fields: [speciesId], references: [id], onDelete: Cascade)
-  subspecies Subspecies? @relation(fields: [subspeciesId], references: [id], onDelete: Cascade)
+  campaign   Campaign?   @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
+  archtype   Archtype    @relation(fields: [class_id], references: [id], onDelete: Cascade)
+  species    Species     @relation(fields: [species_id], references: [id], onDelete: Cascade)
+  subspecies Subspecies? @relation(fields: [subspecies_id], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model NonPlayerCharacter {
-  id         Int  @id @default(autoincrement())
-  campaignId Int?
+  id            Int  @id @default(autoincrement())
+  campaign_id   Int?
 
   name         String
-  creatureType CreatureType
+  creature_type CreatureType
   url          String?
 
-  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 enum CreatureType {
-  ABERRATIONS
-  BEASTS
-  CELESTIALS
-  CONSTRUCTS
-  DRAGONS
+  ABERRATION
+  BEAST
+  CELESTIAL
+  CONSTRUCT
+  DRAGON
   ELEMENTAL
   FEY
-  FIENDS
-  GIANTS
-  HUMANOIDS
-  MONSTROSITIES
-  OOZES
-  PLANTS
+  FIEND
+  GIANT
+  HUMANOID
+  MONSTROSITY
+  OOZE
+  PLANT
   UNDEAD
 }

@@ -1,19 +1,19 @@
 model Campaign {
   id     Int @id @default(autoincrement())
-  userId Int
+  user_id Int
 
   name String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   // Relations
   screens            Screen[]
-  playerCharacters   PlayerCharacter[]
-  nonPlayerCharacter NonPlayerCharacter[]
+  player_characters   PlayerCharacter[]
+  non_player_character NonPlayerCharacter[]
 
   // "onDelete: cascade" means delete all posts if the author is deleted
-  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  created_by User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  @@index(userId)
+  @@index(user_id)
 }
