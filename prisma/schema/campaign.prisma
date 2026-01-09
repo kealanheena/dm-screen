@@ -9,8 +9,8 @@ model Campaign {
 
   // Relations
   screens            Screen[]
-  player_characters   PlayerCharacter[]
-  non_player_character NonPlayerCharacter[]
+  player_characters   Player_Character[]
+  non_player_character Non_Player_Character[]
 
   // "onDelete: cascade" means delete all posts if the author is deleted
   created_by User @relation(fields: [user_id], references: [id], onDelete: Cascade)

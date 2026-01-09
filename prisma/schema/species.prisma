@@ -5,7 +5,7 @@ model Species {
   key  String @unique
 
   subspecies       Subspecies[]
-  player_characters PlayerCharacter[]
+  player_characters Player_Character[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
@@ -18,7 +18,7 @@ model Subspecies {
   name String
   key  String @unique
 
-  player_characters PlayerCharacter[]
+  player_characters Player_Character[]
 
   species Species @relation(fields: [species_id], references: [id], onDelete: Cascade)
 

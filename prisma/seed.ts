@@ -1,4 +1,4 @@
-import { AbilityScore, PrismaClient } from "@prisma/client";
+import { Ability_Score, PrismaClient } from "@prisma/client";
 
 const species = [{
   key: 'aasimar',
@@ -94,25 +94,25 @@ const species = [{
 const archtypes = [{
   key: 'artificer',
   name: 'Artificer',
-  spellcasting_ability: AbilityScore.INT,
+  spellcasting_ability: Ability_Score.INT,
 }, {
   key: 'barbarian',
   name: 'Barbarian',
 }, {
   key: 'bard',
   name: 'Bard',
-  spellcasting_ability: AbilityScore.CHA,
+  spellcasting_ability: Ability_Score.CHA,
 }, {
   key: 'blood_hunter',
   name: 'Blood Hunter',
 }, {
   key: 'cleric',
   name: 'Cleric',
-  spellcasting_ability: AbilityScore.WIS,
+  spellcasting_ability: Ability_Score.WIS,
 }, {
   key: 'druid',
   name: 'Druid',
-  spellcasting_ability: AbilityScore.WIS,
+  spellcasting_ability: Ability_Score.WIS,
 }, {
   key: 'fighter',
   name: 'Fighter',
@@ -131,26 +131,26 @@ const archtypes = [{
 }, {
   key: 'paladin',
   name: 'Paladin',
-  spellcasting_ability: AbilityScore.CHA,
+  spellcasting_ability: Ability_Score.CHA,
 }, {
   key: 'ranger',
   name: 'Ranger',
-  spellcasting_ability: AbilityScore.WIS,
+  spellcasting_ability: Ability_Score.WIS,
 }, {
   key: 'rogue',
   name: 'Rogue',
 }, {
   key: 'sorcerer',
   name: 'Sorcerer',
-  spellcasting_ability: AbilityScore.CHA,
+  spellcasting_ability: Ability_Score.CHA,
 }, {
   key: 'warlock',
   name: 'Warlock',
-  spellcasting_ability: AbilityScore.CHA,
+  spellcasting_ability: Ability_Score.CHA,
 }, {
   key: 'wizard',
   name: 'Wizard',
-  spellcasting_ability: AbilityScore.INT,
+  spellcasting_ability: Ability_Score.INT,
 }];
 
 const playerCharacters = [{
@@ -272,14 +272,16 @@ async function main() {
 
     const subspeciesTasks = subspecies.map(async (subspeciesSingular) => (
       prisma.subspecies.upsert({
-        where: { key: `${subspeciesSingular.key}_${subspeciesSingular}` },
+        where: { key: `${subspeciesSingular.key}_${speciesSingular.key}` },
         create: {
-          species_id: newSpecies.id,
           ...subspeciesSingular,
+          species_id: newSpecies.id,
+          key: `${subspeciesSingular.key}_${speciesSingular.key}`,
         },
         update: {
-          species_id: newSpecies.id,
           ...subspeciesSingular,
+          species_id: newSpecies.id,
+          key: `${subspeciesSingular.key}_${speciesSingular.key}`,
         },
       })
     ));
@@ -309,7 +311,7 @@ async function main() {
       };
       
       
-      return prisma.playerCharacter.upsert({
+      return prisma.player_Character.upsert({
         where: { id: playerCharacter.id },
         create: data,
         update: data,

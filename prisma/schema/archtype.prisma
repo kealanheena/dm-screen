@@ -4,15 +4,15 @@ model Archtype {
   name String
   key  String @unique
 
-  spellcasting_ability AbilityScore?
+  spellcasting_ability Ability_Score?
 
-  player_characters PlayerCharacter[]
+  player_characters Player_Character[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
 }
 
-enum AbilityScore {
+enum Ability_Score {
   STR
   DEX
   CON

@@ -1,4 +1,4 @@
-model PlayerCharacter {
+model Player_Character {
   id           Int  @id @default(autoincrement())
   campaign_id   Int?
   archtype_id      Int
@@ -17,12 +17,12 @@ model PlayerCharacter {
   updated_at DateTime @updatedAt @default(now())
 }
 
-model NonPlayerCharacter {
+model Non_Player_Character {
   id            Int  @id @default(autoincrement())
   campaign_id   Int?
 
   name         String
-  creature_type CreatureType
+  creature_type Creature_Type
   url          String?
 
   campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
@@ -31,7 +31,7 @@ model NonPlayerCharacter {
   updated_at DateTime @updatedAt @default(now())
 }
 
-enum CreatureType {
+enum Creature_Type {
   ABERRATION
   BEAST
   CELESTIAL

@@ -20,31 +20,31 @@ model Screen {
 
 model Card {
   id       Int @id @default(autoincrement())
-  layoutId Int
-  screenId Int
+  layout_id Int
+  screen_id Int
 
   // Card content here ...
   title String
   description String?
   
-  type CardType
+  type Card_Type
 
   // Image content
   img String?
 
   // List content
-  listContent ListContentType
+  list_content List_Content_Type
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
 
   // Relation
-  screen Screen     @relation(fields: [screenId], references: [id], onDelete: Cascade)
+  screen Screen     @relation(fields: [screen_id], references: [id], onDelete: Cascade)
 }
 
 model Layout {
   i     Int @id @default(autoincrement())
-  screenId Int
+  screen_id Int
   // X & Y positions on the grid in grid units
   x      Int @default(0)
   y      Int @default(0)
@@ -52,19 +52,19 @@ model Layout {
   w      Int @default(6)
   h      Int @default(4)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
   // Relation
-  screen    Screen @relation(fields: [screenId], references: [id], onDelete: Cascade)
+  screen    Screen @relation(fields: [screen_id], references: [id], onDelete: Cascade)
 }
 
-enum CardType {
+enum Card_Type {
   TEXT
   LIST
   IMAGE
 }
 
-enum ListContentType {
-  playerCharacter
-  nonPlayerCharacter
+enum List_Content_Type {
+  PLAYER_CHARACTER
+  NON_PLAYER_CHARACTER
 }
