@@ -94,67 +94,67 @@ const species = [{
 const archtypes = [{
   key: 'artificer',
   name: 'Artificer',
-  spellcasting_ability: Ability_Score.INT,
+  spellcasting_ability: Ability_Score.INTELLIGENCE,
 }, {
   key: 'barbarian',
   name: 'Barbarian',
 }, {
   key: 'bard',
   name: 'Bard',
-  spellcasting_ability: Ability_Score.CHA,
+  spellcasting_ability: Ability_Score.CHARISMA,
 }, {
   key: 'blood_hunter',
   name: 'Blood Hunter',
-  feature_ability_modifier: Ability_Score.INT,
+  feature_ability_modifier: Ability_Score.INTELLIGENCE,
 }, {
   key: 'cleric',
   name: 'Cleric',
-  spellcasting_ability: Ability_Score.WIS,
+  spellcasting_ability: Ability_Score.WISDOM,
 }, {
   key: 'druid',
   name: 'Druid',
-  spellcasting_ability: Ability_Score.WIS,
+  spellcasting_ability: Ability_Score.WISDOM,
 }, {
   key: 'fighter',
   name: 'Fighter',
 }, {
   key: 'gunslinger',
   name: 'Gunslinger',
-  feature_ability_modifier: Ability_Score.DEX,
+  feature_ability_modifier: Ability_Score.DEXTERITY,
 },  {
   key: 'illrigger',
   name: 'Illrigger',
 }, {
   key: 'monk',
   name: 'Monk',
-  feature_ability_modifier: Ability_Score.WIS,
+  feature_ability_modifier: Ability_Score.WISDOM,
 }, {
   key: 'monster_hunter',
   name: 'Monster Hunter',
-  feature_ability_modifier: Ability_Score.INT,
+  feature_ability_modifier: Ability_Score.INTELLIGENCE,
 }, {
   key: 'paladin',
   name: 'Paladin',
-  spellcasting_ability: Ability_Score.CHA,
+  spellcasting_ability: Ability_Score.CHARISMA,
 }, {
   key: 'ranger',
   name: 'Ranger',
-  spellcasting_ability: Ability_Score.WIS,
+  spellcasting_ability: Ability_Score.WISDOM,
 }, {
   key: 'rogue',
   name: 'Rogue',
 }, {
   key: 'sorcerer',
   name: 'Sorcerer',
-  spellcasting_ability: Ability_Score.CHA,
+  spellcasting_ability: Ability_Score.CHARISMA,
 }, {
   key: 'warlock',
   name: 'Warlock',
-  spellcasting_ability: Ability_Score.CHA,
+  spellcasting_ability: Ability_Score.CHARISMA,
 }, {
   key: 'wizard',
   name: 'Wizard',
-  spellcasting_ability: Ability_Score.INT,
+  spellcasting_ability: Ability_Score.INTELLIGENCE,
 }];
 
 const playerCharacters = [{
@@ -164,74 +164,204 @@ const playerCharacters = [{
   species: 'shifter',
   subspecies: 'shifter_swiftstride',
 	url: process.env.SPOTS_URL || null,
+  current_hit_points: 14,
+  max_hit_points: 14,
+  ability_scores: {
+    strength: 16,
+    dexterity: 14,
+    constitiution: 14,
+    intelligence: 8,
+    wisdom: 12,
+    charisma: 10,
+  }
 }, {
 	id: 2,
 	name: 'Venimous Micheal',
 	archtype: 'bard',
   species: 'elf',
   subspecies: 'elf_high',
+  current_hit_points: 8,
+  max_hit_points: 8,
+  ability_scores: {
+    strength: 8,
+    dexterity: 14,
+    constitiution: 10,
+    intelligence: 14,
+    wisdom: 12,
+    charisma: 16,
+  }
 }, {
 	id: 3,
 	name: 'Healer Henry',
 	archtype: 'cleric',
   species: 'human',
+  current_hit_points: 9,
+  max_hit_points: 9,
+  ability_scores: {
+    strength: 14,
+    dexterity: 8,
+    constitiution: 12,
+    intelligence: 10,
+    wisdom: 16,
+    charisma: 14,
+  }
 }, {
 	id: 4,
 	name: 'Hexful Agatha',
 	archtype: 'druid',
   species: 'hexblood',
   url: process.env.AGATHA_URL,
+  current_hit_points: 10,
+  max_hit_points: 10,
+  ability_scores: {
+    strength: 8,
+    dexterity: 14,
+    constitiution: 14,
+    intelligence: 12,
+    wisdom: 16,
+    charisma: 10,
+  }
 }, {
 	id: 5,
 	name: 'Fighting Felix',
 	archtype: 'fighter',
   species: 'dwarf',
+  current_hit_points: 13,
+  max_hit_points: 13,
+  ability_scores: {
+    strength: 16,
+    dexterity: 14,
+    constitiution: 14,
+    intelligence: 10,
+    wisdom: 12,
+    charisma: 8,
+  }
 }, {
 	id: 6,
 	name: 'Calm Max',
 	archtype: 'monk',
   species: 'halfling',
+  current_hit_points: 10,
+  max_hit_points: 10,
+  ability_scores: {
+    strength: 8,
+    dexterity: 16,
+    constitiution: 14,
+    intelligence: 12,
+    wisdom: 14,
+    charisma: 10,
+  }
 }, {
 	id: 7,
 	name: 'Rightous Dick',
 	archtype: 'paladin',
   species: 'goliath',
   subspecies: 'goliath_fire_giant',
+  current_hit_points: 12,
+  max_hit_points: 12,
+  ability_scores: {
+    strength: 16,
+    dexterity: 8,
+    constitiution: 14,
+    intelligence: 10,
+    wisdom: 12,
+    charisma: 14,
+  }
 }, {
 	id: 8,
 	name: 'Watchful Bruce',
 	archtype: 'ranger',
   species: 'elf',
   subspecies: 'elf_wood',
+  current_hit_points: 11,
+  max_hit_points: 11,
+  ability_scores: {
+    strength: 14,
+    dexterity: 16,
+    constitiution: 12,
+    intelligence: 10,
+    wisdom: 14,
+    charisma: 8,
+  }
 }, {
 	id: 9,
 	name: 'Tricky Ricky',
 	archtype: 'rogue',
   species: 'tiefling',
   subspecies: 'tiefling_infernal',
+  current_hit_points: 8,
+  max_hit_points: 8,
+  ability_scores: {
+    strength: 8,
+    dexterity: 16,
+    constitiution: 10,
+    intelligence: 12,
+    wisdom: 14,
+    charisma: 14,
+  }
 }, {
 	id: 10,
 	name: 'Magic Mike',
 	archtype: 'sorcerer',
   species: 'aasimar',
+  current_hit_points: 8,
+  max_hit_points: 8,
+  ability_scores: {
+    strength: 8,
+    dexterity: 14,
+    constitiution: 14,
+    intelligence: 12,
+    wisdom: 10,
+    charisma: 16,
+  }
 },  {
 	id: 11,
 	name: 'Fixit Futhark',
 	archtype: 'warlock',
   species: 'warforged',
   url: process.env.FUTHARK_URL,
+  current_hit_points: 9,
+  max_hit_points: 9,
+  ability_scores: {
+    strength: 10,
+    dexterity: 14,
+    constitiution: 12,
+    intelligence: 8,
+    wisdom: 14,
+    charisma: 16,
+  }
 }, {
 	id: 12,
 	name: 'Analytical Aynrix',
 	archtype: 'wizard',
   species: 'human',
   url: process.env.AYNRIX_URL,
+  current_hit_points: 7,
+  max_hit_points: 7,
+  ability_scores: {
+    strength: 8,
+    dexterity: 14,
+    constitiution: 12,
+    intelligence: 16,
+    wisdom: 14,
+    charisma: 10,
+  }
 }, {
 	id: 13,
 	name: 'Bloody Butcher',
   archtype: 'blood_hunter',
 	species: 'gnome',
   subspecies: 'gnome_forest',
+  current_hit_points: 12,
+  max_hit_points: 12,
+  ability_scores: {
+    strength: 8,
+    dexterity: 16,
+    constitiution: 14,
+    intelligence: 14,
+    wisdom: 10,
+    charisma: 12,
+  }
 }, {
 	id: 14,
 	name: 'Deadey Ace',
@@ -239,18 +369,48 @@ const playerCharacters = [{
 	species: 'shifter',
   subspecies: 'shifter_wildhunt',
   url: process.env.ACER_URL,
+  current_hit_points: 8,
+  max_hit_points: 8,
+  ability_scores: {
+    strength: 8,
+    dexterity: 16,
+    constitiution: 10,
+    intelligence: 14,
+    wisdom: 14,
+    charisma: 12,
+  }
 }, {
 	id: 15,
 	name: 'Lucifer Morningstar',
   archtype: 'illrigger',
 	species: 'tiefling',
   subspecies: 'tiefling_chthonic',
+  current_hit_points: 11,
+  max_hit_points: 11,
+  ability_scores: {
+    strength: 16,
+    dexterity: 14,
+    constitiution: 12,
+    intelligence: 8,
+    wisdom: 14,
+    charisma: 14,
+  }
 }, {
 	id: 16,
 	name: 'Mad Maddy',
   archtype: 'monster_hunter',
 	species: 'dragonborn',
   subspecies: 'dragonborn_black',
+  current_hit_points: 11,
+  max_hit_points: 11,
+  ability_scores: {
+    strength: 14,
+    dexterity: 16,
+    constitiution: 12,
+    intelligence: 14,
+    wisdom: 10,
+    charisma: 8,
+  }
 }]
 
 const prisma = new PrismaClient();
@@ -260,7 +420,7 @@ async function main() {
     archtype: {
       name: string;
       key: string;
-      spellcasting_ability?: "STR" | "DEX" | "CON" | "INT" | "WIS" | "CHA" | undefined;
+      spellcasting_ability?: "STRENGTH" | "DEXTERITY" | "CONSTITUTION" | "INTELLIGENCE" | "WISDOM" | "CHARISMA" | undefined;
     }
   ) => prisma.archtype.upsert({
       where: { key: archtype.key },
@@ -302,7 +462,7 @@ async function main() {
 
 
 	const playerCharacterTasks = playerCharacters.map(
-    async ({ archtype, species: speciesSingular,  subspecies: subspeciesSingular, ...playerCharacter }) => {
+    async ({ archtype, species: speciesSingular,  subspecies: subspeciesSingular, ability_scores: abilityScores, ...playerCharacter }) => {
       const archtypeItem = archtypeesResult.find(({ key }) => key === archtype);
       const speciesItem = speciesResult.find(({ key }) => key === speciesSingular);
       const subspeciesItem = speciesItem?.subspecies.find(({ key }) => key === subspeciesSingular);
@@ -315,11 +475,25 @@ async function main() {
       };
       
       
-      return prisma.player_Character.upsert({
+      const { id: playerCharacterId } = await prisma.player_Character.upsert({
         where: { id: playerCharacter.id },
         create: data,
         update: data,
-      })
+      });
+
+      return prisma.ability_Scores.upsert({
+        where: { player_character_id: playerCharacterId },
+        create: {
+          player_character_id: playerCharacterId,
+          ...abilityScores,
+        },
+        update: {
+          player_character_id: playerCharacterId,
+          ...abilityScores,
+        },
+      });
+
+      return
     }
   );
 

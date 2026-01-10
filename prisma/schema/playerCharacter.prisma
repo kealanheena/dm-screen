@@ -9,9 +9,9 @@ model Player_Character {
   url String?
   ability_scores Ability_Scores?
 
-  max_hit_points Int
-  current_hit_points Int
-  temporary_hit_points Int
+  current_hit_points Int @default(0)
+  max_hit_points Int @default(0)
+  temporary_hit_points Int @default(0)
 
   campaign Campaign? @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
   archtype Archtype @relation(fields: [archtype_id], references: [id], onDelete: Cascade)
@@ -40,7 +40,6 @@ model Ability_Scores {
   id Int  @id @default(autoincrement())
   player_character_id Int @unique
 
-  
   strength Int
   dexterity Int
   constitiution Int
