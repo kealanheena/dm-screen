@@ -162,7 +162,7 @@ const playerCharacters = [{
 	name: 'Angry Spots',
 	archtype: 'barbarian',
   species: 'shifter',
-  subspecies: 'shifter_swiftstride',
+  subspecies: 'swiftstride_shifter',
 	url: process.env.SPOTS_URL || null,
   current_hit_points: 14,
   max_hit_points: 14,
@@ -179,7 +179,7 @@ const playerCharacters = [{
 	name: 'Venimous Micheal',
 	archtype: 'bard',
   species: 'elf',
-  subspecies: 'elf_high',
+  subspecies: 'high_elf',
   current_hit_points: 8,
   max_hit_points: 8,
   ability_scores: {
@@ -256,7 +256,7 @@ const playerCharacters = [{
 	name: 'Rightous Dick',
 	archtype: 'paladin',
   species: 'goliath',
-  subspecies: 'goliath_fire_giant',
+  subspecies: 'fire_giant_goliath',
   current_hit_points: 12,
   max_hit_points: 12,
   ability_scores: {
@@ -272,7 +272,7 @@ const playerCharacters = [{
 	name: 'Watchful Bruce',
 	archtype: 'ranger',
   species: 'elf',
-  subspecies: 'elf_wood',
+  subspecies: 'wood_elf',
   current_hit_points: 11,
   max_hit_points: 11,
   ability_scores: {
@@ -288,7 +288,7 @@ const playerCharacters = [{
 	name: 'Tricky Ricky',
 	archtype: 'rogue',
   species: 'tiefling',
-  subspecies: 'tiefling_infernal',
+  subspecies: 'infernal_tiefling',
   current_hit_points: 8,
   max_hit_points: 8,
   ability_scores: {
@@ -351,7 +351,7 @@ const playerCharacters = [{
 	name: 'Bloody Butcher',
   archtype: 'blood_hunter',
 	species: 'gnome',
-  subspecies: 'gnome_forest',
+  subspecies: 'forest_gnome',
   current_hit_points: 12,
   max_hit_points: 12,
   ability_scores: {
@@ -367,7 +367,7 @@ const playerCharacters = [{
 	name: 'Deadey Ace',
   archtype: 'gunslinger',
 	species: 'shifter',
-  subspecies: 'shifter_wildhunt',
+  subspecies: 'wildhunt_shifter',
   url: process.env.ACER_URL,
   current_hit_points: 8,
   max_hit_points: 8,
@@ -384,7 +384,7 @@ const playerCharacters = [{
 	name: 'Lucifer Morningstar',
   archtype: 'illrigger',
 	species: 'tiefling',
-  subspecies: 'tiefling_chthonic',
+  subspecies: 'chthonic_tiefling',
   current_hit_points: 11,
   max_hit_points: 11,
   ability_scores: {
@@ -400,7 +400,7 @@ const playerCharacters = [{
 	name: 'Mad Maddy',
   archtype: 'monster_hunter',
 	species: 'dragonborn',
-  subspecies: 'dragonborn_black',
+  subspecies: 'black_dragonborn',
   current_hit_points: 11,
   max_hit_points: 11,
   ability_scores: {
