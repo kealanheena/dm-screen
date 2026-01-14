@@ -10,6 +10,23 @@ import PlayerCharacterFormDialog from "../PlayerCharacterFormDialog";
 import { ScreenContext } from "@/app/context";
 import Image from "next/image";
 
+const enemies = [
+	{ id: 1, name: 'Aberrant Horror', key: 'aberration' },
+	{ id: 2, name: 'Normal Dog', key: 'beast' },
+	{ id: 3, name: 'Raphiel', key: 'celestial' },
+	{ id: 4, name: 'Forge the Warforged War Cleric', key: 'construct' },
+	{ id: 5, name: 'Drake Fire Licking Spitter', key: 'dragon' },
+	{ id: 6, name: 'Water you doing', key: 'elemental' },
+	{ id: 7, name: 'Leprechan', key: 'fey' },
+	{ id: 8, name: 'Duine Dubh', key: 'fiend' },
+	{ id: 9, name: 'Big Chungus Dubh', key: 'giant' },
+	{ id: 10, name: 'Guy Mc Mann', key: 'humanoid' },
+	{ id: 11, name: 'Mama Monster', key: 'monstrosity' },
+	{ id: 12, name: 'OOOOooozee', key: 'ooze' },
+	{ id: 13, name: 'Tree man', key: 'plant' },
+	{ id: 14, name: 'Dead ... not!', key: 'undead' },
+]
+
 const InititiveComponent = ({ card }) => {
 	const { classes, species } = useContext(ScreenContext);
 
@@ -21,7 +38,7 @@ const InititiveComponent = ({ card }) => {
 		const getData = async () => {
 			const data = await getPlayerCharacters();
 
-			const newItems = map(data || [], (oldData) => {
+			const newItems = map([...data, ...enemies] || [], (oldData) => {
 				const max = 20;
 
 				const initiative = Math.floor(Math.random() * max);
@@ -68,10 +85,9 @@ const InititiveComponent = ({ card }) => {
 								}}
 							>
 								{map(reverse(sortBy(items, ['initiative'])), (item) => { 
-									const { id, name, imageUrl, url, archtype_id, species_id, subspecies_id } = item;
+									const { id, name, imageUrl, url, archtype_id, species_id, subspecies_id, key } = item;
 									const characterClass = find(classes, ['id', archtype_id]);
 									const characterSpecies = find(species, ['id', species_id]);
-									const characterSubspecies = find(characterSpecies.subspecies, ['id', subspecies_id]);
 
 									console.log({ key: item.key })
 
@@ -81,7 +97,11 @@ const InititiveComponent = ({ card }) => {
 											display: 'flex',
 											flexDirection: 'column',
 											alignItems: 'flex-start',
-											background: `url("/icons/classes/${characterClass.key}.png") no-repeat center center`,
+											background: `url("/backgrounds/${
+												characterClass
+												? `classes/${characterClass.key}` 
+												: `monsters/${key}`
+											}.png") no-repeat center center`,
 											backgroundSize: '100% auto',
 										}}
 										sx={{ p: 0, pt: 3, mb: 1 }}
@@ -90,8 +110,13 @@ const InititiveComponent = ({ card }) => {
 										<Grid display="flex" alignItems="center" sx={{ pb: 2, pl: 1, pr: 1 }}>
 											{imageUrl ? <div/> :
 												<Image
-													alt={`${characterSpecies.key} species icon`}
-													src={`/icons/species/${characterSpecies.key}.png`}
+													alt={`${characterSpecies?.key || key} species icon`}
+													src={`/icons/${
+															characterSpecies
+															? `species/${characterSpecies.key}` 
+															: `monsters/${key}`
+														}.png`
+													}
 													style={{ backgroundColor: 'white', borderRadius: '4px', border: '2px solid red' }}
 													height="50"
 													width="50"
