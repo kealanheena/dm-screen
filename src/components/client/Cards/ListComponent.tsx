@@ -24,8 +24,6 @@ import Image from "next/image";
 const ListComponent = ({ card }: { card: { id: number; title: string; listContent: string | null; type: string }}) => {
 	const { isCustomizing, playerCharacters, classes, species } = useContext(ScreenContext);
 
-	console.log({ playerCharacters})
-
 	const [open, setOpen] = useState<boolean>(false);
 	const [openItem, setOpenItem] = useState(null);
 
@@ -108,8 +106,6 @@ const ListComponent = ({ card }: { card: { id: number; title: string; listConten
 							const characterClass = find(classes, ['id', archtype_id]);
 							const characterSpecies = find(species, ['id', species_id]);
 							const characterSubspecies = find(characterSpecies.subspecies, ['id', subspecies_id]);
-
-							console.log({subspecies: characterSpecies.subspecies, subspecies_id})
 
 							return (
 								<ListItem

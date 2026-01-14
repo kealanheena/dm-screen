@@ -40,8 +40,6 @@ export function useFetchScreenData() {
     const fetchListData = async () => {
       try {
         const result = await getPlayerCharacters();
-        
-        // console.log({result});
 
         setData(result);
         setError(null);

@@ -20,6 +20,8 @@ export async function getPlayerCharacters() {
 			archtype_id: true,
 			species_id: true,
 			subspecies_id: true,
+			max_hit_points: true,
+			current_hit_points: true,
 		},
 		orderBy: {
 			name: 'asc', // Sort by creation date in descending order
