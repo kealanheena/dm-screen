@@ -8,7 +8,7 @@ import { Card, CardContent, Divider, Grid, List, ListItem, Tooltip, Typography }
 import { getPlayerCharacters } from "@/actions/playerCharacter.action";
 import PlayerCharacterFormDialog from "../PlayerCharacterFormDialog";
 
-const InititiveComponent = () => {
+const InititiveComponent = ({ card }) => {
 	const [search, setSearch] = useState('');
 	const [items, setItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);

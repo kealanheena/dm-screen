@@ -43,6 +43,9 @@ export default async function ScreenPage({ params }: ServerPageProps) {
 				<Card sx={{ maxWidth: '300px', width: '300px', maxHeight: '500px', height: '500px' }}>
 					<CardComponent card={card} />
 				</Card> 
+				<Card sx={{ maxWidth: '300px', width: '300px', maxHeight: '500px', height: '500px' }}>
+					<CardComponent card={{ ...card, type: 'INITATIVE', title: 'Inititive' }} />
+				</Card>
 				<CardComponent card={{ ...card, type: 'IMAGE', title: 'The Map' }} />
 			</div>
 			

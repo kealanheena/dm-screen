@@ -12,7 +12,7 @@ const CardComponent = ({ type, card }: {
 }) => {
 	switch (card.type) {
 		case 'INITATIVE':
-			return <InititiveComponent />
+			return <InititiveComponent card={card} />
 		case 'LIST':
 			return <ListComponent card={card} />
 		case 'IMAGE':
