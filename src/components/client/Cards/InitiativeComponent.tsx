@@ -101,11 +101,10 @@ const InititiveComponent = ({ card }) => {
 											<ListItemText
 												primary={name}
 												secondary={
-													<Fragment>
-														<Typography>
-															{`Lvl 6 | ${characterSubspecies ? `${characterSubspecies.name} ` : ''} ${characterSpecies.name} | ${characterClass.name}`}
-														</Typography>
-													</Fragment>
+													<Grid>
+														<Typography>AC 14</Typography>
+														<Typography>Spell DC: 12</Typography>
+													</Grid>
 												}
 												secondaryTypographyProps={{ style: { color: '#ededed' } }}
 												sx={{ m: 0, pl: 1, color: 'white' }}
@@ -113,20 +112,17 @@ const InititiveComponent = ({ card }) => {
 										</Grid>
 
 										<Paper sx={{ borderRadius: 0, display: 'flex', justifyContent: 'space-around', p: 0.5, width: '100%' }}>
-											<Grid display="flex">
-										 		<Typography>{`Init: ${item.initiative}`}</Typography>
+											<Grid display="flex" flexDirection="column" alignItems="center">
+												<Typography>INIT</Typography>
+												<Typography>{item.initiative}</Typography>
+											</Grid>
 
-										 		<Divider sx={{ p: 1 }} orientation="vertical" variant="middle" flexItem />
+											<Divider sx={{ p: 1 }} orientation="vertical" variant="middle" flexItem />
 
-										 		<Typography sx={{ pl: 1 }} >{item.name}</Typography>
-												
-										 		{(item.current_hit_points/item.max_hit_points) <= 0.5 && (
-										 			<Tooltip title="Bloodied">
-										 				<Bloodtype sx={{ pl: 1 }}  color="error"/>
-										 			</Tooltip>
-										 		)}
-										 	</Grid>
-
+											<Grid display="flex" flexDirection="column" alignItems="center">
+												<Typography>HP</Typography>
+												<Typography>{item.current_hit_points}/{item.max_hit_points}</Typography>
+											</Grid>
 										</Paper>
 									</ListItem>
 										// <ListItem key={`condition_${item.name}`} sx={{ display: 'flex', justifyContent: 'space-between' }}>
